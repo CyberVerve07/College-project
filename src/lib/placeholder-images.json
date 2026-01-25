@@ -1,3 +1,95 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "title": "Himalayas at Sunset",
+      "description": "A stunning wide-angle view of the Himalayas at sunset.",
+      "imageUrl": "https://images.unsplash.com/photo-1601895912784-8774950a9089?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoaW1hY2hhbCUyMGxhbmRzY2FwZXxlbnwwfHx8fDE3Njg4MDM3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "himachal landscape"
+    },
+    {
+      "id": "dest-dharamshala",
+      "title": "Dharamshala",
+      "description": "The scenic town of Dharamshala with mountains in the background.",
+      "imageUrl": "https://images.unsplash.com/photo-1746013306931-1a3a91477293?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxkaGFyYW1zaGFsYSUyMHRvd258ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "dharamshala town"
+    },
+    {
+      "id": "dest-kangra",
+      "title": "Kangra Valley",
+      "description": "Lush green tea gardens in Kangra Valley.",
+      "imageUrl": "https://images.unsplash.com/photo-1621836668855-378c84bb331d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxrYW5ncmElMjB2YWxsZXl8ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kangra valley"
+    },
+    {
+      "id": "dest-birbilling",
+      "title": "Bir Billing",
+      "description": "Paragliders soaring over Bir Billing.",
+      "imageUrl": "https://images.unsplash.com/photo-1638160292949-2bbaec1bf98e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXJhZ2xpZGluZyUyMGJpcnxlbnwwfHx8fDE3Njg4MDM3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "paragliding bir"
+    },
+    {
+      "id": "dest-manali",
+      "title": "Manali",
+      "description": "Snow-capped mountains and lush valleys of Manali.",
+      "imageUrl": "https://images.unsplash.com/photo-1621295995584-33a7d45f3c17?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW5hbGklMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzY4ODg3NzIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "manali landscape"
+    },
+    {
+      "id": "dest-shimla",
+      "title": "Shimla",
+      "description": "The historic Ridge and Christ Church in Shimla.",
+      "imageUrl": "https://images.unsplash.com/photo-1559993399-be8f7556a8a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaGltbGElMjBjaXR5fGVufDB8fHx8MTc2ODg4NzcyMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "shimla city"
+    },
+    {
+      "id": "dest-spiti",
+      "title": "Spiti Valley",
+      "description": "The breathtaking, arid landscapes of Spiti Valley.",
+      "imageUrl": "https://images.unsplash.com/photo-1606553896503-05c04c105b4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcGl0aSUyMHZhbGxleXxlbnwwfHx8fDE3Njg4ODc3MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "spiti valley"
+    },
+    {
+      "id": "service-taxi",
+      "title": "Sedan Taxi",
+      "description": "A modern sedan taxi cab.",
+      "imageUrl": "https://images.unsplash.com/photo-1722088353797-854b8600d97a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzZWRhbiUyMGNhcnxlbnwwfHx8fDE3Njg3MzU2OTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sedan car"
+    },
+    {
+      "id": "service-innova",
+      "title": "Innova SUV",
+      "description": "A Toyota Innova Crysta car.",
+      "imageUrl": "https://images.unsplash.com/photo-1650959818516-03d68079f9a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdXYlMjBjYXJ8ZW58MHx8fHwxNzY4NzM1NjkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "suv car"
+    },
+    {
+      "id": "service-tempo",
+      "title": "Tempo Traveller",
+      "description": "A Force Tempo Traveller van.",
+      "imageUrl": "https://images.unsplash.com/photo-1760236999462-0415f7396dff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dHJhdmVsbGVyJTIwdmFufGVufDB8fHx8MTc2ODgwMzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "traveller van"
+    },
+    {
+      "id": "service-alto",
+      "title": "Alto Hatchback",
+      "description": "A small Maruti Suzuki Alto hatchback.",
+      "imageUrl": "https://images.unsplash.com/photo-1641825877652-23e34a7358fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoYXRjaGJhY2slMjBjYXJ8ZW58MHx8fHwxNzY4NzcwNTg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hatchback car"
+    },
+    {
+      "id": "service-sumo",
+      "title": "Sumo Jeep",
+      "description": "A rugged Tata Sumo jeep.",
+      "imageUrl": "https://images.unsplash.com/photo-1507242541385-02de954f97e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxqZWVwJTIwc3V2fGVufDB8fHx8MTc2ODgwMzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "jeep suv"
+    },
+    {
+      "id": "about-us",
+      "title": "Happy Travellers",
+      "description": "A group of happy travellers posing in the mountains.",
+      "imageUrl": "https://images.unsplash.com/photo-1664312572933-0563f14484a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMHRyYXZlbGxlcnN8ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy travellers"
+    }
+  ]
 }

@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "Destination": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Destination",
+      "type": "object",
+      "description": "Defines the data model for a travel destination featured on the website. Each destination includes essential information for presentation on the UI.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The official name of the travel destination (e.g., 'Dharamshala')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A comprehensive, paragraph-long summary of the destination. This should detail key attractions, cultural significance, and unique experiences to entice potential travelers."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "A fully-qualified URL for a high-quality, representative image of the destination.",
+          "format": "uri"
+        },
+        "category": {
+          "type": "string",
+          "description": "The primary category of the destination (e.g., 'Hill Station', 'Adventure', 'Pilgrimage')."
+        },
+        "bestTimeToVisit": {
+          "type": "string",
+          "description": "A concise description of the ideal season or months to visit (e.g., 'March to June')."
+        },
+        "attractions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of key attractions or things to do at the destination."
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "imageUrl",
+        "category",
+        "bestTimeToVisit",
+        "attractions"
+      ]
+    },
+    "Service": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Service",
+      "type": "object",
+      "description": "Defines the data model for a vehicle service offered by the company. This includes details about the vehicle, its features, and pricing information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The official name of the service, including the vehicle type (e.g., 'Taxi Service (Sedan)', 'Innova / SUV')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the service, outlining its benefits, suitable use cases, and what is included in the offering."
+        },
+        "pricing": {
+          "type": "string",
+          "description": "A user-friendly string that clearly communicates the pricing model (e.g., 'From ₹15/km', 'Contact for Price')."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "A fully-qualified URL for a high-quality image of the vehicle associated with the service.",
+          "format": "uri"
+        },
+        "capacity": {
+          "type": "string",
+          "description": "The maximum passenger capacity of the vehicle (e.g., 'Up to 4 passengers')."
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of key amenities and features available with the vehicle (e.g., 'Air Conditioning', 'Music System')."
+        },
+        "idealFor": {
+          "type": "string",
+          "description": "A concise description of the ideal travel scenario or group for this service (e.g., 'Solo travelers and small families')."
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "pricing",
+        "imageUrl",
+        "capacity",
+        "features",
+        "idealFor"
+      ]
+    },
+    "ContactFormSubmission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContactFormSubmission",
+      "type": "object",
+      "description": "Defines the data model for a user-submitted contact form entry. This schema captures all necessary fields from the website's contact form.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The full name of the individual submitting the form."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address provided by the user for correspondence.",
+          "format": "email"
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject line of the user's inquiry or message."
+        },
+        "message": {
+          "type": "string",
+          "description": "The main body content of the message submitted by the user."
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "An ISO 8601 formatted timestamp indicating the exact date and time of the form submission (e.g., '2024-07-25T10:30:00Z').",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "subject",
+        "message",
+        "submissionDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "/destinations/{destinationId}": {
+      "schema": {
+        "$ref": "#/backend/entities/Destination"
+      },
+      "description": "Stores all travel destination documents, making them available for display on the website."
+    },
+    "/services/{serviceId}": {
+      "schema": {
+        "$ref": "#/backend/entities/Service"
+      },
+      "description": "Stores all vehicle service documents, detailing the fleet available to customers."
+    },
+    "/contact_form_submissions/{submissionId}": {
+      "schema": {
+        "$ref": "#/backend/entities/ContactFormSubmission"
+      },
+      "description": "A write-only collection that serves as a secure repository for user inquiries submitted via the contact form."
+    }
+  }
+}

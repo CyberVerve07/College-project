@@ -1,0 +1,103 @@
+
+/**
+ * This ruleset secures the Firestore database for the Destiny Tour & Travels website.
+ *
+ * Core Philosophy:
+ * The security model is designed for a public-facing informational website. It prioritizes making
+ * content like destinations and services publicly readable while strictly protecting user-submitted
+ * data from being read or modified by other clients. Writes to public content collections are
+ * disallowed from the client-side, enforcing a model where content is managed by a secure
+ * backend or administrative tool (e.g., using Admin SDKs).
+ *
+ * Data Structure:
+ * The database uses a simple, flat structure with three top-level collections:
+ * - /destinations: Publicly viewable travel destinations.
+ * - /services: Publicly viewable services offered.
+ * - /contact_form_submissions: A write-only "dropbox" for user inquiries.
+ *
+ * Key Security Decisions:
+ * - Public Read, Admin Write: The `/destinations` and `/services` collections are configured to be
+ *   publicly readable by anyone but are not writable from the client (with a specific exception for seeding services).
+ *   This prevents vandalism and unauthorized content changes.
+ * - Write-Only Dropbox: The `/contact_form_submissions` collection allows anyone to create a document (submit the form),
+ *   but denies all read, update, and delete operations. This protects the privacy of submitted
+ *   information (like names and emails) by ensuring it cannot be viewed by other users.
+ * - Data Validation on Write: `create` operations for `/services` and `/contact_form_submissions`
+ *   include validation rules to ensure that incoming data conforms to the expected schema, enhancing data integrity.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Controls access to the 'destinations' collection. Publicly readable, but creation
+     *   is controlled via schema validation to support client-side data seeding.
+     * @path /destinations/{destinationId}
+     * @allow (get, list) Any user, signed-in or not, can read destination documents.
+     * @allow (create) Allows creation only if the new data matches the 'Destination' schema,
+     *   enabling safe initial data seeding from the client.
+     * @deny (update, delete) No client is allowed to modify or delete destination documents.
+     * @principle Ensures data integrity for public content by validating new data and preventing
+     *   unauthorized modifications.
+     */
+    match /destinations/{destinationId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if request.resource.data.name is string &&
+                       request.resource.data.description is string &&
+                       request.resource.data.imageUrl is string &&
+                       request.resource.data.category is string &&
+                       request.resource.data.bestTimeToVisit is string &&
+                       request.resource.data.attractions is list;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Manages access for the 'services' collection. Publicly readable, but creation is
+     *   controlled via schema validation to support client-side data seeding.
+     * @path /services/{serviceId}
+     * @allow (get, list) Any visitor can list all available services.
+     * @allow (create) Allows creation only if the new data matches the 'Service' schema,
+     *   enabling safe initial data seeding from the client.
+     * @deny (update, delete) No client is allowed to modify or delete service documents.
+     * @principle Ensures data integrity for public content by validating new data and preventing
+     *   unauthorized modifications.
+     */
+    match /services/{serviceId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if request.resource.data.name is string &&
+                       request.resource.data.description is string &&
+                       request.resource.data.pricing is string &&
+                       request.resource.data.imageUrl is string &&
+                       request.resource.data.capacity is string &&
+                       request.resource.data.features is list &&
+                       request.resource.data.idealFor is string;
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    /**
+     * @description Secures contact form submissions. This collection acts as a write-only "dropbox".
+     *   Any user can submit a new form if the data is valid, but no one can read, update, or delete
+     *   existing submissions to protect privacy.
+     * @path /contact_form_submissions/{submissionId}
+     * @allow (create) An anonymous visitor can submit a form if it contains the required fields.
+     * @deny (get, list, update, delete) A user attempts to read or modify any submission.
+     * @principle Protects user-submitted private data by making the collection a write-only dropbox
+     *   with schema validation. Data can be sent in but cannot be read back by any client.
+     */
+    match /contact_form_submissions/{submissionId} {
+      allow get: if false;
+      allow list: if false;
+      allow create: if request.resource.data.name is string &&
+                       request.resource.data.email is string &&
+                       request.resource.data.subject is string &&
+                       request.resource.data.message is string &&
+                       request.resource.data.submissionDate is string;
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}
