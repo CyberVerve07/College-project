@@ -43,7 +43,8 @@ service cloud.firestore {
     match /destinations/{destinationId} {
       allow get: if true;
       allow list: if true;
-      allow create: if request.resource.data.name is string &&
+      allow create: if request.auth != null &&
+                       request.resource.data.name is string &&
                        request.resource.data.description is string &&
                        request.resource.data.imageUrl is string &&
                        request.resource.data.category is string &&
@@ -67,7 +68,8 @@ service cloud.firestore {
     match /services/{serviceId} {
       allow get: if true;
       allow list: if true;
-      allow create: if request.resource.data.name is string &&
+      allow create: if request.auth != null &&
+                       request.resource.data.name is string &&
                        request.resource.data.description is string &&
                        request.resource.data.pricing is string &&
                        request.resource.data.imageUrl is string &&
