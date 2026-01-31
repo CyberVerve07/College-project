@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Users, Award, CheckCircle } from 'lucide-react';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { useCollection, useFirestore, useMemoFirebase, useUser } from '@/firebase';
 import { collection } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useEffect, useState } from 'react';
@@ -24,6 +24,7 @@ interface Service {
 
 export default function ServicesPage() {
   const firestore = useFirestore();
+  const { user, isUserLoading: isAuthLoading } = useUser();
   const [isSeeding, setIsSeeding] = useState(true);
 
   const servicesCollection = useMemoFirebase(() => {
@@ -33,23 +34,22 @@ export default function ServicesPage() {
 
   const { data: vehicleServices, isLoading, error } = useCollection<Service>(servicesCollection);
 
-  useEffect(() => {
-    if (firestore && !isLoading) {
-      // Once the initial load is done, check if we need to seed.
+ useEffect(() => {
+    // We need to wait for auth to complete and firestore to be available.
+    if (firestore && !isAuthLoading && user && !isLoading) {
       if (vehicleServices?.length === 0) {
-        seedServices(firestore).finally(() => {
-          // Whether seeding succeeded or not, we are done with the process.
-          // The useCollection hook will update the UI with new data if seeding was successful.
-          setIsSeeding(false);
-        });
+        seedServices(firestore).finally(() => setIsSeeding(false));
       } else {
-        // Data already exists, no need to seed.
+        // Data exists, no need to seed.
         setIsSeeding(false);
       }
+    } else if (!isAuthLoading && !isLoading) {
+      // If auth is done but there is no user, or if data loading is done, stop seeding indicator.
+      setIsSeeding(false);
     }
-  }, [firestore, vehicleServices, isLoading]);
+  }, [firestore, vehicleServices, isLoading, isAuthLoading, user]);
 
-  const showLoading = isLoading || isSeeding;
+  const showLoading = isLoading || isSeeding || isAuthLoading;
 
   return (
     <div className="bg-background">

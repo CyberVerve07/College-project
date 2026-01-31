@@ -1,8 +1,7 @@
-
 'use client';
 
 import Image from 'next/image';
-import { useCollection, useFirestore, useMemoFirebase } from '@/firebase';
+import { useCollection, useFirestore, useMemoFirebase, useUser } from '@/firebase';
 import { collection } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useEffect, useState } from 'react';
@@ -24,6 +23,7 @@ interface Destination {
 
 export default function DestinationsPage() {
   const firestore = useFirestore();
+  const { user, isUserLoading: isAuthLoading } = useUser();
   const [isSeeding, setIsSeeding] = useState(true);
 
   const destinationsCollection = useMemoFirebase(() => {
@@ -34,16 +34,21 @@ export default function DestinationsPage() {
   const { data: destinations, isLoading, error } = useCollection<Destination>(destinationsCollection);
 
   useEffect(() => {
-    if (firestore && !isLoading) {
+    // We need to wait for auth to complete and firestore to be available.
+    if (firestore && !isAuthLoading && user && !isLoading) {
       if (destinations?.length === 0) {
         seedDestinations(firestore).finally(() => setIsSeeding(false));
       } else {
+        // Data exists, no need to seed.
         setIsSeeding(false);
       }
+    } else if (!isAuthLoading && !isLoading) {
+      // If auth is done but there is no user, or if data loading is done, stop seeding indicator.
+      setIsSeeding(false);
     }
-  }, [firestore, destinations, isLoading]);
+  }, [firestore, destinations, isLoading, isAuthLoading, user]);
 
-  const showLoading = isLoading || isSeeding;
+  const showLoading = isLoading || isSeeding || isAuthLoading;
 
   return (
     <div className="py-16 md:py-24 bg-muted/50">
