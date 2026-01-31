@@ -1,8 +1,6 @@
 'use server';
 
 import * as z from 'zod';
-import { initializeFirebase } from '@/firebase';
-import { collection, addDoc } from 'firebase/firestore';
 
 const formSchema = z.object({
   name: z.string(),
@@ -16,6 +14,9 @@ type FormState = {
   error?: string;
 };
 
+// This server action is no longer responsible for database writes.
+// All Firestore logic has been moved to the <ContactForm /> client component
+// to resolve a build error caused by importing client code into a server file.
 export async function submitContactForm(
   data: z.infer<typeof formSchema>
 ): Promise<FormState> {
@@ -25,23 +26,13 @@ export async function submitContactForm(
     return { success: false, error: 'Invalid data provided.' };
   }
 
-  // The `initializeFirebase` function can be called multiple times,
-  // but it will only initialize the app once.
-  const { firestore } = initializeFirebase();
-  const submissionsCollection = collection(firestore, 'contact_form_submissions');
+  // No database operation is performed here.
+  // This function is kept to prevent potential build errors if other parts
+  // of the application were importing it, but it is no longer used by the form itself.
+  console.log(
+    'Server action received data (no-op):',
+    parsedData.data.subject
+  );
 
-  try {
-    await addDoc(submissionsCollection, {
-      ...parsedData.data,
-      submissionDate: new Date().toISOString(),
-    });
-    return { success: true };
-  } catch (error) {
-    console.error('Error submitting contact form:', error);
-    return {
-      success: false,
-      error:
-        'A problem occurred while submitting your message. Please try again.',
-    };
-  }
+  return { success: true };
 }

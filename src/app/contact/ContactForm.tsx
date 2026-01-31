@@ -15,8 +15,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from './actions';
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
+import { useFirestore } from '@/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -35,7 +36,8 @@ const formSchema = z.object({
 
 export default function ContactForm() {
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,23 +49,43 @@ export default function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    startTransition(async () => {
-      const result = await submitContactForm(values);
-      if (result.success) {
-        toast({
-          title: 'Message Sent!',
-          description: 'Thank you for contacting us. We will get back to you shortly.',
-        });
-        form.reset();
-      } else {
-        toast({
-          variant: 'destructive',
-          title: 'Uh oh! Something went wrong.',
-          description: result.error || 'There was a problem with your request.',
-        });
-      }
-    });
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!firestore) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Database connection not available.',
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const submissionsCollection = collection(
+        firestore,
+        'contact_form_submissions'
+      );
+      await addDoc(submissionsCollection, {
+        ...values,
+        submissionDate: new Date().toISOString(),
+      });
+      toast({
+        title: 'Message Sent!',
+        description:
+          'Thank you for contacting us. We will get back to you shortly.',
+      });
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description:
+          'A problem occurred while submitting your message. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -125,8 +147,8 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? 'Sending...' : 'Send Message'}
+        <Button type="submit" className="w-full" disabled={isSubmitting || !firestore}>
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
     </Form>
