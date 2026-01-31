@@ -1,10 +1,18 @@
+'use client';
 
 import Link from 'next/link';
 import { Mountain, Phone, Mail } from 'lucide-react';
 import { siteConfig } from '@/lib/config';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-muted text-muted-foreground border-t">
       <div className="container py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -54,7 +62,7 @@ export default function Footer() {
               <Mail className="w-4 h-4" />
               <span>{siteConfig.contact.email}</span>
             </a>
-            <a href={`httpshttps://wa.me/${siteConfig.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href={`https://wa.me/${siteConfig.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
               <WhatsAppIcon className="w-4 h-4" />
               <span>WhatsApp</span>
             </a>
@@ -63,7 +71,7 @@ export default function Footer() {
       </div>
       <div className="bg-muted/50 py-4">
         <div className="container text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All Rights Reserved.</p>
+          <p>&copy; {year} {siteConfig.name}. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
