@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -24,9 +24,10 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Mountain, Users, Car, Sparkles } from 'lucide-react';
-import { createItinerary, type ItineraryResponse } from '@/ai/flows/create-itinerary-flow';
+import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles } from 'lucide-react';
+import { createItinerary } from '@/ai/flows/create-itinerary-flow';
 import { Separator } from '@/components/ui/separator';
+import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
 
 const availableDestinations = [
   { id: 'dharamshala', label: 'Dharamshala' },
