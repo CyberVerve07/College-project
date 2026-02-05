@@ -1,10 +1,5 @@
 'use server';
-/**
- * @fileOverview An AI-powered travel planner for Himachal Pradesh.
- *
- * - createItinerary: A function that generates a custom travel itinerary.
- */
-
+import { z } from 'zod';
 import { ai } from '@/ai/genkit';
 import {
   ItineraryRequestSchema,
@@ -12,20 +7,56 @@ import {
   type ItineraryRequest,
   type ItineraryResponse,
 } from './itinerary-types';
+import { firebaseConfig } from '@/firebase/config';
+import { initializeApp, getApps } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-// This is the wrapper function that will be called from the client
-export async function createItinerary(
-  input: ItineraryRequest
-): Promise<ItineraryResponse> {
-  return createItineraryFlow(input);
+// Helper to get Firestore (same logic as actions.ts for consistency)
+function getDb() {
+  try {
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    const db = getFirestore(app);
+    console.log('Firebase initialized successfully for Flow');
+    return db;
+  } catch (error) {
+    console.error('Firebase initialization failed for Flow:', error);
+    throw error;
+  }
+}
+
+// RAG: Fetch destination context from Firestore
+async function getDestinationsContext(requestedDestinations: string[]) {
+  try {
+    const db = getDb();
+    const querySnapshot = await getDocs(collection(db, 'destinations'));
+    const allDestinations = querySnapshot.docs.map(doc => doc.data());
+
+    // Filter context to only include requested places or nearby ones
+    const context = allDestinations
+      .filter(d => requestedDestinations.includes(d.name?.toLowerCase()) || requestedDestinations.length === 0)
+      .map(d => `${d.name}: ${d.description}. Best time: ${d.bestTimeToVisit}. Attractions: ${d.attractions?.join(', ')}`)
+      .join('\n');
+
+    return context || 'Use general knowledge for Himachal Pradesh.';
+  } catch (error) {
+    console.warn('Firestore fallback: Using generic knowledge', error);
+    return 'Use general knowledge for Himachal Pradesh.';
+  }
 }
 
 const plannerPrompt = ai.definePrompt({
   name: 'himachalItineraryPlanner',
-  input: { schema: ItineraryRequestSchema },
+  input: {
+    schema: ItineraryRequestSchema.extend({
+      context: z.string().optional()
+    })
+  },
   output: { schema: ItineraryResponseSchema },
   prompt: `
-    You are an expert travel planner for Destiny Tour & Travels, specializing in creating optimized itineraries for Himachal Pradesh. Your task is to generate a practical, enjoyable, and budget-friendly travel plan based on the user's requirements.
+    You are an expert travel planner for Destiny Tour & Travels, specializing in Himachal Pradesh.
+    
+    LOCAL DATA CONTEXT:
+    {{context}}
 
     User Requirements:
     - Budget: {{budget}} INR
@@ -34,40 +65,36 @@ const plannerPrompt = ai.definePrompt({
     - Preferred Destinations: {{#each destinations}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}
     - Vehicle Preference: {{vehiclePreference}}
 
-    Your Constraints & Knowledge Base:
-    1.  **Travel Time is Key:** Mountain travel is slow. Assume an average speed of 30-40 km/h. Be realistic about travel times between destinations. Do not plan more than 6-7 hours of driving on any given day.
-    2.  **Seasonal Conditions:**
-        - Rohtang Pass (near Manali) is closed from November to May.
-        - Spiti Valley is often inaccessible from late October to early June due to heavy snowfall.
-        - Monsoon season (July-August) can cause landslides; suggest safer routes or caution.
-    3.  **Vehicle Recommendations:**
-        - 1-4 people: Sedan (Dzire, Etios) is cost-effective. Recommend an SUV (Innova, Ertiga) for more comfort or rougher terrain.
-        - 5-7 people: An SUV (Innova, Scorpio) is necessary.
-        - 8-12 people: A Tempo Traveller is the only option.
-        - If "Any" is preferred, choose the most cost-effective and practical option.
-    4.  **Cost Estimation:** The budget must cover the vehicle, driver, fuel, tolls, and basic accommodation/food. Be realistic. A 5-day trip for 2 people for 25000 INR is more feasible than a 10-day trip. Your estimated cost should be within the user's budget.
-    5.  **Itinerary Structure:**
-        - The first day should be for arrival and local sightseeing.
-        - The last day should be for departure, with minimal activities.
-        - Combine nearby destinations logically. For example, Dharamshala and Kangra can be covered together.
-    6.  **Output Tone:** Be friendly, encouraging, and professional. The output should feel like it's coming from a trusted travel expert.
-
-    Generate the following output:
-    - A day-wise itinerary. Each day must have a day number, a title, a detailed description, and an estimated travel time.
-    - An overall estimated cost for the entire trip.
-    - A specific recommendation for the best vehicle type.
-    - A short, friendly call-to-action to encourage booking. For example: "Ready for an unforgettable adventure? Contact us to book this plan!"
+    Your Constraints:
+    1. **Context-First:** Use the LOCAL DATA CONTEXT provided above to suggest specific attractions and timing.
+    2. **Realistic Travel:** Mountain travel is slow (30km/h). Don't overpack days.
+    3. **Pricing Engine Logic:** 
+       - Sedan: 14/km + 300/day driver allowance.
+       - SUV: 20/km + 400/day driver allowance.
+       - Minimum 250km/day billing applies.
+    
+    Generate a practical, luxury-feel itinerant plan.
   `,
 });
 
-const createItineraryFlow = ai.defineFlow(
+export const createItineraryFlow = ai.defineFlow(
   {
     name: 'createItineraryFlow',
     inputSchema: ItineraryRequestSchema,
     outputSchema: ItineraryResponseSchema,
   },
   async (input) => {
-    const { output } = await plannerPrompt(input);
+    // Phase 1: Retrieval
+    const context = await getDestinationsContext(input.destinations);
+
+    // Phase 2: Generation
+    const { output } = await plannerPrompt({ ...input, context });
+
+    // Phase 3: Post-processing/Validation (Simulated)
     return output!;
   }
 );
+
+export async function createItinerary(input: ItineraryRequest): Promise<ItineraryResponse> {
+  return createItineraryFlow(input);
+}

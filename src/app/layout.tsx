@@ -28,6 +28,8 @@ const playfairDisplay = Playfair_Display({
   display: 'swap',
 });
 
+import ErrorBoundary from '@/components/error-boundary';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,13 +45,15 @@ export default function RootLayout({
       )}
     >
       <body className="font-body antialiased">
-        <FirebaseClientProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <FloatingButtons />
-          <Toaster />
-        </FirebaseClientProvider>
+        <ErrorBoundary>
+          <FirebaseClientProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+            <FloatingButtons />
+            <Toaster />
+          </FirebaseClientProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

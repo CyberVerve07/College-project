@@ -29,77 +29,67 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
     /**
-     * @description Controls access to the 'destinations' collection. Publicly readable, but creation
-     *   is controlled via schema validation to support client-side data seeding.
+     * @path /users/{userId}
+     * Users can read/write their own profile. Admins can read all.
+     */
+    match /users/{userId} {
+      allow read: if isSignedIn() && (isOwner(userId) || isAdmin());
+      allow create: if isSignedIn() && isOwner(userId);
+      allow update: if isSignedIn() && isOwner(userId) && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']));
+      allow write: if isAdmin(); // Admin can override anything
+    }
+
+    /**
      * @path /destinations/{destinationId}
-     * @allow (get, list) Any user, signed-in or not, can read destination documents.
-     * @allow (create) Allows creation only if the new data matches the 'Destination' schema,
-     *   enabling safe initial data seeding from the client.
-     * @deny (update, delete) No client is allowed to modify or delete destination documents.
-     * @principle Ensures data integrity for public content by validating new data and preventing
-     *   unauthorized modifications.
+     * Public read, Admin write.
      */
     match /destinations/{destinationId} {
-      allow get: if true;
-      allow list: if true;
-      allow create: if request.auth != null &&
-                       request.resource.data.name is string &&
-                       request.resource.data.description is string &&
-                       request.resource.data.imageUrl is string &&
-                       request.resource.data.category is string &&
-                       request.resource.data.bestTimeToVisit is string &&
-                       request.resource.data.attractions is list;
-      allow update: if false;
-      allow delete: if false;
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     /**
-     * @description Manages access for the 'services' collection. Publicly readable, but creation is
-     *   controlled via schema validation to support client-side data seeding.
      * @path /services/{serviceId}
-     * @allow (get, list) Any visitor can list all available services.
-     * @allow (create) Allows creation only if the new data matches the 'Service' schema,
-     *   enabling safe initial data seeding from the client.
-     * @deny (update, delete) No client is allowed to modify or delete service documents.
-     * @principle Ensures data integrity for public content by validating new data and preventing
-     *   unauthorized modifications.
+     * Public read, Admin write.
      */
     match /services/{serviceId} {
-      allow get: if true;
-      allow list: if true;
-      allow create: if request.auth != null &&
-                       request.resource.data.name is string &&
-                       request.resource.data.description is string &&
-                       request.resource.data.pricing is string &&
-                       request.resource.data.imageUrl is string &&
-                       request.resource.data.capacity is string &&
-                       request.resource.data.features is list &&
-                       request.resource.data.idealFor is string;
-      allow update: if false;
-      allow delete: if false;
+      allow read: if true;
+      allow write: if isAdmin();
     }
 
     /**
-     * @description Secures contact form submissions. This collection acts as a write-only "dropbox".
-     *   Any user can submit a new form if the data is valid, but no one can read, update, or delete
-     *   existing submissions to protect privacy.
+     * @path /bookings/{bookingId}
+     * Users can create bookings and read their own. Admins manage all.
+     */
+    match /bookings/{bookingId} {
+      allow create: if isSignedIn();
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+
+    /**
      * @path /contact_form_submissions/{submissionId}
-     * @allow (create) An anonymous visitor can submit a form if it contains the required fields.
-     * @deny (get, list, update, delete) A user attempts to read or modify any submission.
-     * @principle Protects user-submitted private data by making the collection a write-only dropbox
-     *   with schema validation. Data can be sent in but cannot be read back by any client.
+     * Write-only for public, Read for admin.
      */
     match /contact_form_submissions/{submissionId} {
-      allow get: if false;
-      allow list: if false;
       allow create: if request.resource.data.name is string &&
                        request.resource.data.email is string &&
-                       request.resource.data.subject is string &&
-                       request.resource.data.message is string &&
-                       request.resource.data.submissionDate is string;
-      allow update: if false;
-      allow delete: if false;
+                       request.resource.data.message is string;
+      allow read, delete: if isAdmin();
     }
   }
 }

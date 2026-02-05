@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -22,65 +21,75 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Mountain className="h-6 w-6 text-primary" />
-          <span className="hidden font-bold sm:inline-block font-headline">
+    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/80 backdrop-blur-2xl transition-all duration-300">
+      <div className="container flex h-20 items-center px-4 md:px-6">
+        <Link href="/" className="flex items-center space-x-2 group">
+          <div className="bg-primary p-2 rounded-xl group-hover:rotate-12 transition-transform shadow-lg shadow-primary/20">
+            <Mountain className="h-6 w-6 text-white" />
+          </div>
+          <span className="font-black text-2xl font-headline tracking-tighter text-foreground group-hover:text-primary transition-colors">
             {siteConfig.name}
           </span>
         </Link>
-        <nav className="hidden flex-1 items-center space-x-6 text-sm font-medium md:flex">
+        <nav className="ml-auto hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                'transition-colors hover:text-primary',
-                pathname === link.href ? 'text-primary' : 'text-foreground/60'
+                "text-sm font-bold uppercase tracking-widest transition-all hover:text-primary relative py-2 group",
+                pathname === link.href ? "text-primary" : "text-muted-foreground"
               )}
             >
               {link.label}
+              <span className={cn(
+                "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300",
+                pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+              )} />
             </Link>
           ))}
-        </nav>
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle Menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left">
-                <nav className="grid gap-6 text-lg font-medium">
-                  <Link
-                    href="/"
-                    className="flex items-center gap-2 text-lg font-semibold"
-                  >
-                    <Mountain className="h-6 w-6 text-primary" />
-                    <span className="sr-only">{siteConfig.name}</span>
-                  </Link>
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={cn(
-                        'transition-colors hover:text-primary',
-                        pathname === link.href ? 'text-primary' : 'text-foreground/60'
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-          <Button asChild className="hidden md:flex">
+          <Button asChild className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95 font-bold">
             <a href={`tel:${siteConfig.contact.phone}`}>Book a Cab</a>
           </Button>
+        </nav>
+
+        {/* Mobile Nav */}
+        <div className="md:hidden ml-auto">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+                <Menu className="h-7 w-7" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-background/95 backdrop-blur-2xl border-l-primary/20">
+              <nav className="grid gap-8 text-lg font-medium pt-12">
+                <Link
+                  href="/"
+                  className="flex items-center gap-3 text-3xl font-black font-headline tracking-tighter text-primary"
+                >
+                  <Mountain className="h-10 w-10 p-2 bg-primary text-white rounded-xl shadow-lg" />
+                  <span>{siteConfig.name}</span>
+                </Link>
+                <div className="h-px bg-primary/20 w-full my-4" />
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={cn(
+                      'text-xl font-bold uppercase tracking-[0.2em] transition-all hover:pl-6 hover:text-primary',
+                      pathname === link.href ? 'text-primary' : 'text-foreground/60'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <Button asChild className="mt-8 rounded-2xl h-16 text-xl font-black bg-primary">
+                  <a href={`tel:${siteConfig.contact.phone}`}>Call Us Now</a>
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>

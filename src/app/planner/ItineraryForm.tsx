@@ -24,10 +24,17 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles } from 'lucide-react';
+import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2 } from 'lucide-react';
 import { createItinerary } from '@/ai/flows/create-itinerary-flow';
+import { saveBooking } from './actions';
 import { Separator } from '@/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 const availableDestinations = [
   { id: 'dharamshala', label: 'Dharamshala' },
@@ -52,6 +59,8 @@ const formSchema = z.object({
 
 export default function ItineraryForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [isPaid, setIsPaid] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<ItineraryResponse | null>(null);
 
@@ -70,6 +79,7 @@ export default function ItineraryForm() {
     setIsLoading(true);
     setError(null);
     setItinerary(null);
+    setIsPaid(false);
 
     try {
       const result = await createItinerary(values);
@@ -86,6 +96,79 @@ export default function ItineraryForm() {
       setIsLoading(false);
     }
   }
+
+  const handlePayment = async () => {
+    if (!itinerary) return;
+
+    setIsPaymentLoading(true);
+
+    // Load Razorpay Script
+    const loadScript = (src: string) => {
+      return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+      });
+    };
+
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+    if (!res) {
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Razorpay SDK failed to load. Check your internet connection.',
+      });
+      setIsPaymentLoading(false);
+      return;
+    }
+
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_placeholder', // Use test key
+      amount: 99900, // Amount in paise (₹999)
+      currency: 'INR',
+      name: 'Destiny Tour & Travels',
+      description: 'Advance Booking for Itinerary',
+      image: 'https://cdn-icons-png.flaticon.com/512/826/826070.png',
+      handler: async function (response: any) {
+        // This function executes after successful payment
+        const bookingData = {
+          paymentId: response.razorpay_payment_id,
+          amount: 999,
+          itinerary: itinerary,
+          customer: form.getValues(),
+        };
+
+        const saveRes = await saveBooking(bookingData);
+        if (saveRes.success) {
+          setIsPaid(true);
+          toast({
+            title: 'Booking Confirmed!',
+            description: 'Your payment was successful and your trip is booked.',
+          });
+        }
+        setIsPaymentLoading(false);
+      },
+      prefill: {
+        name: 'Guest User',
+        email: 'guest@example.com',
+        contact: '9999999999',
+      },
+      theme: {
+        color: '#3b82f6',
+      },
+      modal: {
+        ondismiss: function () {
+          setIsPaymentLoading(false);
+        }
+      }
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
 
   return (
     <>
@@ -163,10 +246,10 @@ export default function ItineraryForm() {
                                   return checked
                                     ? field.onChange([...field.value, item.id])
                                     : field.onChange(
-                                        field.value?.filter(
-                                          (value) => value !== item.id
-                                        )
-                                      );
+                                      field.value?.filter(
+                                        (value) => value !== item.id
+                                      )
+                                    );
                                 }}
                               />
                             </FormControl>
@@ -207,16 +290,16 @@ export default function ItineraryForm() {
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className="w-full h-16 text-xl font-black rounded-2xl bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all active:scale-95" disabled={isLoading}>
             {isLoading ? (
               <>
-                <Bot className="mr-2 h-4 w-4 animate-spin" />
-                Crafting Your Adventure...
+                <Bot className="mr-3 h-6 w-6 animate-spin" />
+                Architecting...
               </>
             ) : (
               <>
-                <Sparkles className="mr-2 h-4 w-4" />
-                Generate Itinerary
+                <Sparkles className="mr-3 h-6 w-6" />
+                Generate My Adventure
               </>
             )}
           </Button>
@@ -247,52 +330,82 @@ export default function ItineraryForm() {
           </div>
 
           <div className="bg-muted/50 rounded-xl p-6 space-y-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <div className="p-4 bg-background rounded-lg">
-                    <p className="text-sm text-muted-foreground">Budget</p>
-                    <p className="font-bold text-lg flex items-center justify-center gap-1"><IndianRupee className="w-4 h-4" /> {itinerary.estimatedCost.toLocaleString()}</p>
-                </div>
-                <div className="p-4 bg-background rounded-lg">
-                    <p className="text-sm text-muted-foreground">Vehicle</p>
-                    <p className="font-bold text-lg flex items-center justify-center gap-1.5"><Car className="w-4 h-4" /> {itinerary.recommendedVehicle}</p>
-                </div>
-                <div className="p-4 bg-background rounded-lg">
-                    <p className="text-sm text-muted-foreground">Days</p>
-                    <p className="font-bold text-lg flex items-center justify-center gap-1.5"><Calendar className="w-4 h-4" /> {itinerary.itinerary.length}</p>
-                </div>
-                 <div className="p-4 bg-background rounded-lg">
-                    <p className="text-sm text-muted-foreground">People</p>
-                    <p className="font-bold text-lg flex items-center justify-center gap-1.5"><Users className="w-4 h-4" /> {form.getValues('people')}</p>
-                </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
+                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Budget</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1 text-primary"><IndianRupee className="w-5 h-5" /> {itinerary.estimatedCost.toLocaleString()}</p>
+              </div>
+              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
+                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Vehicle</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-secondary"><Car className="w-5 h-5" /> {itinerary.recommendedVehicle}</p>
+              </div>
+              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
+                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Days</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-accent"><Calendar className="w-5 h-5" /> {itinerary.itinerary.length}</p>
+              </div>
+              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
+                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">People</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-primary"><Users className="w-5 h-5" /> {form.getValues('people')}</p>
+              </div>
             </div>
-            
+
             <Separator />
-            
-            <div className="space-y-6">
+
+            <div className="space-y-10">
               {itinerary.itinerary.map((day, index) => (
-                <div key={index} className="flex gap-4">
+                <div key={index} className="flex gap-6 group">
                   <div className="flex flex-col items-center">
-                    <div className="bg-primary text-primary-foreground rounded-full h-10 w-10 flex items-center justify-center font-bold">{day.day}</div>
-                    {index < itinerary.itinerary.length - 1 && <div className="w-px h-full bg-border mt-2"></div>}
+                    <div className="bg-primary text-white rounded-2xl h-14 w-14 flex items-center justify-center font-black text-xl shadow-lg ring-4 ring-primary/20 group-hover:scale-110 transition-transform">{day.day}</div>
+                    {index < itinerary.itinerary.length - 1 && <div className="w-1 h-full bg-gradient-to-b from-primary/40 to-transparent mt-4 rounded-full"></div>}
                   </div>
-                  <div className="flex-1 pb-4">
-                    <h3 className="font-headline text-xl font-bold mb-1">{day.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-3 flex items-center gap-2">
-                      <Clock className="w-3.5 h-3.5"/> Estimated Travel: {day.travelTime}
-                    </p>
-                    <p className="leading-relaxed">{day.description}</p>
+                  <div className="flex-1 pb-10">
+                    <h3 className="font-headline text-3xl font-black mb-2 text-foreground/90">{day.title}</h3>
+                    <div className="flex gap-4 mb-4">
+                      <span className="text-xs font-bold uppercase tracking-widest bg-secondary/10 text-secondary px-3 py-1 rounded-full flex items-center gap-1.5">
+                        <Clock className="w-3 h-3" /> {day.travelTime}
+                      </span>
+                    </div>
+                    <p className="leading-relaxed text-lg text-muted-foreground/80">{day.description}</p>
                   </div>
                 </div>
               ))}
             </div>
-            
+
             <Separator />
-            
+
             <div className="text-center pt-4">
               <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>
-              <Button asChild size="lg">
-                <a href="/contact">Book Your Trip Now</a>
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                {isPaid ? (
+                  <div className="flex items-center gap-2 text-green-600 bg-green-50 px-6 py-3 rounded-full font-bold border border-green-200">
+                    <CheckCircle2 className="w-6 h-6" />
+                    Booking Confirmed & Paid
+                  </div>
+                ) : (
+                  <>
+                    <Button
+                      size="lg"
+                      onClick={handlePayment}
+                      disabled={isPaymentLoading}
+                      className="bg-accent hover:bg-accent/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-accent/20"
+                    >
+                      {isPaymentLoading ? 'Securing Link...' : (
+                        <span className="flex items-center gap-3">
+                          <CreditCard className="w-6 h-6" /> PAY ADVANCE (₹999)
+                        </span>
+                      )}
+                    </Button>
+                    <Button asChild variant="outline" size="lg">
+                      <a href="/contact">Enquire Instead</a>
+                    </Button>
+                  </>
+                )}
+              </div>
+              {isPaid && (
+                <p className="mt-4 text-sm text-muted-foreground italic">
+                  Our team will contact you shortly with the driver details.
+                </p>
+              )}
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@
       "id": "dest-dharamshala",
       "title": "Dharamshala",
       "description": "The scenic town of Dharamshala with mountains in the background.",
-      "imageUrl": "https://images.unsplash.com/photo-1746013306931-1a3a91477293?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxkaGFyYW1zaGFsYSUyMHRvd258ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&q=80",
       "imageHint": "dharamshala town"
     },
     {
@@ -32,22 +32,36 @@
       "id": "dest-manali",
       "title": "Manali",
       "description": "Snow-capped mountains and lush valleys of Manali.",
-      "imageUrl": "https://images.unsplash.com/photo-1621295995584-33a7d45f3c17?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYW5hbGklMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzY4ODg3NzIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=1080&q=80",
       "imageHint": "manali landscape"
     },
     {
       "id": "dest-shimla",
       "title": "Shimla",
       "description": "The historic Ridge and Christ Church in Shimla.",
-      "imageUrl": "https://images.unsplash.com/photo-1559993399-be8f7556a8a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzaGltbGElMjBjaXR5fGVufDB8fHx8MTc2ODg4NzcyMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80&w=1080",
       "imageHint": "shimla city"
     },
     {
       "id": "dest-spiti",
       "title": "Spiti Valley",
       "description": "The breathtaking, arid landscapes of Spiti Valley.",
-      "imageUrl": "https://images.unsplash.com/photo-1606553896503-05c04c105b4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcGl0aSUyMHZhbGxleXxlbnwwfHx8fDE3Njg4ODc3MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&q=80&w=1080",
       "imageHint": "spiti valley"
+    },
+    {
+      "id": "dest-dalhousie",
+      "title": "Dalhousie",
+      "description": "The mini Switzerland of India, Khajjiar near Dalhousie.",
+      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&q=80",
+      "imageHint": "dalhousie landscape"
+    },
+    {
+      "id": "dest-kasol",
+      "title": "Kasol",
+      "description": "The serene Parvati Valley in Kasol.",
+      "imageUrl": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1080&q=80",
+      "imageHint": "kasol river"
     },
     {
       "id": "service-taxi",

@@ -14,64 +14,68 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-muted text-muted-foreground border-t">
-      <div className="container py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="flex flex-col gap-4">
-          <Link href="/" className="flex items-center space-x-2">
-            <Mountain className="h-8 w-8 text-primary" />
-            <span className="font-bold text-lg font-headline text-foreground">
+    <footer className="bg-foreground text-background border-t border-primary/20 rounded-t-[4rem] mt-20 overflow-hidden">
+      <div className="container py-24 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="flex flex-col gap-6">
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="bg-primary p-2.5 rounded-xl shadow-lg shadow-primary/20">
+              <Mountain className="h-8 w-8 text-white" />
+            </div>
+            <span className="font-black text-3xl font-headline tracking-tighter">
               {siteConfig.name}
             </span>
           </Link>
-          <p className="text-sm">
+          <p className="text-lg opacity-60 font-medium leading-relaxed">
             {siteConfig.description}
           </p>
         </div>
 
         <div>
-          <h3 className="font-semibold text-foreground mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-            <li><Link href="/destinations" className="hover:text-primary transition-colors">Destinations</Link></li>
-            <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
-            <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-            <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-secondary">Navigate</h3>
+          <ul className="space-y-4">
+            {['Home', 'Destinations', 'Services', 'About Us', 'Contact'].map((item) => (
+              <li key={item}>
+                <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-primary transition-all hover:pl-2 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                  {item}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="font-semibold text-foreground mb-4">Services</h3>
-          <ul className="space-y-2 text-sm">
-            <li>Taxi Service</li>
-            <li>Innova</li>
-            <li>Tempo Traveller</li>
-            <li>Alto</li>
-            <li>Sumo</li>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-accent">Our Fleet</h3>
+          <ul className="space-y-4 opacity-70">
+            {['Innova Crysta', 'Force Traveller', 'Maruti Suzuki Dzire', 'Mahindra Scorpio', 'Tata Sumo Gold'].map((car) => (
+              <li key={car} className="flex items-center gap-2 italic">
+                <div className="w-4 h-px bg-white/20" />
+                {car}
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="font-semibold text-foreground mb-4">Contact Us</h3>
-          <address className="not-italic space-y-2 text-sm">
-            <p>Kangra, Himachal Pradesh, India</p>
-            <a href={`tel:${siteConfig.contact.phone}`} className="flex items-center gap-2 hover:text-primary transition-colors">
-              <Phone className="w-4 h-4" />
-              <span>{siteConfig.contact.phone}</span>
-            </a>
-            <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2 hover:text-primary transition-colors">
-              <Mail className="w-4 h-4" />
-              <span>{siteConfig.contact.email}</span>
-            </a>
-            <a href={`https://wa.me/${siteConfig.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors">
-              <WhatsAppIcon className="w-4 h-4" />
-              <span>WhatsApp</span>
-            </a>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Base Camp</h3>
+          <address className="not-italic space-y-6">
+            <p className="text-lg opacity-60">Kangra Valley, <br />Himachal Pradesh, India</p>
+            <div className="flex flex-col gap-4">
+              <a href={`tel:${siteConfig.contact.phone}`} className="flex items-center gap-3 hover:text-secondary p-3 bg-white/5 rounded-2xl transition-all">
+                <Phone className="w-5 h-5 text-secondary" />
+                <span className="font-bold">{siteConfig.contact.phone}</span>
+              </a>
+              <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-3 hover:text-accent p-3 bg-white/5 rounded-2xl transition-all">
+                <Mail className="w-5 h-5 text-accent" />
+                <span className="font-bold">Email Dispatch</span>
+              </a>
+            </div>
           </address>
         </div>
       </div>
-      <div className="bg-muted/50 py-4">
-        <div className="container text-center text-sm">
-          <p>&copy; {year} {siteConfig.name}. All Rights Reserved.</p>
+      <div className="bg-black/20 py-8 border-t border-white/5">
+        <div className="container text-center text-sm font-bold opacity-40 uppercase tracking-[0.3em]">
+          <p>&copy; {year} {siteConfig.name} &bull; Built for the Mountains</p>
         </div>
       </div>
     </footer>
