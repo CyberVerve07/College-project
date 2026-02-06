@@ -24,28 +24,44 @@ function getDb() {
   }
 }
 
-// RAG: Fetch destination context from Firestore
-async function getDestinationsContext(requestedDestinations: string[]) {
+// RAG: Fetch destination context and service metadata from Firestore
+async function getPlannerContext(requestedDestinations: string[]) {
   try {
     const db = getDb();
-    const querySnapshot = await getDocs(collection(db, 'destinations'));
-    const allDestinations = querySnapshot.docs.map(doc => doc.data());
+    const [destSnap, servSnap] = await Promise.all([
+      getDocs(collection(db, 'destinations')),
+      getDocs(collection(db, 'services'))
+    ]);
+
+    const allDestinations = destSnap.docs.map(doc => doc.data());
+    const allServices = servSnap.docs.map(doc => doc.data());
 
     // Filter context to only include requested places or nearby ones
-    const context = allDestinations
+    const destContext = allDestinations
       .filter(d => requestedDestinations.includes(d.name?.toLowerCase()) || requestedDestinations.length === 0)
       .map(d => `${d.name}: ${d.description}. Best time: ${d.bestTimeToVisit}. Attractions: ${d.attractions?.join(', ')}`)
       .join('\n');
 
-    return context || 'Use general knowledge for Himachal Pradesh.';
+    const serviceContext = allServices
+      .map(s => `${s.name}: Capacity ${s.capacity}. Rates: ${s.pricing}. Best for: ${s.idealFor}`)
+      .join('\n');
+
+    return {
+      destinations: destContext || 'Use general knowledge for Himachal Pradesh.',
+      services: serviceContext
+    };
   } catch (error) {
     console.warn('Firestore fallback: Using generic knowledge', error);
-    return 'Use general knowledge for Himachal Pradesh.';
+    return {
+      destinations: 'Use general knowledge for Himachal Pradesh.',
+      services: ''
+    };
   }
 }
 
 const plannerPrompt = ai.definePrompt({
   name: 'himachalItineraryPlanner',
+  model: 'googleai/gemini-pro',
   input: {
     schema: ItineraryRequestSchema.extend({
       context: z.string().optional()
@@ -55,8 +71,11 @@ const plannerPrompt = ai.definePrompt({
   prompt: `
     You are an expert travel planner for Destiny Tour & Travels, specializing in Himachal Pradesh.
     
-    LOCAL DATA CONTEXT:
-    {{context}}
+    DESTINATION DATA:
+    {{destContext}}
+
+    AVAILABLE VEHICLES & RATES:
+    {{serviceContext}}
 
     User Requirements:
     - Budget: {{budget}} INR
@@ -85,10 +104,10 @@ export const createItineraryFlow = ai.defineFlow(
   },
   async (input) => {
     // Phase 1: Retrieval
-    const context = await getDestinationsContext(input.destinations);
+    const { destinations: destContext, services: serviceContext } = await getPlannerContext(input.destinations);
 
     // Phase 2: Generation
-    const { output } = await plannerPrompt({ ...input, context });
+    const { output } = await plannerPrompt({ ...input, destContext, serviceContext } as any);
 
     // Phase 3: Post-processing/Validation (Simulated)
     return output!;

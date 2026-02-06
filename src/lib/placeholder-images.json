@@ -11,7 +11,7 @@
       "id": "dest-dharamshala",
       "title": "Dharamshala",
       "description": "The scenic town of Dharamshala with mountains in the background.",
-      "imageUrl": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&q=80",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.haCo5kJRJFj37NVa6hkFJwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "dharamshala town"
     },
     {
@@ -32,21 +32,21 @@
       "id": "dest-manali",
       "title": "Manali",
       "description": "Snow-capped mountains and lush valleys of Manali.",
-      "imageUrl": "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=1080&q=80",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.p_5wr91tggQb--YqLQEFAQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "manali landscape"
     },
     {
       "id": "dest-shimla",
       "title": "Shimla",
       "description": "The historic Ridge and Christ Church in Shimla.",
-      "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80&w=1080",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.Bb3HKlUZCt2mEPpyIbJmDQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "shimla city"
     },
     {
       "id": "dest-spiti",
       "title": "Spiti Valley",
       "description": "The breathtaking, arid landscapes of Spiti Valley.",
-      "imageUrl": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&q=80&w=1080",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.GM5iwaSmQyPAqFFU2QMYwAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "spiti valley"
     },
     {
@@ -64,39 +64,102 @@
       "imageHint": "kasol river"
     },
     {
-      "id": "service-taxi",
-      "title": "Sedan Taxi",
-      "description": "A modern sedan taxi cab.",
-      "imageUrl": "https://images.unsplash.com/photo-1722088353797-854b8600d97a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzZWRhbiUyMGNhcnxlbnwwfHx8fDE3Njg3MzU2OTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "sedan car"
+      "id": "dest-palampur",
+      "title": "Palampur",
+      "description": "Tea gardens and pine forests of Palampur.",
+      "imageUrl": "https://assets.cntraveller.in/photos/627374d4d0cef4929e37fdf2/16:9/w_1024%2Cc_limit/Palampur%2520cover%2520img.jpg",
+      "imageHint": "palampur tea garden"
+    },
+    {
+      "id": "dest-chamba",
+      "title": "Chamba",
+      "description": "Ancient temples and Ravi river in Chamba.",
+      "imageUrl": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1080&q=80",
+      "imageHint": "chamba himachal"
+    },
+    {
+      "id": "dest-solan",
+      "title": "Solan",
+      "description": "Mushroom city of India, Solan.",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.rkDCKyzPy0jQWj_CYKjWjQHaEy?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "solan himachal"
+    },
+    {
+      "id": "dest-baglamukhi",
+      "title": "Baglamukhi Temple",
+      "description": "The sacred Baglamukhi Temple in Himachal Pradesh.",
+      "imageUrl": "https://th.bing.com/th/id/OIP.zGrgDQLN1SWCKJ1F_6c2eAHaFO?w=254&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "imageHint": "baglamukhi temple"
+    },
+    {
+      "id": "service-alto",
+      "title": "Maruti Alto",
+      "description": "Maruti Alto 800 hatchback.",
+      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "imageHint": "maruti alto 800 white car himachal"
+    },
+    {
+      "id": "service-dzire",
+      "title": "Swift Dzire",
+      "description": "Maruti Swift Dzire sedan.",
+      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "imageHint": "swift dzire taxi himachal"
+    },
+    {
+      "id": "service-etios",
+      "title": "Toyota Etios",
+      "description": "Toyota Etios sedan.",
+      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "imageHint": "toyota etios taxi india"
     },
     {
       "id": "service-innova",
-      "title": "Innova SUV",
-      "description": "A Toyota Innova Crysta car.",
-      "imageUrl": "https://images.unsplash.com/photo-1650959818516-03d68079f9a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdXYlMjBjYXJ8ZW58MHx8fHwxNzY4NzM1NjkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "suv car"
+      "title": "Innova Crysta",
+      "description": "Toyota Innova Crysta SUV.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "imageHint": "toyota innova crysta himachal"
+    },
+    {
+      "id": "service-bolero",
+      "title": "Mahindra Bolero",
+      "description": "Mahindra Bolero SUV.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "imageHint": "mahindra bolero himachal"
+    },
+    {
+      "id": "service-sumo",
+      "title": "Tata Sumo",
+      "description": "Tata Sumo Gold.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "imageHint": "tata sumo gold himachal"
     },
     {
       "id": "service-tempo",
       "title": "Tempo Traveller",
-      "description": "A Force Tempo Traveller van.",
-      "imageUrl": "https://images.unsplash.com/photo-1760236999462-0415f7396dff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dHJhdmVsbGVyJTIwdmFufGVufDB8fHx8MTc2ODgwMzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "traveller van"
+      "description": "Force Tempo Traveller.",
+      "imageUrl": "https://images.unsplash.com/photo-1464851707681-f9d5fdaccea8?w=1080&q=80",
+      "imageHint": "force tempo traveller india"
     },
     {
-      "id": "service-alto",
-      "title": "Alto Hatchback",
-      "description": "A small Maruti Suzuki Alto hatchback.",
-      "imageUrl": "https://images.unsplash.com/photo-1641825877652-23e34a7358fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoYXRjaGJhY2slMjBjYXJ8ZW58MHx8fHwxNzY4NzcwNTg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "hatchback car"
+      "id": "service-thar",
+      "title": "Mahindra Thar",
+      "description": "Mahindra Thar 4x4.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "imageHint": "mahindra thar himachal"
     },
     {
-      "id": "service-sumo",
-      "title": "Sumo Jeep",
-      "description": "A rugged Tata Sumo jeep.",
-      "imageUrl": "https://images.unsplash.com/photo-1507242541385-02de954f97e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxqZWVwJTIwc3V2fGVufDB8fHx8MTc2ODgwMzcyOXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "jeep suv"
+      "id": "service-ertiga",
+      "title": "Maruti Ertiga",
+      "description": "Maruti Ertiga MPV.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "imageHint": "maruti ertiga"
+    },
+    {
+      "id": "service-fortuner",
+      "title": "Toyota Fortuner",
+      "description": "Toyota Fortuner SUV.",
+      "imageUrl": "https://images.unsplash.com/photo-1632245889029-e406faaa34cd?w=1080&q=80",
+      "imageHint": "toyota fortuner"
     },
     {
       "id": "about-us",

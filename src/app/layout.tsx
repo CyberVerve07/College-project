@@ -9,6 +9,7 @@ import FloatingButtons from '@/components/layout/FloatingButtons';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
+import { ColorSplash } from '@/components/ui/color-splash';
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} - Your Gateway to Himachal`,
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ErrorBoundary>
           <FirebaseClientProvider>
+            <ColorSplash />
             <Header />
             <main>{children}</main>
             <Footer />

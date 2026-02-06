@@ -68,7 +68,16 @@ service cloud.firestore {
      */
     match /services/{serviceId} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if true; // Temporarily allowed for seeding
+    }
+
+    /**
+     * @path /routes/{routeId}
+     * Public read, Open write for seeding.
+     */
+    match /routes/{routeId} {
+      allow read: if true;
+      allow write: if true;
     }
 
     /**

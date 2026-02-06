@@ -2,48 +2,103 @@ import { PlaceHolderImagesMap } from './placeholder-images';
 
 export const initialServices = [
   {
-    name: 'Taxi Service (Sedan)',
-    description: 'Our comfortable and reliable sedan taxis are perfect for city travel, airport transfers, and short trips around the Kangra valley. Enjoy a smooth ride with a professional driver.',
-    pricing: 'From ₹15/km',
-    imageUrl: PlaceHolderImagesMap.get('service-taxi')?.imageUrl,
-    capacity: 'Up to 4 passengers',
-    features: ['Air Conditioning', 'Music System', 'Professional Driver'],
-    idealFor: 'Solo travelers, couples, and small families.'
-  },
-  {
-    name: 'Innova / SUV',
-    description: 'Travel in style and comfort with our spacious SUVs like the Toyota Innova. With ample legroom and luggage space, they are the ideal choice for long-distance journeys and family vacations.',
-    pricing: 'From ₹22/km',
-    imageUrl: PlaceHolderImagesMap.get('service-innova')?.imageUrl,
-    capacity: 'Up to 7 passengers',
-    features: ['Extra Luggage Space', 'Air Conditioning', 'Comfortable Seating'],
-    idealFor: 'Families, group travelers, and long-distance travel.'
-  },
-  {
-    name: 'Tempo Traveller',
-    description: 'Our Tempo Travellers are perfect for large groups and extended family tours. With comfortable seating and a spacious interior, everyone can travel together without compromising on comfort.',
+    id: 'maruti-alto',
+    name: 'Maruti Alto',
+    description: 'Budget-friendly hatchback perfect for couples and navigating narrow mountain roads.',
     pricing: 'Contact for Price',
-    imageUrl: PlaceHolderImagesMap.get('service-tempo')?.imageUrl,
-    capacity: 'Up to 12 passengers',
-    features: ['Spacious Interiors', 'Push-back Seats', 'Music System'],
-    idealFor: 'Large groups, family functions, and corporate outings.'
-  },
-  {
-    name: 'Alto (Hatchback)',
-    description: 'The compact and efficient Maruti Alto is an excellent choice for budget-conscious travelers. Its small size makes it perfect for navigating the narrow and winding roads of the Himalayas.',
-    pricing: 'From ₹12/km',
     imageUrl: PlaceHolderImagesMap.get('service-alto')?.imageUrl,
-    capacity: 'Up to 4 passengers',
-    features: ['Fuel Efficient', 'Compact Size', 'Easy to Park'],
-    idealFor: 'Budget travel and navigating narrow roads.'
+    capacity: '4 Passengers',
+    features: ['Fuel Efficient', 'Compact Size', 'Best for Narrow Roads'],
+    idealFor: 'Budget travel, couples, narrow mountain roads'
   },
   {
-    name: 'Sumo / Jeep',
-    description: 'For the adventurous at heart, our rugged vehicles like the Tata Sumo or similar jeeps are built to conquer the challenging terrains of the Himalayas. Ideal for off-road trips and remote destinations.',
+    id: 'swift-dzire',
+    name: 'Maruti Swift Dzire',
+    description: 'Reliable sedan offering a comfortable ride for small families and airport transfers.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-dzire')?.imageUrl,
+    capacity: '4 Passengers + Luggage',
+    features: ['AC Cab', 'Comfortable Seating', 'Boot Space'],
+    idealFor: 'Small families, airport transfers, city tours'
+  },
+  {
+    id: 'toyota-etios',
+    name: 'Toyota Etios',
+    description: 'Spacious sedan known for its legroom and smooth ride on highways.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-etios')?.imageUrl,
+    capacity: '4 Passengers + Luggage',
+    features: ['Spacious Cabin', 'Smooth Ride', 'Large Boot'],
+    idealFor: 'Families, commercial travel, highway trips'
+  },
+  {
+    id: 'innova-crysta',
+    name: 'Toyota Innova Crysta',
+    description: 'Premium SUV offering superior comfort and power for long-distance mountain journeys.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-innova')?.imageUrl,
+    capacity: '6-7 Passengers',
+    features: ['Captain Seats', 'AC Blower in Rear', 'Ample Legroom'],
+    idealFor: 'Families, long-distance comfort, premium travel'
+  },
+  {
+    id: 'maruti-ertiga',
+    name: 'Maruti Ertiga',
+    description: 'Smart hybrid MPV offering a balance of comfort and economy for family trips.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-ertiga')?.imageUrl,
+    capacity: '6 Passengers',
+    features: ['Hybrid Tech', 'Comfortable', 'Budget Friendly'],
+    idealFor: 'Families, budget groups, city & hill drive'
+  },
+  {
+    id: 'toyota-fortuner',
+    name: 'Toyota Fortuner',
+    description: 'Luxury 4x4 SUV for exclusive travel with maximum power and presence.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-fortuner')?.imageUrl,
+    capacity: '7 Passengers',
+    features: ['Luxury Interiors', '4x4 Power', 'Premium Status'],
+    idealFor: 'VIP travel, luxury tours, off-road comfort'
+  },
+  {
+    id: 'mahindra-bolero',
+    name: 'Mahindra Bolero',
+    description: 'Rugged SUV built for rough terrains and larger groups on a budget.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-bolero')?.imageUrl,
+    capacity: '7-8 Passengers',
+    features: ['Rugged Build', 'High Ground Clearance', 'Spacious'],
+    idealFor: 'Rural travel, rough roads, budget groups'
+  },
+  {
+    id: 'tata-sumo',
+    name: 'Tata Sumo Gold',
+    description: 'The workhorse of the mountains, ideal for local transport and tough roads.',
     pricing: 'Contact for Price',
     imageUrl: PlaceHolderImagesMap.get('service-sumo')?.imageUrl,
-    capacity: 'Up to 9 passengers',
-    features: ['Robust Build', 'High Ground Clearance', '4x4 Capability'],
-    idealFor: 'Adventure tours and exploring remote areas.'
+    capacity: '7-9 Passengers',
+    features: ['Tough Build', 'Good Ground Clearance', 'Cost Effective'],
+    idealFor: 'Budget groups, rough terrain, local transport'
   },
+  {
+    id: 'force-tempo',
+    name: 'Force Tempo Traveller',
+    description: 'Spacious van for large groups travelling together with comfort and panoramic views.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-tempo')?.imageUrl,
+    capacity: '12-16 Passengers',
+    features: ['Push-back Seats', 'Panoramic Windows', 'Music System'],
+    idealFor: 'Large groups, corporate outings, school trips'
+  },
+  {
+    id: 'mahindra-thar',
+    name: 'Mahindra Thar',
+    description: 'Iconic 4x4 jeep made for off-road adventures and scenic open-top experiences.',
+    pricing: 'Contact for Price',
+    imageUrl: PlaceHolderImagesMap.get('service-thar')?.imageUrl,
+    capacity: '4-6 Passengers',
+    features: ['4x4 Capability', 'Convertible Soft Top', 'High Torque'],
+    idealFor: 'Off-road adventure, Spiti Valley, photography trips'
+  }
 ].filter(service => service.imageUrl);
