@@ -18,10 +18,6 @@ export default function ContactPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 drop-shadow-sm">
             Get in Touch
-            <br />
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 text-secondary-foreground font-semibold text-sm border border-secondary/20 mt-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> All Himachal Services Available
-            </div>
           </h1>
           <p className="max-w-3xl mx-auto text-xl md:text-2xl text-muted-foreground font-medium leading-relaxed">
             Ready for your Himalayan adventure?
@@ -30,17 +26,18 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Info Card */}
-          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/20 dark:border-white/10 space-y-10 relative overflow-hidden group hover:shadow-primary/10 transition-all duration-500">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/20 dark:border-white/10 flex flex-col h-full relative overflow-hidden group hover:shadow-primary/10 transition-all duration-500">
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div>
-              <h2 className="text-3xl font-bold font-headline mb-2">Contact Information</h2>
+              <h2 className="text-3xl font-bold font-headline mb-6">Contact Information</h2>
               <p className="text-muted-foreground">Reach out to us through any of these channels.</p>
             </div>
 
-            <div className="space-y-8 relative z-10">
+            <div className="flex-1 flex flex-col justify-center space-y-8 relative z-10 mt-8">
               <div className="flex items-start gap-6 group/item">
                 <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
                   <MapPin className="w-7 h-7 text-blue-500" />
@@ -89,10 +86,12 @@ export default function ContactPage() {
           </div>
 
           {/* Form Card */}
-          <div className="bg-white dark:bg-slate-900 p-10 rounded-3xl shadow-2xl border border-primary/10 relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 p-10 rounded-3xl shadow-2xl border border-primary/10 relative overflow-hidden h-full flex flex-col">
             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
             <h2 className="text-3xl font-bold font-headline mb-8">Send a Message</h2>
-            <ContactForm />
+            <div className="flex-1">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </div>

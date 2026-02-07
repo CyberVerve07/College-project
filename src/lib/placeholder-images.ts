@@ -5,6 +5,7 @@ export type ImagePlaceholder = {
   title: string;
   description: string;
   imageUrl: string;
+  homeImageUrl?: string;
   imageHint: string;
 };
 

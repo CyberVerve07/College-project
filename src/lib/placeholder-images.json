@@ -5,20 +5,22 @@
       "title": "Himalayas at Sunset",
       "description": "A stunning wide-angle view of the Himalayas at sunset.",
       "imageUrl": "https://i.pinimg.com/originals/c3/3e/d3/c33ed39a744cb727e5fa93bae7857b36.jpg",
-      "imageHint": "himachal landscape"
+      "homeImageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "himachal cinematic landscape"
     },
     {
       "id": "dest-dharamshala",
       "title": "Dharamshala",
       "description": "The scenic town of Dharamshala with mountains in the background.",
       "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.haCo5kJRJFj37NVa6hkFJwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://images.unsplash.com/photo-1598091383021-15ddea10925d",
       "imageHint": "dharamshala town"
     },
     {
       "id": "dest-kangra",
       "title": "Kangra Valley",
       "description": "Lush green tea gardens in Kangra Valley.",
-      "imageUrl": "https://images.unsplash.com/photo-1621836668855-378c84bb331d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxrYW5ncmElMjB2YWxsZXl8ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://www.gosahin.com/go/p/f/1546183162_bajreshwari-devi-temple-kangra1.jpg",
       "imageHint": "kangra valley"
     },
     {
@@ -33,6 +35,7 @@
       "title": "Manali",
       "description": "Snow-capped mountains and lush valleys of Manali.",
       "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.p_5wr91tggQb--YqLQEFAQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23",
       "imageHint": "manali landscape"
     },
     {
@@ -40,6 +43,7 @@
       "title": "Shimla",
       "description": "The historic Ridge and Christ Church in Shimla.",
       "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.Bb3HKlUZCt2mEPpyIbJmDQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Christ_Church_in_Shimla_on_a_rainy_day.jpg",
       "imageHint": "shimla city"
     },
     {
@@ -47,20 +51,21 @@
       "title": "Spiti Valley",
       "description": "The breathtaking, arid landscapes of Spiti Valley.",
       "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.GM5iwaSmQyPAqFFU2QMYwAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Spiti_Valley_Landscape.jpg",
       "imageHint": "spiti valley"
     },
     {
       "id": "dest-dalhousie",
       "title": "Dalhousie",
       "description": "The mini Switzerland of India, Khajjiar near Dalhousie.",
-      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1080&q=80",
+      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.V5QA__hHCcl6_5YoTPkOUQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "dalhousie landscape"
     },
     {
       "id": "dest-kasol",
       "title": "Kasol",
       "description": "The serene Parvati Valley in Kasol.",
-      "imageUrl": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1080&q=80",
+      "imageUrl": "https://th.bing.com/th/id/OIP.4rGlrPJA9HYXgmsY9YZduwHaFL?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "kasol river"
     },
     {
@@ -74,7 +79,7 @@
       "id": "dest-chamba",
       "title": "Chamba",
       "description": "Ancient temples and Ravi river in Chamba.",
-      "imageUrl": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=1080&q=80",
+      "imageUrl": "https://im.hunt.in/cg/Chamba/City-Guide/lakshmi-narayan-mandir-chamba.jpg",
       "imageHint": "chamba himachal"
     },
     {
@@ -82,6 +87,7 @@
       "title": "Solan",
       "description": "Mushroom city of India, Solan.",
       "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.rkDCKyzPy0jQWj_CYKjWjQHaEy?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://images.unsplash.com/photo-1626120032639-75f280fa759d",
       "imageHint": "solan himachal"
     },
     {
@@ -89,7 +95,99 @@
       "title": "Baglamukhi Temple",
       "description": "The sacred Baglamukhi Temple in Himachal Pradesh.",
       "imageUrl": "https://th.bing.com/th/id/OIP.zGrgDQLN1SWCKJ1F_6c2eAHaFO?w=254&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+      "homeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Maa_Baglamukhi_Temple_Bankhandi_%28Kangra%29.jpg",
       "imageHint": "baglamukhi temple"
+    },
+    {
+      "id": "dest-bharmour",
+      "title": "Bharmour",
+      "description": "Ancient Chaurasi Temple complex and Manimahesh in Bharmour.",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.2nQTN-dDhkVcAD3WqNm7JQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "bharmour temples chamba"
+    },
+    {
+      "id": "dest-kullu",
+      "title": "Kullu",
+      "description": "The beautiful Kullu Valley with Beas river and scenic peaks.",
+      "imageUrl": "https://i.pinimg.com/originals/85/1a/a7/851aa7c2f7b6b688701784978cb365b2.jpg",
+      "imageHint": "kullu valley himachal"
+    },
+    {
+      "id": "dest-pangi",
+      "title": "Pangi Valley",
+      "description": "Remote Pangi Valley with Chandrabhaga river and mountain roads.",
+      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.PjHSl7wq_Gg-SYGQSIiftQHaE7?w=626&h=417&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "pangi valley chamba"
+    },
+    {
+      "id": "dest-bilaspur",
+      "title": "Bilaspur",
+      "description": "Gobind Sagar Lake and scenic dam views in Bilaspur.",
+      "imageUrl": "https://www.capertravelindia.com/images/himachal-3.jpg",
+      "imageHint": "bilaspur gobind sagar lake"
+    },
+    {
+      "id": "dest-narkanda",
+      "title": "Narkanda",
+      "description": "Hatu Peak and snow-covered mountains in Narkanda.",
+      "imageUrl": "https://www.namasteindiatrip.com/blog/wp-content/uploads/2014/09/hatu-peak.jpg",
+      "imageHint": "narkanda hatu peak"
+    },
+    {
+      "id": "dest-kasauli",
+      "title": "Kasauli",
+      "description": "A serene colonial-era hill station with pine forests, scenic viewpoints, and heritage churches.",
+      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
+      "imageHint": "kasauli hill station"
+    },
+    {
+      "id": "dest-khajjiar",
+      "title": "Khajjiar",
+      "description": "Called the 'Mini Switzerland of India', famous for its lush meadows, lake, and deodar forests.",
+      "imageUrl": "https://www.holidify.com/images/cmsuploads/compressed/733_20210421151356.jpg",
+      "imageHint": "khajjiar mini switzerland"
+    },
+    {
+      "id": "dest-kufri",
+      "title": "Kufri",
+      "description": "A popular winter destination near Shimla known for snow activities, skiing, and yak rides.",
+      "imageUrl": "https://th.bing.com/th/id/OIP.r_1MwmKO6jDxXeIqakppuQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "kufri snow skiing"
+    },
+    {
+      "id": "dest-mcleodganj",
+      "title": "McLeod Ganj",
+      "description": "Home to the Dalai Lama, a vibrant hub of Tibetan culture, cafes, and spiritual retreats.",
+      "imageUrl": "https://i.ytimg.com/vi/C5q5yBCGzkc/maxresdefault.jpg",
+      "imageHint": "mcleodganj dalai lama"
+    },
+    {
+      "id": "dest-tabo",
+      "title": "Tabo",
+      "description": "An ancient monastery town in Spiti Valley with 1000-year-old Buddhist art and murals.",
+      "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200&q=80",
+      "imageHint": "tabo monastery spiti"
+    },
+    {
+      "id": "dest-malana",
+      "title": "Malana",
+      "description": "A remote ancient village known for its unique culture, laws, and stunning mountain setting.",
+      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.58MEBRSEIQR_z8TXpZYdIAHaEP?w=1200&h=687&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "malana village kullu"
+    },
+    {
+      "id": "dest-kinnaur",
+      "title": "Kinnaur Valley",
+      "description": "A scenic valley bordering Tibet, famous for apple orchards, Kinner Kailash, and the Sutlej River.",
+      "imageUrl": "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&q=80",
+      "imageHint": "kinnaur valley apples"
+    },
+    {
+      "id": "dest-chail",
+      "title": "Chail",
+      "description": "A peaceful hill station with the world's highest cricket ground, palace, and wildlife sanctuary.",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.jgtpnOXckWJW5PplOqNoTAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "chail cricket ground"
     },
     {
       "id": "service-alto",

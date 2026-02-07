@@ -32,31 +32,31 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-300 rounded-b-3xl shadow-2xl">
-      <div className="container flex h-24 items-center px-6 md:px-10">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/90 backdrop-blur-xl transition-all duration-300 shadow-xl">
+      <div className="container flex h-20 items-center px-6 md:px-10">
         <Link href="/" className="flex items-center space-x-3 group">
-          <span className="font-extrabold text-4xl tracking-tighter text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-            Destiny <span className="text-primary italic">Tour</span> & Travels
+          <span className="font-extrabold text-3xl tracking-tight text-white drop-shadow-lg">
+            Destiny <span className="text-primary italic font-black">Tour</span> & Travels
           </span>
         </Link>
-        <nav className="ml-auto hidden md:flex gap-8 items-center">
+        <nav className="ml-auto hidden md:flex gap-10 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-bold uppercase tracking-widest transition-all hover:text-primary relative py-2 group",
-                pathname === link.href ? "text-primary" : "text-muted-foreground"
+                "text-sm font-semibold uppercase tracking-wider transition-all hover:text-primary relative py-2 group",
+                pathname === link.href ? "text-primary" : "text-white/85"
               )}
             >
               {link.label}
               <span className={cn(
-                "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300",
+                "absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary to-pink-500 transition-all duration-300",
                 pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
               )} />
             </Link>
           ))}
-          <Button asChild className="rounded-2xl px-8 h-12 bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95 font-bold">
+          <Button asChild className="rounded-xl px-8 h-11 bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm">
             <a href={`tel:${siteConfig.contact.phone}`}>Book a Cab</a>
           </Button>
         </nav>
@@ -100,6 +100,6 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-    </header>
+    </header >
   );
 }

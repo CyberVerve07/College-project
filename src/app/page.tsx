@@ -45,14 +45,14 @@ export default function Home() {
       <HeroSection />
 
       {/* Featured Destinations */}
-      <section id="destinations" className="py-32 relative">
-        <div className="container px-4 md:px-6 text-center mb-20">
-          <h2 className="text-4xl md:text-7xl font-black font-headline tracking-tighter mb-6">Legends Await</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Skip the tourist traps. Our drivers take you to the heart of the Himalayas.</p>
+      <section id="destinations" className="py-24 md:py-32 relative">
+        <div className="container px-6 md:px-8 text-center mb-16">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-5 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-primary to-pink-600">Legendary Destinations</h2>
+          <p className="text-lg md:text-xl text-slate-700 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
         </div>
 
         <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {featuredDestinations.map((dest) => {
               const imageData = PlaceHolderImagesMap.get(dest.id);
               if (!imageData) return null;
@@ -60,10 +60,10 @@ export default function Home() {
               return (
                 <div key={dest.id} className="group relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-3 cursor-pointer neon-border">
                   <Image
-                    src={imageData.imageUrl}
+                    src={imageData.homeImageUrl || imageData.imageUrl}
                     alt={imageData.description}
                     fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                    className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />

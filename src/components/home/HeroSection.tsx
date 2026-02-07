@@ -43,65 +43,77 @@ export default function HeroSection() {
                     style={{ y: backgroundY, scale: 1.1 }}
                 >
                     <Image
-                        src={heroImage.imageUrl}
+                        src={heroImage.homeImageUrl || heroImage.imageUrl}
                         alt={heroImage.description}
                         fill
                         className="object-cover"
                         priority
-                        quality={90}
+                        quality={95}
                     />
-                    {/* Winter Overlay - Cool Blue Tint */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-transparent to-black/60 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay" />
+                    {/* Enhanced Gradient Overlay for Better Text Contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-black/80" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-transparent to-purple-900/20" />
                 </motion.div>
             )}
 
             {/* Snow Particles */}
             <SnowParticles count={100} />
 
-
-
             {/* Content */}
             <motion.div
-                className="container relative z-20 px-4 md:px-6 text-center"
+                className="container relative z-20 px-6 md:px-8 text-center"
                 style={{ y: textY, opacity, perspective: 1000 }}
             >
-                <div className="max-w-4xl mx-auto space-y-8">
+                <div className="max-w-5xl mx-auto space-y-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="inline-block rounded-full bg-white/10 px-6 py-2 text-sm font-bold text-white border border-white/20 backdrop-blur-md shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-pulse"
+                        className="inline-flex items-center gap-2 rounded-full bg-white/15 px-7 py-3 text-sm font-semibold text-white border border-white/30 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
                     >
-                        🏔️ Gateway to the Gods: Himachal Pradesh
+                        <span className="text-xl">🏔️</span>
+                        <span className="tracking-wide">Gateway to the Gods: Himachal Pradesh</span>
                     </motion.div>
 
-                    <h1 className="text-7xl font-black tracking-tighter text-white sm:text-8xl md:text-9xl font-headline leading-[0.9] drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-blue-200">
-                            Explore Himachal
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="space-y-4"
+                    >
+                        <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight text-white font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+                            Explore
                         </span>
-                        <span className="block text-2xl md:text-3xl mt-4 font-bold tracking-wide text-white drop-shadow-md">
-                            with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-pink-500 font-extrabold text-3xl md:text-4xl">Destiny Tour & Travels</span>
+                        <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+                            Himachal
                         </span>
-                    </h1>
+                        <span className="block text-xl sm:text-2xl md:text-3xl mt-6 font-semibold tracking-wide text-white/90 drop-shadow-lg">
+                            with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-pink-400 font-bold">Destiny Tour & Travels</span>
+                        </span>
+                    </motion.h1>
 
-                    <p className="max-w-2xl mx-auto text-xl text-blue-100 md:text-3xl font-body leading-relaxed drop-shadow-lg">
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.4 }}
+                        className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-100 font-medium leading-relaxed drop-shadow-lg"
+                    >
                         From the valleys of Manali to the spirituality of Dharamshala. Experience the majesty of the mountains with our premium fleet.
-                    </p>
+                    </motion.p>
 
                     <motion.div
-                        className="flex flex-col sm:flex-row gap-6 justify-center pt-8"
+                        className="flex flex-col sm:flex-row gap-5 justify-center pt-6"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
+                        transition={{ delay: 0.6, duration: 0.8 }}
                     >
-                        <Button asChild size="lg" className="h-16 px-12 text-xl rounded-full bg-gradient-to-r from-primary to-pink-600 text-white hover:opacity-90 shadow-[0_0_40px_rgba(168,85,247,0.4)] transition-all hover:scale-105 border-0">
+                        <Button asChild size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-105 border-0 shadow-[0_8px_30px_rgba(168,85,247,0.35)]">
                             <Link href="/contact">
-                                Book Your Ride <ArrowRight className="ml-3 h-6 w-6" />
+                                Book Your Ride <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                             </Link>
                         </Button>
-                        <Button asChild variant="outline" size="lg" className="h-16 px-12 text-xl rounded-full glass border-white/30 text-white hover:bg-white/20 transition-all hover:scale-105">
-                            <Link href="#gallery">View Gallery</Link>
+                        <Button asChild variant="outline" size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-white/10 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 transition-all duration-300 hover:scale-105 shadow-lg">
+                            <Link href="#destinations">View Gallery</Link>
                         </Button>
                     </motion.div>
                 </div>
