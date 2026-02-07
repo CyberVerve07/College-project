@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImagesMap, PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
 import { ArrowRight, Car, Users, Mountain, Star } from 'lucide-react';
+import HeroSection from '@/components/home/HeroSection';
 import { cn } from '@/lib/utils';
 import { testimonials } from '@/lib/testimonials-data';
 
@@ -31,60 +32,8 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-[100dvh] bg-mesh">
       {/* Hero Section */}
-      <section className="relative w-full h-[90vh] flex items-center overflow-hidden">
-        {heroImage && (
-          <div className="absolute inset-0">
-            <Image
-              src={heroImage.imageUrl}
-              alt={heroImage.description}
-              fill
-              className="object-cover scale-105 animate-in fade-in duration-1000"
-              priority
-              quality={90}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/40 to-transparent" />
-          </div>
-        )}
-
-        <div className="container relative z-10 px-4 md:px-6">
-          <div className="max-w-3xl space-y-8">
-            <div className="inline-block rounded-full bg-primary/20 px-4 py-1.5 text-sm font-semibold text-primary border border-primary/30 backdrop-blur-xl animate-in fade-in slide-in-from-left-4 duration-700">
-              🏔️ Next-Gen Himalayan Travel
-            </div>
-            <h1 className="text-6xl font-black tracking-tighter text-foreground sm:text-7xl md:text-8xl font-headline leading-[0.9] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
-              Peak <br />
-              <span className="text-gradient">Experience</span>
-            </h1>
-            <p className="max-w-[550px] text-xl text-muted-foreground md:text-2xl font-body leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-              Modern rides, Local souls. Redefining how you experience the roof of the world.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-5 pt-6 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
-              <Button asChild size="lg" className="h-16 px-10 text-xl rounded-2xl bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/40 transition-all hover:-translate-y-1 active:scale-95">
-                <Link href="/contact">
-                  Start Adventure <ArrowRight className="ml-3 h-6 w-6" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="h-16 px-10 text-xl rounded-2xl glass border-primary/20 hover:bg-primary/10 transition-all hover:-translate-y-1 active:scale-95">
-                <Link href="#gallery">Visual Journey</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Quick Facts */}
-        <div className="absolute bottom-20 right-12 hidden lg:flex flex-col gap-6 animate-in fade-in slide-in-from-right-10 duration-1000 delay-500">
-          {[
-            { label: 'Verified Drivers', value: '50+', color: 'text-primary' },
-            { label: 'Safety Rating', value: '4.9/5', color: 'text-secondary' },
-            { label: 'Happy Souls', value: '2k+', color: 'text-accent' },
-          ].map((item, i) => (
-            <div key={i} className="glass-dark rounded-3xl p-6 border-l-4 border-l-primary flex flex-col justify-center min-w-[200px] hover:bg-white/5 transition-colors">
-              <div className={cn("text-3xl font-black", item.color)}>{item.value}</div>
-              <div className="text-xs uppercase tracking-[0.2em] font-bold opacity-60 mt-1">{item.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Hero Section */}
+      <HeroSection />
 
       {/* Featured Destinations */}
       <section id="destinations" className="py-32 relative">

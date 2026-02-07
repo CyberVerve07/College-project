@@ -18,8 +18,8 @@
     --secondary-foreground: 0 0% 100%;
     --muted: 270 20% 96%;
     --muted-foreground: 270 10% 40%;
-    --accent: 350 80% 50%;
-    /* Ruby Red */
+    --accent: 330 80% 60%;
+    /* Hot Pink/Red */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -44,8 +44,8 @@
     --secondary-foreground: 270 10% 4%;
     --muted: 270 30% 15%;
     --muted-foreground: 270 10% 60%;
-    --accent: 350 90% 60%;
-    /* Ruby Red */
+    --accent: 330 90% 60%;
+    /* Hot Pink */
     --accent-foreground: 0 0% 100%;
     --border: 270 30% 15%;
     --input: 270 30% 15%;

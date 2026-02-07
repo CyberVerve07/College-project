@@ -5,7 +5,7 @@ import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default function FloatingButtons() {
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
+    <div className="fixed bottom-24 right-6 z-40 flex flex-col gap-3">
       <Button asChild size="icon" className="rounded-full w-14 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg">
         <a href={`https://wa.me/${siteConfig.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="Book on WhatsApp">
           <WhatsAppIcon className="w-7 h-7" />

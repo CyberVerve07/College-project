@@ -21,14 +21,11 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-background/80 backdrop-blur-2xl transition-all duration-300">
-      <div className="container flex h-20 items-center px-4 md:px-6">
-        <Link href="/" className="flex items-center space-x-2 group">
-          <div className="bg-primary p-2 rounded-xl group-hover:rotate-12 transition-transform shadow-lg shadow-primary/20">
-            <Mountain className="h-6 w-6 text-white" />
-          </div>
-          <span className="font-black text-2xl font-headline tracking-tighter text-foreground group-hover:text-primary transition-colors">
-            {siteConfig.name}
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur-xl transition-all duration-300 rounded-b-3xl shadow-2xl">
+      <div className="container flex h-24 items-center px-6 md:px-10">
+        <Link href="/" className="flex items-center space-x-3 group">
+          <span className="font-extrabold text-4xl tracking-tighter text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+            Destiny <span className="text-primary italic">Tour</span> & Travels
           </span>
         </Link>
         <nav className="ml-auto hidden md:flex gap-8 items-center">

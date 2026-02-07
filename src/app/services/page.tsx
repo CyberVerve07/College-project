@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Users, Award, CheckCircle, MapPin, Navigation, Phone } from 'lucide-react';
 import { initialServices } from '@/lib/services-data';
 import { Badge } from '@/components/ui/badge';
+import FareEstimator from '@/components/services/FareEstimator';
 
 export default function ServicesPage() {
   // Use local fixed data to identify vehicles
@@ -21,6 +22,11 @@ export default function ServicesPage() {
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Choose from our wide range of well-maintained vehicles for a safe and comfortable journey.
           </p>
+        </div>
+
+        {/* AI Fare Estimator */}
+        <div className="mb-16">
+          <FareEstimator />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

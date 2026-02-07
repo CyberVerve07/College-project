@@ -1,39 +1,21 @@
 import { z } from 'zod';
 import { ai } from '@/ai/genkit';
-import { firebaseConfig } from '@/firebase/config';
-import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore, collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
-// Helper to get Firestore
-function getDb() {
-    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-    return getFirestore(app);
-}
-
-// Input Schema for Fare Estimator
+// Input Schema
 export const FareRequestSchema = z.object({
     from: z.string().describe('Pickup location'),
     to: z.string().describe('Destination location'),
-    vehicleType: z.string().describe('Preferred vehicle (e.g., Sedan, Innova, Tempo Traveller)'),
+    vehicleType: z.string().optional().describe('Preferred vehicle (Sedan, SUV, etc.)'),
 });
 
-// Output Schema for Fare Estimator
+// Output Schema
 export const FareResponseSchema = z.object({
-    estimatedFare: z.number().describe('Calculated fare in INR'),
-    currency: z.string().default('INR'),
-    distanceKm: z.number().describe('Distance used for calculation'),
-    breakdown: z.string().describe('Explanation of the cost (rate * distance)'),
-    isVerifiedRoute: z.boolean().describe('Whether the distance was found in our verified routes collection'),
-    note: z.string().optional().describe('Extra charges like tolls or parking'),
+    estimatedFare: z.number().describe('Calculated total fare in INR'),
+    distanceKm: z.number().describe('Estimated distance in Kilometers'),
+    breakdown: z.string().describe('Short explanation of the cost'),
+    vehicle: z.string().describe('The vehicle type used for calculation'),
 });
 
-/**
- * AI Fare Estimator Flow
- * Logic:
- * 1. Fetch Route data from Firestore (verified distances).
- * 2. Fetch Service data from Firestore (rates per km).
- * 3. Use AI to match user's fuzzy location names to Firestore IDs and calculate final explanation.
- */
 export const fareEstimatorFlow = ai.defineFlow(
     {
         name: 'fareEstimatorFlow',
@@ -41,43 +23,59 @@ export const fareEstimatorFlow = ai.defineFlow(
         outputSchema: FareResponseSchema,
     },
     async (input) => {
-        const db = getDb();
+        try {
+            const prompt = `
+            You are a taxi fare estimator for "Destiny Tour & Travels" in Himachal Pradesh.
+            
+            REQUEST:
+            From: ${input.from}
+            To: ${input.to}
+            Vehicle: ${input.vehicleType || 'Any standard taxi'}
 
-        // 1. Fetch all routes and services for context
-        const routesSnap = await getDocs(collection(db, 'routes'));
-        const servicesSnap = await getDocs(collection(db, 'services'));
+            RATES (Use these strictly):
+            - Sedan (Dzire/Etios): ₹14/km
+            - SUV (Innova/Crysta): ₹20/km
+            - Tempo Traveller: ₹28/km
+            - Minimum billing distance: 10km
 
-        const routesData = routesSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-        const servicesData = servicesSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+            LOGIC:
+            1. Estimate the road distance between the two locations in Himachal Pradesh. Be realistic for mountain roads.
+            2. Choose the appropriate rate based on the requested vehicle. If "Any", use Sedan.
+            3. Calculate Fare = Distance * Rate.
+            4. Add a standard ₹300 driver/night charge if the distance is > 250km.
 
-        const prompt = `
-      You are a pricing assistant for Destiny Tour & Travels.
-      
-      VERIFIED ROUTES:
-      ${JSON.stringify(routesData)}
-      
-      VEHICLE SERVICES:
-      ${JSON.stringify(servicesData)}
+            OUTPUT:
+            Return a JSON object with:
+            - estimatedFare (number)
+            - distanceKm (number)
+            - vehicle (string)
+            - breakdown (string, e.g. "250km @ ₹14/km + Tolls")
+            `;
 
-      USER REQUEST:
-      From: ${input.from}
-      To: ${input.to}
-      Vehicle: ${input.vehicleType}
+            const { output } = await ai.generate({
+                prompt,
+                output: { schema: FareResponseSchema },
+            });
 
-      INSTRUCTIONS:
-      1. Find the best matching route from the VERIFIED ROUTES.
-      2. Find the best matching vehicle from VEHICLE SERVICES.
-      3. Extract the 'pricing' (e.g., "From ₹15/km") and 'distanceKm'.
-      4. Calculate: Fare = Rate * distanceKm.
-      5. If no verified route exists, do NOT guess the distance. Instead, return 0 for estimatedFare and set isVerifiedRoute to false.
-      6. Return a JSON object matching the schema.
-    `;
+            if (!output) {
+                throw new Error('AI could not generate a response.');
+            }
 
-        const { output } = await ai.generate({
-            prompt,
-            output: { schema: FareResponseSchema },
-        });
+            return output;
+        } catch (error) {
+            console.error("Fare Estimator Error:", error);
+            // Return a fallback so the UI doesn't crash
+            // Fallback to a safe estimate or contact message
+            const isSedan = input.vehicleType?.toLowerCase().includes('sedan') || !input.vehicleType;
+            const rate = isSedan ? 15 : 22;
+            const estimatedDist = 50; // Default assumption if map fails
 
-        return output!;
+            return {
+                estimatedFare: estimatedDist * rate,
+                distanceKm: estimatedDist,
+                vehicle: input.vehicleType || "Taxi",
+                breakdown: "System is offline. This is a base estimate for local travel. Please contact us for exact inter-city rates."
+            };
+        }
     }
 );

@@ -30,19 +30,75 @@ import { saveBooking } from './actions';
 import { Separator } from '@/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
 
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
 
 const availableDestinations = [
-  { id: 'dharamshala', label: 'Dharamshala' },
+  // Shimla & Around
+  { id: 'shimla', label: 'Shimla City' },
+  { id: 'kufri', label: 'Kufri' },
+  { id: 'narkanda', label: 'Narkanda' },
+  { id: 'chail', label: 'Chail' },
+  { id: 'mashobra', label: 'Mashobra' },
+  { id: 'rohru', label: 'Rohru' },
+
+  // Manali & Kullu
   { id: 'manali', label: 'Manali' },
-  { id: 'shimla', label: 'Shimla' },
-  { id: 'spiti', label: 'Spiti Valley' },
-  { id: 'kangra', label: 'Kangra Valley' },
+  { id: 'kullu', label: 'Kullu Town' },
+  { id: 'old_manali', label: 'Old Manali' },
+  { id: 'solang', label: 'Solang Valley' },
+  { id: 'sethan', label: 'Sethan (Igloo Village)' },
+  { id: 'kasol', label: 'Kasol' },
+  { id: 'manikaran', label: 'Manikaran' },
+  { id: 'tosh', label: 'Tosh Village' },
+  { id: 'malana', label: 'Malana' },
+  { id: 'tirthan', label: 'Tirthan Valley' },
+  { id: 'jibhi', label: 'Jibhi' },
+  { id: 'shoja', label: 'Shoja' },
+
+  // Dharamshala & Kangra
+  { id: 'dharamshala', label: 'Dharamshala' },
+  { id: 'mcleodganj', label: 'McLeodGanj' },
+  { id: 'kangra_devi', label: 'Brajeshwari Devi (Kangra)' },
+  { id: 'chamunda', label: 'Chamunda Devi' },
+  { id: 'jwala_ji', label: 'Jwala Ji Temple' },
+  { id: 'baglamukhi', label: 'Baglamukhi Temple' },
+  { id: 'chintpurni', label: 'Chintpurni Mata' },
+  { id: 'pathankot', label: 'Pathankot (Pickup/Drop)' },
+  { id: 'palampur', label: 'Palampur' },
   { id: 'bir', label: 'Bir Billing' },
+  { id: 'kangra_fort', label: 'Kangra Fort' },
+
+  // Dalhousie & Chamba
+  { id: 'dalhousie', label: 'Dalhousie' },
+  { id: 'khajjiar', label: 'Khajjiar (Mini Swiss)' },
+  { id: 'chamba', label: 'Chamba Town' },
+  { id: 'bharmour', label: 'Bharmour' },
+
+  // Spiti & Lahaul
+  { id: 'spiti', label: 'Spiti Valley (Full Circle)' },
+  { id: 'kaza', label: 'Kaza' },
+  { id: 'chandratal', label: 'Chandratal Lake' },
+  { id: 'tabo', label: 'Tabo Monastery' },
+  { id: 'dhankar', label: 'Dhankar' },
+  { id: 'langza', label: 'Langza (Fossil Village)' },
+  { id: 'hikkim', label: 'Hikkim (Highest Post Office)' },
+  { id: 'sissu', label: 'Sissu' },
+  { id: 'keylong', label: 'Keylong' },
+  { id: 'jispa', label: 'Jispa' },
+
+  // Kinnaur
+  { id: 'kinnaur', label: 'Kinnaur Valley' },
+  { id: 'kalpa', label: 'Kalpa' },
+  { id: 'sangla', label: 'Sangla Valley' },
+  { id: 'chitkul', label: 'Chitkul (Last Village)' },
+  { id: 'nako', label: 'Nako Lake' },
+
+  // Mandi & Others
+  { id: 'prashar', label: 'Prashar Lake' },
+  { id: 'barot', label: 'Barot' },
+  { id: 'janjheli', label: 'Janjehli' },
+  { id: 'kasauli', label: 'Kasauli' },
+  { id: 'solan', label: 'Solan' },
+  { id: 'renukaji', label: 'Renuka Ji Lake' },
 ];
 
 const vehicleTypes = ['Sedan', 'SUV', 'Tempo Traveller', 'Any'];
@@ -59,8 +115,6 @@ const formSchema = z.object({
 
 export default function ItineraryForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
-  const [isPaid, setIsPaid] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<ItineraryResponse | null>(null);
 
@@ -79,7 +133,6 @@ export default function ItineraryForm() {
     setIsLoading(true);
     setError(null);
     setItinerary(null);
-    setIsPaid(false);
 
     try {
       const result = await createItinerary(values);
@@ -97,79 +150,6 @@ export default function ItineraryForm() {
     }
   }
 
-  const handlePayment = async () => {
-    if (!itinerary) return;
-
-    setIsPaymentLoading(true);
-
-    // Load Razorpay Script
-    const loadScript = (src: string) => {
-      return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        document.body.appendChild(script);
-      });
-    };
-
-    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
-
-    if (!res) {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: 'Razorpay SDK failed to load. Check your internet connection.',
-      });
-      setIsPaymentLoading(false);
-      return;
-    }
-
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_placeholder', // Use test key
-      amount: 99900, // Amount in paise (₹999)
-      currency: 'INR',
-      name: 'Destiny Tour & Travels',
-      description: 'Advance Booking for Itinerary',
-      image: 'https://cdn-icons-png.flaticon.com/512/826/826070.png',
-      handler: async function (response: any) {
-        // This function executes after successful payment
-        const bookingData = {
-          paymentId: response.razorpay_payment_id,
-          amount: 999,
-          itinerary: itinerary,
-          customer: form.getValues(),
-        };
-
-        const saveRes = await saveBooking(bookingData);
-        if (saveRes.success) {
-          setIsPaid(true);
-          toast({
-            title: 'Booking Confirmed!',
-            description: 'Your payment was successful and your trip is booked.',
-          });
-        }
-        setIsPaymentLoading(false);
-      },
-      prefill: {
-        name: 'Guest User',
-        email: 'guest@example.com',
-        contact: '9999999999',
-      },
-      theme: {
-        color: '#3b82f6',
-      },
-      modal: {
-        ondismiss: function () {
-          setIsPaymentLoading(false);
-        }
-      }
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  };
-
   return (
     <>
       <Form {...form}>
@@ -182,7 +162,7 @@ export default function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Your Budget (INR)</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 50000" {...field} />
+                    <Input type="number" placeholder="e.g., 50000" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-purple-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -195,7 +175,7 @@ export default function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of Days</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 5" {...field} />
+                    <Input type="number" placeholder="e.g., 5" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-pink-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(236,72,153,0.3)] transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -208,8 +188,56 @@ export default function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of People</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 2" {...field} />
+                    <Input type="number" placeholder="e.g., 2" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-blue-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300" />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="p-6 rounded-3xl bg-secondary/5 border border-secondary/10 backdrop-blur-sm shadow-inner overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 opacity-50 pointer-events-none" />
+            <FormField
+              control={form.control}
+              name="destinations"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="mb-6 relative z-10">
+                    <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+                      Select Your Dream Destinations
+                    </FormLabel>
+                    <FormDescription>
+                      Choose specific temples, valleys, and adventures.
+                    </FormDescription>
+                  </div>
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                    {availableDestinations.map((item) => (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-purple-200/50"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                  field.value?.filter(
+                                    (value) => value !== item.id
+                                  )
+                                );
+                            }}
+                            className="data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
+                          />
+                        </FormControl>
+                        <FormLabel className="font-medium cursor-pointer flex-1 text-sm">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -218,64 +246,13 @@ export default function ItineraryForm() {
 
           <FormField
             control={form.control}
-            name="destinations"
-            render={() => (
-              <FormItem>
-                <div className="mb-4">
-                  <FormLabel className="text-base">Preferred Destinations</FormLabel>
-                  <FormDescription>
-                    Select the places you'd love to visit.
-                  </FormDescription>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {availableDestinations.map((item) => (
-                    <FormField
-                      key={item.id}
-                      control={form.control}
-                      name="destinations"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="flex flex-row items-start space-x-3 space-y-0"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.includes(item.id)}
-                                onCheckedChange={(checked) => {
-                                  return checked
-                                    ? field.onChange([...field.value, item.id])
-                                    : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== item.id
-                                      )
-                                    );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="font-normal">
-                              {item.label}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
-                  ))}
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
             name="vehiclePreference"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Vehicle Preference</FormLabel>
+                <FormLabel className="text-lg font-semibold">Preferred Ride</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="h-12 rounded-xl border-purple-200/50 bg-white/50 backdrop-blur focus:ring-purple-500">
                       <SelectValue placeholder="Select a preferred vehicle type" />
                     </SelectTrigger>
                   </FormControl>
@@ -290,16 +267,20 @@ export default function ItineraryForm() {
             )}
           />
 
-          <Button type="submit" className="w-full h-16 text-xl font-black rounded-2xl bg-primary hover:bg-primary/90 shadow-xl shadow-primary/30 transition-all active:scale-95" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full h-16 text-xl font-black rounded-2xl text-white shadow-2xl transition-all active:scale-95 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:opacity-90 shadow-purple-500/30"
+            disabled={isLoading}
+          >
             {isLoading ? (
               <>
                 <Bot className="mr-3 h-6 w-6 animate-spin" />
-                Architecting...
+                Planning Magic...
               </>
             ) : (
               <>
-                <Sparkles className="mr-3 h-6 w-6" />
-                Generate My Adventure
+                <Sparkles className="mr-3 h-6 w-6 fill-yellow-300 text-yellow-300" />
+                Generate My Dream Trip
               </>
             )}
           </Button>
@@ -376,36 +357,10 @@ export default function ItineraryForm() {
             <div className="text-center pt-4">
               <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                {isPaid ? (
-                  <div className="flex items-center gap-2 text-green-600 bg-green-50 px-6 py-3 rounded-full font-bold border border-green-200">
-                    <CheckCircle2 className="w-6 h-6" />
-                    Booking Confirmed & Paid
-                  </div>
-                ) : (
-                  <>
-                    <Button
-                      size="lg"
-                      onClick={handlePayment}
-                      disabled={isPaymentLoading}
-                      className="bg-accent hover:bg-accent/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-accent/20"
-                    >
-                      {isPaymentLoading ? 'Securing Link...' : (
-                        <span className="flex items-center gap-3">
-                          <CreditCard className="w-6 h-6" /> PAY ADVANCE (₹999)
-                        </span>
-                      )}
-                    </Button>
-                    <Button asChild variant="outline" size="lg">
-                      <a href="/contact">Enquire Instead</a>
-                    </Button>
-                  </>
-                )}
+                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-primary/20">
+                  <a href="/contact">Book via WhatsApp</a>
+                </Button>
               </div>
-              {isPaid && (
-                <p className="mt-4 text-sm text-muted-foreground italic">
-                  Our team will contact you shortly with the driver details.
-                </p>
-              )}
             </div>
           </div>
         </div>

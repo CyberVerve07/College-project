@@ -10,6 +10,7 @@ import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { ColorSplash } from '@/components/ui/color-splash';
+import ChatWidget from '@/components/ai/ChatWidget';
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} - Your Gateway to Himachal`,
@@ -53,6 +54,7 @@ export default function RootLayout({
             <main>{children}</main>
             <Footer />
             <FloatingButtons />
+            <ChatWidget />
             <Toaster />
           </FirebaseClientProvider>
         </ErrorBoundary>
