@@ -1,37 +1,21 @@
 import { z } from 'zod';
 import { ai } from '@/ai/genkit';
-import { firebaseConfig } from '@/firebase/config';
-import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-// Helper to get Firestore
-function getDb() {
-    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-    return getFirestore(app);
-}
-
-// Input Schema for Chat Assistant
 export const ChatRequestSchema = z.object({
-    message: z.string().describe('User question or query'),
+    message: z.string(),
     history: z.array(z.object({
         role: z.enum(['user', 'model']),
         content: z.string()
-    })).optional().describe('Chat history for context'),
+    })).optional(),
 });
 
-// Output Schema for Chat Assistant
 export const ChatResponseSchema = z.object({
-    answer: z.string().describe('Grounded answer from the AI'),
-    suggestedActions: z.array(z.string()).optional().describe('Quick replies or next steps'),
-    sources: z.array(z.string()).optional().describe('IDs of documents used to answer'),
+    answer: z.string(),
+    suggestedActions: z.array(z.string()).optional(),
 });
 
-/**
- * AI Chat Assistant Flow
- * Logic:
- * 1. Fetch ALL destinations and services to use as grounding context.
- * 2. Strict system prompt: "If you don't know based on context, say you don't know and provide contact info."
- */
+import { HIMACHAL_KNOWLEDGE, getSmartFallback } from '@/lib/himachal-knowledge';
+
 export const chatAssistantFlow = ai.defineFlow(
     {
         name: 'chatAssistantFlow',
@@ -39,43 +23,40 @@ export const chatAssistantFlow = ai.defineFlow(
         outputSchema: ChatResponseSchema,
     },
     async (input) => {
-        const db = getDb();
-
-        // Fetch grounding data
-        const [destSnap, servSnap] = await Promise.all([
-            getDocs(collection(db, 'destinations')),
-            getDocs(collection(db, 'services'))
-        ]);
-
-        const context = {
-            destinations: destSnap.docs.map(d => ({ id: d.id, ...d.data() })),
-            services: servSnap.docs.map(d => ({ id: d.id, ...d.data() }))
-        };
-
         const systemPrompt = `
-      You are a helpful travel assistant for "Destiny Tour & Travels", a taxi and travel agency in Kangra, Himachal Pradesh.
-      
-      AGENCY DATA (GROUNDING CONTEXT):
-      ${JSON.stringify(context)}
+        You are "Destiny AI", an expert travel assistant for Himachal Pradesh.
+        
+        EXTENSIVE KNOWLEDGE BASE:
+        ${JSON.stringify(HIMACHAL_KNOWLEDGE, null, 2)}
+        
+        ROLE & TONE:
+        - You are helpful, enthusiastic, and knowledgeable about every corner of Himachal.
+        - **CURRENCY RULE**: ALWAYS display prices in **Indian Rupees (₹)**. Never use USD ($). If a price is just a number, assume it is ₹.
+        - WHEN ASKED ABOUT HOTELS: Use the price ranges from the knowledge base. Suggest calling our office for specific booking.
+        - WHEN ASKED ABOUT PLACES: List the 'popular_places' and 'activities' for that district.
+        - ALWAYS start with a friendly greeting if it's the start of convo.
+        - Keep responses concise but informative.
+        `;
 
-      STRICT RULES:
-      1. ONLY answer based on the provided AGENCY DATA.
-      2. If the user asks for something NOT in the data (like international trips, or unrelated topics), politely explain that "Destiny Tour & Travels" specializing in Himachal Pradesh and suggest they contact the agency via WhatsApp: +91-XXXXX-XXXXX.
-      3. Do NOT hallucinate prices. If a price is "Contact for Price", tell the user exactly that.
-      4. Keep answers concise and professional.
-    `;
+        try {
+            const response = await ai.generate({
+                system: systemPrompt,
+                prompt: input.message,
+                messages: input.history?.map(h => ({
+                    role: h.role,
+                    content: [{ text: h.content }]
+                })),
+                output: { schema: ChatResponseSchema },
+            });
 
-        const result = await ai.generate({
-            system: systemPrompt,
-            prompt: input.message,
-            // Pass history to allow multi-turn conversation
-            messages: input.history?.map(h => ({
-                role: h.role as 'user' | 'model',
-                content: [{ text: h.content }]
-            })),
-            output: { schema: ChatResponseSchema },
-        });
-
-        return result.output!;
+            return response.output || { answer: getSmartFallback(input.message), suggestedActions: [] };
+        } catch (error) {
+            console.error("Chat Gen Error:", error);
+            // Smart Fallback using local search
+            return {
+                answer: getSmartFallback(input.message),
+                suggestedActions: ["View Packages", "Call Support"]
+            };
+        }
     }
 );
