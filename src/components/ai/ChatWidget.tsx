@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, RefreshCw } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, RefreshCw, ChevronDown, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { generateChatResponse } from '@/app/actions/ai';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type Message = {
     id: string;
@@ -25,12 +26,32 @@ export default function ChatWidget() {
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const isMobile = useIsMobile();
 
+    // Handle scroll to bottom
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages, isOpen]);
+
+    // Back button handling for mobile
+    useEffect(() => {
+        if (isOpen && isMobile) {
+            // Push state when opening chat on mobile
+            window.history.pushState({ chatOpen: true }, '');
+
+            const handlePopState = () => {
+                setIsOpen(false);
+            };
+
+            window.addEventListener('popstate', handlePopState);
+
+            return () => {
+                window.removeEventListener('popstate', handlePopState);
+            };
+        }
+    }, [isOpen, isMobile]);
 
     const resetChat = () => {
         setMessages([
@@ -90,8 +111,24 @@ export default function ChatWidget() {
         handleSendMessage(inputValue);
     };
 
+    const toggleChat = () => {
+        if (!isOpen) {
+            setIsOpen(true);
+        } else {
+            // If going back, we might need to go back in history if we pushed state
+            if (isMobile) {
+                window.history.back();
+            } else {
+                setIsOpen(false);
+            }
+        }
+    }
+
     return (
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
+        <div className={cn(
+            "fixed z-50 flex flex-col items-end pointer-events-none",
+            isMobile ? "inset-0" : "bottom-6 right-6"
+        )}>
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -99,129 +136,143 @@ export default function ChatWidget() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="mb-4 pointer-events-auto"
+                        className={cn(
+                            "pointer-events-auto shadow-2xl overflow-hidden bg-background/95 backdrop-blur-md flex flex-col",
+                            isMobile ? "w-full h-full rounded-none" : "w-[380px] h-[600px] mb-4 rounded-2xl border border-primary/20"
+                        )}
                     >
-                        <Card className="w-[350px] h-[500px] shadow-2xl border-primary/20 flex flex-col overflow-hidden bg-background/95 backdrop-blur-md">
-                            <CardHeader className="bg-primary/5 border-b p-4 flex flex-row items-center justify-between shrink-0">
-                                <div className="flex items-center gap-2">
-                                    <div className="bg-primary/10 p-1.5 rounded-full">
-                                        <Sparkles className="w-4 h-4 text-primary fill-primary/20" />
-                                    </div>
-                                    <div>
-                                        <CardTitle className="text-sm font-bold">Destiny Assistant</CardTitle>
-                                        <p className="text-xs text-muted-foreground flex items-center gap-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                            Online
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-1">
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 transition-colors" onClick={resetChat} title="Reset Chat">
-                                        <RefreshCw className="w-4 h-4" />
+                        {/* Header */}
+                        <div className="bg-primary/5 border-b p-4 flex flex-row items-center justify-between shrink-0">
+                            <div className="flex items-center gap-3">
+                                {isMobile && (
+                                    <Button variant="ghost" size="icon" onClick={() => window.history.back()} className="-ml-2">
+                                        <ArrowLeft className="w-5 h-5" />
                                     </Button>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors" onClick={() => setIsOpen(false)}>
-                                        <X className="w-4 h-4" />
-                                    </Button>
+                                )}
+                                <div className="bg-primary/10 p-2 rounded-full">
+                                    <Sparkles className="w-4 h-4 text-primary fill-primary/20" />
                                 </div>
-                            </CardHeader>
+                                <div>
+                                    <h3 className="text-sm font-bold font-headline tracking-wide">Destiny Assistant</h3>
+                                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                        Online
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex gap-1">
+                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 transition-colors" onClick={resetChat} title="Reset Chat">
+                                    <RefreshCw className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors" onClick={() => isMobile ? window.history.back() : setIsOpen(false)}>
+                                    {isMobile ? <X className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                </Button>
+                            </div>
+                        </div>
 
-                            <CardContent className="flex-1 overflow-hidden p-0 relative">
-                                <ScrollArea className="h-full p-4">
-                                    <div className="flex flex-col gap-4 pb-4">
-                                        {messages.map((msg) => (
-                                            <div
-                                                key={msg.id}
-                                                className={cn(
-                                                    "flex flex-col gap-2 max-w-[85%]",
-                                                    msg.role === 'user' ? "self-end items-end" : "self-start items-start"
-                                                )}
-                                            >
+                        {/* Messages Area */}
+                        <div className="flex-1 overflow-hidden relative bg-gradient-to-b from-transparent to-primary/5">
+                            <ScrollArea className="h-full p-4">
+                                <div className="flex flex-col gap-6 pb-4">
+                                    {messages.map((msg) => (
+                                        <div
+                                            key={msg.id}
+                                            className={cn(
+                                                "flex flex-col gap-2 max-w-[85%]",
+                                                msg.role === 'user' ? "self-end items-end" : "self-start items-start"
+                                            )}
+                                        >
+                                            <div className={cn(
+                                                "flex gap-2",
+                                                msg.role === 'user' ? "flex-row-reverse" : "flex-row"
+                                            )}>
                                                 <div className={cn(
-                                                    "flex gap-2",
-                                                    msg.role === 'user' ? "flex-row-reverse" : "flex-row"
+                                                    "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm mt-1",
+                                                    msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-white text-primary border-primary/20"
                                                 )}>
-                                                    <div className={cn(
-                                                        "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm",
-                                                        msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"
-                                                    )}>
-                                                        {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
-                                                    </div>
-                                                    <div
-                                                        className={cn(
-                                                            "rounded-2xl px-4 py-2.5 text-sm shadow-sm",
-                                                            msg.role === 'user'
-                                                                ? "bg-primary text-primary-foreground rounded-tr-sm"
-                                                                : "bg-muted text-foreground rounded-tl-sm border border-black/5"
-                                                        )}
-                                                    >
-                                                        {msg.content}
-                                                    </div>
+                                                    {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-5 h-5" />}
                                                 </div>
-
-                                                {/* Render Suggestions */}
-                                                {msg.role === 'model' && msg.suggestions && msg.suggestions.length > 0 && (
-                                                    <div className="flex flex-wrap gap-2 mt-1 ml-10">
-                                                        {msg.suggestions.map((suggestion, idx) => (
-                                                            <button
-                                                                key={idx}
-                                                                onClick={() => handleSendMessage(suggestion)}
-                                                                disabled={isLoading}
-                                                                className="text-xs bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1.5 rounded-full transition-colors border border-primary/10"
-                                                            >
-                                                                {suggestion}
-                                                            </button>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ))}
-                                        {isLoading && (
-                                            <div className="flex gap-2 self-start max-w-[85%]">
-                                                <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center shrink-0 border">
-                                                    <Bot className="w-4 h-4 animate-pulse" />
-                                                </div>
-                                                <div className="bg-muted rounded-2xl px-4 py-2.5 rounded-tl-sm flex items-center gap-1">
-                                                    <span className="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                                                    <span className="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                                                    <span className="w-1.5 h-1.5 bg-foreground/40 rounded-full animate-bounce"></span>
+                                                <div
+                                                    className={cn(
+                                                        "rounded-2xl px-4 py-3 text-sm shadow-sm",
+                                                        msg.role === 'user'
+                                                            ? "bg-primary text-primary-foreground rounded-tr-sm"
+                                                            : "bg-white border border-primary/10 text-foreground rounded-tl-sm"
+                                                    )}
+                                                >
+                                                    {msg.content}
                                                 </div>
                                             </div>
-                                        )}
-                                        <div ref={scrollRef} />
-                                    </div>
-                                </ScrollArea>
-                            </CardContent>
 
-                            <CardFooter className="p-3 bg-muted/30 border-t shrink-0">
-                                <form onSubmit={handleSubmit} className="flex w-full gap-2 items-center">
-                                    <Input
-                                        placeholder="Ask about trips..."
-                                        value={inputValue}
-                                        onChange={(e) => setInputValue(e.target.value)}
-                                        className="flex-1 bg-background focus-visible:ring-primary/50"
-                                        disabled={isLoading}
-                                    />
-                                    <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className={cn("shrink-0 transition-all", inputValue.trim() ? "bg-primary" : "bg-muted-foreground/30")}>
-                                        {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                                    </Button>
-                                </form>
-                            </CardFooter>
-                        </Card>
+                                            {/* Render Suggestions */}
+                                            {msg.role === 'model' && msg.suggestions && msg.suggestions.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mt-1 ml-10">
+                                                    {msg.suggestions.map((suggestion, idx) => (
+                                                        <button
+                                                            key={idx}
+                                                            onClick={() => handleSendMessage(suggestion)}
+                                                            disabled={isLoading}
+                                                            className="text-xs font-medium bg-white hover:bg-primary/10 text-primary px-3 py-1.5 rounded-full transition-all border border-primary/20 shadow-sm hover:scale-105 active:scale-95"
+                                                        >
+                                                            {suggestion}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                    {isLoading && (
+                                        <div className="flex gap-2 self-start max-w-[85%]">
+                                            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-primary/20 mt-1">
+                                                <Bot className="w-5 h-5 text-primary animate-pulse" />
+                                            </div>
+                                            <div className="bg-white border border-primary/10 rounded-2xl px-4 py-3 rounded-tl-sm flex items-center gap-1 shadow-sm">
+                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce"></span>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div ref={scrollRef} />
+                                </div>
+                            </ScrollArea>
+                        </div>
+
+                        {/* Input Area */}
+                        <div className="p-3 bg-white border-t shrink-0 pb-safe">
+                            <form onSubmit={handleSubmit} className="flex w-full gap-2 items-center">
+                                <Input
+                                    placeholder="Ask about trips, cabs, or hotels..."
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    className="flex-1 bg-muted/30 focus-visible:ring-primary/50 border-primary/10 h-11 rounded-full px-4"
+                                    disabled={isLoading}
+                                />
+                                <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className={cn("shrink-0 transition-all h-11 w-11 rounded-full shadow-md", inputValue.trim() ? "bg-primary hover:bg-primary/90" : "bg-muted text-muted-foreground")}>
+                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5 ml-0.5" />}
+                                </Button>
+                            </form>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            <Button
-                size="lg"
-                className={cn(
-                    "h-14 w-14 rounded-full shadow-xl transition-all duration-300 pointer-events-auto hover:scale-105",
-                    isOpen ? "rotate-90 opacity-0 scale-50 absolute" : "opacity-100 scale-100 bg-gradient-to-tr from-primary to-orange-400 text-white"
-                )}
-                onClick={() => setIsOpen(true)}
-            >
-                <MessageCircle className="w-7 h-7" />
-                <span className="sr-only">Open Chat</span>
-            </Button>
+            {!isOpen && (
+                <Button
+                    size="lg"
+                    className={cn(
+                        "h-16 w-16 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 pointer-events-auto hover:scale-110 hover:-translate-y-1 bg-gradient-to-tr from-primary via-purple-500 to-pink-500 border-2 border-white/20",
+                        isMobile ? "bottom-6 right-6 fixed" : "",
+                    )}
+                    onClick={toggleChat}
+                >
+                    <MessageCircle className="w-8 h-8 text-white fill-white/20" />
+                    <span className="sr-only">Open Chat</span>
+
+                    {/* Notification Dot */}
+                    <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse" />
+                </Button>
+            )}
         </div>
     );
 }
