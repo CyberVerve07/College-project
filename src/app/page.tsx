@@ -26,6 +26,15 @@ const services = [
   { name: 'Alto & Sumo', icon: Mountain, imageId: 'service-sumo' },
 ];
 
+/**
+ * Home Page component.
+ * Landing page featuring:
+ * - Hero section with parallax
+ * - Featured destinations grid
+ * - Services overview
+ * - Image gallery
+ * - Booking call-to-action
+ */
 export default function Home() {
   const heroImage = PlaceHolderImagesMap.get('hero');
 

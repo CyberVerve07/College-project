@@ -8,6 +8,10 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/config';
 
+/**
+ * Navigation links configuration.
+ * Used for both desktop navigation and mobile sheet menu.
+ */
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/destinations', label: 'Destinations' },
@@ -17,6 +21,13 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
+/**
+ * Global Header component.
+ * Features:
+ * - Responsive navigation (Desktop list / Mobile sheet)
+ * - Sticky positioning with backdrop blur
+ * - Active link highlighting
+ */
 export default function Header() {
   const pathname = usePathname();
 

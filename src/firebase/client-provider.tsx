@@ -9,6 +9,12 @@ interface FirebaseClientProviderProps {
   children: ReactNode;
 }
 
+/**
+ * Wrapper component to initialize Firebase on the client side.
+ * Ensures Firebase is initialized only once and provides the context to children.
+ *
+ * @param {FirebaseClientProviderProps} props - Children elements.
+ */
 export function FirebaseClientProvider({
   children,
 }: FirebaseClientProviderProps) {

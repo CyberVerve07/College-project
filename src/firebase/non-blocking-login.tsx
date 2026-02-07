@@ -7,7 +7,13 @@ import {
   // Assume getAuth and app are initialized elsewhere
 } from 'firebase/auth';
 
-/** Initiate anonymous sign-in (non-blocking). */
+/** 
+ * Initiate anonymous sign-in (non-blocking). 
+ * This function triggers the sign-in process but does not wait for it to complete.
+ * Auth state changes should be monitored via `onAuthStateChanged`.
+ * 
+ * @param {Auth} authInstance - Firebase Auth instance.
+ */
 export function initiateAnonymousSignIn(authInstance: Auth): void {
   // CRITICAL: Call signInAnonymously directly. Do NOT use 'await signInAnonymously(...)'.
   signInAnonymously(authInstance);

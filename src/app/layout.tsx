@@ -32,6 +32,13 @@ const playfairDisplay = Playfair_Display({
 
 import ErrorBoundary from '@/components/error-boundary';
 
+/**
+ * Root Layout component.
+ * Wraps the entire application with:
+ * - Font configurations (PT Sans, Playfair Display)
+ * - Global providers (Firebase, ErrorBoundary)
+ * - Global UI components (Header, Footer, Toaster, ChatWidget)
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

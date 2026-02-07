@@ -9,6 +9,13 @@ import { PlaceHolderImagesMap } from '@/lib/placeholder-images';
 import { SnowParticles } from '@/components/ui/snow-particles';
 import { useEffect, useRef } from 'react';
 
+/**
+ * Hero Section component for the Home page.
+ * Features:
+ * - Parallax background effect using Framer Motion
+ * - Animated text entrance
+ * - Snow particles effect
+ */
 export default function HeroSection() {
     const heroImage = PlaceHolderImagesMap.get('hero');
     const ref = useRef<HTMLDivElement>(null);

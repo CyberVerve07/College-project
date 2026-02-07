@@ -6,6 +6,12 @@ import { initialDestinations } from '@/lib/destinations-data';
 import { errorEmitter, FirestorePermissionError } from '@/firebase';
 
 // This function should only be called from the client-side.
+/**
+ * Seeds the 'services' collection in Firestore with initial data.
+ * CAUTION: This deletes all existing services before adding new ones.
+ *
+ * @param {Firestore} firestore - Firestore instance.
+ */
 export async function seedServices(firestore: Firestore) {
   const servicesCollection = collection(firestore, 'services');
 

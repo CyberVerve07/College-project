@@ -6,6 +6,11 @@ import { siteConfig } from '@/lib/config';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import { useEffect, useState } from 'react';
 
+/**
+ * Global Footer component.
+ * Displays site navigation, fleet information, contact details, and copyright.
+ * Uses client-side state for the current year.
+ */
 export default function Footer() {
   const [year, setYear] = useState<number | null>(null);
 

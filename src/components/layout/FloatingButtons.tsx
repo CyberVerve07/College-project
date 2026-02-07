@@ -3,6 +3,10 @@ import { Phone } from 'lucide-react';
 import { siteConfig } from '@/lib/config';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
+/**
+ * Fixed floating action buttons for quick contact (WhatsApp & Phone).
+ * Positioned at the bottom-right of the viewport.
+ */
 export default function FloatingButtons() {
   return (
     <div className="fixed bottom-24 right-6 z-40 flex flex-col gap-3">

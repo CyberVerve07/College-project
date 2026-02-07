@@ -7,6 +7,10 @@ if (!apiKey) {
   console.error("❌ GENKIT ERROR: No API key found. Please check .env file.");
 }
 
+/**
+ * Configured Genkit instance with Google AI (Gemini) plugin.
+ * Uses the API key from environment variables.
+ */
 export const ai = genkit({
   plugins: [
     googleAI({

@@ -27,6 +27,11 @@ const actionTypes = {
 
 let count = 0
 
+/**
+ * Generates a unique ID for each toast.
+ * Uses a simple counter that wraps around MAX_SAFE_INTEGER.
+ * @returns {string} Unique ID string.
+ */
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER
   return count.toString()
@@ -36,21 +41,21 @@ type ActionType = typeof actionTypes
 
 type Action =
   | {
-      type: ActionType["ADD_TOAST"]
-      toast: ToasterToast
-    }
+    type: ActionType["ADD_TOAST"]
+    toast: ToasterToast
+  }
   | {
-      type: ActionType["UPDATE_TOAST"]
-      toast: Partial<ToasterToast>
-    }
+    type: ActionType["UPDATE_TOAST"]
+    toast: Partial<ToasterToast>
+  }
   | {
-      type: ActionType["DISMISS_TOAST"]
-      toastId?: ToasterToast["id"]
-    }
+    type: ActionType["DISMISS_TOAST"]
+    toastId?: ToasterToast["id"]
+  }
   | {
-      type: ActionType["REMOVE_TOAST"]
-      toastId?: ToasterToast["id"]
-    }
+    type: ActionType["REMOVE_TOAST"]
+    toastId?: ToasterToast["id"]
+  }
 
 interface State {
   toasts: ToasterToast[]
@@ -74,6 +79,14 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout)
 }
 
+/**
+ * Reducer function to handle toast state updates.
+ * Manages adding, updating, dismissing, and removing toasts.
+ *
+ * @param {State} state - Current state of toasts.
+ * @param {Action} action - Action to perform.
+ * @returns {State} New state.
+ */
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -108,9 +121,9 @@ export const reducer = (state: State, action: Action): State => {
         toasts: state.toasts.map((t) =>
           t.id === toastId || toastId === undefined
             ? {
-                ...t,
-                open: false,
-              }
+              ...t,
+              open: false,
+            }
             : t
         ),
       }
@@ -142,6 +155,11 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
+/**
+ * Helper function to create a toast imperatively.
+ * @param {Toast} props - Toast properties.
+ * @returns Object with id, dismiss, and update methods.
+ */
 function toast({ ...props }: Toast) {
   const id = genId()
 
@@ -171,6 +189,12 @@ function toast({ ...props }: Toast) {
   }
 }
 
+/**
+ * Custom hook to manage toast notifications.
+ * Connects to the global toast state and allows components to display toasts.
+ *
+ * @returns {Object} Toast state and methods.
+ */
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
