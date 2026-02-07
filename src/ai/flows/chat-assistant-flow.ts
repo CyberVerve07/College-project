@@ -54,8 +54,9 @@ export const chatAssistantFlow = ai.defineFlow(
             });
 
             return response.output || { answer: getSmartFallback(input.message), suggestedActions: [] };
-        } catch (error) {
-            console.error("Chat Gen Error:", error);
+        } catch (error: any) {
+            console.error("Chat Gen Error Details:", JSON.stringify(error, null, 2));
+            console.error("Chat Gen Error Message:", error.message);
             // Smart Fallback using local search
             return {
                 answer: getSmartFallback(input.message),
