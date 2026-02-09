@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/config';
+import { ModeToggle } from '@/components/ui/mode-toggle';
 
 /**
  * Navigation links configuration.
@@ -56,9 +57,10 @@ export default function Header() {
               )} />
             </Link>
           ))}
-          <Button asChild className="rounded-xl px-8 h-11 bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm">
+          <Button asChild className="rounded-xl px-8 h-11 bg-gradient-to-r from-primary via-purple-600 to-pink-600 shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
             <a href={`tel:${siteConfig.contact.phone}`}>Book a Cab</a>
           </Button>
+          <ModeToggle />
         </nav>
 
         {/* Mobile Nav */}
@@ -95,6 +97,9 @@ export default function Header() {
                 <Button asChild className="mt-8 rounded-2xl h-16 text-xl font-black bg-primary">
                   <a href={`tel:${siteConfig.contact.phone}`}>Call Us Now</a>
                 </Button>
+                <div className="mt-4 flex justify-center">
+                  <ModeToggle />
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

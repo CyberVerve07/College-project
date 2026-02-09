@@ -1,15 +1,13 @@
 'use server';
 
-import { chatAssistantFlow, ChatRequestSchema } from '@/ai/flows/chat-assistant-flow';
-import { fareEstimatorFlow, FareRequestSchema } from '@/ai/flows/fare-estimator-flow';
-import { z } from 'zod';
+import { chatAssistantFlow } from '@/ai/flows/chat-assistant-flow';
+import { fareEstimatorFlow } from '@/ai/flows/fare-estimator-flow';
+import { ChatRequest, FareRequest } from '@/ai/schemas';
 
 /**
- * Server action to generate a chat response using the AI flow.
- * @param {input} input - Chat request data.
- * @returns {Promise<Object>} Success status and data/error.
+ * Server action to generate a chat response using OpenRouter AI.
  */
-export async function generateChatResponse(input: z.infer<typeof ChatRequestSchema>) {
+export async function generateChatResponse(input: ChatRequest) {
     try {
         const result = await chatAssistantFlow(input);
         return { success: true, data: result };
@@ -20,11 +18,9 @@ export async function generateChatResponse(input: z.infer<typeof ChatRequestSche
 }
 
 /**
- * Server action to estimate fare using the AI flow.
- * @param {input} input - Fare request data.
- * @returns {Promise<Object>} Success status and data/error.
+ * Server action to estimate fare using OpenRouter AI.
  */
-export async function estimateFare(input: z.infer<typeof FareRequestSchema>) {
+export async function estimateFare(input: FareRequest) {
     try {
         const result = await fareEstimatorFlow(input);
         return { success: true, data: result };

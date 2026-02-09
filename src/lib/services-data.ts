@@ -82,13 +82,13 @@ export const initialServices = [
     idealFor: 'Budget groups, rough terrain, local transport'
   },
   {
-    id: 'force-tempo',
-    name: 'Force Tempo Traveller',
-    description: 'Spacious van for large groups travelling together with comfort and panoramic views.',
+    id: 'mini-bus',
+    name: 'Mini Bus Service',
+    description: 'Comfortable mini bus for large groups travelling together with ample seating and luggage space.',
     pricing: 'Contact for Price',
     imageUrl: PlaceHolderImagesMap.get('service-tempo')?.imageUrl,
     capacity: '12-16 Passengers',
-    features: ['Push-back Seats', 'Panoramic Windows', 'Music System'],
+    features: ['Comfortable Seating', 'Ample Space', 'Group Travel'],
     idealFor: 'Large groups, corporate outings, school trips'
   },
   {

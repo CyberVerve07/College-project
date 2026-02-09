@@ -9,13 +9,63 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    qualities: [75, 80, 85, 90, 95, 100],
+    qualities: [60, 75, 85],
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'placehold.co',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.wixstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'image3.mouthshut.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.swantour.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ychef.files.bbci.co.uk',
+      },
+      {
+        protocol: 'https',
+        hostname: 'himtimes.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.hindustantimes.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.astroved.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.india.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.shortpedia.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i0.wp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dynamic.tourtravelworld.com',
       },
       {
         protocol: 'https',
@@ -164,6 +214,42 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgd.aeplcdn.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'imgd-ct.aeplcdn.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'stimg.cardekho.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'c.ndtvimg.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'static-cdn.cars24.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.v3cars.com',
         port: '',
         pathname: '/**',
       },

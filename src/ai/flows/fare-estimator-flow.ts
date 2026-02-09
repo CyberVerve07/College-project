@@ -1,81 +1,99 @@
-import { z } from 'zod';
-import { ai } from '@/ai/genkit';
+'use server';
 
-// Input Schema
-export const FareRequestSchema = z.object({
-    from: z.string().describe('Pickup location'),
-    to: z.string().describe('Destination location'),
-    vehicleType: z.string().optional().describe('Preferred vehicle (Sedan, SUV, etc.)'),
-});
+import { FareRequest, FareResponse } from '@/ai/schemas';
 
-// Output Schema
-export const FareResponseSchema = z.object({
-    estimatedFare: z.number().describe('Calculated total fare in INR'),
-    distanceKm: z.number().describe('Estimated distance in Kilometers'),
-    breakdown: z.string().describe('Short explanation of the cost'),
-    vehicle: z.string().describe('The vehicle type used for calculation'),
-});
+/**
+ * OpenRouter API call for fare estimation
+ */
+async function callOpenRouterForFare(prompt: string) {
+    const apiKey = process.env.OPENROUTER_API_KEY;
 
-export const fareEstimatorFlow = ai.defineFlow(
-    {
-        name: 'fareEstimatorFlow',
-        inputSchema: FareRequestSchema,
-        outputSchema: FareResponseSchema,
-    },
-    async (input) => {
-        try {
-            const prompt = `
-            You are a taxi fare estimator for "Destiny Tour & Travels" in Himachal Pradesh.
-            
-            REQUEST:
-            From: ${input.from}
-            To: ${input.to}
-            Vehicle: ${input.vehicleType || 'Any standard taxi'}
+    if (!apiKey) {
+        throw new Error('OPENROUTER_API_KEY is not set');
+    }
 
-            RATES (Use these strictly):
-            - Sedan (Dzire/Etios): ₹14/km
-            - SUV (Innova/Crysta): ₹20/km
-            - Tempo Traveller: ₹28/km
-            - Minimum billing distance: 10km
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://destiny-travel.com',
+            'X-Title': 'Destiny Travel AI',
+        },
+        body: JSON.stringify({
+            model: 'openai/gpt-3.5-turbo',
+            messages: [
+                { role: 'system', content: 'You are a taxi fare calculator. Always respond with valid JSON only.' },
+                { role: 'user', content: prompt }
+            ],
+            max_tokens: 300,
+            temperature: 0.3,
+        }),
+    });
 
-            LOGIC:
-            1. Estimate the road distance between the two locations in Himachal Pradesh. Be realistic for mountain roads.
-            2. Choose the appropriate rate based on the requested vehicle. If "Any", use Sedan.
-            3. Calculate Fare = Distance * Rate.
-            4. Add a standard ₹300 driver/night charge if the distance is > 250km.
+    if (!response.ok) {
+        throw new Error(`OpenRouter API error: ${response.status}`);
+    }
 
-            OUTPUT:
-            Return a JSON object with:
-            - estimatedFare (number)
-            - distanceKm (number)
-            - vehicle (string)
-            - breakdown (string, e.g. "250km @ ₹14/km + Tolls")
-            `;
+    const data = await response.json();
+    return data.choices[0]?.message?.content || '';
+}
 
-            const { output } = await ai.generate({
-                prompt,
-                output: { schema: FareResponseSchema },
-            });
+/**
+ * Fare Estimator Flow using OpenRouter
+ */
+export async function fareEstimatorFlow(input: FareRequest): Promise<FareResponse> {
+    try {
+        const prompt = `
+        Calculate taxi fare for Himachal Pradesh travel:
+        
+        From: ${input.from}
+        To: ${input.to}
+        Vehicle: ${input.vehicleType || 'Sedan'}
 
-            if (!output) {
-                throw new Error('AI could not generate a response.');
-            }
+        RATES:
+        - Sedan (Dzire/Etios): ₹14/km
+        - SUV (Innova/Crysta): ₹20/km
+        - Tempo Traveller: ₹28/km
+        - Minimum billing: 10km
+        - Add ₹300 driver charge if distance > 250km
 
-            return output;
-        } catch (error) {
-            console.error("Fare Estimator Error:", error);
-            // Return a fallback so the UI doesn't crash
-            // Fallback to a safe estimate or contact message
-            const isSedan = input.vehicleType?.toLowerCase().includes('sedan') || !input.vehicleType;
-            const rate = isSedan ? 15 : 22;
-            const estimatedDist = 50; // Default assumption if map fails
+        Return ONLY this JSON format (no other text):
+        {
+            "estimatedFare": <number>,
+            "distanceKm": <number>,
+            "vehicle": "<string>",
+            "breakdown": "<string like '150km @ ₹14/km'>"
+        }
+        `;
 
+        const aiResponse = await callOpenRouterForFare(prompt);
+
+        const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+            const parsed = JSON.parse(jsonMatch[0]);
             return {
-                estimatedFare: estimatedDist * rate,
-                distanceKm: estimatedDist,
-                vehicle: input.vehicleType || "Taxi",
-                breakdown: "System is offline. This is a base estimate for local travel. Please contact us for exact inter-city rates."
+                estimatedFare: parsed.estimatedFare || 0,
+                distanceKm: parsed.distanceKm || 0,
+                vehicle: parsed.vehicle || input.vehicleType || 'Taxi',
+                breakdown: parsed.breakdown || 'Estimated fare',
             };
         }
+
+        throw new Error('Could not parse AI response');
+
+    } catch (error) {
+        console.error("Fare Estimator Error:", error);
+
+        const isSedan = input.vehicleType?.toLowerCase().includes('sedan') || !input.vehicleType;
+        const rate = isSedan ? 15 : 22;
+        const estimatedDist = 50;
+
+        return {
+            estimatedFare: estimatedDist * rate,
+            distanceKm: estimatedDist,
+            vehicle: input.vehicleType || "Taxi",
+            breakdown: "Offline estimate. Please contact us for exact rates."
+        };
     }
-);
+}

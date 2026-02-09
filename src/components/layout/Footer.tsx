@@ -19,8 +19,8 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-foreground text-background border-t border-primary/20 rounded-t-[3rem] mt-20 overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
-      <div className="container py-24 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-foreground text-background border-t border-primary/20 rounded-t-[2rem] md:rounded-t-[3rem] mt-10 md:mt-20 overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+      <div className="container py-12 md:py-24 grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
         <div className="flex flex-col gap-6">
           <Link href="/" className="flex items-center space-x-3 group">
             <span className="font-extrabold text-3xl tracking-tighter">

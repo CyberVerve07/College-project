@@ -94,6 +94,20 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-extrabold;
   }
+
+  .glow-on-hover {
+    @apply transition-all duration-300;
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: 0 0 20px theme('colors.primary.DEFAULT'), 0 0 40px theme('colors.secondary.DEFAULT');
+    transform: scale(1.05);
+  }
+
+  .click-effect:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px theme('colors.primary.DEFAULT');
+  }
 }
 
 @keyframes float {

@@ -34,7 +34,7 @@ export default function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden"
+            className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden"
         >
             {/* Background with Parallax */}
             {heroImage && (
@@ -48,7 +48,7 @@ export default function HeroSection() {
                         fill
                         className="object-cover"
                         priority
-                        quality={95}
+                        quality={75}
                     />
                     {/* Enhanced Gradient Overlay for Better Text Contrast */}
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-black/80" />
@@ -56,8 +56,8 @@ export default function HeroSection() {
                 </motion.div>
             )}
 
-            {/* Snow Particles */}
-            <SnowParticles count={100} />
+            {/* Snow Particles - Reduced for performance */}
+            <SnowParticles count={30} />
 
             {/* Content */}
             <motion.div
@@ -81,10 +81,10 @@ export default function HeroSection() {
                         transition={{ duration: 1, delay: 0.2 }}
                         className="space-y-4"
                     >
-                        <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight text-white font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+                        <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight text-white font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
                             Explore
                         </span>
-                        <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+                        <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
                             Himachal
                         </span>
                         <span className="block text-xl sm:text-2xl md:text-3xl mt-6 font-semibold tracking-wide text-white/90 drop-shadow-lg">
@@ -107,12 +107,12 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
-                        <Button asChild size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-105 border-0 shadow-[0_8px_30px_rgba(168,85,247,0.35)]">
+                        <Button asChild size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 border-0 glow-on-hover">
                             <Link href="/contact">
                                 Book Your Ride <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6" />
                             </Link>
                         </Button>
-                        <Button asChild variant="outline" size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-white/10 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 transition-all duration-300 hover:scale-105 shadow-lg">
+                        <Button asChild variant="outline" size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-white/10 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 transition-all duration-300 hover:scale-105 shadow-lg glow-on-hover">
                             <Link href="#destinations">View Gallery</Link>
                         </Button>
                     </motion.div>

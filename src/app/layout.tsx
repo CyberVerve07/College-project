@@ -11,6 +11,7 @@ import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { ColorSplash } from '@/components/ui/color-splash';
 import ChatWidget from '@/components/ai/ChatWidget';
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} - Your Gateway to Himachal`,
@@ -47,6 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         'scroll-smooth',
         ptSans.variable,
@@ -55,15 +57,22 @@ export default function RootLayout({
     >
       <body className="font-body antialiased">
         <ErrorBoundary>
-          <FirebaseClientProvider>
-            <ColorSplash />
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <FloatingButtons />
-            <ChatWidget />
-            <Toaster />
-          </FirebaseClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <FirebaseClientProvider>
+              <ColorSplash />
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <FloatingButtons />
+              <ChatWidget />
+              <Toaster />
+            </FirebaseClientProvider>
+          </ThemeProvider>
         </ErrorBoundary>
       </body>
     </html>

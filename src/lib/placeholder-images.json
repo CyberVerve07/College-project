@@ -4,7 +4,7 @@
       "id": "hero",
       "title": "Himalayas at Sunset",
       "description": "A stunning wide-angle view of the Himalayas at sunset.",
-      "imageUrl": "https://i.pinimg.com/originals/c3/3e/d3/c33ed39a744cb727e5fa93bae7857b36.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
       "homeImageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "himachal cinematic landscape"
     },
@@ -12,15 +12,15 @@
       "id": "dest-dharamshala",
       "title": "Dharamshala",
       "description": "The scenic town of Dharamshala with mountains in the background.",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.haCo5kJRJFj37NVa6hkFJwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://images.unsplash.com/photo-1598091383021-15ddea10925d",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Dharamshala_Cricket_Stadium_Landscape.jpg/500px-Dharamshala_Cricket_Stadium_Landscape.jpg",
+      "homeImageUrl": "https://static.wixstatic.com/media/nsplsh_4684fcdc5b7c420289579427a5555a9c~mv2.jpg/v1/fill/w_4032,h_2979,al_c,q_90/Image%20by%20Maninderjeet%20Singh%20Sidhu.jpg",
       "imageHint": "dharamshala town"
     },
     {
       "id": "dest-kangra",
       "title": "Kangra Valley",
       "description": "Lush green tea gardens in Kangra Valley.",
-      "imageUrl": "https://www.gosahin.com/go/p/f/1546183162_bajreshwari-devi-temple-kangra1.jpg",
+      "imageUrl": "https://th.bing.com/th/id/R.179e77d4878fe60d2f76046c6f1a7fbe?rik=4iRADswaeSgV4A&riu=http%3a%2f%2froyalkangra.com%2fimages%2fbrijeshwaritemple2.jpg&ehk=LCCFBRP%2boGZh4A%2bYKKG3xYAY3MJZpSahHEfK0D6QtlM%3d&risl=&pid=ImgRaw&r=0",
       "imageHint": "kangra valley"
     },
     {
@@ -34,75 +34,75 @@
       "id": "dest-manali",
       "title": "Manali",
       "description": "Snow-capped mountains and lush valleys of Manali.",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.p_5wr91tggQb--YqLQEFAQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23",
+      "imageUrl": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=1200&q=80",
       "imageHint": "manali landscape"
     },
     {
       "id": "dest-shimla",
       "title": "Shimla",
       "description": "The historic Ridge and Christ Church in Shimla.",
-      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.Bb3HKlUZCt2mEPpyIbJmDQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Christ_Church_in_Shimla_on_a_rainy_day.jpg",
+      "imageUrl": "https://dynamic.tourtravelworld.com/package-images/photo-big/dir_17/492163/174168.jpg",
+      "homeImageUrl": "https://dynamic.tourtravelworld.com/package-images/photo-big/dir_17/492163/174168.jpg",
       "imageHint": "shimla city"
     },
     {
       "id": "dest-spiti",
       "title": "Spiti Valley",
       "description": "The breathtaking, arid landscapes of Spiti Valley.",
-      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.GM5iwaSmQyPAqFFU2QMYwAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Spiti_Valley_Landscape.jpg",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.3uC6pP2ntRo9ef2tPnXtdgHaEA?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://tse1.mm.bing.net/th/id/OIP.3uC6pP2ntRo9ef2tPnXtdgHaEA?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "spiti valley"
     },
     {
       "id": "dest-dalhousie",
       "title": "Dalhousie",
       "description": "The mini Switzerland of India, Khajjiar near Dalhousie.",
-      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.V5QA__hHCcl6_5YoTPkOUQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://images.unsplash.com/photo-1622308644420-b20142dc993c?w=800&q=80",
       "imageHint": "dalhousie landscape"
     },
     {
       "id": "dest-kasol",
       "title": "Kasol",
       "description": "The serene Parvati Valley in Kasol.",
-      "imageUrl": "https://th.bing.com/th/id/OIP.4rGlrPJA9HYXgmsY9YZduwHaFL?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://i0.wp.com/www.tusktravel.com/blog/wp-content/uploads/2021/12/Kasol-Himachal-Pradesh2.jpg?w=1200&ssl=1",
       "imageHint": "kasol river"
     },
     {
       "id": "dest-palampur",
       "title": "Palampur",
       "description": "Tea gardens and pine forests of Palampur.",
-      "imageUrl": "https://assets.cntraveller.in/photos/627374d4d0cef4929e37fdf2/16:9/w_1024%2Cc_limit/Palampur%2520cover%2520img.jpg",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.t_S4a2-xNu2gUk_BnuKj2QHaFf?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "palampur tea garden"
     },
     {
       "id": "dest-chamba",
       "title": "Chamba",
       "description": "Ancient temples and Ravi river in Chamba.",
-      "imageUrl": "https://im.hunt.in/cg/Chamba/City-Guide/lakshmi-narayan-mandir-chamba.jpg",
+      "imageUrl": "https://th.bing.com/th/id/OIP.C_R9ZNq5Qwa-a2WimWavLQHaFM?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "chamba himachal"
     },
     {
       "id": "dest-solan",
       "title": "Solan",
       "description": "Mushroom city of India, Solan.",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.rkDCKyzPy0jQWj_CYKjWjQHaEy?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://images.unsplash.com/photo-1626120032639-75f280fa759d",
+      "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200&q=80",
       "imageHint": "solan himachal"
     },
     {
       "id": "dest-baglamukhi",
       "title": "Baglamukhi Temple",
       "description": "The sacred Baglamukhi Temple in Himachal Pradesh.",
-      "imageUrl": "https://th.bing.com/th/id/OIP.zGrgDQLN1SWCKJ1F_6c2eAHaFO?w=254&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
-      "homeImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Maa_Baglamukhi_Temple_Bankhandi_%28Kangra%29.jpg",
+      "imageUrl": "https://www.astroved.com/astropedia/assets/images/temples/Baglamukhi-Temple.jpg",
+      "homeImageUrl": "https://www.astroved.com/astropedia/assets/images/temples/Baglamukhi-Temple.jpg",
       "imageHint": "baglamukhi temple"
     },
     {
       "id": "dest-bharmour",
       "title": "Bharmour",
       "description": "Ancient Chaurasi Temple complex and Manimahesh in Bharmour.",
-      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.2nQTN-dDhkVcAD3WqNm7JQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://image3.mouthshut.com/images/imagesp/925805243s.jpg",
       "imageHint": "bharmour temples chamba"
     },
     {
@@ -116,14 +116,14 @@
       "id": "dest-pangi",
       "title": "Pangi Valley",
       "description": "Remote Pangi Valley with Chandrabhaga river and mountain roads.",
-      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.PjHSl7wq_Gg-SYGQSIiftQHaE7?w=626&h=417&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://tse3.mm.bing.net/th/id/OIP.c8monHTPSbLIIck7pWzsjgHaEX?w=1004&h=591&rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "pangi valley chamba"
     },
     {
       "id": "dest-bilaspur",
       "title": "Bilaspur",
       "description": "Gobind Sagar Lake and scenic dam views in Bilaspur.",
-      "imageUrl": "https://www.capertravelindia.com/images/himachal-3.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
       "imageHint": "bilaspur gobind sagar lake"
     },
     {
@@ -137,42 +137,42 @@
       "id": "dest-kasauli",
       "title": "Kasauli",
       "description": "A serene colonial-era hill station with pine forests, scenic viewpoints, and heritage churches.",
-      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
+      "imageUrl": "https://assets.shortpedia.com/Voices/wp-content/uploads/2021/07/kasauli-1200x900-1.jpg",
       "imageHint": "kasauli hill station"
     },
     {
       "id": "dest-khajjiar",
       "title": "Khajjiar",
       "description": "Called the 'Mini Switzerland of India', famous for its lush meadows, lake, and deodar forests.",
-      "imageUrl": "https://www.holidify.com/images/cmsuploads/compressed/733_20210421151356.jpg",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.Jks73hGbyIAxEpmXDyzkkQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "khajjiar mini switzerland"
     },
     {
       "id": "dest-kufri",
       "title": "Kufri",
       "description": "A popular winter destination near Shimla known for snow activities, skiing, and yak rides.",
-      "imageUrl": "https://th.bing.com/th/id/OIP.r_1MwmKO6jDxXeIqakppuQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://www.india.com/wp-content/uploads/2019/02/Kufri-Himachal-Pradesh.jpg",
       "imageHint": "kufri snow skiing"
     },
     {
       "id": "dest-mcleodganj",
       "title": "McLeod Ganj",
       "description": "Home to the Dalai Lama, a vibrant hub of Tibetan culture, cafes, and spiritual retreats.",
-      "imageUrl": "https://i.ytimg.com/vi/C5q5yBCGzkc/maxresdefault.jpg",
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.aGwyk1lfXvTjKFz5xGizfwHaEK?w=800&h=450&rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "mcleodganj dalai lama"
     },
     {
       "id": "dest-tabo",
       "title": "Tabo",
       "description": "An ancient monastery town in Spiti Valley with 1000-year-old Buddhist art and murals.",
-      "imageUrl": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200&q=80",
+      "imageUrl": "https://www.swantour.com/blogs/wp-content/uploads/2020/01/Tabo-Monastery.jpg",
       "imageHint": "tabo monastery spiti"
     },
     {
       "id": "dest-malana",
       "title": "Malana",
       "description": "A remote ancient village known for its unique culture, laws, and stunning mountain setting.",
-      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.58MEBRSEIQR_z8TXpZYdIAHaEP?w=1200&h=687&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://ychef.files.bbci.co.uk/976x549/p06hmxxw.jpg",
       "imageHint": "malana village kullu"
     },
     {
@@ -186,77 +186,77 @@
       "id": "dest-chail",
       "title": "Chail",
       "description": "A peaceful hill station with the world's highest cricket ground, palace, and wildlife sanctuary.",
-      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.jgtpnOXckWJW5PplOqNoTAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://himtimes.com/wp-content/uploads/2013/10/chail-cricket-ground1.jpg",
       "imageHint": "chail cricket ground"
     },
     {
       "id": "service-alto",
       "title": "Maruti Alto",
-      "description": "Maruti Alto 800 hatchback.",
-      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "description": "Budget-friendly hatchback perfect for couples and navigating narrow mountain roads.",
+      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80&auto=format&fit=crop",
       "imageHint": "maruti alto 800 white car himachal"
     },
     {
       "id": "service-dzire",
       "title": "Swift Dzire",
-      "description": "Maruti Swift Dzire sedan.",
-      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "description": "Reliable sedan offering a comfortable ride for small families and airport transfers.",
+      "imageUrl": "https://c.ndtvimg.com/2024-11/jv0eghso_dzire_625x300_05_November_24.jpg",
       "imageHint": "swift dzire taxi himachal"
     },
     {
       "id": "service-etios",
       "title": "Toyota Etios",
-      "description": "Toyota Etios sedan.",
-      "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1080&q=80",
+      "description": "Spacious sedan known for its legroom and smooth ride on highways.",
+      "imageUrl": "https://th.bing.com/th/id/OIP.8GJz0Gbo704XCe4nj2YHHgHaE8?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
       "imageHint": "toyota etios taxi india"
     },
     {
       "id": "service-innova",
       "title": "Innova Crysta",
-      "description": "Toyota Innova Crysta SUV.",
-      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "description": "Premium SUV offering superior comfort and power for long-distance mountain journeys.",
+      "imageUrl": "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&q=80&auto=format&fit=crop",
       "imageHint": "toyota innova crysta himachal"
     },
     {
       "id": "service-bolero",
       "title": "Mahindra Bolero",
-      "description": "Mahindra Bolero SUV.",
-      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "description": "Rugged SUV built for rough terrains and larger groups on a budget.",
+      "imageUrl": "https://static-cdn.cars24.com/prod/auto-news24-cms/cars24-blog-images/2025/10/28/c863f702-e88b-4998-bb7b-7b627d877f2e-used-mahindra-bolero.webp",
       "imageHint": "mahindra bolero himachal"
     },
     {
       "id": "service-sumo",
-      "title": "Tata Sumo",
-      "description": "Tata Sumo Gold.",
-      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "title": "Tata Sumo Gold",
+      "description": "The workhorse of the mountains, ideal for local transport and tough roads.",
+      "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80&auto=format&fit=crop",
       "imageHint": "tata sumo gold himachal"
     },
     {
       "id": "service-tempo",
-      "title": "Tempo Traveller",
-      "description": "Force Tempo Traveller.",
-      "imageUrl": "https://images.unsplash.com/photo-1464851707681-f9d5fdaccea8?w=1080&q=80",
-      "imageHint": "force tempo traveller india"
+      "title": "Mini Bus Service",
+      "description": "Comfortable mini bus for large groups travelling together with ample seating and luggage space.",
+      "imageUrl": "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80&auto=format&fit=crop",
+      "imageHint": "mini bus india"
     },
     {
       "id": "service-thar",
       "title": "Mahindra Thar",
-      "description": "Mahindra Thar 4x4.",
-      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "description": "Iconic 4x4 jeep made for off-road adventures and scenic open-top experiences.",
+      "imageUrl": "https://www.v3cars.com/media/model-imgs/1656316728-Mahindra%20Thar%20Side%20Exterior.webp",
       "imageHint": "mahindra thar himachal"
     },
     {
       "id": "service-ertiga",
       "title": "Maruti Ertiga",
-      "description": "Maruti Ertiga MPV.",
-      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1080&q=80",
+      "description": "Smart hybrid MPV offering a balance of comfort and economy for family trips.",
+      "imageUrl": "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?w=800&q=80&auto=format&fit=crop",
       "imageHint": "maruti ertiga"
     },
     {
       "id": "service-fortuner",
       "title": "Toyota Fortuner",
-      "description": "Toyota Fortuner SUV.",
-      "imageUrl": "https://images.unsplash.com/photo-1632245889029-e406faaa34cd?w=1080&q=80",
+      "description": "Luxury 4x4 SUV for exclusive travel with maximum power and presence.",
+      "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=80&auto=format&fit=crop",
       "imageHint": "toyota fortuner"
     },
     {

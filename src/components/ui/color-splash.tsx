@@ -5,47 +5,35 @@ import { motion } from 'framer-motion';
 export function ColorSplash() {
     return (
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-            <motion.div
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3],
-                    x: [0, 100, 0],
-                    y: [0, 50, 0],
-                }}
-                transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                }}
-                className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/30 rounded-full blur-[100px]"
-            />
+            {/* Reduced number of animated elements and blur radius for better performance */}
             <motion.div
                 animate={{
                     scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.4, 0.3],
-                    x: [0, -50, 0],
+                    opacity: [0.1, 0.2, 0.1],
                 }}
                 transition={{
                     duration: 15,
                     repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 2
+                    ease: "linear"
                 }}
-                className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-secondary/30 rounded-full blur-[100px]"
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[80px]"
             />
             <motion.div
                 animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.2, 0.4, 0.2],
+                    scale: [1, 1.1, 1],
+                    opacity: [0.1, 0.2, 0.1],
                 }}
                 transition={{
-                    duration: 12,
+                    duration: 18,
                     repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 5
+                    ease: "linear",
+                    delay: 2
                 }}
-                className="absolute top-[40%] left-[30%] w-[300px] h-[300px] bg-accent/20 rounded-full blur-[80px]"
+                style={{ willChange: 'transform, opacity' }}
+                className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[80px]"
             />
         </div>
     );
 }
+
