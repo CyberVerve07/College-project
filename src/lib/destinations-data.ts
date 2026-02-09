@@ -35,7 +35,7 @@ export const initialDestinations = [
     attractions: ['Key Monastery', 'Chandratal Lake', 'Kaza', 'Tabo Monastery'],
   },
   {
-    name: 'Kangra Valley',
+    name: 'Kangra',
     description: 'A vast and beautiful valley, Kangra is dotted with tea gardens, ancient forts, and temples. It provides a more serene and offbeat experience compared to other bustling tourist spots.',
     imageUrl: PlaceHolderImagesMap.get('dest-kangra')?.imageUrl,
     category: 'Nature & Heritage',

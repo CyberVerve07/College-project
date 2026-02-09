@@ -29,8 +29,6 @@ export default function HeroSection() {
     const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-
-
     return (
         <section
             ref={ref}

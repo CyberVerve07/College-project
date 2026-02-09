@@ -10,7 +10,7 @@ import { testimonials } from '@/lib/testimonials-data';
 
 const featuredDestinations = [
   { id: 'dest-dharamshala', title: 'Dharamshala' },
-  { id: 'dest-kangra', title: 'Kangra Valley' },
+  { id: 'dest-kangra', title: 'Kangra' },
   { id: 'dest-birbilling', title: 'Bir Billing' },
   { id: 'dest-manali', title: 'Manali' },
   { id: 'dest-shimla', title: 'Shimla' },
@@ -44,10 +44,10 @@ export default function Home() {
       <HeroSection />
 
       {/* Featured Destinations */}
-      <section id="destinations" className="py-16 md:py-32 relative">
-        <div className="container px-6 md:px-8 text-center mb-10 md:mb-16">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-4 md:mb-5 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-primary to-pink-600">Legendary Destinations</h2>
-          <p className="text-base md:text-xl text-slate-700 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
+      <section id="destinations" className="py-8 md:py-16 relative">
+        <div className="container px-6 md:px-8 text-center mb-6 md:mb-10">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-3 md:mb-5 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-pink-500 dropping-shadow-lg">Legendary Destinations</h2>
+          <p className="text-base md:text-xl text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
         </div>
 
         <div className="container px-4 md:px-6">

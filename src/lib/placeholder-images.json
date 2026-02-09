@@ -18,8 +18,8 @@
     },
     {
       "id": "dest-kangra",
-      "title": "Kangra Valley",
-      "description": "Lush green tea gardens in Kangra Valley.",
+      "title": "Kangra",
+      "description": "Lush green tea gardens in Kangra.",
       "imageUrl": "https://th.bing.com/th/id/R.179e77d4878fe60d2f76046c6f1a7fbe?rik=4iRADswaeSgV4A&riu=http%3a%2f%2froyalkangra.com%2fimages%2fbrijeshwaritemple2.jpg&ehk=LCCFBRP%2boGZh4A%2bYKKG3xYAY3MJZpSahHEfK0D6QtlM%3d&risl=&pid=ImgRaw&r=0",
       "imageHint": "kangra valley"
     },
@@ -72,7 +72,8 @@
       "id": "dest-palampur",
       "title": "Palampur",
       "description": "Tea gardens and pine forests of Palampur.",
-      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.t_S4a2-xNu2gUk_BnuKj2QHaFf?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageUrl": "https://assets.cntraveller.in/photos/627374d4d0cef4929e37fdf2/16:9/w_1024%2Cc_limit/Palampur%2520cover%2520img.jpg",
+      "homeImageUrl": "https://assets.cntraveller.in/photos/627374d4d0cef4929e37fdf2/16:9/w_1024%2Cc_limit/Palampur%2520cover%2520img.jpg",
       "imageHint": "palampur tea garden"
     },
     {
