@@ -32,7 +32,7 @@ export default function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden"
+            className="relative w-full h-[100dvh] flex items-center overflow-hidden"
         >
             {/* Background with Parallax */}
             {heroImage && (
@@ -48,45 +48,41 @@ export default function HeroSection() {
                         priority
                         quality={75}
                     />
-                    {/* Enhanced Gradient Overlay for Better Text Contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-black/80" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-transparent to-purple-900/20" />
+                    {/* Asymmetric Gradient: Darker on left for text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
                 </motion.div>
             )}
 
-            {/* Snow Particles - Reduced for performance */}
+            {/* Snow Particles */}
             <SnowParticles count={30} />
 
-            {/* Content */}
+            {/* Content Container */}
             <motion.div
-                className="container relative z-20 px-6 md:px-8 text-center"
-                style={{ y: textY, opacity, perspective: 1000 }}
+                className="container relative z-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center h-full"
+                style={{ y: textY, opacity }}
             >
-                <div className="max-w-5xl mx-auto space-y-10">
+                {/* Left Content (Text) - Col Span 7 */}
+                <div className="lg:col-span-7 flex flex-col justify-center pt-20 lg:pt-0">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="inline-flex items-center gap-2 rounded-full bg-white/15 px-7 py-3 text-sm font-semibold text-white border border-white/30 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
+                        className="inline-flex items-center gap-2 self-start rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white/90 border border-white/20 backdrop-blur-md mb-8"
                     >
-                        <span className="text-xl">🏔️</span>
-                        <span className="tracking-wide">Gateway to the Gods: Himachal Pradesh</span>
+                        <span className="text-lg">🏔️</span>
+                        <span>Ready for the mountains?</span>
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="space-y-4"
+                        className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6"
                     >
-                        <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight text-white font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
-                            Explore
-                        </span>
-                        <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 font-headline leading-[1.05] drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
-                            Himachal
-                        </span>
-                        <span className="block text-xl sm:text-2xl md:text-3xl mt-6 font-semibold tracking-wide text-white/90 drop-shadow-lg">
-                            with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-pink-400 font-bold">Destiny Tour & Travels</span>
+                        Don&apos;t Just Visit, <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-100 to-white">
+                            Live Himachal
                         </span>
                     </motion.h1>
 
@@ -94,25 +90,70 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl text-slate-100 font-medium leading-relaxed drop-shadow-lg"
+                        className="text-lg sm:text-xl text-gray-300 max-w-xl font-medium leading-relaxed mb-10"
                     >
-                        From the valleys of Manali to the spirituality of Dharamshala. Experience the majesty of the mountains with our premium fleet.
+                        Tired of the city noise? Pack your bags and let us drive you to paradise. From Manali&apos;s peaks to Dharamshala&apos;s peace – we&apos;ve got the ride sorted.
                     </motion.p>
 
                     <motion.div
-                        className="flex flex-col sm:flex-row gap-5 justify-center pt-6"
+                        className="flex flex-wrap gap-4"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
-                        <Button asChild size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 border-0 glow-on-hover">
-                            <Link href="/contact">
-                                Book Your Ride <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+                        <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl bg-white text-black hover:bg-white/90 transition-transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                            <Link href="/contact" className="flex items-center">
+                                Let&apos;s Go! <ArrowRight className="ml-3 h-[18px] w-[18px] group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
                             </Link>
                         </Button>
-                        <Button asChild variant="outline" size="lg" className="h-14 sm:h-16 px-10 sm:px-14 text-base sm:text-lg font-bold rounded-full bg-white/10 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/20 hover:border-white/60 transition-all duration-300 hover:scale-105 shadow-lg glow-on-hover">
-                            <Link href="#destinations">View Gallery</Link>
+                        <Button asChild variant="ghost" size="lg" className="h-14 px-8 text-lg font-medium text-white hover:bg-white/10 hover:text-white rounded-2xl border border-white/20 backdrop-blur-sm">
+                            <Link href="#destinations">See the Magic</Link>
                         </Button>
+                    </motion.div>
+                </div>
+
+                {/* Right Content (Floating Card) - Col Span 5 */}
+                <div className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, rotate: 6 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 3 }}
+                        transition={{ duration: 1, delay: 0.5, type: "spring" }}
+                        whileHover={{ scale: 1.05, rotate: 0 }}
+                        className="w-full max-w-md aspect-[4/5] rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group"
+                    >
+                        {/* Decorative Gradient Blob */}
+                        <div className="absolute -top-20 -right-20 w-60 h-60 bg-purple-500/30 rounded-full blur-3xl group-hover:bg-purple-500/50 transition-colors duration-700" />
+
+                        <div className="relative z-10">
+                            <div className="flex justify-between items-start mb-8">
+                                <span className="text-5xl font-black text-white/20">01</span>
+                                <div className="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors">
+                                    <ArrowRight className="text-white w-7 h-7 -rotate-45" strokeWidth={1.5} />
+                                </div>
+                            </div>
+                            <h3 className="text-3xl font-bold text-white mb-2">Manali <br /> Adventures</h3>
+                            <p className="text-white/60 text-sm">Most popular this season</p>
+                        </div>
+
+                        <div className="relative z-10 space-y-4">
+                            <div className="bg-black/30 rounded-xl p-4 backdrop-blur-sm border border-white/5">
+                                <div className="flex justify-between text-sm text-white/80 mb-1">
+                                    <span>Temperature</span>
+                                    <span>2°C</span>
+                                </div>
+                                <div className="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                                    <div className="bg-blue-400 w-1/3 h-full rounded-full" />
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <div className="flex -space-x-3">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-black border-2 border-white/20" />
+                                    ))}
+                                </div>
+                                <span className="text-white/80 text-sm font-medium">+12k Travelers</span>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
             </motion.div>
