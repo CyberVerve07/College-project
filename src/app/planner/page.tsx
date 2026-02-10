@@ -3,12 +3,10 @@ import ItineraryForm from "./ItineraryForm";
 export default function AIPlannerPage() {
   return (
     <div className="py-24 bg-mesh min-h-screen relative overflow-hidden">
-      {/* Ambient Background Glow */}
+      {/* Ambient Background Glow - Optimized */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-600/30 rounded-full blur-[120px] mix-blend-screen animate-pulse" />
-        <div className="absolute top-[10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[100px] mix-blend-screen" />
-        <div className="absolute bottom-[-10%] left-[20%] w-[60%] h-[60%] bg-pink-600/20 rounded-full blur-[150px] mix-blend-screen animate-pulse delay-700" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-green-500/20 rounded-full blur-[80px] mix-blend-screen" />
+        <div className="absolute top-[-5%] left-[-5%] w-[35%] h-[35%] bg-purple-600/20 rounded-full blur-[60px] mix-blend-screen animate-pulse will-change-opacity" />
+        <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-blue-600/15 rounded-full blur-[80px] mix-blend-screen will-change-opacity" />
       </div>
 
       <div className="w-full px-4 md:px-8 relative z-10">

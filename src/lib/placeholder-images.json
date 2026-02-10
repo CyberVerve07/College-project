@@ -13,7 +13,7 @@
       "title": "Dharamshala",
       "description": "The scenic town of Dharamshala with mountains in the background.",
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Dharamshala_Cricket_Stadium_Landscape.jpg/500px-Dharamshala_Cricket_Stadium_Landscape.jpg",
-      "homeImageUrl": "https://static.wixstatic.com/media/nsplsh_4684fcdc5b7c420289579427a5555a9c~mv2.jpg/v1/fill/w_4032,h_2979,al_c,q_90/Image%20by%20Maninderjeet%20Singh%20Sidhu.jpg",
+      "homeImageUrl": "https://images.unsplash.com/photo-1503265192943-9d7eea6fc77a?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "dharamshala town"
     },
     {
@@ -21,6 +21,7 @@
       "title": "Kangra",
       "description": "Lush green tea gardens in Kangra.",
       "imageUrl": "https://th.bing.com/th/id/R.179e77d4878fe60d2f76046c6f1a7fbe?rik=4iRADswaeSgV4A&riu=http%3a%2f%2froyalkangra.com%2fimages%2fbrijeshwaritemple2.jpg&ehk=LCCFBRP%2boGZh4A%2bYKKG3xYAY3MJZpSahHEfK0D6QtlM%3d&risl=&pid=ImgRaw&r=0",
+      "homeImageUrl": "https://i.pinimg.com/originals/39/47/03/3947033418698185d573ba08fbffb0d3.jpg",
       "imageHint": "kangra valley"
     },
     {
@@ -28,6 +29,7 @@
       "title": "Bir Billing",
       "description": "Paragliders soaring over Bir Billing.",
       "imageUrl": "https://images.unsplash.com/photo-1638160292949-2bbaec1bf98e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXJhZ2xpZGluZyUyMGJpcnxlbnwwfHx8fDE3Njg4MDM3Mjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "homeImageUrl": "https://images.unsplash.com/photo-1620720970374-5b7e67e1e610?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "paragliding bir"
     },
     {
@@ -35,7 +37,7 @@
       "title": "Manali",
       "description": "Snow-capped mountains and lush valleys of Manali.",
       "imageUrl": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80",
-      "homeImageUrl": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=1200&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1712388430474-ace0c16051e2?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "manali landscape"
     },
     {
@@ -43,7 +45,7 @@
       "title": "Shimla",
       "description": "The historic Ridge and Christ Church in Shimla.",
       "imageUrl": "https://dynamic.tourtravelworld.com/package-images/photo-big/dir_17/492163/174168.jpg",
-      "homeImageUrl": "https://dynamic.tourtravelworld.com/package-images/photo-big/dir_17/492163/174168.jpg",
+      "homeImageUrl": "https://images.unsplash.com/photo-1641735689487-9bb4da3c2fb5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "shimla city"
     },
     {
@@ -51,7 +53,7 @@
       "title": "Spiti Valley",
       "description": "The breathtaking, arid landscapes of Spiti Valley.",
       "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.3uC6pP2ntRo9ef2tPnXtdgHaEA?rs=1&pid=ImgDetMain&o=7&rm=3",
-      "homeImageUrl": "https://tse1.mm.bing.net/th/id/OIP.3uC6pP2ntRo9ef2tPnXtdgHaEA?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://plus.unsplash.com/premium_photo-1661963698896-6ecc8afcf6fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "spiti valley"
     },
     {
@@ -59,6 +61,7 @@
       "title": "Dalhousie",
       "description": "The mini Switzerland of India, Khajjiar near Dalhousie.",
       "imageUrl": "https://images.unsplash.com/photo-1622308644420-b20142dc993c?w=800&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1549644414-9b679f825cd0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "dalhousie landscape"
     },
     {

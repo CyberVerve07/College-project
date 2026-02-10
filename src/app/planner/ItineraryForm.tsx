@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -113,7 +113,7 @@ const formSchema = z.object({
   vehiclePreference: z.string().min(1, 'Please select a vehicle type.'),
 });
 
-export default function ItineraryForm() {
+export default memo(function ItineraryForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<ItineraryResponse | null>(null);
@@ -128,6 +128,16 @@ export default function ItineraryForm() {
       vehiclePreference: 'Any',
     },
   });
+
+  // Memoize destinations to prevent re-creating array on every render
+  const memoizedDestinations = useMemo(() => availableDestinations, []);
+
+  // Memoize checkbox change handler
+  const handleDestinationChange = useCallback((field: any, itemId: string, checked: boolean) => {
+    return checked
+      ? field.onChange([...field.value, itemId])
+      : field.onChange(field.value?.filter((value: string) => value !== itemId));
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -212,7 +222,7 @@ export default function ItineraryForm() {
                     </FormDescription>
                   </div>
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                    {availableDestinations.map((item) => (
+                    {memoizedDestinations.map((item) => (
                       <FormItem
                         key={item.id}
                         className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-purple-200/50"
@@ -220,15 +230,7 @@ export default function ItineraryForm() {
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.id)}
-                            onCheckedChange={(checked) => {
-                              return checked
-                                ? field.onChange([...field.value, item.id])
-                                : field.onChange(
-                                  field.value?.filter(
-                                    (value) => value !== item.id
-                                  )
-                                );
-                            }}
+                            onCheckedChange={(checked) => handleDestinationChange(field, item.id, !!checked)}
                             className="data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
                           />
                         </FormControl>
@@ -367,4 +369,4 @@ export default function ItineraryForm() {
       )}
     </>
   );
-}
+});
