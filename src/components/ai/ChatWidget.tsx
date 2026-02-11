@@ -146,11 +146,11 @@ export default function ChatWidget() {
                             <div className="flex items-center gap-3">
                                 {isMobile && (
                                     <Button variant="ghost" size="icon" onClick={() => window.history.back()} className="-ml-2">
-                                        <ArrowLeft className="w-5 h-5" />
+                                        <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
                                     </Button>
                                 )}
                                 <div className="bg-primary/10 p-2 rounded-full">
-                                    <Sparkles className="w-4 h-4 text-primary fill-primary/20" />
+                                    <Sparkles className="w-4 h-4 text-primary fill-primary/20" strokeWidth={2} />
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-bold font-headline tracking-wide">Destiny Assistant</h3>
@@ -162,10 +162,10 @@ export default function ChatWidget() {
                             </div>
                             <div className="flex gap-1">
                                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 transition-colors" onClick={resetChat} title="Reset Chat">
-                                    <RefreshCw className="w-4 h-4" />
+                                    <RefreshCw className="w-4 h-4" strokeWidth={2.5} />
                                 </Button>
                                 <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-destructive/10 hover:text-destructive transition-colors" onClick={() => isMobile ? window.history.back() : setIsOpen(false)}>
-                                    {isMobile ? <X className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                                    {isMobile ? <X className="w-5 h-5" strokeWidth={2.5} /> : <ChevronDown className="w-5 h-5" strokeWidth={2.5} />}
                                 </Button>
                             </div>
                         </div>
@@ -190,7 +190,7 @@ export default function ChatWidget() {
                                                     "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm mt-1",
                                                     msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-card text-foreground border-border"
                                                 )}>
-                                                    {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-5 h-5" />}
+                                                    {msg.role === 'user' ? <User className="w-4 h-4" strokeWidth={2.5} /> : <Bot className="w-5 h-5" strokeWidth={2} />}
                                                 </div>
                                                 <div
                                                     className={cn(
@@ -249,7 +249,7 @@ export default function ChatWidget() {
                                     disabled={isLoading}
                                 />
                                 <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className={cn("shrink-0 transition-all h-11 w-11 rounded-full shadow-md", inputValue.trim() ? "bg-primary hover:bg-primary/90" : "bg-muted text-muted-foreground")}>
-                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5 ml-0.5" />}
+                                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" strokeWidth={2.5} /> : <Send className="w-5 h-5 ml-0.5" strokeWidth={2.5} />}
                                 </Button>
                             </form>
                         </div>
@@ -266,7 +266,7 @@ export default function ChatWidget() {
                     )}
                     onClick={toggleChat}
                 >
-                    <MessageCircle className="w-8 h-8 text-white fill-white/20" />
+                    <MessageCircle className="w-8 h-8 text-white fill-white/20" strokeWidth={2} />
                     <span className="sr-only">Open Chat</span>
 
                     {/* Notification Dot */}

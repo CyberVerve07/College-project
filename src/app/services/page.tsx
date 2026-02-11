@@ -68,7 +68,7 @@ export default function ServicesPage() {
                 {/* Verified Badge */}
                 <div className="absolute top-4 right-4 z-20">
                   <Badge variant="secondary" className="bg-black/70 hover:bg-black/80 text-white backdrop-blur-md border-0 px-3 py-1 flex items-center gap-1.5 shadow-sm">
-                    <CheckCircle className="w-3.5 h-3.5 text-green-400" />
+                    <CheckCircle className="w-3.5 h-3.5 text-green-400" strokeWidth={2.5} />
                     <span className="text-xs font-medium tracking-wide">Verified</span>
                   </Badge>
                 </div>
@@ -110,15 +110,15 @@ export default function ServicesPage() {
                   {/* Features / Specs */}
                   <div className="grid grid-cols-2 gap-y-3 gap-x-2 mb-6 pt-4 border-t border-border/50">
                     <div className="flex items-center gap-2 text-sm font-medium text-foreground/80">
-                      <Users className="w-4 h-4 text-primary" />
+                      <Users className="w-4 h-4 text-primary" strokeWidth={2} />
                       <span className="truncate">{service.capacity}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm font-medium text-foreground/80">
-                      <Award className="w-4 h-4 text-primary" />
+                      <Award className="w-4 h-4 text-primary" strokeWidth={2} />
                       <span className="truncate">Top Rated</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm font-medium text-foreground/80 col-span-2">
-                      <Navigation className="w-4 h-4 text-primary" />
+                      <Navigation className="w-4 h-4 text-primary" strokeWidth={2} />
                       <span className="truncate">{service.idealFor.split(',')[0]}</span>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ export default function ServicesPage() {
                   <div className="mt-auto">
                     <Button asChild className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
                       <Link href="/contact?service=${service.id}" className="flex items-center justify-center gap-2">
-                        <Phone className="w-4 h-4" />
+                        <Phone className="w-4 h-4" strokeWidth={2.5} />
                         <span>Book This Vehicle</span>
                       </Link>
                     </Button>

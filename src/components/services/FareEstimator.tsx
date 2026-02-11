@@ -53,7 +53,7 @@ export default function FareEstimator() {
             <CardHeader className="bg-primary/5 border-b">
                 <div className="flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-full">
-                        <Calculator className="w-6 h-6 text-primary" />
+                        <Calculator className="w-6 h-6 text-primary" strokeWidth={2} />
                     </div>
                     <div>
                         <CardTitle>Instant Fare Estimator</CardTitle>
@@ -73,7 +73,7 @@ export default function FareEstimator() {
                                         <FormLabel>Pickup</FormLabel>
                                         <FormControl>
                                             <div className="relative">
-                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
                                                 <Input placeholder="e.g. Kangra Airport" className="pl-9" {...field} />
                                             </div>
                                         </FormControl>
@@ -89,7 +89,7 @@ export default function FareEstimator() {
                                         <FormLabel>Drop</FormLabel>
                                         <FormControl>
                                             <div className="relative">
-                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
                                                 <Input placeholder="e.g. McLeod Ganj" className="pl-9" {...field} />
                                             </div>
                                         </FormControl>
@@ -123,7 +123,7 @@ export default function FareEstimator() {
                         <Button type="submit" className="w-full h-12 text-lg font-bold bg-gradient-to-r from-primary to-orange-600 hover:from-primary/90 hover:to-orange-700 transition-all shadow-md" disabled={isLoading}>
                             {isLoading ? (
                                 <>
-                                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                    <Loader2 className="mr-2 h-5 w-5 animate-spin" strokeWidth={2.5} />
                                     Calculating...
                                 </>
                             ) : (
@@ -152,19 +152,19 @@ export default function FareEstimator() {
                             className="mt-8 bg-green-50/50 border border-green-100 rounded-xl p-6 relative overflow-hidden"
                         >
                             <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <IndianRupee className="w-32 h-32 text-green-600" />
+                                <IndianRupee className="w-32 h-32 text-green-600" strokeWidth={1} />
                             </div>
 
                             <div className="relative z-10 grid md:grid-cols-2 gap-6 items-center">
                                 <div>
                                     <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-1">Estimated Fare</p>
                                     <div className="flex items-center gap-1">
-                                        <IndianRupee className="w-8 h-8 text-green-700" />
+                                        <IndianRupee className="w-8 h-8 text-green-700" strokeWidth={2.5} />
                                         <span className="text-4xl font-black text-green-700">{result.estimatedFare.toLocaleString()}</span>
                                         <span className="text-sm text-green-600 self-end mb-2">approx</span>
                                     </div>
                                     <p className="text-sm text-muted-foreground mt-2 flex items-center gap-1">
-                                        <Car className="w-3 h-3" />
+                                        <Car className="w-3 h-3" strokeWidth={2} />
                                         {result.vehicle} • {result.distanceKm} km
                                     </p>
                                 </div>
@@ -180,7 +180,7 @@ export default function FareEstimator() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        <IndianRupee className="w-4 h-4" />
+                                        <IndianRupee className="w-4 h-4" strokeWidth={2.5} />
                                         Book This Trip
                                     </a>
                                 </Button>

@@ -57,20 +57,20 @@ export default function HeroSection() {
             {/* Snow Particles */}
             <SnowParticles count={30} />
 
-            {/* Content Container */}
+            {/* Content Container - Asymmetric Grid */}
             <motion.div
-                className="container relative z-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center h-full"
+                className="container relative z-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full"
                 style={{ y: textY, opacity }}
             >
-                {/* Left Content (Text) - Col Span 7 */}
-                <div className="lg:col-span-7 flex flex-col justify-center pt-20 lg:pt-0">
+                {/* Left Content (Text) - Col Span 8 for MORE asymmetry */}
+                <div className="lg:col-span-8 flex flex-col justify-center pt-20 lg:pt-0 lg:pr-12">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="inline-flex items-center gap-2 self-start rounded-full bg-white/10 px-5 py-2 text-sm font-medium text-white/90 border border-white/20 backdrop-blur-md mb-8"
+                        className="flex items-center gap-3 text-orange-400 font-bold tracking-widest uppercase text-sm mb-6"
                     >
-                        <span className="text-lg">🏔️</span>
+                        <span className="text-xl">🏔️</span>
                         <span>Ready for the mountains?</span>
                     </motion.div>
 
@@ -81,7 +81,7 @@ export default function HeroSection() {
                         className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6"
                     >
                         Don&apos;t Just Visit, <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-100 to-white">
+                        <span className="text-orange-500 font-black">
                             Live Himachal
                         </span>
                     </motion.h1>
@@ -101,34 +101,34 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
-                        <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-2xl bg-white text-black hover:bg-white/90 transition-transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                            <Link href="/contact" className="flex items-center">
-                                Let&apos;s Go! <ArrowRight className="ml-3 h-[18px] w-[18px] group-hover:translate-x-1 transition-transform" strokeWidth={2.5} />
+                        <Button asChild size="lg" className="h-16 px-10 text-lg font-black rounded-[22px] bg-gradient-to-r from-orange-500 to-red-600 text-white hover:from-orange-600 hover:to-red-700 transition-all hover:scale-105 shadow-[0_8px_30px_rgba(249,115,22,0.4)]">
+                            <Link href="/contact" className="flex items-center gap-3">
+                                Let&apos;s Go! <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" strokeWidth={3} />
                             </Link>
                         </Button>
-                        <Button asChild variant="ghost" size="lg" className="h-14 px-8 text-lg font-medium text-white hover:bg-white/10 hover:text-white rounded-2xl border border-white/20 backdrop-blur-sm">
+                        <Button asChild variant="ghost" size="lg" className="h-16 px-10 text-lg font-bold text-white hover:bg-orange-500/20 hover:text-orange-300 rounded-[22px] border-2 border-orange-400/30 backdrop-blur-sm hover:border-orange-400/60 transition-all">
                             <Link href="#destinations">See the Magic</Link>
                         </Button>
                     </motion.div>
                 </div>
 
-                {/* Right Content (Floating Card) - Col Span 5 */}
-                <div className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end">
+                {/* Right Content (Floating Card) - Col Span 4 for asymmetry */}
+                <div className="hidden lg:flex lg:col-span-4 justify-end">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8, rotate: 6 }}
-                        animate={{ opacity: 1, scale: 1, rotate: 3 }}
+                        initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
+                        animate={{ opacity: 1, scale: 1, rotate: -4 }}
                         transition={{ duration: 1, delay: 0.5, type: "spring" }}
                         whileHover={{ scale: 1.05, rotate: 0 }}
-                        className="w-full max-w-md aspect-[4/5] rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group"
+                        className="w-full max-w-sm aspect-[4/5] rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group"
                     >
                         {/* Decorative Gradient Blob */}
-                        <div className="absolute -top-20 -right-20 w-60 h-60 bg-purple-500/30 rounded-full blur-3xl group-hover:bg-purple-500/50 transition-colors duration-700" />
+                        <div className="absolute -top-20 -right-20 w-60 h-60 bg-orange-500/30 rounded-full blur-3xl group-hover:bg-orange-500/50 transition-colors duration-700" />
 
                         <div className="relative z-10">
                             <div className="flex justify-between items-start mb-8">
                                 <span className="text-5xl font-black text-white/20">01</span>
                                 <div className="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors">
-                                    <ArrowRight className="text-white w-7 h-7 -rotate-45" strokeWidth={1.5} />
+                                    <ArrowRight className="text-orange-300 w-8 h-8 -rotate-45" strokeWidth={2.5} />
                                 </div>
                             </div>
                             <h3 className="text-3xl font-bold text-white mb-2">Manali <br /> Adventures</h3>

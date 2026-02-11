@@ -276,12 +276,12 @@ export default memo(function ItineraryForm() {
           >
             {isLoading ? (
               <>
-                <Bot className="mr-3 h-6 w-6 animate-spin" />
+                <Bot className="mr-3 h-6 w-6 animate-spin" strokeWidth={2} />
                 Planning Magic...
               </>
             ) : (
               <>
-                <Sparkles className="mr-3 h-6 w-6 fill-yellow-300 text-yellow-300" />
+                <Sparkles className="mr-3 h-6 w-6 fill-yellow-300 text-yellow-300" strokeWidth={2} />
                 Generate My Dream Trip
               </>
             )}
@@ -316,19 +316,19 @@ export default memo(function ItineraryForm() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
                 <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Budget</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1 text-primary"><IndianRupee className="w-5 h-5" /> {itinerary.estimatedCost.toLocaleString()}</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1 text-primary"><IndianRupee className="w-5 h-5" strokeWidth={2.5} /> {itinerary.estimatedCost.toLocaleString()}</p>
               </div>
               <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
                 <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Vehicle</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-secondary"><Car className="w-5 h-5" /> {itinerary.recommendedVehicle}</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-secondary"><Car className="w-5 h-5" strokeWidth={2.5} /> {itinerary.recommendedVehicle}</p>
               </div>
               <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
                 <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Days</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-accent"><Calendar className="w-5 h-5" /> {itinerary.itinerary.length}</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-accent"><Calendar className="w-5 h-5" strokeWidth={2.5} /> {itinerary.itinerary.length}</p>
               </div>
               <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
                 <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">People</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-primary"><Users className="w-5 h-5" /> {form.getValues('people')}</p>
+                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-primary"><Users className="w-5 h-5" strokeWidth={2.5} /> {form.getValues('people')}</p>
               </div>
             </div>
 
@@ -345,7 +345,7 @@ export default memo(function ItineraryForm() {
                     <h3 className="font-headline text-3xl font-black mb-2 text-foreground/90">{day.title}</h3>
                     <div className="flex gap-4 mb-4">
                       <span className="text-xs font-bold uppercase tracking-widest bg-secondary/10 text-secondary px-3 py-1 rounded-full flex items-center gap-1.5">
-                        <Clock className="w-3 h-3" /> {day.travelTime}
+                        <Clock className="w-3 h-3" strokeWidth={2.5} /> {day.travelTime}
                       </span>
                     </div>
                     <p className="leading-relaxed text-lg text-muted-foreground/80">{day.description}</p>

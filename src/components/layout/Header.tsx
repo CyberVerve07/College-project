@@ -68,7 +68,7 @@ export default function Header() {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-                <Menu className="h-7 w-7" />
+                <Menu className="h-8 w-8 text-primary" strokeWidth={1.5} />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -78,7 +78,7 @@ export default function Header() {
                   href="/"
                   className="flex items-center gap-3 text-3xl font-black font-headline tracking-tighter text-primary"
                 >
-                  <Mountain className="h-10 w-10 p-2 bg-primary text-white rounded-xl shadow-lg" />
+                  <Mountain className="h-10 w-10 p-2 bg-primary text-white rounded-xl shadow-lg" strokeWidth={1.5} />
                   <span>{siteConfig.name}</span>
                 </Link>
                 <div className="h-px bg-primary/20 w-full my-4" />

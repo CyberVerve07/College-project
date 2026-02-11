@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { seedDestinations, seedRoutes } from '@/firebase/seed';
 import { initialDestinations } from '@/lib/destinations-data';
 import { Card, CardContent } from '@/components/ui/card';
-import { MapPin, Calendar, Star, ArrowRight } from 'lucide-react';
+import { Calendar, Star, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -79,7 +79,7 @@ export default function DestinationsPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold font-headline bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-pink-500">
+          <h1 className="text-4xl md:text-5xl font-bold font-headline text-orange-500" style={{ textShadow: '0 0 40px rgba(249, 115, 22, 0.4)' }}>
             Explore Our Destinations
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
@@ -137,7 +137,7 @@ export default function DestinationsPage() {
             variants={containerVariants}
             initial="hidden"
             animate="show"
-            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
           >
             {(() => {
               // Combine DB data with local data just like before
@@ -209,19 +209,19 @@ export default function DestinationsPage() {
 
                       <div className="space-y-4 text-sm text-foreground/80 mb-6 flex-grow">
                         <div className="flex items-center gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
-                          <Calendar className="w-4 h-4 text-primary shrink-0" />
+                          <Calendar className="w-5 h-5 text-orange-500 shrink-0" strokeWidth={2.5} />
                           <span className="font-medium">{dest.bestTimeToVisit}</span>
                         </div>
                         <div className="flex items-start gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
-                          <Star className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                          <Star className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" strokeWidth={2.5} />
                           <span className="line-clamp-2">{dest.attractions.join(', ')}</span>
                         </div>
                       </div>
 
-                      <Button asChild className="w-full mt-auto bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-700 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
+                      <Button asChild className="w-full mt-auto bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
                         <Link href="/contact" className="flex items-center justify-center gap-2">
                           <span>Plan Your Trip</span>
-                          <ArrowRight className="w-4 h-4" />
+                          <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
                         </Link>
                       </Button>
                     </CardContent>

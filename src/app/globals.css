@@ -4,52 +4,52 @@
 
 @layer base {
   :root {
-    --background: 270 50% 98%;
-    --foreground: 270 60% 10%;
+    --background: 30 50% 98%;
+    --foreground: 30 60% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 270 60% 10%;
+    --card-foreground: 30 60% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 270 60% 10%;
-    --primary: 270 70% 50%;
-    /* Vibrant Purple */
+    --popover-foreground: 30 60% 10%;
+    --primary: 24 90% 55%;
+    /* Vibrant Orange */
     --primary-foreground: 0 0% 100%;
-    --secondary: 200 90% 45%;
-    /* Electric Blue */
+    --secondary: 8 85% 55%;
+    /* Deep Red */
     --secondary-foreground: 0 0% 100%;
-    --muted: 270 20% 96%;
-    --muted-foreground: 270 10% 40%;
-    --accent: 330 80% 60%;
-    /* Hot Pink/Red */
+    --muted: 30 20% 96%;
+    --muted-foreground: 30 10% 40%;
+    --accent: 38 95% 60%;
+    /* Amber/Gold */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 270 30% 90%;
-    --input: 270 30% 90%;
-    --ring: 270 70% 50%;
-    --radius: 0.75rem;
+    --border: 30 30% 90%;
+    --input: 30 30% 90%;
+    --ring: 24 90% 55%;
+    --radius: 1rem;
   }
 
   .dark {
-    --background: 270 50% 4%;
-    --foreground: 270 20% 98%;
-    --card: 270 50% 6%;
-    --card-foreground: 270 20% 98%;
-    --popover: 270 50% 4%;
-    --popover-foreground: 270 20% 98%;
-    --primary: 270 80% 60%;
-    /* Vibrant Purple */
-    --primary-foreground: 270 10% 4%;
-    --secondary: 190 90% 50%;
-    /* Electric Blue/Cyan */
-    --secondary-foreground: 270 10% 4%;
-    --muted: 270 30% 15%;
-    --muted-foreground: 270 10% 60%;
-    --accent: 330 90% 60%;
-    /* Hot Pink */
+    --background: 30 50% 4%;
+    --foreground: 30 20% 98%;
+    --card: 30 50% 6%;
+    --card-foreground: 30 20% 98%;
+    --popover: 30 50% 4%;
+    --popover-foreground: 30 20% 98%;
+    --primary: 24 95% 60%;
+    /* Vibrant Orange */
+    --primary-foreground: 30 10% 4%;
+    --secondary: 8 90% 58%;
+    /* Deep Red/Crimson */
+    --secondary-foreground: 30 10% 4%;
+    --muted: 30 30% 15%;
+    --muted-foreground: 30 10% 60%;
+    --accent: 38 90% 65%;
+    /* Amber */
     --accent-foreground: 0 0% 100%;
-    --border: 270 30% 15%;
-    --input: 270 30% 15%;
-    --ring: 270 80% 60%;
+    --border: 30 30% 15%;
+    --input: 30 30% 15%;
+    --ring: 24 95% 60%;
   }
 }
 
@@ -80,19 +80,19 @@
 
   .bg-mesh {
     background-image:
-      radial-gradient(at 0% 0%, hsla(270, 70%, 50%, 0.2) 0, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(350, 80%, 50%, 0.15) 0, transparent 50%),
-      radial-gradient(at 50% 100%, hsla(200, 90%, 45%, 0.1) 0, transparent 50%);
+      radial-gradient(at 0% 0%, hsla(24, 90%, 55%, 0.2) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(8, 85%, 55%, 0.15) 0, transparent 50%),
+      radial-gradient(at 50% 100%, hsla(38, 95%, 60%, 0.1) 0, transparent 50%);
     background-attachment: fixed;
   }
 
   .neon-border {
     @apply border-primary/50;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent font-extrabold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-red-500 to-amber-500 font-extrabold;
   }
 
   .glow-on-hover {

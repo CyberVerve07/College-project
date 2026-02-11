@@ -14,7 +14,7 @@ export default function ContactPage() {
       <div className="container relative z-10">
         <div className="text-center mb-16 space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm uppercase tracking-wider mb-4">
-            <Sparkles className="w-4 h-4" /> 24/7 Support Available
+            <Sparkles className="w-4 h-4" strokeWidth={2} /> 24/7 Support Available
           </div>
           <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 drop-shadow-sm">
             Get in Touch
@@ -40,7 +40,7 @@ export default function ContactPage() {
             <div className="flex-1 flex flex-col justify-center space-y-8 relative z-10 mt-8">
               <div className="flex items-start gap-6 group/item">
                 <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                  <MapPin className="w-7 h-7 text-blue-500" />
+                  <MapPin className="w-7 h-7 text-blue-500" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Our Base Camp</h3>
@@ -50,7 +50,7 @@ export default function ContactPage() {
 
               <div className="flex items-start gap-6 group/item">
                 <div className="w-14 h-14 rounded-2xl bg-green-50 dark:bg-green-900/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                  <Phone className="w-7 h-7 text-green-600" />
+                  <Phone className="w-7 h-7 text-green-600" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Call Us</h3>
@@ -61,7 +61,7 @@ export default function ContactPage() {
 
               <div className="flex items-start gap-6 group/item">
                 <div className="w-14 h-14 rounded-2xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                  <Mail className="w-7 h-7 text-orange-500" />
+                  <Mail className="w-7 h-7 text-orange-500" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email</h3>

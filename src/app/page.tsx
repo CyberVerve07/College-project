@@ -2,8 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { PlaceHolderImagesMap, PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
-import { ArrowRight, Car, Users, Mountain, Star } from 'lucide-react';
+import { ArrowRight, Car, Users, Mountain } from 'lucide-react';
 import HeroSection from '@/components/home/HeroSection';
 import { cn } from '@/lib/utils';
 import { testimonials } from '@/lib/testimonials-data';
@@ -46,38 +53,52 @@ export default function Home() {
       {/* Featured Destinations */}
       <section id="destinations" className="py-8 md:py-16 relative">
         <div className="container px-6 md:px-8 text-center mb-6 md:mb-10">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-3 md:mb-5 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-pink-500 dropping-shadow-lg">Legendary Destinations</h2>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-3 md:mb-5 text-white" style={{ textShadow: '0 0 60px rgba(251, 146, 60, 0.6), 0 4px 20px rgba(0,0,0,0.8)' }}>Legendary Destinations</h2>
           <p className="text-base md:text-xl text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
         </div>
 
         <div className="container px-4 md:px-6">
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredDestinations.map((dest) => {
-              const imageData = PlaceHolderImagesMap.get(dest.id);
-              if (!imageData) return null;
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4 md:-ml-6 py-6">
+              {featuredDestinations.map((dest) => {
+                const imageData = PlaceHolderImagesMap.get(dest.id);
+                if (!imageData) return null;
 
-              return (
-                <div key={dest.id} className="group relative h-[400px] md:h-[500px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-3 cursor-pointer neon-border">
-                  <Image
-                    src={imageData.homeImageUrl || imageData.imageUrl}
-                    alt={imageData.description}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                  <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full transform transition-all duration-500">
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3 group-hover:text-secondary-foreground transition-colors">{dest.title}</h3>
-                    <p className="text-white/60 text-sm md:text-base line-clamp-2 mb-4 md:mb-6 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                      {imageData.description}
-                    </p>
-                    <div className="h-1 w-0 group-hover:w-full bg-secondary transition-all duration-500 rounded-full" />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                return (
+                  <CarouselItem key={dest.id} className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                    <div className="group relative h-[400px] md:h-[500px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-3 cursor-pointer neon-border bg-card">
+                      <Image
+                        src={imageData.homeImageUrl || imageData.imageUrl}
+                        alt={imageData.description}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-all duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+                      <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full transform transition-all duration-500">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3 group-hover:text-secondary-foreground transition-colors">{dest.title}</h3>
+                        <p className="text-white/60 text-sm md:text-base line-clamp-2 mb-4 md:mb-6 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                          {imageData.description}
+                        </p>
+                        <div className="h-1 w-0 group-hover:w-full bg-secondary transition-all duration-500 rounded-full" />
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="left-[-2rem] bg-white/10 hover:bg-white/20 border-white/20 text-white" />
+              <CarouselNext className="right-[-2rem] bg-white/10 hover:bg-white/20 border-white/20 text-white" />
+            </div>
+          </Carousel>
         </div>
       </section>
 
@@ -105,7 +126,7 @@ export default function Home() {
                       />
                     ) : (
                       <div className="bg-primary/20 w-full h-full flex items-center justify-center rounded-full">
-                        <service.icon className="w-16 h-16 md:w-20 md:h-20 text-primary" />
+                        <service.icon className="w-16 h-16 md:w-20 md:h-20 text-orange-500" strokeWidth={2} />
                       </div>
                     )}
                   </div>
@@ -124,7 +145,7 @@ export default function Home() {
       {/* Gallery Section */}
       <section id="gallery" className="py-16 md:py-32">
         <div className="container px-4 md:px-6 text-center mb-10 md:mb-20">
-          <h2 className="text-4xl md:text-7xl font-black font-headline tracking-tighter mb-4 text-gradient">Visual Overdose</h2>
+          <h2 className="text-4xl md:text-7xl font-black font-headline tracking-tighter mb-4 text-orange-400" style={{ textShadow: '0 0 50px rgba(251, 146, 60, 0.5)' }}>Visual Overdose</h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
         </div>
         <div className="container px-4 md:px-6 columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-10 space-y-6 md:space-y-10">
@@ -150,7 +171,7 @@ export default function Home() {
       </section>
 
       {/* Booking Prompt */}
-      <section className="py-20 md:py-40 bg-gradient-to-br from-red-600 to-blue-700 text-white text-center rounded-t-[2.5rem] md:rounded-t-[5rem] mx-4 md:mx-8">
+      <section className="py-20 md:py-40 bg-gradient-to-br from-orange-600 via-red-600 to-red-800 text-white text-center rounded-t-[2.5rem] md:rounded-t-[5rem] mx-4 md:mx-8">
         <div className="container px-4 md:px-6">
           <h2 className="text-4xl md:text-6xl lg:text-9xl font-black font-headline mb-6 md:mb-10 tracking-tighter animate-pulse">DON'T SETTLE</h2>
           <p className="text-lg md:text-2xl mb-10 md:mb-16 opacity-80 max-w-3xl mx-auto font-bold uppercase tracking-widest leading-relaxed">

@@ -85,11 +85,11 @@ export default function Footer() {
                 <span className="font-bold">WhatsApp Us</span>
               </a>
               <a href={`tel:${siteConfig.contact.phone}`} className="flex items-center gap-3 hover:text-secondary p-3 bg-white/5 rounded-2xl transition-all">
-                <Phone className="w-5 h-5 text-secondary" />
+                <Phone className="w-5 h-5 text-secondary" strokeWidth={2.5} />
                 <span className="font-bold">{siteConfig.contact.phone}</span>
               </a>
               <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-3 hover:text-accent p-3 bg-white/5 rounded-2xl transition-all">
-                <Mail className="w-5 h-5 text-accent" />
+                <Mail className="w-5 h-5 text-accent" strokeWidth={2.5} />
                 <span className="font-bold">Email Dispatch</span>
               </a>
             </div>
