@@ -188,7 +188,7 @@ export default function ChatWidget() {
                                             )}>
                                                 <div className={cn(
                                                     "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm mt-1",
-                                                    msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-white text-primary border-primary/20"
+                                                    msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-card text-foreground border-border"
                                                 )}>
                                                     {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-5 h-5" />}
                                                 </div>
@@ -197,7 +197,7 @@ export default function ChatWidget() {
                                                         "rounded-2xl px-4 py-3 text-sm shadow-sm",
                                                         msg.role === 'user'
                                                             ? "bg-primary text-primary-foreground rounded-tr-sm"
-                                                            : "bg-white border border-primary/10 text-foreground rounded-tl-sm"
+                                                            : "bg-card border border-border text-foreground rounded-tl-sm"
                                                     )}
                                                 >
                                                     {msg.content}
@@ -212,7 +212,7 @@ export default function ChatWidget() {
                                                             key={idx}
                                                             onClick={() => handleSendMessage(suggestion)}
                                                             disabled={isLoading}
-                                                            className="text-xs font-medium bg-white hover:bg-primary/10 text-primary px-3 py-1.5 rounded-full transition-all border border-primary/20 shadow-sm hover:scale-105 active:scale-95"
+                                                            className="text-xs font-medium bg-secondary/10 hover:bg-secondary/20 text-secondary-foreground px-3 py-1.5 rounded-full transition-all border border-secondary/20 shadow-sm hover:scale-105 active:scale-95"
                                                         >
                                                             {suggestion}
                                                         </button>
@@ -223,13 +223,13 @@ export default function ChatWidget() {
                                     ))}
                                     {isLoading && (
                                         <div className="flex gap-2 self-start max-w-[85%]">
-                                            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-primary/20 mt-1">
-                                                <Bot className="w-5 h-5 text-primary animate-pulse" />
+                                            <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center shrink-0 border border-border mt-1">
+                                                <Bot className="w-5 h-5 text-foreground animate-pulse" />
                                             </div>
-                                            <div className="bg-white border border-primary/10 rounded-2xl px-4 py-3 rounded-tl-sm flex items-center gap-1 shadow-sm">
-                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
-                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
-                                                <span className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce"></span>
+                                            <div className="bg-card border border-border rounded-2xl px-4 py-3 rounded-tl-sm flex items-center gap-1 shadow-sm">
+                                                <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                                                <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                                                <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce"></span>
                                             </div>
                                         </div>
                                     )}
@@ -239,13 +239,13 @@ export default function ChatWidget() {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-3 bg-white border-t shrink-0 pb-safe">
+                        <div className="p-3 bg-background border-t shrink-0 pb-safe">
                             <form onSubmit={handleSubmit} className="flex w-full gap-2 items-center">
                                 <Input
                                     placeholder="Ask about trips, cabs, or hotels..."
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
-                                    className="flex-1 bg-muted/30 focus-visible:ring-primary/50 border-primary/10 h-11 rounded-full px-4"
+                                    className="flex-1 bg-muted/50 focus-visible:ring-primary/50 border-border h-11 rounded-full px-4"
                                     disabled={isLoading}
                                 />
                                 <Button type="submit" size="icon" disabled={isLoading || !inputValue.trim()} className={cn("shrink-0 transition-all h-11 w-11 rounded-full shadow-md", inputValue.trim() ? "bg-primary hover:bg-primary/90" : "bg-muted text-muted-foreground")}>

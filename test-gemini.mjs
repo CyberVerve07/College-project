@@ -1,4 +1,4 @@
-import { ai } from './genkit';
+import { ai } from './src/ai/genkit.js';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -14,7 +14,7 @@ async function main() {
 
         console.log("✅ SUCCESS! Gemini is working!");
         console.log("📩 Response:", response.text);
-    } catch (error: any) {
+    } catch (error) {
         console.error("❌ Test Error:", error.message);
     }
 }

@@ -1,46 +1,10 @@
 'use server';
 
 import { FareRequest, FareResponse } from '@/ai/schemas';
+import { ai } from '@/ai/genkit';
 
 /**
- * OpenRouter API call for fare estimation
- */
-async function callOpenRouterForFare(prompt: string) {
-    const apiKey = process.env.OPENROUTER_API_KEY;
-
-    if (!apiKey) {
-        throw new Error('OPENROUTER_API_KEY is not set');
-    }
-
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://destiny-travel.com',
-            'X-Title': 'Destiny Travel AI',
-        },
-        body: JSON.stringify({
-            model: 'openai/gpt-3.5-turbo',
-            messages: [
-                { role: 'system', content: 'You are a taxi fare calculator. Always respond with valid JSON only.' },
-                { role: 'user', content: prompt }
-            ],
-            max_tokens: 300,
-            temperature: 0.3,
-        }),
-    });
-
-    if (!response.ok) {
-        throw new Error(`OpenRouter API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.choices[0]?.message?.content || '';
-}
-
-/**
- * Fare Estimator Flow using OpenRouter
+ * Fare Estimator Flow using Genkit (Groq)
  */
 export async function fareEstimatorFlow(input: FareRequest): Promise<FareResponse> {
     try {
@@ -67,9 +31,14 @@ export async function fareEstimatorFlow(input: FareRequest): Promise<FareRespons
         }
         `;
 
-        const aiResponse = await callOpenRouterForFare(prompt);
+        const { text } = await ai.generate({
+            prompt: prompt,
+            config: {
+                temperature: 0.3,
+            }
+        });
 
-        const jsonMatch = aiResponse.match(/\{[\s\S]*\}/);
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
         if (jsonMatch) {
             const parsed = JSON.parse(jsonMatch[0]);
             return {

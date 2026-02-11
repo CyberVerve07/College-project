@@ -2,6 +2,7 @@
 
 import { HIMACHAL_KNOWLEDGE, getSmartFallback } from '@/lib/himachal-knowledge';
 import { ChatRequest, ChatResponse } from '@/ai/schemas';
+import { ai } from '@/ai/genkit';
 
 const SYSTEM_PROMPT = `
 You are "Destiny AI", an expert local guide for Himachal Pradesh.
@@ -21,42 +22,6 @@ Example interaction:
 User: "Best places in Manali?"
 You: "Manali is beautiful! You must visit **Solang Valley** for adventure, **Hadimba Temple** for peace, and **Old Manali** for cafes. We can arrange a **Volvo bus** or **Private Cab** for you. Want to know hotel rates?"
 `;
-
-/**
- * OpenRouter API call function
- */
-async function callOpenRouter(messages: Array<{ role: string; content: string }>) {
-    const apiKey = process.env.OPENROUTER_API_KEY;
-
-    if (!apiKey) {
-        throw new Error('OPENROUTER_API_KEY is not set in environment variables');
-    }
-
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://destiny-travel.com',
-            'X-Title': process.env.OPENROUTER_APP_NAME || 'Destiny Travel AI',
-        },
-        body: JSON.stringify({
-            model: 'openai/gpt-3.5-turbo',
-            messages: messages,
-            max_tokens: 500,
-            temperature: 0.7,
-        }),
-    });
-
-    if (!response.ok) {
-        const errorData = await response.text();
-        console.error('OpenRouter API Error:', errorData);
-        throw new Error(`OpenRouter API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.choices[0]?.message?.content || '';
-}
 
 /**
  * Parse AI response to extract answer and suggestions
@@ -79,31 +44,33 @@ function parseResponse(content: string): ChatResponse {
 }
 
 /**
- * Main chat assistant flow using OpenRouter
+ * Main chat assistant flow using Genkit (Groq)
  */
 export async function chatAssistantFlow(input: ChatRequest): Promise<ChatResponse> {
     try {
-        const messages: Array<{ role: string; content: string }> = [
-            { role: 'system', content: SYSTEM_PROMPT },
-        ];
+        // Construct the prompt manually for Llama 3
+        let fullPrompt = `SYSTEM INSTRUCTIONS:\n${SYSTEM_PROMPT}\n\nCONVERSATION HISTORY:\n`;
 
         if (input.history && input.history.length > 0) {
             for (const msg of input.history) {
-                messages.push({
-                    role: msg.role === 'user' ? 'user' : 'assistant',
-                    content: msg.content,
-                });
+                const role = msg.role === 'user' ? 'User' : 'Destiny AI';
+                fullPrompt += `${role}: ${msg.content}\n`;
             }
         }
 
-        messages.push({ role: 'user', content: input.message });
+        fullPrompt += `\nUser: ${input.message}\nDestiny AI:`;
 
-        const aiResponse = await callOpenRouter(messages);
+        const { text } = await ai.generate({
+            prompt: fullPrompt,
+            config: {
+                temperature: 0.7,
+            }
+        });
 
-        return parseResponse(aiResponse);
+        return parseResponse(text);
 
     } catch (error: any) {
-        console.error("Chat Gen Error:", error.message);
+        console.error("Chat Gen Error:", error);
 
         return {
             answer: getSmartFallback(input.message),
@@ -111,3 +78,5 @@ export async function chatAssistantFlow(input: ChatRequest): Promise<ChatRespons
         };
     }
 }
+
+
