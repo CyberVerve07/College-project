@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const formSchema = z.object({
     from: z.string().min(2, { message: 'Pickup location is required' }),
     to: z.string().min(2, { message: 'Destination is required' }),
+    distance: z.string().min(1, { message: 'Distance is required' }),
     vehicleType: z.string().optional(),
 });
 
@@ -29,6 +30,7 @@ export default function FareEstimator() {
         defaultValues: {
             from: '',
             to: '',
+            distance: '',
             vehicleType: 'Sedan',
         },
     });
@@ -91,6 +93,22 @@ export default function FareEstimator() {
                                             <div className="relative">
                                                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
                                                 <Input placeholder="e.g. McLeod Ganj" className="pl-9" {...field} />
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="distance"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Distance (km)</FormLabel>
+                                        <FormControl>
+                                            <div className="relative">
+                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
+                                                <Input type="number" placeholder="e.g. 50" className="pl-9" {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />

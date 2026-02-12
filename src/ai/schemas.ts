@@ -19,6 +19,7 @@ export const ChatResponseSchema = z.object({
 export const FareRequestSchema = z.object({
     from: z.string().describe('Pickup location'),
     to: z.string().describe('Destination location'),
+    distance: z.string().optional().describe('Distance in km'),
     vehicleType: z.string().optional().describe('Preferred vehicle (Sedan, SUV, etc.)'),
 });
 
