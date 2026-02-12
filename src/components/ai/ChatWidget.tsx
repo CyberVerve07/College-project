@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils';
 import { generateChatResponse } from '@/app/actions/ai';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
-
 type Message = {
     id: string;
     role: 'user' | 'model';
@@ -19,6 +18,7 @@ type Message = {
 };
 
 export default function ChatWidget() {
+    // const { user } = useAuth(); // Removed Auth dependency
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { id: 'welcome', role: 'model', content: 'Hi! I am Destiny AI. How can I help you plan your Himachal trip today?', suggestions: ['Plan a Trip', 'Cab Rates', 'Best Places to Visit'] }

@@ -24,11 +24,13 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2 } from 'lucide-react';
+import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2, FileText } from 'lucide-react';
 import { createItinerary } from '@/ai/flows/create-itinerary-flow';
 import { saveBooking } from './actions';
 import { Separator } from '@/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
+import { downloadItineraryPdf } from '@/lib/pdf-api';
+import { useRouter } from 'next/navigation';
 
 
 const availableDestinations = [
@@ -114,6 +116,8 @@ const formSchema = z.object({
 });
 
 export default memo(function ItineraryForm() {
+  // const { user } = useAuth();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [itinerary, setItinerary] = useState<ItineraryResponse | null>(null);
@@ -159,6 +163,22 @@ export default memo(function ItineraryForm() {
       setIsLoading(false);
     }
   }
+
+  const handleDownloadPdf = async () => {
+    if (!itinerary) return;
+    try {
+      toast({ title: "Generating PDF...", description: "Please wait while we prepare your itinerary." });
+      await downloadItineraryPdf(itinerary);
+      toast({ title: "Success", description: "PDF downloaded successfully!" });
+    } catch (e) {
+      toast({ variant: "destructive", title: "Error", description: "Failed to download PDF. Make sure the Java backend is running on port 8080." });
+    }
+  };
+
+  const handleBooking = (e: React.MouseEvent) => {
+    // Redirect to contact for booking
+    router.push('/contact');
+  };
 
   return (
     <>
@@ -359,8 +379,11 @@ export default memo(function ItineraryForm() {
             <div className="text-center pt-4">
               <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-primary/20">
-                  <a href="/contact">Book via WhatsApp</a>
+                <Button onClick={handleBooking} size="lg" className="bg-primary hover:bg-primary/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-primary/20 cursor-pointer">
+                  Book via WhatsApp
+                </Button>
+                <Button onClick={handleDownloadPdf} variant="outline" size="lg" className="bg-background/50 hover:bg-background/80 border-primary/20 min-w-[250px] h-16 rounded-2xl text-xl font-bold backdrop-blur-sm">
+                  <FileText className="mr-2 h-6 w-6" /> Download PDF
                 </Button>
               </div>
             </div>

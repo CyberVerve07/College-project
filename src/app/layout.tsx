@@ -13,6 +13,7 @@ import { ColorSplash } from '@/components/ui/color-splash';
 import ChatWidget from '@/components/ai/ChatWidget';
 import { ThemeProvider } from "@/components/theme-provider"
 
+
 export const metadata: Metadata = {
   title: `${siteConfig.name} - Your Gateway to Himachal`,
   description: siteConfig.description,

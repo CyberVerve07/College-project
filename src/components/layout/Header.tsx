@@ -8,13 +8,9 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/config';
 import { ModeToggle } from '@/components/ui/mode-toggle';
-
-/**
- * Navigation links configuration.
- * Used for both desktop navigation and mobile sheet menu.
- */
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/discover-himachal', label: 'Discover' },
   { href: '/destinations', label: 'Destinations' },
   { href: '/services', label: 'Services' },
   { href: '/planner', label: 'AI Planner' },
@@ -22,13 +18,6 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-/**
- * Global Header component.
- * Features:
- * - Responsive navigation (Desktop list / Mobile sheet)
- * - Sticky positioning with backdrop blur
- * - Active link highlighting
- */
 export default function Header() {
   const pathname = usePathname();
 
@@ -57,9 +46,11 @@ export default function Header() {
               )} />
             </Link>
           ))}
-          <Button asChild className="rounded-xl px-8 h-11 bg-gradient-to-r from-primary via-purple-600 to-pink-600 shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
-            <a href={`tel:${siteConfig.contact.phone}`}>Book a Cab</a>
-          </Button>
+          <div className="flex gap-4">
+            <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-purple-600 to-pink-600 shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
+              <a href={`tel:${siteConfig.contact.phone}`}>Book Cab</a>
+            </Button>
+          </div>
           <ModeToggle />
         </nav>
 
@@ -94,10 +85,8 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
-                <Button asChild className="mt-8 rounded-2xl h-16 text-xl font-black bg-primary">
-                  <a href={`tel:${siteConfig.contact.phone}`}>Call Us Now</a>
-                </Button>
-                <div className="mt-4 flex justify-center">
+
+                <div className="mt-8 flex justify-center">
                   <ModeToggle />
                 </div>
               </nav>
