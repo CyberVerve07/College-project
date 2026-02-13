@@ -69,13 +69,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'plus.unsplash.com',
+        hostname: '**.unsplash.com',
         port: '',
         pathname: '/**',
       },
@@ -99,13 +93,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'tse1.mm.bing.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse2.mm.bing.net',
+        hostname: '**.bing.net',
         port: '',
         pathname: '/**',
       },
@@ -171,37 +159,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'tse1.mm.bing.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse2.mm.bing.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse3.mm.bing.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'tse4.mm.bing.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'image.slidesharecdn.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.pinimg.com',
         port: '',
         pathname: '/**',
       },
@@ -214,12 +172,6 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'www.holidify.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'th.bing.com',
         port: '',
         pathname: '/**',
       },
@@ -280,12 +232,6 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'img-global.cpcdn.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'i.pinimg.com',
         port: '',
         pathname: '/**',
       },

@@ -7,7 +7,6 @@ import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { estimateFare } from '@/app/actions/ai';
 import { Loader2, MapPin, Calculator, IndianRupee, Car } from 'lucide-react';
@@ -16,7 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const formSchema = z.object({
     from: z.string().min(2, { message: 'Pickup location is required' }),
     to: z.string().min(2, { message: 'Destination is required' }),
-    vehicleType: z.string().optional(),
+    distance: z.string().min(1, { message: 'Distance is required' }),
 });
 
 export default function FareEstimator() {
@@ -29,7 +28,7 @@ export default function FareEstimator() {
         defaultValues: {
             from: '',
             to: '',
-            vehicleType: 'Sedan',
+            distance: '',
         },
     });
 
@@ -74,7 +73,7 @@ export default function FareEstimator() {
                                         <FormControl>
                                             <div className="relative">
                                                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
-                                                <Input placeholder="e.g. Kangra Airport" className="pl-9" {...field} />
+                                                <Input placeholder="e.g. Kangra Airport" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -90,7 +89,7 @@ export default function FareEstimator() {
                                         <FormControl>
                                             <div className="relative">
                                                 <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
-                                                <Input placeholder="e.g. McLeod Ganj" className="pl-9" {...field} />
+                                                <Input placeholder="e.g. McLeod Ganj" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -99,22 +98,16 @@ export default function FareEstimator() {
                             />
                             <FormField
                                 control={form.control}
-                                name="vehicleType"
+                                name="distance"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Vehicle</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            <FormControl>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select Vehicle" />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent>
-                                                <SelectItem value="Sedan">Sedan (Dzire/Etios)</SelectItem>
-                                                <SelectItem value="SUV">SUV (Innova/Crysta)</SelectItem>
-                                                <SelectItem value="Tempo Traveller">Tempo Traveller</SelectItem>
-                                            </SelectContent>
-                                        </Select>
+                                        <FormLabel>Distance (km)</FormLabel>
+                                        <FormControl>
+                                            <div className="relative">
+                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
+                                                <Input type="number" placeholder="e.g. 50" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
+                                            </div>
+                                        </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -146,35 +139,41 @@ export default function FareEstimator() {
                     )}
 
                     {result && (
+
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="mt-8 bg-green-50/50 border border-green-100 rounded-xl p-6 relative overflow-hidden"
+                            className="mt-8 bg-gradient-to-br from-card to-muted/30 border border-primary/20 rounded-xl p-6 relative overflow-hidden shadow-xl"
                         >
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <IndianRupee className="w-32 h-32 text-green-600" strokeWidth={1} />
+                            <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-[0.03]">
+                                <IndianRupee className="w-40 h-40 text-primary" strokeWidth={1} />
                             </div>
 
                             <div className="relative z-10 grid md:grid-cols-2 gap-6 items-center">
                                 <div>
-                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-1">Estimated Fare</p>
+                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-bold mb-1">Estimated Fare</p>
                                     <div className="flex items-center gap-1">
-                                        <IndianRupee className="w-8 h-8 text-green-700" strokeWidth={2.5} />
-                                        <span className="text-4xl font-black text-green-700">{result.estimatedFare.toLocaleString()}</span>
-                                        <span className="text-sm text-green-600 self-end mb-2">approx</span>
+                                        <IndianRupee className="w-8 h-8 text-primary" strokeWidth={3} />
+                                        <span className="text-5xl font-black text-foreground tracking-tight">{result.estimatedFare.toLocaleString()}</span>
+                                        <span className="text-sm text-muted-foreground self-end mb-2 font-medium">approx</span>
                                     </div>
-                                    <p className="text-sm text-muted-foreground mt-2 flex items-center gap-1">
-                                        <Car className="w-3 h-3" strokeWidth={2} />
-                                        {result.vehicle} • {result.distanceKm} km
-                                    </p>
+                                    <div className="mt-3 flex items-center gap-2 text-sm font-medium text-muted-foreground bg-background/40 w-fit px-3 py-1 rounded-full border border-border/50">
+                                        <Car className="w-4 h-4 text-primary/80" strokeWidth={2.5} />
+                                        <span>{result.vehicle}</span>
+                                        <span className="w-1 h-1 bg-border rounded-full" />
+                                        <span>{result.distanceKm} km</span>
+                                    </div>
                                 </div>
-                                <div className="bg-white/60 p-4 rounded-lg border border-green-100/50 shadow-sm">
-                                    <p className="text-xs font-bold text-green-800 uppercase mb-2">Breakdown</p>
-                                    <p className="text-sm text-foreground/80 leading-relaxed">{result.breakdown}</p>
+                                <div className="bg-muted/40 p-5 rounded-xl border border-border/50 shadow-inner backdrop-blur-sm">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Rate Breakdown</p>
+                                    </div>
+                                    <p className="text-base text-foreground/90 font-medium">{result.breakdown}</p>
                                 </div>
                             </div>
                             <div className="mt-6 flex justify-end">
-                                <Button asChild variant="outline" className="text-green-700 border-green-200 hover:bg-green-100 hover:text-green-800 gap-2 cursor-pointer">
+                                <Button asChild variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 cursor-pointer shadow-md">
                                     <a
                                         href={`https://wa.me/917832989320?text=${encodeURIComponent(`Hi Destiny Tours, I want to book a taxi.\n\n📍 Trip: ${form.getValues('from')} ➝ ${form.getValues('to')}\n🚗 Vehicle: ${result.vehicle}\n💰 Est. Fare: ₹${result.estimatedFare}\n\nPlease confirm availability.`)}`}
                                         target="_blank"
@@ -189,6 +188,6 @@ export default function FareEstimator() {
                     )}
                 </AnimatePresence>
             </CardContent>
-        </Card>
+        </Card >
     );
 }
