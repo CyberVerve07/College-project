@@ -12,7 +12,7 @@ const facts = [
     {
         title: "Land of Gods",
         description: "Himachal is known as 'Dev Bhoomi' due to its mention in ancient Hindu texts and abundance of temples.",
-        icon: <Sparkles className="h-6 w-6 text-yellow-400" />
+        icon: <Sparkles className="h-6 w-6 text-secondary" />
     },
     {
         title: "Fruit Bowl of India",
@@ -22,12 +22,12 @@ const facts = [
     {
         title: "Eco-Friendly State",
         description: "Himachal Pradesh was the first state in India to ban the production, storage, and use of plastic bags.",
-        icon: <div className="text-green-500 font-bold text-xl">♻️</div>
+        icon: <div className="text-secondary font-bold text-xl">♻️</div>
     },
     {
         title: "World's Highest Post Office",
         description: "Hikkim, a village in Spiti Valley, houses the world's highest post office at 14,400 ft.",
-        icon: <div className="text-blue-500 font-bold text-xl">📮</div>
+        icon: <div className="text-primary font-bold text-xl">📮</div>
     }
 ];
 
@@ -97,9 +97,9 @@ const cultureInsights = [
     {
         category: "Production",
         title: "Apple State",
-        icon: <Wheat className="h-4 w-4 text-amber-500" />,
+        icon: <Wheat className="h-4 w-4 text-primary" />,
         content: "Himachal is famous for its apples, especially in Shimla and Kinnaur. It also produces large quantities of maize, wheat, and wool.",
-        color: "bg-amber-100 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300"
+        color: "bg-primary/10 text-primary"
     },
     {
         category: "Languages",
@@ -134,7 +134,7 @@ export default function DiscoverHimachal() {
     const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
     return (
-        <div ref={containerRef} className="min-h-screen bg-background overflow-hidden font-sans">
+        <div ref={containerRef} className="min-h-screen overflow-hidden font-sans">
 
             {/* --- HERO SECTION --- */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -166,15 +166,15 @@ export default function DiscoverHimachal() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-6xl md:text-8xl font-black text-white tracking-tighter drop-shadow-2xl font-headline"
+                        className="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl font-headline"
                     >
-                        The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Himachal</span>
+                        The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">Himachal</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
+                        className="text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed"
                     >
                         Beyond the snow-capped peaks lies a land of ancient gods, vibrant culture, and flavors that warm the heart.
                     </motion.p>
@@ -191,7 +191,7 @@ export default function DiscoverHimachal() {
                         whileInView={{ opacity: 1, x: 0 }}
                         className="mb-16"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold font-headline mb-4">Did You Know? <span className="text-primary">.</span></h2>
+                        <h2 className="text-4xl md:text-6xl font-bold font-headline mb-4">Did You Know? <span className="text-primary">.</span></h2>
                         <p className="text-muted-foreground text-lg max-w-xl">Fascinating insights about the land of snow that make it truly unique.</p>
                     </motion.div>
 
@@ -217,11 +217,11 @@ export default function DiscoverHimachal() {
             </section>
 
             {/* --- CULTURE & INSIGHTS --- */}
-            <section className="py-24 bg-gradient-to-b from-background to-slate-50 dark:to-slate-900/50 relative">
+            <section className="py-24 relative">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
                         <span className="text-primary font-bold tracking-widest uppercase text-sm">Tradition & Nature</span>
-                        <h2 className="text-4xl md:text-5xl font-bold mt-2 font-headline">Culture & Climate</h2>
+                        <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Culture & Climate</h2>
                         <div className="w-24 h-1 bg-primary/50 mx-auto mt-6 rounded-full" />
                     </div>
 
@@ -278,12 +278,12 @@ export default function DiscoverHimachal() {
             </section>
 
             {/* --- DIVINE DESTINATIONS (TEMPLES) --- */}
-            <section className="py-24 bg-slate-50 dark:bg-slate-950/50">
+            <section className="py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex justify-between items-end mb-12">
                         <div>
                             <span className="text-primary font-bold tracking-widest uppercase text-sm">Spiritual Journey</span>
-                            <h2 className="text-4xl md:text-5xl font-bold mt-2 font-headline">Divine Destinations</h2>
+                            <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Divine Destinations</h2>
                         </div>
                     </div>
 
@@ -328,7 +328,7 @@ export default function DiscoverHimachal() {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                         <div>
-                            <h2 className="text-4xl md:text-5xl font-bold font-headline mb-4">A Taste of <span className="text-primary">Mountains</span></h2>
+                            <h2 className="text-4xl md:text-6xl font-bold font-headline mb-4">A Taste of <span className="text-primary">Mountains</span></h2>
                             <p className="text-lg text-muted-foreground">Flavors derived from the crisp air and rich traditions.</p>
                         </div>
                         <Utensils className="h-12 w-12 text-muted-foreground/20 hidden md:block" />

@@ -6,7 +6,7 @@ import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen py-20 bg-gradient-to-b from-slate-50 to-blue-50 dark:from-slate-950 dark:to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen py-20 relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -16,10 +16,10 @@ export default function ContactPage() {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-bold text-sm uppercase tracking-wider mb-4">
             <Sparkles className="w-4 h-4" strokeWidth={2} /> 24/7 Support Available
           </div>
-          <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 drop-shadow-sm">
+          <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary via-teal-500 to-secondary drop-shadow-sm">
             Get in Touch
           </h1>
-          <p className="max-w-3xl mx-auto text-xl md:text-2xl text-muted-foreground font-medium leading-relaxed">
+          <p className="max-w-3xl mx-auto text-base md:text-lg text-muted-foreground font-medium leading-relaxed">
             Ready for your Himalayan adventure?
             <br />
             <span className="text-foreground font-bold">For the best and lowest prices</span>, contact us directly!
@@ -29,11 +29,11 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Info Card */}
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/20 dark:border-white/10 flex flex-col h-full relative overflow-hidden group hover:shadow-primary/10 transition-all duration-500">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-teal-500 to-secondary" />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             <div>
-              <h2 className="text-3xl font-bold font-headline mb-6">Contact Information</h2>
+              <h2 className="text-4xl md:text-6xl font-bold font-headline mb-6">Contact Information</h2>
               <p className="text-muted-foreground">Reach out to us through any of these channels.</p>
             </div>
 
@@ -60,13 +60,13 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start gap-6 group/item">
-                <div className="w-14 h-14 rounded-2xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                  <Mail className="w-7 h-7 text-orange-500" strokeWidth={2} />
+                <div className="w-14 h-14 rounded-2xl bg-secondary/10 dark:bg-secondary/20 flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300">
+                  <Mail className="w-7 h-7 text-secondary" strokeWidth={2} />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-1">Email</h3>
                   <p className="text-muted-foreground mb-1">For customized itineraries:</p>
-                  <a href={`mailto:${siteConfig.contact.email}`} className="text-lg font-medium hover:text-orange-500 transition-colors">{siteConfig.contact.email}</a>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="text-lg font-medium hover:text-secondary transition-colors">{siteConfig.contact.email}</a>
                 </div>
               </div>
 
@@ -87,8 +87,8 @@ export default function ContactPage() {
 
           {/* Form Card */}
           <div className="bg-white dark:bg-slate-900 p-10 rounded-3xl shadow-2xl border border-primary/10 relative overflow-hidden h-full flex flex-col">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-purple-500 to-pink-500" />
-            <h2 className="text-3xl font-bold font-headline mb-8">Send a Message</h2>
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary via-teal-500 to-secondary" />
+            <h2 className="text-4xl md:text-6xl font-bold font-headline mb-8">Send a Message</h2>
             <div className="flex-1">
               <ContactForm />
             </div>

@@ -46,15 +46,15 @@ export default function Home() {
   const heroImage = PlaceHolderImagesMap.get('hero');
 
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-mesh">
+    <div className="flex flex-col min-h-[100dvh]">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Featured Destinations */}
       <section id="destinations" className="py-8 md:py-16 relative">
         <div className="container px-6 md:px-8 text-center mb-6 md:mb-10">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-headline tracking-tight mb-3 md:mb-5 text-white" style={{ textShadow: '0 0 60px rgba(251, 146, 60, 0.6), 0 4px 20px rgba(0,0,0,0.8)' }}>Legendary Destinations</h2>
-          <p className="text-base md:text-xl text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
+          <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tight mb-3 md:mb-5 text-white" style={{ textShadow: '0 0 60px hsla(200, 85%, 35%, 0.6), 0 4px 20px rgba(0,0,0,0.8)' }}>Legendary Destinations</h2>
+          <p className="text-base md:text-lg text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
         </div>
 
         <div className="container px-4 md:px-6">
@@ -105,8 +105,8 @@ export default function Home() {
       {/* Services Section */}
       <section id="services-overview" className="bg-muted py-16 md:py-32 text-foreground rounded-[2.5rem] md:rounded-[4rem] mx-4 md:mx-8">
         <div className="container px-4 md:px-6 text-center mb-12 md:mb-24">
-          <h2 className="text-4xl md:text-7xl font-black font-headline tracking-tighter mb-4 md:mb-6">Our Premium Fleet</h2>
-          <p className="text-lg md:text-xl opacity-60 max-w-2xl mx-auto">Reliable, well-maintained vehicles for a safe and comfortable journey.</p>
+          <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 md:mb-6">Our Premium Fleet</h2>
+          <p className="text-base md:text-lg opacity-60 max-w-2xl mx-auto">Reliable, well-maintained vehicles for a safe and comfortable journey.</p>
         </div>
 
         <div className="container px-4 md:px-6">
@@ -126,7 +126,7 @@ export default function Home() {
                       />
                     ) : (
                       <div className="bg-primary/20 w-full h-full flex items-center justify-center rounded-full">
-                        <service.icon className="w-16 h-16 md:w-20 md:h-20 text-orange-500" strokeWidth={2} />
+                        <service.icon className="w-16 h-16 md:w-20 md:h-20 text-primary" strokeWidth={2} />
                       </div>
                     )}
                   </div>
@@ -145,8 +145,8 @@ export default function Home() {
       {/* Gallery Section */}
       <section id="gallery" className="py-16 md:py-32">
         <div className="container px-4 md:px-6 text-center mb-10 md:mb-20">
-          <h2 className="text-4xl md:text-7xl font-black font-headline tracking-tighter mb-4 text-orange-400" style={{ textShadow: '0 0 50px rgba(251, 146, 60, 0.5)' }}>Visual Overdose</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
+          <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 text-primary" style={{ textShadow: '0 0 50px hsla(200, 85%, 35%, 0.5)' }}>Visual Overdose</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
         </div>
         <div className="container px-4 md:px-6 columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-10 space-y-6 md:space-y-10">
           {PlaceHolderImages.filter(img => img.id.startsWith('dest-')).map((img: ImagePlaceholder) => (
@@ -170,14 +170,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Prompt */}
-      <section className="py-20 md:py-40 bg-gradient-to-br from-orange-600 via-red-600 to-red-800 text-white text-center rounded-t-[2.5rem] md:rounded-t-[5rem] mx-4 md:mx-8">
-        <div className="container px-4 md:px-6">
+      <section className="py-20 md:py-40 bg-mesh text-white text-center rounded-t-[2.5rem] md:rounded-t-[5rem] mx-4 md:mx-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-primary/20 backdrop-blur-3xl" />
+        <div className="container px-4 md:px-6 relative z-10">
           <h2 className="text-4xl md:text-6xl lg:text-9xl font-black font-headline mb-6 md:mb-10 tracking-tighter animate-pulse">DON'T SETTLE</h2>
           <p className="text-lg md:text-2xl mb-10 md:mb-16 opacity-80 max-w-3xl mx-auto font-bold uppercase tracking-widest leading-relaxed">
             While others take you to destinations, we take you to experiences. Book the ride of your life.
           </p>
-          <Button asChild size="lg" variant="secondary" className="h-16 md:h-24 px-10 md:px-16 text-xl md:text-3xl font-black rounded-[1.5rem] md:rounded-[2rem] bg-white text-blue-700 hover:bg-black hover:text-white transition-all shadow-2xl hover:scale-110 active:scale-95">
+          <Button asChild size="lg" variant="secondary" className="h-16 md:h-24 px-10 md:px-16 text-xl md:text-3xl font-black rounded-[1.5rem] md:rounded-[2rem] bg-white text-primary hover:bg-black hover:text-white transition-all shadow-2xl hover:scale-110 active:scale-95">
             <Link href="/contact">LOCK THE TRIP</Link>
           </Button>
         </div>

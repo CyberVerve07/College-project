@@ -4,52 +4,69 @@
 
 @layer base {
   :root {
-    --background: 30 50% 98%;
-    --foreground: 30 60% 10%;
+    --background: 210 40% 98%;
+    /* Cool White/Mist */
+    --foreground: 222 47% 11%;
+    /* Deep Navy */
+
     --card: 0 0% 100%;
-    --card-foreground: 30 60% 10%;
+    --card-foreground: 222 47% 11%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 30 60% 10%;
-    --primary: 24 90% 55%;
-    /* Vibrant Orange */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 8 85% 55%;
-    /* Deep Red */
-    --secondary-foreground: 0 0% 100%;
-    --muted: 30 20% 96%;
-    --muted-foreground: 30 10% 40%;
-    --accent: 38 95% 60%;
-    /* Amber/Gold */
-    --accent-foreground: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 200 85% 35%;
+    /* Deep Cerulean Blue - Trust/Calm */
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 35 95% 50%;
+    /* Golden Amber - Warmth/Spirituality */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 150 60% 40%;
+    /* Pine Green - Nature */
+    --accent-foreground: 210 40% 98%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 30 30% 90%;
-    --input: 30 30% 90%;
-    --ring: 24 90% 55%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 200 85% 35%;
+
     --radius: 1rem;
   }
 
   .dark {
-    --background: 30 50% 4%;
-    --foreground: 30 20% 98%;
-    --card: 30 50% 6%;
-    --card-foreground: 30 20% 98%;
-    --popover: 30 50% 4%;
-    --popover-foreground: 30 20% 98%;
-    --primary: 24 95% 60%;
-    /* Vibrant Orange */
-    --primary-foreground: 30 10% 4%;
-    --secondary: 8 90% 58%;
-    /* Deep Red/Crimson */
-    --secondary-foreground: 30 10% 4%;
-    --muted: 30 30% 15%;
-    --muted-foreground: 30 10% 60%;
-    --accent: 38 90% 65%;
-    /* Amber */
-    --accent-foreground: 0 0% 100%;
-    --border: 30 30% 15%;
-    --input: 30 30% 15%;
-    --ring: 24 95% 60%;
+    --background: 222 47% 11%;
+    /* Deep Navy */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 200 85% 45%;
+    /* Slightly lighter blue */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 35 95% 55%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 150 60% 45%;
+    --accent-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 200 85% 45%;
   }
 }
 
@@ -59,19 +76,34 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground bg-mesh selection:bg-secondary/30 selection:text-secondary-foreground;
+    background-attachment: fixed;
+  }
+
+  h1 {
+    @apply text-5xl md:text-7xl font-black font-headline tracking-tight;
+  }
+
+  h2 {
+    @apply text-4xl md:text-6xl font-bold font-headline tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-bold font-headline;
+  }
+
+  p {
+    @apply text-base md:text-lg leading-relaxed;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-lg;
   }
 
   .glass-dark {
-    @apply bg-black/40 backdrop-blur-lg border border-white/10;
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.8);
+    @apply bg-black/40 backdrop-blur-lg border border-white/10 shadow-lg;
   }
 
   .text-glow {
@@ -80,23 +112,18 @@
 
   .bg-mesh {
     background-image:
-      radial-gradient(at 0% 0%, hsla(24, 90%, 55%, 0.2) 0, transparent 50%),
-      radial-gradient(at 100% 0%, hsla(8, 85%, 55%, 0.15) 0, transparent 50%),
-      radial-gradient(at 50% 100%, hsla(38, 95%, 60%, 0.1) 0, transparent 50%);
-    background-attachment: fixed;
+      radial-gradient(at 0% 0%, hsla(200, 85%, 35%, 0.15) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(35, 95%, 50%, 0.1) 0, transparent 50%),
+      radial-gradient(at 50% 100%, hsla(150, 60%, 40%, 0.05) 0, transparent 50%);
   }
 
   .neon-border {
     @apply border-primary/50;
-    box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+    box-shadow: 0 0 15px hsla(200, 85%, 35%, 0.3);
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-red-500 to-amber-500 font-extrabold;
-  }
-
-  .glow-on-hover {
-    @apply transition-all duration-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-500 to-secondary font-extrabold;
   }
 
   .glow-on-hover:hover {

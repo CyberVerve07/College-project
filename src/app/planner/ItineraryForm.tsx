@@ -192,7 +192,7 @@ export default memo(function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Your Budget (INR)</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 50000" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-purple-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 50000" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -205,7 +205,7 @@ export default memo(function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of Days</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 5" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-pink-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(236,72,153,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 5" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-secondary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(35,95%,50%,0.3)] transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -218,7 +218,7 @@ export default memo(function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of People</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 2" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-blue-500 focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 2" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-accent focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(150,60%,40%,0.3)] transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -227,14 +227,14 @@ export default memo(function ItineraryForm() {
           </div>
 
           <div className="p-6 rounded-3xl bg-secondary/5 border border-secondary/10 backdrop-blur-sm shadow-inner overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5 opacity-50 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50 pointer-events-none" />
             <FormField
               control={form.control}
               name="destinations"
               render={({ field }) => (
                 <FormItem>
                   <div className="mb-6 relative z-10">
-                    <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+                    <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
                       Select Your Dream Destinations
                     </FormLabel>
                     <FormDescription>
@@ -245,13 +245,13 @@ export default memo(function ItineraryForm() {
                     {memoizedDestinations.map((item) => (
                       <FormItem
                         key={item.id}
-                        className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-purple-200/50"
+                        className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-primary/50"
                       >
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => handleDestinationChange(field, item.id, !!checked)}
-                            className="data-[state=checked]:bg-purple-600 data-[state=checked]:border-purple-600"
+                            className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                           />
                         </FormControl>
                         <FormLabel className="font-medium cursor-pointer flex-1 text-sm">
@@ -274,7 +274,7 @@ export default memo(function ItineraryForm() {
                 <FormLabel className="text-lg font-semibold">Preferred Ride</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="h-12 rounded-xl border-purple-200/50 bg-white/50 backdrop-blur focus:ring-purple-500">
+                    <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
                       <SelectValue placeholder="Select a preferred vehicle type" />
                     </SelectTrigger>
                   </FormControl>
@@ -291,7 +291,7 @@ export default memo(function ItineraryForm() {
 
           <Button
             type="submit"
-            className="w-full h-16 text-xl font-black rounded-2xl text-white shadow-2xl transition-all active:scale-95 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:opacity-90 shadow-purple-500/30"
+            className="w-full h-16 text-xl font-black rounded-2xl text-white shadow-2xl transition-all active:scale-95 bg-gradient-to-r from-primary via-teal-500 to-secondary hover:opacity-90 shadow-primary/30"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -301,7 +301,7 @@ export default memo(function ItineraryForm() {
               </>
             ) : (
               <>
-                <Sparkles className="mr-3 h-6 w-6 fill-yellow-300 text-yellow-300" strokeWidth={2} />
+                <Sparkles className="mr-3 h-6 w-6 fill-secondary text-secondary" strokeWidth={2} />
                 Generate My Dream Trip
               </>
             )}

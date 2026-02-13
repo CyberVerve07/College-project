@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Our Fleet</h3>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-secondary">Our Fleet</h3>
           <ul className="space-y-4">
             {[
               { name: 'Innova Crysta', type: 'Premium SUV' },
