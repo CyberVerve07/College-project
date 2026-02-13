@@ -68,7 +68,7 @@ export default function HeroSection() {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="flex items-center gap-3 text-secondary font-bold tracking-widest uppercase text-sm mb-6"
+                        className="flex items-center gap-3 text-cyan-400 font-bold tracking-widest uppercase text-sm mb-6"
                     >
                         <span className="text-xl">🏔️</span>
                         <span>Ready for the mountains?</span>
@@ -81,7 +81,7 @@ export default function HeroSection() {
                         className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6"
                     >
                         Don&apos;t Just Visit, <br />
-                        <span className="text-secondary font-black">
+                        <span className="text-cyan-400 font-black">
                             Live Himachal
                         </span>
                     </motion.h1>
@@ -128,7 +128,7 @@ export default function HeroSection() {
                             <div className="flex justify-between items-start mb-8">
                                 <span className="text-5xl font-black text-white/20">01</span>
                                 <div className="bg-white/10 p-3 rounded-full group-hover:bg-white/20 transition-colors">
-                                    <ArrowRight className="text-secondary w-8 h-8 -rotate-45" strokeWidth={2.5} />
+                                    <ArrowRight className="text-cyan-400 w-8 h-8 -rotate-45" strokeWidth={2.5} />
                                 </div>
                             </div>
                             <h3 className="text-3xl font-bold text-white mb-2">Manali <br /> Adventures</h3>

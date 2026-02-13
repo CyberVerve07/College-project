@@ -12,7 +12,7 @@ const facts = [
     {
         title: "Land of Gods",
         description: "Himachal is known as 'Dev Bhoomi' due to its mention in ancient Hindu texts and abundance of temples.",
-        icon: <Sparkles className="h-6 w-6 text-secondary" />
+        icon: <Sparkles className="h-6 w-6 text-cyan-400" />
     },
     {
         title: "Fruit Bowl of India",
@@ -22,7 +22,7 @@ const facts = [
     {
         title: "Eco-Friendly State",
         description: "Himachal Pradesh was the first state in India to ban the production, storage, and use of plastic bags.",
-        icon: <div className="text-secondary font-bold text-xl">♻️</div>
+        icon: <div className="text-cyan-400 font-bold text-xl">♻️</div>
     },
     {
         title: "World's Highest Post Office",
@@ -168,7 +168,7 @@ export default function DiscoverHimachal() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl font-headline"
                     >
-                        The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">Himachal</span>
+                        The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-primary">Himachal</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
@@ -203,12 +203,12 @@ export default function DiscoverHimachal() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
                                 whileHover={{ y: -10 }}
-                                className="p-6 rounded-3xl bg-secondary/30 border border-secondary hover:bg-secondary/50 transition-all duration-300 group cursor-pointer"
+                                className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group cursor-pointer"
                             >
                                 <div className="mb-4 bg-background w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                                     {fact.icon}
                                 </div>
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{fact.title}</h3>
+                                <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">{fact.title}</h3>
                                 <p className="text-muted-foreground text-sm leading-relaxed">{fact.description}</p>
                             </motion.div>
                         ))}

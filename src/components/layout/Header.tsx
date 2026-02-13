@@ -23,13 +23,13 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/90 backdrop-blur-xl transition-all duration-300 shadow-xl">
-      <div className="container flex h-20 items-center px-6 md:px-10">
+      <div className="container flex h-20 items-center justify-between px-6 md:px-10">
         <Link href="/" className="flex items-center space-x-3 group">
           <span className="font-extrabold text-3xl tracking-tight text-white drop-shadow-lg">
             Destiny <span className="text-primary italic font-black">Tour</span> & Travels
           </span>
         </Link>
-        <nav className="ml-auto hidden md:flex gap-10 items-center">
+        <nav className="hidden lg:flex gap-8 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -55,7 +55,7 @@ export default function Header() {
         </nav>
 
         {/* Mobile Nav */}
-        <div className="md:hidden ml-auto">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="hover:bg-primary/10">
