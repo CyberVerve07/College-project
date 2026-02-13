@@ -1,122 +1,288 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
+import { useLoadScript, Autocomplete } from '@react-google-maps/api';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { Car, MapPin, Info, Loader2, AlertCircle } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { estimateFare } from '@/app/actions/ai';
-import { Loader2, MapPin, Calculator, IndianRupee, Car } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from '@/components/ui/card';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
+// Libraries for Google Maps
+const libraries: ("places" | "drawing" | "geometry" | "localContext" | "visualization")[] = ["places"];
 
 const formSchema = z.object({
-    from: z.string().min(2, { message: 'Pickup location is required' }),
-    to: z.string().min(2, { message: 'Destination is required' }),
-    distance: z.string().min(1, { message: 'Distance is required' }),
+    pickup: z.string().min(2, {
+        message: 'Pickup location must be at least 2 characters.',
+    }),
+    drop: z.string().min(2, {
+        message: 'Drop location must be at least 2 characters.',
+    }),
+    vehicleType: z.string({
+        required_error: 'Please select a vehicle type.',
+    }),
 });
 
+// Vehicle rates per km (approximate) - ADJUST THESE AS NEEDED
+const VEHICLE_RATES = {
+    sedan: 14,
+    suv: 18,
+    innova: 22,
+    tempo: 28,
+};
+
 export default function FareEstimator() {
-    const [result, setResult] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [distance, setDistance] = useState<string | null>(null);
+    const [duration, setDuration] = useState<string | null>(null);
+    const [fare, setFare] = useState<number | null>(null);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+    // Load Google Maps Script
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+        libraries,
+    });
+
+    const [pickupAutocomplete, setPickupAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
+    const [dropAutocomplete, setDropAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            from: '',
-            to: '',
-            distance: '',
+            pickup: '',
+            drop: '',
+            vehicleType: 'sedan',
         },
     });
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        setIsLoading(true);
-        setError(null);
-        setResult(null);
+    const onPickupLoad = (autocomplete: google.maps.places.Autocomplete) => {
+        setPickupAutocomplete(autocomplete);
+    };
 
-        const response = await estimateFare(values);
+    const onDropLoad = (autocomplete: google.maps.places.Autocomplete) => {
+        setDropAutocomplete(autocomplete);
+    };
 
-        if (response.success) {
-            setResult(response.data);
-        } else {
-            setError(response.error as string);
+    const onPickupPlaceChanged = () => {
+        if (pickupAutocomplete !== null) {
+            const place = pickupAutocomplete.getPlace();
+            if (place.formatted_address) {
+                form.setValue('pickup', place.formatted_address);
+            }
         }
-        setIsLoading(false);
+    };
+
+    const onDropPlaceChanged = () => {
+        if (dropAutocomplete !== null) {
+            const place = dropAutocomplete.getPlace();
+            if (place.formatted_address) {
+                form.setValue('drop', place.formatted_address);
+            }
+        }
+    };
+
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setLoading(true);
+        setError(null);
+        setFare(null);
+        setDistance(null);
+        setDuration(null);
+
+        if (!isLoaded) {
+            setError("Google Maps API is not loaded yet.");
+            setLoading(false);
+            return;
+        }
+
+        const directionsService = new google.maps.DirectionsService();
+
+        directionsService.route(
+            {
+                origin: values.pickup,
+                destination: values.drop,
+                travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (result, status) => {
+                setLoading(false);
+                if (status === google.maps.DirectionsStatus.OK && result) {
+                    const route = result.routes[0];
+                    if (route && route.legs && route.legs[0]) {
+                        const leg = route.legs[0];
+                        const distText = leg.distance?.text || "";
+                        const distValue = leg.distance?.value || 0; // meters
+                        const durText = leg.duration?.text || "";
+
+                        setDistance(distText);
+                        setDuration(durText);
+
+                        // Calculate Fare
+                        const distKm = distValue / 1000;
+                        const rate = VEHICLE_RATES[values.vehicleType as keyof typeof VEHICLE_RATES];
+                        // Simple calculation: Base fare + (distance * rate)
+                        // Adding a base fare of 500 for intercity
+                        const estimatedFare = Math.round(500 + (distKm * rate));
+                        setFare(estimatedFare);
+                    }
+                } else {
+                    console.error(`error fetching directions ${result}`);
+                    if (status === 'ZERO_RESULTS') {
+                        setError("No route could be found between the origin and destination.");
+                    } else if (status === 'NOT_FOUND') {
+                        setError("At least one of the locations could not be geocoded.");
+                    }
+                    else {
+                        setError(`Could not calculate distance. Error: ${status}. Please check API Key configuration.`);
+                    }
+                }
+            }
+        );
+    }
+
+    if (loadError) {
+        return (
+            <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                    Error loading Google Maps API. Please check your API key.
+                </AlertDescription>
+            </Alert>
+        )
+    }
+
+    if (!isLoaded) {
+        return (
+            <div className="flex justify-center p-8">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        )
     }
 
     return (
-        <Card className="w-full max-w-3xl mx-auto shadow-xl border-primary/10 overflow-hidden">
-            <CardHeader className="bg-primary/5 border-b">
-                <div className="flex items-center gap-3">
-                    <div className="p-2 bg-primary/10 rounded-full">
-                        <Calculator className="w-6 h-6 text-primary" strokeWidth={2} />
-                    </div>
-                    <div>
-                        <CardTitle>Instant Fare Estimator</CardTitle>
-                        <CardDescription>Get a quick quote for your journey in Himachal.</CardDescription>
-                    </div>
-                </div>
+        <Card className="w-full max-w-md mx-auto shadow-lg border-primary/20 bg-background/95 backdrop-blur-sm">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-2xl text-primary">
+                    <Car className="h-6 w-6" />
+                    Fare Estimator
+                </CardTitle>
+                <CardDescription>
+                    Get an instant fare estimate for your journey.
+                    <br />
+                    <span className="text-xs text-muted-foreground">(Powered by Google Maps)</span>
+                </CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                        <div className="grid md:grid-cols-3 gap-4">
-                            <FormField
-                                control={form.control}
-                                name="from"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Pickup</FormLabel>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+
+                        <FormField
+                            control={form.control}
+                            name="pickup"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Pickup Location</FormLabel>
+                                    <Autocomplete
+                                        onLoad={onPickupLoad}
+                                        onPlaceChanged={onPickupPlaceChanged}
+                                    >
                                         <FormControl>
                                             <div className="relative">
-                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
-                                                <Input placeholder="e.g. Kangra Airport" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
+                                                <MapPin className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                                <Input placeholder="Enter pickup location" className="pl-9" {...field} />
                                             </div>
                                         </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="to"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Drop</FormLabel>
+                                    </Autocomplete>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="drop"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Drop Location</FormLabel>
+                                    <Autocomplete
+                                        onLoad={onDropLoad}
+                                        onPlaceChanged={onDropPlaceChanged}
+                                    >
                                         <FormControl>
                                             <div className="relative">
-                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
-                                                <Input placeholder="e.g. McLeod Ganj" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
+                                                <MapPin className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                                <Input placeholder="Enter drop location" className="pl-9" {...field} />
                                             </div>
                                         </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="distance"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Distance (km)</FormLabel>
+                                    </Autocomplete>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="vehicleType"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Vehicle Type</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
-                                            <div className="relative">
-                                                <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" strokeWidth={2} />
-                                                <Input type="number" placeholder="e.g. 50" className="pl-9 bg-background/50 border-input/50 focus:border-primary focus:ring-primary/20 transition-all font-medium" {...field} />
-                                            </div>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a vehicle" />
+                                            </SelectTrigger>
                                         </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <Button type="submit" className="w-full h-12 text-lg font-bold bg-primary hover:bg-primary/90 transition-all shadow-md" disabled={isLoading}>
-                            {isLoading ? (
+                                        <SelectContent>
+                                            <SelectItem value="sedan">Sedan (Dzire/Etios)</SelectItem>
+                                            <SelectItem value="suv">SUV (Innova/Ertiga)</SelectItem>
+                                            <SelectItem value="innova">Innova Crysta</SelectItem>
+                                            <SelectItem value="tempo">Tempo Traveller</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {error && (
+                            <Alert variant="destructive">
+                                <AlertCircle className="h-4 w-4" />
+                                <AlertTitle>Error</AlertTitle>
+                                <AlertDescription>{error}</AlertDescription>
+                            </Alert>
+                        )}
+
+                        <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={loading}>
+                            {loading ? (
                                 <>
-                                    <Loader2 className="mr-2 h-5 w-5 animate-spin" strokeWidth={2.5} />
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                     Calculating...
                                 </>
                             ) : (
@@ -125,69 +291,35 @@ export default function FareEstimator() {
                         </Button>
                     </form>
                 </Form>
-
-                <AnimatePresence>
-                    {error && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="mt-6 p-4 bg-destructive/10 text-destructive rounded-lg text-center"
-                        >
-                            {error}
-                        </motion.div>
-                    )}
-
-                    {result && (
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="mt-8 bg-gradient-to-br from-card to-muted/30 border border-primary/20 rounded-xl p-6 relative overflow-hidden shadow-xl"
-                        >
-                            <div className="absolute top-0 right-0 p-4 opacity-5 dark:opacity-[0.03]">
-                                <IndianRupee className="w-40 h-40 text-primary" strokeWidth={1} />
-                            </div>
-
-                            <div className="relative z-10 grid md:grid-cols-2 gap-6 items-center">
-                                <div>
-                                    <p className="text-sm text-muted-foreground uppercase tracking-wider font-bold mb-1">Estimated Fare</p>
-                                    <div className="flex items-center gap-1">
-                                        <IndianRupee className="w-8 h-8 text-primary" strokeWidth={3} />
-                                        <span className="text-5xl font-black text-foreground tracking-tight">{result.estimatedFare.toLocaleString()}</span>
-                                        <span className="text-sm text-muted-foreground self-end mb-2 font-medium">approx</span>
-                                    </div>
-                                    <div className="mt-3 flex items-center gap-2 text-sm font-medium text-muted-foreground bg-background/40 w-fit px-3 py-1 rounded-full border border-border/50">
-                                        <Car className="w-4 h-4 text-primary/80" strokeWidth={2.5} />
-                                        <span>{result.vehicle}</span>
-                                        <span className="w-1 h-1 bg-border rounded-full" />
-                                        <span>{result.distanceKm} km</span>
-                                    </div>
-                                </div>
-                                <div className="bg-muted/40 p-5 rounded-xl border border-border/50 shadow-inner backdrop-blur-sm">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Rate Breakdown</p>
-                                    </div>
-                                    <p className="text-base text-foreground/90 font-medium">{result.breakdown}</p>
-                                </div>
-                            </div>
-                            <div className="mt-6 flex justify-end">
-                                <Button asChild variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 cursor-pointer shadow-md">
-                                    <a
-                                        href={`https://wa.me/917832989320?text=${encodeURIComponent(`Hi Destiny Tours, I want to book a taxi.\n\n📍 Trip: ${form.getValues('from')} ➝ ${form.getValues('to')}\n🚗 Vehicle: ${result.vehicle}\n💰 Est. Fare: ₹${result.estimatedFare}\n\nPlease confirm availability.`)}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <IndianRupee className="w-4 h-4" strokeWidth={2.5} />
-                                        Book This Trip
-                                    </a>
-                                </Button>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
             </CardContent>
-        </Card >
+            {fare !== null && (
+                <CardFooter className="flex flex-col gap-4 bg-primary/5 border-t border-primary/10 pt-6">
+                    <div className="flex justify-between w-full text-sm">
+                        <span className="text-muted-foreground">Distance:</span>
+                        <span className="font-medium">{distance}</span>
+                    </div>
+                    <div className="flex justify-between w-full text-sm">
+                        <span className="text-muted-foreground">Duration:</span>
+                        <span className="font-medium">{duration}</span>
+                    </div>
+                    <div className="flex justify-between w-full items-center pt-2 border-t border-primary/20">
+                        <span className="font-semibold text-lg">Estimated Fare:</span>
+                        <span className="font-bold text-2xl text-primary">₹{fare.toLocaleString()}</span>
+                    </div>
+                    <div className="w-full bg-blue-50 p-3 rounded-md flex gap-2 items-start mt-2">
+                        <Info className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                        <p className="text-xs text-blue-700">
+                            This is an approximate fare. Actual fare may vary due to tolls, parking, and night charges.
+                        </p>
+                    </div>
+                    <Button className="w-full bg-green-600 hover:bg-green-700 text-white" onClick={() => {
+                        const text = `Hi, I want to book a cab from ${form.getValues('pickup')} to ${form.getValues('drop')}. Estimated fare is ₹${fare}.`;
+                        window.open(`https://wa.me/919876543210?text=${encodeURIComponent(text)}`, '_blank');
+                    }}>
+                        Book via WhatsApp
+                    </Button>
+                </CardFooter>
+            )}
+        </Card>
     );
 }
