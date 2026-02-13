@@ -1,9 +1,11 @@
 'use client';
 
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
+import { Sparkles, Send } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -96,11 +98,15 @@ export default function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel className="text-base font-semibold text-foreground/80 pl-1">Full Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input
+                  placeholder="John Doe"
+                  {...field}
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="pl-1" />
             </FormItem>
           )}
         />
@@ -109,11 +115,15 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel className="text-base font-semibold text-foreground/80 pl-1">Email Address</FormLabel>
               <FormControl>
-                <Input placeholder="you@example.com" {...field} />
+                <Input
+                  placeholder="you@example.com"
+                  {...field}
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="pl-1" />
             </FormItem>
           )}
         />
@@ -122,11 +132,15 @@ export default function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel className="text-base font-semibold text-foreground/80 pl-1">Subject</FormLabel>
               <FormControl>
-                <Input placeholder="Booking Inquiry" {...field} />
+                <Input
+                  placeholder="Booking Inquiry"
+                  {...field}
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="pl-1" />
             </FormItem>
           )}
         />
@@ -135,20 +149,32 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your Message</FormLabel>
+              <FormLabel className="text-base font-semibold text-foreground/80 pl-1">Your Message</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Tell us how we can help you..."
-                  className="min-h-[120px]"
+                  className="min-h-[160px] p-6 rounded-3xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg resize-none"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="pl-1" />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isSubmitting || !firestore}>
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+        <Button
+          type="submit"
+          className="w-full h-16 rounded-2xl text-xl font-bold bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300"
+          disabled={isSubmitting || !firestore}
+        >
+          {isSubmitting ? (
+            <span className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 animate-spin" /> Sending...
+            </span>
+          ) : (
+            <span className="flex items-center gap-2">
+              Send Message <Send className="w-5 h-5 ml-1" />
+            </span>
+          )}
         </Button>
       </form>
     </Form>
