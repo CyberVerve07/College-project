@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Phone } from 'lucide-react';
 import { siteConfig } from '@/lib/config';
