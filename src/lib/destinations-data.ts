@@ -77,7 +77,7 @@ export const initialDestinations = [
   {
     name: 'Baglamukhi Temple',
     description: 'A dedicated temple to Goddess Baglamukhi, believed to grant victory over enemies. A spiritual center visited by devotees from all over.',
-    imageUrl: PlaceHolderImagesMap.get('dest-baglamukhi')?.imageUrl,
+    imageUrl: 'https://searchothings.com/wp-content/uploads/2024/09/Untitled-design-22-1024x538.png',
     category: 'Spiritual & Pilgrimage',
     bestTimeToVisit: 'Year-round',
     attractions: ['Baglamukhi Temple', 'Bankhandi', 'Kangra Fort (Nearby)', 'Chintpurni Temple (Nearby)'],
