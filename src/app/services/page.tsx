@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Users, Award, CheckCircle, Navigation, Phone } from 'lucide-react';
 import { initialServices } from '@/lib/services-data';
 import { Badge } from '@/components/ui/badge';
-import FareEstimator from '@/components/services/FareEstimator';
+
 import { motion } from 'framer-motion';
 
 export default function ServicesPage() {
@@ -45,15 +45,7 @@ export default function ServicesPage() {
           </p>
         </motion.div>
 
-        {/* AI Fare Estimator */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-16"
-        >
-          <FareEstimator />
-        </motion.div>
+
 
         <motion.div
           variants={containerVariants}
