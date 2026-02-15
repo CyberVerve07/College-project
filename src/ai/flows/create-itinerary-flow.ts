@@ -38,12 +38,17 @@ Rules:
 5. Mention approximate daily expenses for each day.
 6. Do NOT book anything — only planning.
 7. Match destinations to the trip style: "${input.tripStyle}".
+8. IMPORTANT: Provide accurate Latitude and Longitude for each "Best Destination" so we can show them on a map.
 
 You MUST respond with ONLY valid JSON matching this exact structure (no markdown, no explanation, just JSON):
 
 {
   "bestDestinations": [
-    { "name": "Place Name", "reason": "Why this place suits the user" }
+    { 
+      "name": "Place Name", 
+      "reason": "Why this place suits the user",
+      "coordinates": { "lat": 32.2432, "lng": 77.1892 } 
+    }
   ],
   "itinerary": [
     {
@@ -111,7 +116,19 @@ IMPORTANT INSTRUCTIONS:
 
     // FALLBACK: Generate a basic but structured response
     const districts = HIMACHAL_KNOWLEDGE.districts;
+    // Simple logic to pick based on keywords if possible, else random
     const tripDests = districts.slice(0, Math.min(2, districts.length));
+
+    // Fallback coordinates map (approximate centers)
+    const coordMap: Record<string, { lat: number, lng: number }> = {
+      "Kullu & Manali": { lat: 32.2432, lng: 77.1892 },
+      "Shimla": { lat: 31.1048, lng: 77.1734 },
+      "Kangra & Shaktipeeths": { lat: 32.0998, lng: 76.2691 },
+      "Lahaul & Spiti": { lat: 32.2276, lng: 78.0772 },
+      "Dalhousie & Chamba": { lat: 32.5359, lng: 75.9647 },
+      "Kinnaur": { lat: 31.6510, lng: 78.4754 },
+      "Mandi & Bilaspur": { lat: 31.7082, lng: 76.9327 }
+    };
 
     const fallbackItinerary = [];
     for (let i = 0; i < input.days; i++) {
@@ -140,6 +157,7 @@ IMPORTANT INSTRUCTIONS:
       bestDestinations: tripDests.map(d => ({
         name: d.name,
         reason: `Popular for ${d.activities.slice(0, 2).join(' and ')} with beautiful scenery.`,
+        coordinates: coordMap[d.name] || { lat: 31.1048, lng: 77.1734 } // Default to Shimla if missing
       })),
       itinerary: fallbackItinerary,
       transportAdvice: [

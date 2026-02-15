@@ -9,6 +9,7 @@ export const initialDestinations = [
     category: 'Spiritual & Cultural',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['McLeod Ganj', 'Namgyal Monastery', 'Bhagsu Nag Temple', 'Dal Lake'],
+    coordinates: { lat: 32.2190, lng: 76.3234 }
   },
   {
     name: 'Manali',
@@ -17,6 +18,7 @@ export const initialDestinations = [
     category: 'Adventure & Honeymoon',
     bestTimeToVisit: 'October to June',
     attractions: ['Solang Valley', 'Rohtang Pass', 'Hadimba Temple', 'Old Manali'],
+    coordinates: { lat: 32.2432, lng: 77.1892 }
   },
   {
     name: 'Shimla',
@@ -25,6 +27,7 @@ export const initialDestinations = [
     category: 'Hill Station & Heritage',
     bestTimeToVisit: 'March to June, October to February (for snow)',
     attractions: ['The Ridge', 'Mall Road', 'Jakhoo Temple', 'Kufri'],
+    coordinates: { lat: 31.1048, lng: 77.1734 }
   },
   {
     name: 'Spiti Valley',
@@ -33,6 +36,7 @@ export const initialDestinations = [
     category: 'Adventure & Remote',
     bestTimeToVisit: 'June to September',
     attractions: ['Key Monastery', 'Chandratal Lake', 'Kaza', 'Tabo Monastery'],
+    coordinates: { lat: 32.2461, lng: 78.0349 }
   },
   {
     name: 'Kangra',
@@ -41,6 +45,7 @@ export const initialDestinations = [
     category: 'Nature & Heritage',
     bestTimeToVisit: 'September to June',
     attractions: ['Kangra Fort', 'Masroor Rock Cut Temple', 'Palampur Tea Gardens'],
+    coordinates: { lat: 32.0998, lng: 76.2691 }
   },
   {
     name: 'Bir Billing',
@@ -49,6 +54,7 @@ export const initialDestinations = [
     category: 'Adventure Sports',
     bestTimeToVisit: 'March to May, October to November',
     attractions: ['Paragliding', 'Chokling Monastery', 'Gunehar Waterfall', 'Bir Tea Factory'],
+    coordinates: { lat: 32.0463, lng: 76.7198 }
   },
   {
     name: 'Palampur',
@@ -57,6 +63,7 @@ export const initialDestinations = [
     category: 'Nature & Tea Gardens',
     bestTimeToVisit: 'September to June',
     attractions: ['Tea Gardens', 'Neugal Khad', 'Baijnath Temple', 'Saurabh Van Vihar'],
+    coordinates: { lat: 32.1109, lng: 76.5363 }
   },
   {
     name: 'Chamba',
@@ -65,6 +72,7 @@ export const initialDestinations = [
     category: 'History & Culture',
     bestTimeToVisit: 'March to June, September to December',
     attractions: ['Lakshmi Narayan Temple', 'Bhuri Singh Museum', 'Chamera Lake', 'Manimahesh'],
+    coordinates: { lat: 32.5534, lng: 76.1258 }
   },
   {
     name: 'Solan',
@@ -73,6 +81,7 @@ export const initialDestinations = [
     category: 'City & Culture',
     bestTimeToVisit: 'February to May, August to November',
     attractions: ['Shoolini Mata Temple', 'Jatoli Shiv Temple', 'Mohan Shakti Park', 'Kasauli (Nearby)'],
+    coordinates: { lat: 30.9084, lng: 77.0999 }
   },
   {
     name: 'Baglamukhi Temple',
@@ -81,6 +90,7 @@ export const initialDestinations = [
     category: 'Spiritual & Pilgrimage',
     bestTimeToVisit: 'Year-round',
     attractions: ['Baglamukhi Temple', 'Bankhandi', 'Kangra Fort (Nearby)', 'Chintpurni Temple (Nearby)'],
+    coordinates: { lat: 31.9706, lng: 76.2165 }
   },
   {
     name: 'Bharmour',
@@ -89,6 +99,7 @@ export const initialDestinations = [
     category: 'Spiritual & Heritage',
     bestTimeToVisit: 'April to October',
     attractions: ['Chaurasi Temple Complex', 'Manimahesh Temple', 'Bharmani Temple', 'Lakshana Devi Temple'],
+    coordinates: { lat: 32.4432, lng: 76.5363 }
   },
   {
     name: 'Kullu',
@@ -97,6 +108,7 @@ export const initialDestinations = [
     category: 'Nature & Adventure',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Great Himalayan National Park', 'Raghunath Temple', 'Bijli Mahadev', 'Kasol Valley'],
+    coordinates: { lat: 31.9566, lng: 77.1111 }
   },
   {
     name: 'Pangi Valley',
@@ -105,6 +117,7 @@ export const initialDestinations = [
     category: 'Remote & Adventure',
     bestTimeToVisit: 'June to September',
     attractions: ['Killar', 'Sach Pass', 'Chandrabhaga River', 'Mindhal Lake'],
+    coordinates: { lat: 33.0906, lng: 76.5542 }
   },
   {
     name: 'Bilaspur',
@@ -113,6 +126,7 @@ export const initialDestinations = [
     category: 'Lake & Scenic',
     bestTimeToVisit: 'October to March',
     attractions: ['Gobind Sagar Lake', 'Bhakra Dam', 'Naina Devi Temple', 'Vyas Cave'],
+    coordinates: { lat: 31.3260, lng: 76.7567 }
   },
   {
     name: 'Narkanda',
@@ -121,6 +135,7 @@ export const initialDestinations = [
     category: 'Hill Station & Winter Sports',
     bestTimeToVisit: 'December to February (for snow), March to June',
     attractions: ['Hatu Peak', 'Hatu Mata Temple', 'Skiing', 'Stokes Farm'],
+    coordinates: { lat: 31.2618, lng: 77.4608 }
   },
   {
     name: 'Kasauli',
@@ -129,6 +144,7 @@ export const initialDestinations = [
     category: 'Hill Station & Heritage',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Monkey Point', 'Christ Church', 'Gilbert Trail', 'Sunset Point'],
+    coordinates: { lat: 30.9013, lng: 76.9649 }
   },
   {
     name: 'Dalhousie',
@@ -137,6 +153,7 @@ export const initialDestinations = [
     category: 'Hill Station & Colonial',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Khajjiar', 'Dainkund Peak', 'Kalatop Wildlife Sanctuary', 'Panchpula'],
+    coordinates: { lat: 32.5359, lng: 75.9647 }
   },
   {
     name: 'Kasol',
@@ -145,6 +162,7 @@ export const initialDestinations = [
     category: 'Backpacking & Trekking',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Kheerganga Trek', 'Tosh Village', 'Chalal', 'Parvati River'],
+    coordinates: { lat: 32.0097, lng: 77.3150 }
   },
   {
     name: 'Khajjiar',
@@ -153,6 +171,7 @@ export const initialDestinations = [
     category: 'Meadow & Scenic',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Khajjiar Lake', 'Khajji Nag Temple', 'Golden Devi Temple', 'Zorbing'],
+    coordinates: { lat: 32.5558, lng: 76.0652 }
   },
   {
     name: 'Kufri',
@@ -161,6 +180,7 @@ export const initialDestinations = [
     category: 'Winter Sports & Wildlife',
     bestTimeToVisit: 'November to February (for snow), March to June',
     attractions: ['Skiing', 'Himalayan Nature Park', 'Mahasu Peak', 'Fagu'],
+    coordinates: { lat: 31.0979, lng: 77.2688 }
   },
   {
     name: 'McLeod Ganj',
@@ -169,6 +189,7 @@ export const initialDestinations = [
     category: 'Spiritual & Cultural',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Dalai Lama Temple', 'Bhagsu Waterfall', 'Triund Trek', 'Tibetan Museum'],
+    coordinates: { lat: 32.2426, lng: 76.3213 }
   },
   {
     name: 'Tabo',
@@ -177,6 +198,7 @@ export const initialDestinations = [
     category: 'Heritage & Spiritual',
     bestTimeToVisit: 'June to September',
     attractions: ['Tabo Monastery', 'Tabo Caves', 'Ancient Murals', 'Golden Temple'],
+    coordinates: { lat: 32.0924, lng: 78.3812 }
   },
   {
     name: 'Malana',
@@ -185,6 +207,7 @@ export const initialDestinations = [
     category: 'Remote & Cultural',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Malana Village', 'Jamadagni Temple', 'Malana Dam', 'Trek to Chandrakhani Pass'],
+    coordinates: { lat: 32.0626, lng: 77.2626 }
   },
   {
     name: 'Kinnaur Valley',
@@ -193,6 +216,7 @@ export const initialDestinations = [
     category: 'Scenic & Adventure',
     bestTimeToVisit: 'April to October',
     attractions: ['Kalpa', 'Kinner Kailash', 'Reckong Peo', 'Chitkul'],
+    coordinates: { lat: 31.6510, lng: 78.4754 }
   },
   {
     name: 'Chail',
@@ -201,5 +225,6 @@ export const initialDestinations = [
     category: 'Heritage & Wildlife',
     bestTimeToVisit: 'March to June, September to November',
     attractions: ['Chail Cricket Ground', 'Chail Palace', 'Chail Wildlife Sanctuary', 'Kali Ka Tibba'],
+    coordinates: { lat: 30.9678, lng: 77.1891 }
   },
 ].filter(dest => dest.imageUrl);

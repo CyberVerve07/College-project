@@ -29,6 +29,12 @@ import { Separator } from '@/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
 import { downloadItineraryPdf } from '@/lib/pdf-api';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+const TripMap = dynamic(() => import('@/components/ui/TripMap'), {
+  ssr: false,
+  loading: () => <div className="h-[400px] w-full bg-muted/20 animate-pulse rounded-xl" />
+});
 
 
 const tripStyles = ['Adventure', 'Nature', 'Peace', 'Spiritual'];
@@ -240,6 +246,11 @@ export default memo(function ItineraryForm() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold font-headline">Your Leo AI Travel Plan</h2>
             <p className="text-muted-foreground mt-2">Here is your personalized Himachal trip crafted by Leo AI.</p>
+          </div>
+
+          {/* ===== TRIP MAP ===== */}
+          <div className="w-full">
+            <TripMap destinations={itinerary.bestDestinations || []} />
           </div>
 
           {/* ===== SECTION 1: Best Destinations ===== */}

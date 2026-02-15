@@ -15,7 +15,11 @@ export const ItineraryResponseSchema = z.object({
   bestDestinations: z.array(z.object({
     name: z.string().describe('Name of the destination'),
     reason: z.string().describe('Why this destination is recommended for the user'),
-  })).describe('Top recommended destinations with reasons.'),
+    coordinates: z.object({
+      lat: z.number().describe('Latitude of the destination'),
+      lng: z.number().describe('Longitude of the destination'),
+    }).describe('Geographic coordinates for map display'),
+  })).describe('Top recommended destinations with reasons and coordinates.'),
 
   // Section 2: Day-wise Itinerary
   itinerary: z.array(z.object({
