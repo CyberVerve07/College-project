@@ -80,7 +80,7 @@ export default function Footer() {
           <address className="not-italic space-y-6">
             <p className="text-lg opacity-60">Dharamshala, <br />Himachal Pradesh, India</p>
             <div className="flex flex-col gap-4">
-              <a href={`https://wa.me/${siteConfig.contact.whatsapp}`} className="flex items-center gap-3 hover:text-green-500 p-3 bg-white/5 rounded-2xl transition-all group">
+              <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-green-500 p-3 bg-white/5 rounded-2xl transition-all group">
                 <WhatsAppIcon className="w-5 h-5 text-green-500" />
                 <span className="font-bold">WhatsApp Us</span>
               </a>

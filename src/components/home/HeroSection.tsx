@@ -7,6 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { PlaceHolderImagesMap } from '@/lib/placeholder-images';
 import { SnowParticles } from '@/components/ui/snow-particles';
+import { siteConfig } from '@/lib/config';
 import { useEffect, useRef } from 'react';
 
 /**
@@ -101,9 +102,9 @@ export default function HeroSection() {
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
                         <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-lg bg-white text-black hover:bg-gray-200 transition-all shadow-xl">
-                            <Link href="/contact" className="flex items-center gap-3">
+                            <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
                                 Let&apos;s Go! <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
-                            </Link>
+                            </a>
                         </Button>
                         <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg font-bold text-white hover:bg-white/10 hover:text-white rounded-lg border-white/30 backdrop-blur-sm transition-all bg-transparent">
                             <Link href="#destinations">See the Magic</Link>
