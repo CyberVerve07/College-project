@@ -5,8 +5,8 @@ export default function AIPlannerPage() {
     <div className="py-24 bg-mesh min-h-screen relative overflow-hidden">
       {/* Ambient Background Glow - Optimized */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-5%] left-[-5%] w-[35%] h-[35%] bg-secondary/20 rounded-full blur-[60px] mix-blend-screen animate-pulse will-change-opacity" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-primary/15 rounded-full blur-[80px] mix-blend-screen will-change-opacity" />
+        <div className="absolute top-[-5%] left-[-5%] w-[35%] h-[35%] bg-secondary/15 rounded-full blur-[60px] mix-blend-screen will-change-transform" />
+        <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[80px] mix-blend-screen will-change-transform" />
       </div>
 
       <div className="w-full px-4 md:px-8 relative z-10">

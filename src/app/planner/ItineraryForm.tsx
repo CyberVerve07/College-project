@@ -33,6 +33,28 @@ import { downloadItineraryPdf } from '@/lib/pdf-api';
 import { useRouter } from 'next/navigation';
 
 
+
+const DestinationItem = memo(({ item, isSelected, onToggle }: { item: { id: string, label: string }, isSelected: boolean, onToggle: (id: string, checked: boolean) => void }) => {
+  return (
+    <FormItem
+      className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-primary/50"
+    >
+      <FormControl>
+        <Checkbox
+          checked={isSelected}
+          onCheckedChange={(checked) => onToggle(item.id, !!checked)}
+          className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+        />
+      </FormControl>
+      <FormLabel className="font-medium cursor-pointer flex-1 text-sm">
+        {item.label}
+      </FormLabel>
+    </FormItem>
+  );
+});
+
+DestinationItem.displayName = 'DestinationItem';
+
 const availableDestinations = [
   // Shimla & Around
   { id: 'shimla', label: 'Shimla City' },
@@ -243,21 +265,12 @@ export default memo(function ItineraryForm() {
                   </div>
                   <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                     {memoizedDestinations.map((item) => (
-                      <FormItem
+                      <DestinationItem
                         key={item.id}
-                        className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-primary/50"
-                      >
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value?.includes(item.id)}
-                            onCheckedChange={(checked) => handleDestinationChange(field, item.id, !!checked)}
-                            className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                          />
-                        </FormControl>
-                        <FormLabel className="font-medium cursor-pointer flex-1 text-sm">
-                          {item.label}
-                        </FormLabel>
-                      </FormItem>
+                        item={item}
+                        isSelected={field.value?.includes(item.id)}
+                        onToggle={(id, checked) => handleDestinationChange(field, id, checked)}
+                      />
                     ))}
                   </div>
                   <FormMessage />
