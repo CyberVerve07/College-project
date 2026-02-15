@@ -39,8 +39,8 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
     const statBoxWidth = contentWidth / 3;
     const stats = [
         { label: 'Total Budget', value: itinerary.budgetBreakdown?.total || 'N/A' },
-        { label: 'Vehicle', value: itinerary.recommendedVehicle },
         { label: 'Days', value: `${itinerary.itinerary.length} Days` },
+        { label: 'Destinations', value: `${itinerary.bestDestinations?.length || 0} Places` },
     ];
 
     stats.forEach((stat, i) => {

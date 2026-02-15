@@ -30,16 +30,16 @@ import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
 import { downloadItineraryPdf } from '@/lib/pdf-api';
 import { useRouter } from 'next/navigation';
 
-const vehicleTypes = ['Sedan', 'SUV', 'Tempo Traveller', 'Any'];
+
 const tripStyles = ['Adventure', 'Nature', 'Peace', 'Spiritual'];
 
 const formSchema = z.object({
   origin: z.string().min(2, 'Please enter a valid origin city.'),
+  destination: z.string().min(2, 'Please enter where you want to go.'),
   budget: z.coerce.number().int().positive({ message: 'Please enter a valid budget.' }),
   days: z.coerce.number().int().min(1, 'Must be at least 1 day.').max(15, 'Cannot exceed 15 days.'),
   people: z.coerce.number().int().min(1, 'Must be at least 1 person.').max(20, 'Cannot exceed 20 people.'),
   tripStyle: z.string().min(1, 'Please select a trip style.'),
-  vehiclePreference: z.string().min(1, 'Please select a vehicle type.'),
 });
 
 export default memo(function ItineraryForm() {
@@ -52,11 +52,11 @@ export default memo(function ItineraryForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       origin: '',
+      destination: '',
       budget: 50000,
       days: 5,
       people: 2,
       tripStyle: 'Adventure',
-      vehiclePreference: 'Any',
     },
   });
 
@@ -158,8 +158,22 @@ export default memo(function ItineraryForm() {
             />
           </div>
 
-          {/* Trip Style & Vehicle */}
+          {/* Destination & Trip Style */}
           <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="destination"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold">Destination</FormLabel>
+                  <FormDescription>Where do you want to go?</FormDescription>
+                  <FormControl>
+                    <Input placeholder="e.g., Manali, Shimla, Spiti" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-accent focus-visible:ring-offset-0 transition-all duration-300" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="tripStyle"
@@ -176,29 +190,6 @@ export default memo(function ItineraryForm() {
                     <SelectContent>
                       {tripStyles.map((style) => (
                         <SelectItem key={style} value={style}>{style}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="vehiclePreference"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-lg font-semibold">Select Vehicle</FormLabel>
-                  <FormDescription>Destiny Tour Travel provides budget-friendly transport.</FormDescription>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
-                        <SelectValue placeholder="Select vehicle type" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {vehicleTypes.map((type) => (
-                        <SelectItem key={type} value={type}>{type}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -308,10 +299,7 @@ export default memo(function ItineraryForm() {
             <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-teal-400">
               <Navigation className="w-6 h-6" /> Travel & Transport Advice
             </h3>
-            <div className="flex items-center gap-2 mb-4">
-              <Car className="w-5 h-5 text-secondary" />
-              <span className="font-bold text-secondary">Recommended Vehicle: {itinerary.recommendedVehicle}</span>
-            </div>
+
             <ul className="space-y-2">
               {itinerary.transportAdvice?.map((tip, i) => (
                 <li key={i} className="flex gap-2 text-muted-foreground text-sm items-start">

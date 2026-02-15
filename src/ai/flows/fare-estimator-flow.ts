@@ -1,7 +1,6 @@
 'use server';
 
 import { FareRequest, FareResponse } from '@/ai/schemas';
-import { ai } from '@/ai/genkit';
 
 /**
  * Fare Estimator Flow using Genkit (Groq)

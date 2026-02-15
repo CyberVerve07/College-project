@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 export const ItineraryRequestSchema = z.object({
   origin: z.string().describe('The starting city of the journey (e.g., "Delhi", "Mumbai").'),
+  destination: z.string().describe('Where the user wants to go (e.g., "Manali", "Shimla", "Spiti").'),
   budget: z.number().describe('The total budget for the trip in Indian Rupees (INR).'),
   days: z.number().describe('The total number of days for the trip.'),
   people: z.number().describe('The number of people travelling.'),
   tripStyle: z.string().describe('The style of trip: Adventure, Nature, Peace, or Spiritual.'),
-  vehiclePreference: z.string().describe('The preferred type of vehicle (e.g., Sedan, SUV, Tempo Traveller, or Any).'),
 });
 export type ItineraryRequest = z.infer<typeof ItineraryRequestSchema>;
 
@@ -45,6 +45,5 @@ export const ItineraryResponseSchema = z.object({
 
   // Booking CTA
   bookingCTA: z.string().describe('Call-to-action text mentioning Destiny Tour Travel.'),
-  recommendedVehicle: z.string().describe('Best vehicle for this trip.'),
 });
 export type ItineraryResponse = z.infer<typeof ItineraryResponseSchema>;
