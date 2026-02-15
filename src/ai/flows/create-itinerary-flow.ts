@@ -19,32 +19,43 @@ export const createItineraryFlow = ai.defineFlow(
   async (input) => {
     try {
       const prompt = `
-        You are an expert local guide and travel planner for Himachal Pradesh.
+        You are **Leo AI**, an expert local guide and travel planner for Destiny Tour Travel in Himachal Pradesh.
+        Your goal is to create a **highly detailed, immersive, and practical** travel itinerary.
         
         KNOWLEDGE BASE (Use this for descriptions, travel times, food, and culture):
         ${JSON.stringify(HIMACHAL_KNOWLEDGE, null, 2)}
 
         REQUEST:
         Create a detailed ${input.days}-day trip to ${input.destinations.join(', ')} for ${input.people} people.
-        Budget: ₹${input.budget}.
+        Origin: ${input.origin} (Suggest travel route from here if applicable).
+        Budget: ₹${input.budget} (Ensure recommendations fit this budget).
         Vehicle: ${input.vehiclePreference}.
 
+        RETURN FORMAT (JSON):
         Return a JSON object with:
-        - estimatedCost (number)
-        - recommendedVehicle (string)
-        - bookingCTA (string)
-        - itinerary: Array of days (day, title, description, travelTime).
+        - estimatedCost (number): Realistic total cost based on mid-range options.
+        - recommendedVehicle (string): Best vehicle for the terrain.
+        - bookingCTA (string): "Contact Destiny Tour Travel to book this exact trip!"
+        - itinerary: Array of days.
+          - day (number)
+          - title (string): Catchy title (e.g., "The Magic of Spiti Valley").
+          - description (string): **THIS IS THE MOST IMPORTANT PART.** Write a full paragraph (approx 50-80 words). 
+            - Describe the vibe of the place.
+            - Mention specific spots to visit in Morning, Afternoon, and Evening.
+            - Include names of famous cafes or restaurants for lunch/dinner.
+            - Mention travel times between spots.
+          - travelTime (string): e.g., "6 hours drive" or "Local exploration".
+        - foodRecommendations: Array of 5-6 specific dishes or famous eateries (e.g., "Cafe 1947", "Siddu at Ghewar's").
+        - accommodation: Array of 3-4 specific areas or types (e.g., "Old Manali Homestays", "Luxury Camps in Jispa").
+        - thingsToAvoid: Array of 4-5 critical tips (safety, scams, roads).
+        - adventures: Array of 3-4 activities available on this route.
+        - temples: Array of 3-4 spiritual places to visit.
         
-        CRITICAL INSTRUCTIONS FOR 'description':
-        - Do NOT just write generic text.
-        - You MUST include specific names of Temples, Cafes, and Dishes from the Knowledge Base.
-        - Format the description covers:
-          * Morning: [Activity/Spot]
-          * Afternoon: [Lunch recommendation & Spot]
-          * Evening: [Market/Sunset spot]
-          * Food to Try: [Specific Dish Name]
-        
-        Make it sound like a passionate local guide is speaking.
+        TONE & STYLE:
+        - Write like a passionate local friend, not a robot.
+        - Use sensory details (e.g., "crisp mountain air", "aroma of pine").
+        - **DO NOT** give generic advice like "Visit local market". Instead say "Stroll through the Mall Road and buy wooden handicrafts."
+        - Ensure the itinerary is logically sequenced (don't jump between far-off places in one day).
         `;
 
       const { output } = await ai.generate({
@@ -60,6 +71,7 @@ export const createItineraryFlow = ai.defineFlow(
       console.error("Itinerary Gen Error:", error);
 
       console.error("Itinerary Gen Error:", error);
+      console.log("⚠️ USING SMART FALLBACK LOGIC - AI GENERATION FAILED");
 
       // SMART FALLBACK v3: Multi-Destination, No-Repetition & Deep Details
       const totalDays = input.days;
@@ -123,7 +135,12 @@ export const createItineraryFlow = ai.defineFlow(
         estimatedCost: (input.budget || 25000),
         recommendedVehicle: input.vehiclePreference || "SUV",
         bookingCTA: "This is a curated plan based on top local spots. Contact us to book!",
-        itinerary: fallbackItinerary
+        itinerary: fallbackItinerary,
+        foodRecommendations: ["Siddu", "Dham", "Trout Fish", "Thukpa", "Momos"],
+        accommodation: ["Homestays", "Boutique Hotels", "Riverside Camps"],
+        thingsToAvoid: ["Driving at night", "Littering in mountains", "Overexertion on Day 1"],
+        adventures: ["Paragliding", "River Rafting", "Trekking"],
+        temples: ["Hadimba Temple", "Jakhu Temple", "Baijnath Temple"]
       };
     }
   }

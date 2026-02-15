@@ -15,7 +15,7 @@ export default function AIPlannerPage() {
             ✨ Smart Travel Concierge
           </div>
           <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-tight drop-shadow-[0_0_25px_rgba(255,255,255,0.3)]">
-            Plan your trip with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-teal-400 to-secondary animate-gradient-x">AI Power</span>
+            Plan your trip with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-teal-400 to-secondary animate-gradient-x">Leo AI</span>
           </h1>
           <p className="mt-6 max-w-2xl mx-auto text-xl text-muted-foreground font-body leading-relaxed">
             Crafting legendary Himalayan adventures using real-time data and expert local knowledge.

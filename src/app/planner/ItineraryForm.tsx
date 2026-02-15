@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2, FileText } from 'lucide-react';
+import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2, FileText, Utensils, Bed, Landmark, MountainSnow, AlertTriangle, XCircle } from 'lucide-react';
 import { createItinerary } from '@/ai/flows/create-itinerary-flow';
 import { saveBooking } from './actions';
 import { Separator } from '@/components/ui/separator';
@@ -34,106 +34,19 @@ import { useRouter } from 'next/navigation';
 
 
 
-const DestinationItem = memo(({ item, isSelected, onToggle }: { item: { id: string, label: string }, isSelected: boolean, onToggle: (id: string, checked: boolean) => void }) => {
-  return (
-    <FormItem
-      className="flex flex-row items-center space-x-3 space-y-0 p-3 rounded-xl hover:bg-white/50 transition-colors border border-transparent hover:border-primary/50"
-    >
-      <FormControl>
-        <Checkbox
-          checked={isSelected}
-          onCheckedChange={(checked) => onToggle(item.id, !!checked)}
-          className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-        />
-      </FormControl>
-      <FormLabel className="font-medium cursor-pointer flex-1 text-sm">
-        {item.label}
-      </FormLabel>
-    </FormItem>
-  );
-});
+// DestinationItem component removed
 
-DestinationItem.displayName = 'DestinationItem';
 
-const availableDestinations = [
-  // Shimla & Around
-  { id: 'shimla', label: 'Shimla City' },
-  { id: 'kufri', label: 'Kufri' },
-  { id: 'narkanda', label: 'Narkanda' },
-  { id: 'chail', label: 'Chail' },
-  { id: 'mashobra', label: 'Mashobra' },
-  { id: 'rohru', label: 'Rohru' },
-
-  // Manali & Kullu
-  { id: 'manali', label: 'Manali' },
-  { id: 'kullu', label: 'Kullu Town' },
-  { id: 'old_manali', label: 'Old Manali' },
-  { id: 'solang', label: 'Solang Valley' },
-  { id: 'sethan', label: 'Sethan (Igloo Village)' },
-  { id: 'kasol', label: 'Kasol' },
-  { id: 'manikaran', label: 'Manikaran' },
-  { id: 'tosh', label: 'Tosh Village' },
-  { id: 'malana', label: 'Malana' },
-  { id: 'tirthan', label: 'Tirthan Valley' },
-  { id: 'jibhi', label: 'Jibhi' },
-  { id: 'shoja', label: 'Shoja' },
-
-  // Dharamshala & Kangra
-  { id: 'dharamshala', label: 'Dharamshala' },
-  { id: 'mcleodganj', label: 'McLeodGanj' },
-  { id: 'kangra_devi', label: 'Brajeshwari Devi (Kangra)' },
-  { id: 'chamunda', label: 'Chamunda Devi' },
-  { id: 'jwala_ji', label: 'Jwala Ji Temple' },
-  { id: 'baglamukhi', label: 'Baglamukhi Temple' },
-  { id: 'chintpurni', label: 'Chintpurni Mata' },
-  { id: 'pathankot', label: 'Pathankot (Pickup/Drop)' },
-  { id: 'palampur', label: 'Palampur' },
-  { id: 'bir', label: 'Bir Billing' },
-  { id: 'kangra_fort', label: 'Kangra Fort' },
-
-  // Dalhousie & Chamba
-  { id: 'dalhousie', label: 'Dalhousie' },
-  { id: 'khajjiar', label: 'Khajjiar (Mini Swiss)' },
-  { id: 'chamba', label: 'Chamba Town' },
-  { id: 'bharmour', label: 'Bharmour' },
-
-  // Spiti & Lahaul
-  { id: 'spiti', label: 'Spiti Valley (Full Circle)' },
-  { id: 'kaza', label: 'Kaza' },
-  { id: 'chandratal', label: 'Chandratal Lake' },
-  { id: 'tabo', label: 'Tabo Monastery' },
-  { id: 'dhankar', label: 'Dhankar' },
-  { id: 'langza', label: 'Langza (Fossil Village)' },
-  { id: 'hikkim', label: 'Hikkim (Highest Post Office)' },
-  { id: 'sissu', label: 'Sissu' },
-  { id: 'keylong', label: 'Keylong' },
-  { id: 'jispa', label: 'Jispa' },
-
-  // Kinnaur
-  { id: 'kinnaur', label: 'Kinnaur Valley' },
-  { id: 'kalpa', label: 'Kalpa' },
-  { id: 'sangla', label: 'Sangla Valley' },
-  { id: 'chitkul', label: 'Chitkul (Last Village)' },
-  { id: 'nako', label: 'Nako Lake' },
-
-  // Mandi & Others
-  { id: 'prashar', label: 'Prashar Lake' },
-  { id: 'barot', label: 'Barot' },
-  { id: 'janjheli', label: 'Janjehli' },
-  { id: 'kasauli', label: 'Kasauli' },
-  { id: 'solan', label: 'Solan' },
-  { id: 'renukaji', label: 'Renuka Ji Lake' },
-];
+// Removed availableDestinations list for simpler UI
 
 const vehicleTypes = ['Sedan', 'SUV', 'Tempo Traveller', 'Any'];
 
 const formSchema = z.object({
+  origin: z.string().min(2, 'Please enter a valid origin city.'),
   budget: z.coerce.number().int().positive({ message: 'Please enter a valid budget.' }),
   days: z.coerce.number().int().min(1, 'Must be at least 1 day.').max(15, 'Cannot exceed 15 days.'),
   people: z.coerce.number().int().min(1, 'Must be at least 1 person.').max(20, 'Cannot exceed 20 people.'),
-  destinations: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: 'You have to select at least one destination.',
-  }),
+  destinations: z.string().min(2, 'Please enter at least one destination.'),
   vehiclePreference: z.string().min(1, 'Please select a vehicle type.'),
 });
 
@@ -147,23 +60,14 @@ export default memo(function ItineraryForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      origin: '',
       budget: 50000,
       days: 5,
       people: 2,
-      destinations: ['manali'],
+      destinations: '',
       vehiclePreference: 'Any',
     },
   });
-
-  // Memoize destinations to prevent re-creating array on every render
-  const memoizedDestinations = useMemo(() => availableDestinations, []);
-
-  // Memoize checkbox change handler
-  const handleDestinationChange = useCallback((field: any, itemId: string, checked: boolean) => {
-    return checked
-      ? field.onChange([...field.value, itemId])
-      : field.onChange(field.value?.filter((value: string) => value !== itemId));
-  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -171,7 +75,15 @@ export default memo(function ItineraryForm() {
     setItinerary(null);
 
     try {
-      const result = await createItinerary(values);
+      // Split comma-separated string into array for API
+      const destinationArray = values.destinations.split(',').map(d => d.trim()).filter(d => d);
+
+      const payload = {
+        ...values,
+        destinations: destinationArray
+      };
+
+      const result = await createItinerary(payload);
       setItinerary(result);
     } catch (e) {
       console.error(e);
@@ -206,6 +118,19 @@ export default memo(function ItineraryForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="origin"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Where are you traveling from?</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g., Mumbai, Delhi, Bangalore" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="grid md:grid-cols-3 gap-6">
             <FormField
               control={form.control}
@@ -248,43 +173,34 @@ export default memo(function ItineraryForm() {
             />
           </div>
 
-          <div className="p-6 rounded-3xl bg-secondary/5 border border-secondary/10 backdrop-blur-sm shadow-inner overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-50 pointer-events-none" />
-            <FormField
-              control={form.control}
-              name="destinations"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="mb-6 relative z-10">
-                    <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-                      Select Your Dream Destinations
-                    </FormLabel>
-                    <FormDescription>
-                      Choose specific temples, valleys, and adventures.
-                    </FormDescription>
-                  </div>
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                    {memoizedDestinations.map((item) => (
-                      <DestinationItem
-                        key={item.id}
-                        item={item}
-                        isSelected={field.value?.includes(item.id)}
-                        onToggle={(id, checked) => handleDestinationChange(field, id, checked)}
-                      />
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="destinations"
+            render={({ field }) => (
+              <FormItem className="relative">
+                <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                  Your Dream Destinations
+                </FormLabel>
+                <FormDescription>
+                  Where do you want to go? Enter multiple places separated by commas.
+                </FormDescription>
+                <FormControl>
+                  <Input placeholder="e.g., Manali, Kasol, Spiti Valley" {...field} className="h-14 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
             name="vehiclePreference"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-lg font-semibold">Preferred Ride</FormLabel>
+                <FormLabel className="text-lg font-semibold">Select Vehicle</FormLabel>
+                <FormDescription className="mb-3 text-primary/90 font-medium">
+                  Destiny Tour Travel will provide you the best transport services in Himachal in a budget-friendly way.
+                </FormDescription>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
@@ -310,7 +226,7 @@ export default memo(function ItineraryForm() {
             {isLoading ? (
               <>
                 <Bot className="mr-3 h-6 w-6 animate-spin" strokeWidth={2} />
-                Planning Magic...
+                Leo AI is working...
               </>
             ) : (
               <>
@@ -327,7 +243,7 @@ export default memo(function ItineraryForm() {
           <div className="flex justify-center items-center">
             <Bot className="h-8 w-8 text-primary animate-bounce" />
           </div>
-          <p className="mt-4 text-muted-foreground">Our AI is planning your perfect trip. This might take a moment...</p>
+          <p className="mt-4 text-muted-foreground">Leo AI is planning your perfect trip. This might take a moment...</p>
         </div>
       )}
 
@@ -363,6 +279,70 @@ export default memo(function ItineraryForm() {
                 <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">People</p>
                 <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-primary"><Users className="w-5 h-5" strokeWidth={2.5} /> {form.getValues('people')}</p>
               </div>
+            </div>
+
+            <Separator className="my-8 bg-white/10" />
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              {/* Food & Stay */}
+              <div className="space-y-6">
+                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
+                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-primary"><Utensils className="w-5 h-5" /> Food to Try</h4>
+                  <ul className="space-y-2">
+                    {itinerary.foodRecommendations?.map((item, i) => (
+                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
+                        <span className="text-primary mt-1">•</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
+                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-secondary"><Bed className="w-5 h-5" /> Where to Stay</h4>
+                  <ul className="space-y-2">
+                    {itinerary.accommodation?.map((item, i) => (
+                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
+                        <span className="text-secondary mt-1">•</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Temples & Adventures */}
+              <div className="space-y-6">
+                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
+                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-amber-400"><Landmark className="w-5 h-5" /> Temples & Culture</h4>
+                  <ul className="space-y-2">
+                    {itinerary.temples?.map((item, i) => (
+                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
+                        <span className="text-amber-400 mt-1">•</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
+                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-orange-400"><MountainSnow className="w-5 h-5" /> Adventures</h4>
+                  <ul className="space-y-2">
+                    {itinerary.adventures?.map((item, i) => (
+                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
+                        <span className="text-orange-400 mt-1">•</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Things to Avoid - Full Width Warning */}
+            <div className="bg-red-500/5 p-6 rounded-2xl border border-red-500/20 mb-8">
+              <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-red-400"><AlertTriangle className="w-5 h-5" /> Travel Advisory (What to Avoid)</h4>
+              <ul className="grid md:grid-cols-2 gap-x-4 gap-y-2">
+                {itinerary.thingsToAvoid?.map((item, i) => (
+                  <li key={i} className="flex gap-2 text-red-300/80 text-sm items-start">
+                    <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <Separator />
