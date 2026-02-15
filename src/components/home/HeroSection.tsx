@@ -49,7 +49,7 @@ export default function HeroSection() {
                         quality={75}
                     />
                     {/* Asymmetric Gradient: Darker on left for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
                 </motion.div>
             )}
@@ -59,18 +59,17 @@ export default function HeroSection() {
 
             {/* Content Container - Asymmetric Grid */}
             <motion.div
-                className="container relative z-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center h-full"
+                className="container relative z-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full"
                 style={{ y: textY, opacity }}
             >
                 {/* Left Content (Text) - Col Span 8 for MORE asymmetry */}
-                <div className="lg:col-span-12 flex flex-col justify-center pt-20 lg:pt-0 lg:pr-12">
+                <div className="lg:col-span-8 flex flex-col justify-center pt-20 lg:pt-0">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="flex items-center gap-3 text-cyan-400 font-bold tracking-widest uppercase text-sm mb-6"
+                        className="flex items-center gap-3 text-white/80 tracking-[0.2em] uppercase text-sm mb-8 font-light border-l-2 border-primary pl-4"
                     >
-                        <span className="text-xl">🏔️</span>
                         <span>Ready for the mountains?</span>
                     </motion.div>
 
@@ -78,10 +77,10 @@ export default function HeroSection() {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[6.5rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6"
+                        className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-8"
                     >
                         Don&apos;t Just Visit, <br />
-                        <span className="text-cyan-400 font-black">
+                        <span className="text-white font-black underline decoration-primary/60 decoration-4 underline-offset-8">
                             Live Himachal
                         </span>
                     </motion.h1>
@@ -90,23 +89,23 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="text-lg sm:text-xl text-gray-300 max-w-xl font-medium leading-relaxed mb-10"
+                        className="text-lg sm:text-xl text-gray-200 max-w-xl font-medium leading-relaxed mb-12"
                     >
                         Tired of the city noise? Pack your bags and let us drive you to paradise. From Manali&apos;s peaks to Dharamshala&apos;s peace – we&apos;ve got the ride sorted.
                     </motion.p>
 
                     <motion.div
-                        className="flex flex-wrap gap-4"
+                        className="flex flex-wrap gap-6"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
-                        <Button asChild size="lg" className="h-16 px-10 text-lg font-black rounded-[22px] bg-primary text-white hover:bg-primary/90 hover:scale-105 shadow-[0_8px_30px_hsla(200,85%,35%,0.4)] transition-all">
+                        <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-lg bg-white text-black hover:bg-gray-200 transition-all shadow-xl">
                             <Link href="/contact" className="flex items-center gap-3">
-                                Let&apos;s Go! <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" strokeWidth={3} />
+                                Let&apos;s Go! <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
                             </Link>
                         </Button>
-                        <Button asChild variant="ghost" size="lg" className="h-16 px-10 text-lg font-bold text-white hover:bg-white/10 hover:text-white rounded-[22px] border-2 border-white/20 backdrop-blur-sm transition-all">
+                        <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg font-bold text-white hover:bg-white/10 hover:text-white rounded-lg border-white/30 backdrop-blur-sm transition-all bg-transparent">
                             <Link href="#destinations">See the Magic</Link>
                         </Button>
                     </motion.div>

@@ -37,7 +37,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 200 85% 35%;
 
-    --radius: 1rem;
+    --radius: 0.5rem;
   }
 
   .dark {
@@ -94,6 +94,11 @@
 
   p {
     @apply text-base md:text-lg leading-relaxed;
+  }
+
+  /* Custom Icon Style */
+  .lucide {
+    stroke-width: 1.5px;
   }
 }
 
