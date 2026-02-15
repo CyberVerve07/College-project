@@ -1,7 +1,7 @@
 import { genkit } from 'genkit';
 import { googleAI } from '@genkit-ai/google-genai';
 
-const apiKey = process.env.GOOGLE_GENAI_API_KEY || process.env.GROQ_API_KEY;
+const apiKey = process.env.GOOGLE_GENAI_API_KEY;
 
 if (!apiKey) {
   console.error("❌ GENKIT ERROR: No API key found. Please check .env file.");
