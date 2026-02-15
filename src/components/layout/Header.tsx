@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Menu, Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/config';
@@ -18,6 +18,14 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
+/**
+ * Global Header component.
+ * Features:
+ * - Responsive navigation (Desktop vs Mobile Sheet)
+ * - Dynamic active state styling
+ * - "Book Cab" CTA linking to WhatsApp
+ * - Theme toggle integration
+ */
 export default function Header() {
   const pathname = usePathname();
 
@@ -64,6 +72,12 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="bg-background/95 backdrop-blur-2xl border-l-primary/20">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Mobile Navigation Menu</SheetTitle>
+                <SheetDescription>
+                  Access site navigation links and settings.
+                </SheetDescription>
+              </SheetHeader>
               <nav className="grid gap-8 text-lg font-medium pt-12">
                 <Link
                   href="/"

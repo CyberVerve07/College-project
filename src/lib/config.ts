@@ -1,3 +1,7 @@
+/**
+ * Global configuration for the site.
+ * Contains metadata, contact info, and other static details.
+ */
 export const siteConfig = {
   name: "Destiny Tour & Travels",
   url: "https://destinytours.com", // Replace with actual domain

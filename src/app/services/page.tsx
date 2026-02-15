@@ -10,6 +10,11 @@ import { Badge } from '@/components/ui/badge';
 
 import { motion } from 'framer-motion';
 
+/**
+ * Services Page component.
+ * Displays the fleet of vehicles with details and booking options.
+ * Animations powered by Framer Motion.
+ */
 export default function ServicesPage() {
   const services = initialServices;
 

@@ -16,6 +16,7 @@ import { useEffect, useRef } from 'react';
  * - Parallax background effect using Framer Motion
  * - Animated text entrance
  * - Snow particles effect
+ * - "Let's Go" CTA linking to WhatsApp
  */
 export default function HeroSection() {
     const heroImage = PlaceHolderImagesMap.get('hero');

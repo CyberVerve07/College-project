@@ -36,7 +36,7 @@ import ErrorBoundary from '@/components/error-boundary';
  * Root Layout component.
  * Wraps the entire application with:
  * - Font configurations (PT Sans, Playfair Display)
- * - Global providers (Firebase, ErrorBoundary)
+ * - Global providers (Firebase, ErrorBoundary, ThemeProvider)
  * - Global UI components (Header, Footer, Toaster)
  */
 export default function RootLayout({

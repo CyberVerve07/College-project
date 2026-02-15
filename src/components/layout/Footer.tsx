@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
  * Global Footer component.
  * Displays site navigation, fleet information, contact details, and copyright.
  * Uses client-side state for the current year.
+ * Integrated with siteConfig for centralized contact info.
  */
 export default function Footer() {
   const [year, setYear] = useState<number | null>(null);
