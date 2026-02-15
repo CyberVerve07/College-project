@@ -136,7 +136,7 @@ export default function DocumentationPage() {
                         <h2 className="text-2xl font-bold mb-6 border-b pb-2 print:text-xl">4. Key Features</h2>
                         <div className="space-y-4 text-muted-foreground print:text-black">
                             <div>
-                                <strong className="text-foreground print:text-black">AI-Powered Trip Planner:</strong> Takes user inputs (budget, dates) -> Generates daily itinerary -> Plots on Map.
+                                <strong className="text-foreground print:text-black">AI-Powered Trip Planner:</strong> Takes user inputs (budget, dates) &rarr; Generates daily itinerary &rarr; Plots on Map.
                             </div>
                             <div>
                                 <strong className="text-foreground print:text-black">Interactive Destinations:</strong> List View / Map View toggle. Uses specific coordinates to render markers on OpenStreetMap.
