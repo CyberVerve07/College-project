@@ -43,7 +43,7 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-semibold uppercase tracking-wider transition-all hover:text-primary relative py-2 group",
+                "text-sm md:text-base font-semibold uppercase tracking-wider transition-all hover:text-primary relative py-2 group",
                 pathname === link.href ? "text-primary" : "text-white/85"
               )}
             >

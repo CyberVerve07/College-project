@@ -132,7 +132,7 @@ export default function Home() {
                     )}
                   </div>
                   <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-4">{service.name}</h3>
-                  <p className="opacity-50 text-sm md:text-base mb-6 md:mb-8 italic">Rugged. Sanatized. Ready.</p>
+                  <p className="opacity-50 text-sm md:text-base mb-6 md:mb-8 italic">Rugged. Sanitized. Ready.</p>
                   <Button asChild variant="secondary" className="mt-auto w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-base md:text-lg font-bold bg-white text-black hover:bg-secondary hover:text-white transition-all">
                     <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Get Quote</a>
                   </Button>
