@@ -28,6 +28,7 @@ export default function Footer() {
               Destiny <span className="text-primary italic">Tour</span> & Travels
             </span>
           </Link>
+          <p className="text-lg opacity-60 font-medium leading-relaxed">
             Mission: To provide unforgettable journeys with 100% customer satisfaction. We are available 24/7 to make your trip flawless.
           </p>
         </div>

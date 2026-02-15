@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,7 +22,7 @@ export default function ChatWidget() {
     // const { user } = useAuth(); // Removed Auth dependency
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { id: 'welcome', role: 'model', content: 'Hi! I am Destiny AI. How can I help you plan your Himachal trip today?', suggestions: ['Plan a Trip', 'Cab Rates', 'Best Places to Visit'] }
+        { id: 'welcome', role: 'model', content: 'Hi! I am Leo. How can I help you plan your Himachal trip today?', suggestions: ['Plan a Trip', 'Cab Rates', 'Best Places to Visit'] }
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,7 @@ export default function ChatWidget() {
 
     const resetChat = () => {
         setMessages([
-            { id: 'welcome', role: 'model', content: 'Hi! I am Destiny AI. How can I help you plan your Himachal trip today?', suggestions: ['Plan a Trip', 'Cab Rates', 'Best Places to Visit'] }
+            { id: 'welcome', role: 'model', content: 'Hi! I am Leo. How can I help you plan your Himachal trip today?', suggestions: ['Plan a Trip', 'Cab Rates', 'Best Places to Visit'] }
         ]);
         setInputValue('');
     };
@@ -149,11 +150,17 @@ export default function ChatWidget() {
                                         <ArrowLeft className="w-5 h-5" strokeWidth={2.5} />
                                     </Button>
                                 )}
-                                <div className="bg-primary/10 p-2 rounded-full">
-                                    <Sparkles className="w-4 h-4 text-primary fill-primary/20" strokeWidth={2} />
+                                <div className="bg-primary/10 p-1.5 rounded-full overflow-hidden border border-primary/20">
+                                    <Image
+                                        src="https://thumbs.dreamstime.com/b/leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-illustration-124792632.jpg"
+                                        alt="Leo"
+                                        width={32}
+                                        height={32}
+                                        className="w-8 h-8 object-cover scale-110"
+                                    />
                                 </div>
                                 <div>
-                                    <h3 className="text-sm font-bold font-headline tracking-wide">Destiny Assistant</h3>
+                                    <h3 className="text-sm font-bold font-headline tracking-wide">Leo</h3>
                                     <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                                         Online
@@ -190,7 +197,15 @@ export default function ChatWidget() {
                                                     "w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-sm mt-1",
                                                     msg.role === 'user' ? "bg-primary text-primary-foreground" : "bg-card text-foreground border-border"
                                                 )}>
-                                                    {msg.role === 'user' ? <User className="w-4 h-4" strokeWidth={2.5} /> : <Bot className="w-5 h-5" strokeWidth={2} />}
+                                                    {msg.role === 'user' ? <User className="w-4 h-4" strokeWidth={2.5} /> : (
+                                                        <Image
+                                                            src="https://thumbs.dreamstime.com/b/leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-illustration-124792632.jpg"
+                                                            alt="Leo"
+                                                            width={24}
+                                                            height={24}
+                                                            className="w-full h-full object-cover rounded-full"
+                                                        />
+                                                    )}
                                                 </div>
                                                 <div
                                                     className={cn(
@@ -223,8 +238,14 @@ export default function ChatWidget() {
                                     ))}
                                     {isLoading && (
                                         <div className="flex gap-2 self-start max-w-[85%]">
-                                            <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center shrink-0 border border-border mt-1">
-                                                <Bot className="w-5 h-5 text-foreground animate-pulse" />
+                                            <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center shrink-0 border border-border mt-1 overflow-hidden">
+                                                <Image
+                                                    src="https://thumbs.dreamstime.com/b/leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-illustration-124792632.jpg"
+                                                    alt="Leo"
+                                                    width={24}
+                                                    height={24}
+                                                    className="w-full h-full object-cover animate-pulse"
+                                                />
                                             </div>
                                             <div className="bg-card border border-border rounded-2xl px-4 py-3 rounded-tl-sm flex items-center gap-1 shadow-sm">
                                                 <span className="w-1.5 h-1.5 bg-foreground/60 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
@@ -261,16 +282,22 @@ export default function ChatWidget() {
                 <Button
                     size="lg"
                     className={cn(
-                        "h-16 w-16 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 pointer-events-auto hover:scale-110 hover:-translate-y-1 bg-gradient-to-tr from-primary via-purple-500 to-pink-500 border-2 border-white/20",
+                        "h-16 w-16 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 pointer-events-auto hover:scale-110 hover:-translate-y-1 bg-gradient-to-tr from-primary via-purple-500 to-pink-500 border-2 border-white/20 p-0 overflow-hidden",
                         isMobile ? "bottom-6 right-6 fixed" : "",
                     )}
                     onClick={toggleChat}
                 >
-                    <MessageCircle className="w-8 h-8 text-white fill-white/20" strokeWidth={2} />
+                    <Image
+                        src="https://thumbs.dreamstime.com/b/leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-leo-lettering-calligraphy-brush-text-horoscope-zodiac-sign-illustration-124792632.jpg"
+                        alt="Chat with Leo"
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+                    />
                     <span className="sr-only">Open Chat</span>
 
                     {/* Notification Dot */}
-                    <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-pulse" />
+                    <span className="absolute top-2 right-2 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse" />
                 </Button>
             )}
         </div>
