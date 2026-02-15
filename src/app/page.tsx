@@ -148,16 +148,15 @@ export default function Home() {
           <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 text-primary" style={{ textShadow: '0 0 50px hsla(200, 85%, 35%, 0.5)' }}>Visual Overdose</h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
         </div>
-        <div className="container px-4 md:px-6 columns-1 sm:columns-2 lg:columns-3 gap-6 md:gap-10 space-y-6 md:space-y-10">
+        <div className="container px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {PlaceHolderImages.filter(img => img.id.startsWith('dest-')).map((img: ImagePlaceholder) => (
-            <div key={img.id} className="relative break-inside-avoid rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all group neon-border">
+            <div key={img.id} className="relative h-[350px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all group neon-border">
               <Image
                 src={img.imageUrl}
                 alt={img.title}
-                width={400}
-                height={600}
+                fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity" />

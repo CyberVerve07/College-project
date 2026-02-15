@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Sparkles, Send, ArrowRight } from 'lucide-react';
 import ContactForm from './ContactForm';
 import { siteConfig } from '@/lib/config';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
+import FloatingButtons from '@/components/layout/FloatingButtons';
 
 export default function ContactPage() {
   return (
@@ -104,6 +105,9 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* Floating WhatsApp + Phone buttons - Only on Contact page */}
+      <FloatingButtons />
     </div>
   );
 }

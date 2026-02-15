@@ -1,29 +1,50 @@
 import { z } from 'zod';
 
 export const ItineraryRequestSchema = z.object({
-  origin: z.string().describe('The starting point of the journey (e.g., "Delhi", "Mumbai").'),
+  origin: z.string().describe('The starting city of the journey (e.g., "Delhi", "Mumbai").'),
   budget: z.number().describe('The total budget for the trip in Indian Rupees (INR).'),
   days: z.number().describe('The total number of days for the trip.'),
   people: z.number().describe('The number of people travelling.'),
-  destinations: z.array(z.string()).describe('A list of preferred destinations in Himachal Pradesh.'),
+  tripStyle: z.string().describe('The style of trip: Adventure, Nature, Peace, or Spiritual.'),
   vehiclePreference: z.string().describe('The preferred type of vehicle (e.g., Sedan, SUV, Tempo Traveller, or Any).'),
 });
 export type ItineraryRequest = z.infer<typeof ItineraryRequestSchema>;
 
 export const ItineraryResponseSchema = z.object({
+  // Section 1: Best Destinations
+  bestDestinations: z.array(z.object({
+    name: z.string().describe('Name of the destination'),
+    reason: z.string().describe('Why this destination is recommended for the user'),
+  })).describe('Top recommended destinations with reasons.'),
+
+  // Section 2: Day-wise Itinerary
   itinerary: z.array(z.object({
-    day: z.number().describe('The day number of the itinerary (e.g., 1, 2, 3).'),
-    title: z.string().describe('A catchy title for the day\'s plan (e.g., "Arrival in Manali & Local Sightseeing").'),
-    description: z.string().describe('A detailed paragraph describing the activities, places to visit, and experiences for the day. Should be engaging and informative.'),
-    travelTime: z.string().describe('Estimated travel time for the day in hours (e.g., "Approx. 4-5 hours").'),
-  })).describe('A day-wise breakdown of the travel plan.'),
-  estimatedCost: z.number().describe('An estimated total cost for the trip in Indian Rupees (INR), considering travel, accommodation, and food for the given budget.'),
-  recommendedVehicle: z.string().describe('The recommended vehicle type (e.g., "Sedan", "SUV", "Tempo Traveller") based on the number of people and destinations.'),
-  bookingCTA: z.string().describe('A compelling call-to-action text to encourage the user to book the trip.'),
-  foodRecommendations: z.array(z.string()).describe('List of specific local dishes or cafes to try (e.g., "Siddu at Manali", "Trout Fish").'),
-  accommodation: z.array(z.string()).describe('Suggested areas or types of stays (e.g., "Riverside cottages in Jibhi", "Heritage hotel in Shimla").'),
-  thingsToAvoid: z.array(z.string()).describe('Important travel advice on what to avoid (e.g., "Avoid Rohtang Pass on Tuesdays", "Don\'t rely on ATMs in remote Spiti").'),
-  adventures: z.array(z.string()).describe('List of adventure activities included or recommended (e.g., "Paragliding in Bir", "River Rafting in Kullu").'),
-  temples: z.array(z.string()).describe('List of famous temples or monasteries to visit (e.g., "Hadimba Temple", "Key Monastery").'),
+    day: z.number().describe('Day number'),
+    title: z.string().describe('Catchy title for the day'),
+    morning: z.string().describe('Morning plan with specific places/activities'),
+    afternoon: z.string().describe('Afternoon plan with lunch spot and activities'),
+    evening: z.string().describe('Evening plan with dinner or relaxation'),
+    dailyExpense: z.string().describe('Approximate expense for this day (e.g., "₹3,000 - ₹4,000")'),
+  })).describe('Complete day-by-day breakdown.'),
+
+  // Section 3: Travel & Transport Advice
+  transportAdvice: z.array(z.string()).describe('Travel and transport tips (routes, vehicle suggestions, road conditions).'),
+
+  // Section 4: Budget Breakdown
+  budgetBreakdown: z.object({
+    transport: z.string().describe('Approximate transport cost'),
+    accommodation: z.string().describe('Approximate stay cost'),
+    food: z.string().describe('Approximate food cost'),
+    activities: z.string().describe('Approximate activities/entry fees cost'),
+    misc: z.string().describe('Miscellaneous/emergency buffer'),
+    total: z.string().describe('Total estimated cost'),
+  }).describe('Approximate budget breakdown.'),
+
+  // Section 5: Local Tips
+  localTips: z.array(z.string()).describe('Weather advice, clothing tips, common mistakes to avoid, and local insights.'),
+
+  // Booking CTA
+  bookingCTA: z.string().describe('Call-to-action text mentioning Destiny Tour Travel.'),
+  recommendedVehicle: z.string().describe('Best vehicle for this trip.'),
 });
 export type ItineraryResponse = z.infer<typeof ItineraryResponseSchema>;

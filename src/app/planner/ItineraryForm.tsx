@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -22,36 +22,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, CreditCard, CheckCircle2, FileText, Utensils, Bed, Landmark, MountainSnow, AlertTriangle, XCircle } from 'lucide-react';
+import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, FileText, MapPin, Compass, Wallet, Lightbulb, Navigation } from 'lucide-react';
 import { createItinerary } from '@/ai/flows/create-itinerary-flow';
-import { saveBooking } from './actions';
 import { Separator } from '@/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/flows/itinerary-types';
 import { downloadItineraryPdf } from '@/lib/pdf-api';
 import { useRouter } from 'next/navigation';
 
-
-
-// DestinationItem component removed
-
-
-// Removed availableDestinations list for simpler UI
-
 const vehicleTypes = ['Sedan', 'SUV', 'Tempo Traveller', 'Any'];
+const tripStyles = ['Adventure', 'Nature', 'Peace', 'Spiritual'];
 
 const formSchema = z.object({
   origin: z.string().min(2, 'Please enter a valid origin city.'),
   budget: z.coerce.number().int().positive({ message: 'Please enter a valid budget.' }),
   days: z.coerce.number().int().min(1, 'Must be at least 1 day.').max(15, 'Cannot exceed 15 days.'),
   people: z.coerce.number().int().min(1, 'Must be at least 1 person.').max(20, 'Cannot exceed 20 people.'),
-  destinations: z.string().min(2, 'Please enter at least one destination.'),
+  tripStyle: z.string().min(1, 'Please select a trip style.'),
   vehiclePreference: z.string().min(1, 'Please select a vehicle type.'),
 });
 
 export default memo(function ItineraryForm() {
-  // const { user } = useAuth();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +55,7 @@ export default memo(function ItineraryForm() {
       budget: 50000,
       days: 5,
       people: 2,
-      destinations: '',
+      tripStyle: 'Adventure',
       vehiclePreference: 'Any',
     },
   });
@@ -75,19 +66,11 @@ export default memo(function ItineraryForm() {
     setItinerary(null);
 
     try {
-      // Split comma-separated string into array for API
-      const destinationArray = values.destinations.split(',').map(d => d.trim()).filter(d => d);
-
-      const payload = {
-        ...values,
-        destinations: destinationArray
-      };
-
-      const result = await createItinerary(payload);
+      const result = await createItinerary(values);
       setItinerary(result);
     } catch (e) {
       console.error(e);
-      setError('Failed to generate itinerary. The AI model might be busy. Please try again in a moment.');
+      setError('Leo AI could not generate the itinerary. Please try again in a moment.');
       toast({
         variant: 'destructive',
         title: 'An error occurred',
@@ -101,7 +84,7 @@ export default memo(function ItineraryForm() {
   const handleDownloadPdf = async () => {
     if (!itinerary) return;
     try {
-      toast({ title: "Generating PDF...", description: "Please wait while we prepare your itinerary." });
+      toast({ title: "Generating PDF...", description: "Please wait while Leo AI prepares your itinerary." });
       await downloadItineraryPdf(itinerary);
       toast({ title: "Success", description: "PDF downloaded successfully!" });
     } catch (e) {
@@ -109,8 +92,7 @@ export default memo(function ItineraryForm() {
     }
   };
 
-  const handleBooking = (e: React.MouseEvent) => {
-    // Redirect to contact for booking
+  const handleBooking = () => {
     router.push('/contact');
   };
 
@@ -118,6 +100,7 @@ export default memo(function ItineraryForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* Origin */}
           <FormField
             control={form.control}
             name="origin"
@@ -125,21 +108,23 @@ export default memo(function ItineraryForm() {
               <FormItem>
                 <FormLabel>Where are you traveling from?</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Mumbai, Delhi, Bangalore" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
+                  <Input placeholder="e.g., Delhi, Mumbai, Chandigarh" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 transition-all duration-300" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          {/* Budget, Days, People */}
           <div className="grid md:grid-cols-3 gap-6">
             <FormField
               control={form.control}
               name="budget"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Budget (INR)</FormLabel>
+                  <FormLabel>Total Budget (INR)</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 50000" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 50000" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -152,7 +137,7 @@ export default memo(function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of Days</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 5" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-secondary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(35,95%,50%,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 5" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-secondary focus-visible:ring-offset-0 transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -165,7 +150,7 @@ export default memo(function ItineraryForm() {
                 <FormItem>
                   <FormLabel>Number of People</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 2" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-accent focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(150,60%,40%,0.3)] transition-all duration-300" />
+                    <Input type="number" placeholder="e.g., 2" {...field} className="h-12 bg-white/5 border-white/10 text-lg focus-visible:ring-accent focus-visible:ring-offset-0 transition-all duration-300" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -173,50 +158,55 @@ export default memo(function ItineraryForm() {
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="destinations"
-            render={({ field }) => (
-              <FormItem className="relative">
-                <FormLabel className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-                  Your Dream Destinations
-                </FormLabel>
-                <FormDescription>
-                  Where do you want to go? Enter multiple places separated by commas.
-                </FormDescription>
-                <FormControl>
-                  <Input placeholder="e.g., Manali, Kasol, Spiti Valley" {...field} className="h-14 bg-white/5 border-white/10 text-lg focus-visible:ring-primary focus-visible:ring-offset-0 focus-visible:shadow-[0_0_20px_hsla(200,85%,35%,0.3)] transition-all duration-300" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="vehiclePreference"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-lg font-semibold">Select Vehicle</FormLabel>
-                <FormDescription className="mb-3 text-primary/90 font-medium">
-                  Destiny Tour Travel will provide you the best transport services in Himachal in a budget-friendly way.
-                </FormDescription>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
-                      <SelectValue placeholder="Select a preferred vehicle type" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {vehicleTypes.map((type) => (
-                      <SelectItem key={type} value={type}>{type}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {/* Trip Style & Vehicle */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="tripStyle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold">Trip Style</FormLabel>
+                  <FormDescription>What kind of experience are you looking for?</FormDescription>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
+                        <SelectValue placeholder="Select trip style" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {tripStyles.map((style) => (
+                        <SelectItem key={style} value={style}>{style}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="vehiclePreference"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold">Select Vehicle</FormLabel>
+                  <FormDescription>Destiny Tour Travel provides budget-friendly transport.</FormDescription>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="h-12 rounded-xl border-primary/20 bg-white/50 backdrop-blur focus:ring-primary">
+                        <SelectValue placeholder="Select vehicle type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {vehicleTypes.map((type) => (
+                        <SelectItem key={type} value={type}>{type}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <Button
             type="submit"
@@ -243,7 +233,7 @@ export default memo(function ItineraryForm() {
           <div className="flex justify-center items-center">
             <Bot className="h-8 w-8 text-primary animate-bounce" />
           </div>
-          <p className="mt-4 text-muted-foreground">Leo AI is planning your perfect trip. This might take a moment...</p>
+          <p className="mt-4 text-muted-foreground">Leo AI is planning your perfect Himachal trip. This might take a moment...</p>
         </div>
       )}
 
@@ -255,130 +245,122 @@ export default memo(function ItineraryForm() {
       )}
 
       {itinerary && (
-        <div className="mt-12">
+        <div className="mt-12 space-y-10">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold font-headline">Your Custom Itinerary</h2>
-            <p className="text-muted-foreground mt-2">Here is the personalized travel plan crafted just for you.</p>
+            <h2 className="text-3xl font-bold font-headline">Your Leo AI Travel Plan</h2>
+            <p className="text-muted-foreground mt-2">Here is your personalized Himachal trip crafted by Leo AI.</p>
           </div>
 
-          <div className="bg-muted/50 rounded-xl p-6 space-y-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
-                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Budget</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1 text-primary"><IndianRupee className="w-5 h-5" strokeWidth={2.5} /> {itinerary.estimatedCost.toLocaleString()}</p>
-              </div>
-              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
-                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Vehicle</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-secondary"><Car className="w-5 h-5" strokeWidth={2.5} /> {itinerary.recommendedVehicle}</p>
-              </div>
-              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
-                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">Days</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-accent"><Calendar className="w-5 h-5" strokeWidth={2.5} /> {itinerary.itinerary.length}</p>
-              </div>
-              <div className="p-6 bg-background/40 rounded-3xl border border-white/10 shadow-inner">
-                <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-2">People</p>
-                <p className="font-black text-2xl flex items-center justify-center gap-1.5 text-primary"><Users className="w-5 h-5" strokeWidth={2.5} /> {form.getValues('people')}</p>
-              </div>
+          {/* ===== SECTION 1: Best Destinations ===== */}
+          <div className="bg-muted/50 rounded-xl p-6">
+            <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-primary">
+              <MapPin className="w-6 h-6" /> Best Destinations for You
+            </h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              {itinerary.bestDestinations?.map((dest, i) => (
+                <div key={i} className="bg-background/40 p-4 rounded-2xl border border-white/10">
+                  <h4 className="font-bold text-lg text-foreground">{dest.name}</h4>
+                  <p className="text-sm text-muted-foreground mt-1">{dest.reason}</p>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <Separator className="my-8 bg-white/10" />
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              {/* Food & Stay */}
-              <div className="space-y-6">
-                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
-                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-primary"><Utensils className="w-5 h-5" /> Food to Try</h4>
-                  <ul className="space-y-2">
-                    {itinerary.foodRecommendations?.map((item, i) => (
-                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
-                        <span className="text-primary mt-1">•</span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
-                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-secondary"><Bed className="w-5 h-5" /> Where to Stay</h4>
-                  <ul className="space-y-2">
-                    {itinerary.accommodation?.map((item, i) => (
-                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
-                        <span className="text-secondary mt-1">•</span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Temples & Adventures */}
-              <div className="space-y-6">
-                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
-                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-amber-400"><Landmark className="w-5 h-5" /> Temples & Culture</h4>
-                  <ul className="space-y-2">
-                    {itinerary.temples?.map((item, i) => (
-                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
-                        <span className="text-amber-400 mt-1">•</span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="bg-background/40 p-5 rounded-2xl border border-white/5 shadow-sm">
-                  <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-orange-400"><MountainSnow className="w-5 h-5" /> Adventures</h4>
-                  <ul className="space-y-2">
-                    {itinerary.adventures?.map((item, i) => (
-                      <li key={i} className="flex gap-2 text-muted-foreground text-sm">
-                        <span className="text-orange-400 mt-1">•</span> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Things to Avoid - Full Width Warning */}
-            <div className="bg-red-500/5 p-6 rounded-2xl border border-red-500/20 mb-8">
-              <h4 className="flex items-center gap-2 font-bold text-lg mb-4 text-red-400"><AlertTriangle className="w-5 h-5" /> Travel Advisory (What to Avoid)</h4>
-              <ul className="grid md:grid-cols-2 gap-x-4 gap-y-2">
-                {itinerary.thingsToAvoid?.map((item, i) => (
-                  <li key={i} className="flex gap-2 text-red-300/80 text-sm items-start">
-                    <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <Separator />
-
-            <div className="space-y-10">
+          {/* ===== SECTION 2: Day-wise Itinerary ===== */}
+          <div className="bg-muted/50 rounded-xl p-6">
+            <h3 className="flex items-center gap-2 font-bold text-xl mb-6 text-secondary">
+              <Calendar className="w-6 h-6" /> Day-wise Itinerary
+            </h3>
+            <div className="space-y-8">
               {itinerary.itinerary.map((day, index) => (
                 <div key={index} className="flex gap-6 group">
                   <div className="flex flex-col items-center">
                     <div className="bg-primary text-white rounded-2xl h-14 w-14 flex items-center justify-center font-black text-xl shadow-lg ring-4 ring-primary/20 group-hover:scale-110 transition-transform">{day.day}</div>
                     {index < itinerary.itinerary.length - 1 && <div className="w-1 h-full bg-gradient-to-b from-primary/40 to-transparent mt-4 rounded-full"></div>}
                   </div>
-                  <div className="flex-1 pb-10">
-                    <h3 className="font-headline text-3xl font-black mb-2 text-foreground/90">{day.title}</h3>
-                    <div className="flex gap-4 mb-4">
-                      <span className="text-xs font-bold uppercase tracking-widest bg-secondary/10 text-secondary px-3 py-1 rounded-full flex items-center gap-1.5">
-                        <Clock className="w-3 h-3" strokeWidth={2.5} /> {day.travelTime}
-                      </span>
+                  <div className="flex-1 pb-6">
+                    <h4 className="font-headline text-2xl font-black mb-3 text-foreground/90">{day.title}</h4>
+                    <div className="space-y-3">
+                      <div className="bg-background/40 p-3 rounded-xl border border-white/5">
+                        <span className="text-xs font-bold uppercase tracking-widest text-amber-400">☀️ Morning</span>
+                        <p className="text-sm text-muted-foreground mt-1">{day.morning}</p>
+                      </div>
+                      <div className="bg-background/40 p-3 rounded-xl border border-white/5">
+                        <span className="text-xs font-bold uppercase tracking-widest text-orange-400">🌤️ Afternoon</span>
+                        <p className="text-sm text-muted-foreground mt-1">{day.afternoon}</p>
+                      </div>
+                      <div className="bg-background/40 p-3 rounded-xl border border-white/5">
+                        <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">🌙 Evening</span>
+                        <p className="text-sm text-muted-foreground mt-1">{day.evening}</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground/60 mt-2">
+                        <Wallet className="w-3 h-3" /> <span>{day.dailyExpense}</span>
+                      </div>
                     </div>
-                    <p className="leading-relaxed text-lg text-muted-foreground/80">{day.description}</p>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
 
-            <Separator />
+          {/* ===== SECTION 3: Travel & Transport ===== */}
+          <div className="bg-muted/50 rounded-xl p-6">
+            <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-teal-400">
+              <Navigation className="w-6 h-6" /> Travel & Transport Advice
+            </h3>
+            <div className="flex items-center gap-2 mb-4">
+              <Car className="w-5 h-5 text-secondary" />
+              <span className="font-bold text-secondary">Recommended Vehicle: {itinerary.recommendedVehicle}</span>
+            </div>
+            <ul className="space-y-2">
+              {itinerary.transportAdvice?.map((tip, i) => (
+                <li key={i} className="flex gap-2 text-muted-foreground text-sm items-start">
+                  <Compass className="w-4 h-4 mt-0.5 shrink-0 text-teal-400" /> {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="text-center pt-4">
-              <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button onClick={handleBooking} size="lg" className="bg-primary hover:bg-primary/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-primary/20 cursor-pointer">
-                  Book via WhatsApp
-                </Button>
-                <Button onClick={handleDownloadPdf} variant="outline" size="lg" className="bg-background/50 hover:bg-background/80 border-primary/20 min-w-[250px] h-16 rounded-2xl text-xl font-bold backdrop-blur-sm">
-                  <FileText className="mr-2 h-6 w-6" /> Download PDF
-                </Button>
-              </div>
+          {/* ===== SECTION 4: Budget Breakdown ===== */}
+          <div className="bg-muted/50 rounded-xl p-6">
+            <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-amber-400">
+              <IndianRupee className="w-6 h-6" /> Budget Breakdown
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {itinerary.budgetBreakdown && Object.entries(itinerary.budgetBreakdown).map(([key, value]) => (
+                <div key={key} className={`bg-background/40 p-4 rounded-2xl border border-white/10 ${key === 'total' ? 'col-span-2 md:col-span-3 bg-primary/10 border-primary/30' : ''}`}>
+                  <p className="text-xs uppercase tracking-widest font-bold opacity-50 mb-1">{key}</p>
+                  <p className={`font-bold text-lg ${key === 'total' ? 'text-primary text-2xl' : 'text-foreground'}`}>{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ===== SECTION 5: Local Tips ===== */}
+          <div className="bg-muted/50 rounded-xl p-6">
+            <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-green-400">
+              <Lightbulb className="w-6 h-6" /> Local Tips & Advice
+            </h3>
+            <ul className="space-y-3">
+              {itinerary.localTips?.map((tip, i) => (
+                <li key={i} className="flex gap-3 text-muted-foreground text-sm items-start bg-background/40 p-3 rounded-xl border border-white/5">
+                  <span className="text-green-400 font-bold shrink-0">💡</span> {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ===== CTA ===== */}
+          <Separator />
+          <div className="text-center pt-4">
+            <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button onClick={handleBooking} size="lg" className="bg-primary hover:bg-primary/90 text-white min-w-[250px] h-16 rounded-2xl text-xl font-black shadow-xl shadow-primary/20 cursor-pointer">
+                Book via WhatsApp
+              </Button>
+              <Button onClick={handleDownloadPdf} variant="outline" size="lg" className="bg-background/50 hover:bg-background/80 border-primary/20 min-w-[250px] h-16 rounded-2xl text-xl font-bold backdrop-blur-sm">
+                <FileText className="mr-2 h-6 w-6" /> Download PDF
+              </Button>
             </div>
           </div>
         </div>

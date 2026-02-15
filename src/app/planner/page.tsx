@@ -1,4 +1,5 @@
 import ItineraryForm from "./ItineraryForm";
+import ChatWidget from '@/components/ai/ChatWidget';
 
 export default function AIPlannerPage() {
   return (
@@ -26,6 +27,9 @@ export default function AIPlannerPage() {
           <ItineraryForm />
         </div>
       </div>
+
+      {/* Leo AI Chat Assistant - Only on Planner page */}
+      <ChatWidget />
     </div>
   );
 }

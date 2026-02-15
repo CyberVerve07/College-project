@@ -19,44 +19,68 @@ export const createItineraryFlow = ai.defineFlow(
   async (input) => {
     try {
       const prompt = `
-        You are **Leo AI**, an expert local guide and travel planner for Destiny Tour Travel in Himachal Pradesh.
-        Your goal is to create a **highly detailed, immersive, and practical** travel itinerary.
-        
-        KNOWLEDGE BASE (Use this for descriptions, travel times, food, and culture):
-        ${JSON.stringify(HIMACHAL_KNOWLEDGE, null, 2)}
+You are **Leo AI**, a smart and friendly travel assistant by Destiny Tour Travel.
 
-        REQUEST:
-        Create a detailed ${input.days}-day trip to ${input.destinations.join(', ')} for ${input.people} people.
-        Origin: ${input.origin} (Suggest travel route from here if applicable).
-        Budget: ₹${input.budget} (Ensure recommendations fit this budget).
-        Vehicle: ${input.vehiclePreference}.
+Plan a complete Himachal Pradesh trip using the details below.
 
-        RETURN FORMAT (JSON):
-        Return a JSON object with:
-        - estimatedCost (number): Realistic total cost based on mid-range options.
-        - recommendedVehicle (string): Best vehicle for the terrain.
-        - bookingCTA (string): "Contact Destiny Tour Travel to book this exact trip!"
-        - itinerary: Array of days.
-          - day (number)
-          - title (string): Catchy title (e.g., "The Magic of Spiti Valley").
-          - description (string): **THIS IS THE MOST IMPORTANT PART.** Write a full paragraph (approx 50-80 words). 
-            - Describe the vibe of the place.
-            - Mention specific spots to visit in Morning, Afternoon, and Evening.
-            - Include names of famous cafes or restaurants for lunch/dinner.
-            - Mention travel times between spots.
-          - travelTime (string): e.g., "6 hours drive" or "Local exploration".
-        - foodRecommendations: Array of 5-6 specific dishes or famous eateries (e.g., "Cafe 1947", "Siddu at Ghewar's").
-        - accommodation: Array of 3-4 specific areas or types (e.g., "Old Manali Homestays", "Luxury Camps in Jispa").
-        - thingsToAvoid: Array of 4-5 critical tips (safety, scams, roads).
-        - adventures: Array of 3-4 activities available on this route.
-        - temples: Array of 3-4 spiritual places to visit.
-        
-        TONE & STYLE:
-        - Write like a passionate local friend, not a robot.
-        - Use sensory details (e.g., "crisp mountain air", "aroma of pine").
-        - **DO NOT** give generic advice like "Visit local market". Instead say "Stroll through the Mall Road and buy wooden handicrafts."
-        - Ensure the itinerary is logically sequenced (don't jump between far-off places in one day).
-        `;
+User Details:
+- Starting City: ${input.origin}
+- Total Budget (INR): ₹${input.budget}
+- Number of Days: ${input.days}
+- Number of People: ${input.people}
+- Vehicle Preference: ${input.vehiclePreference}
+- Trip Style: ${input.tripStyle}
+
+KNOWLEDGE BASE (Use this data for accuracy on places, food, culture, routes):
+${JSON.stringify(HIMACHAL_KNOWLEDGE, null, 2)}
+
+Rules:
+1. Suggest ONLY Himachal Pradesh destinations.
+2. Keep the plan realistic within the given budget of ₹${input.budget} for ${input.people} people.
+3. Avoid overtraveling — max 2 locations if days ≤ 5. For longer trips, add 1-2 more.
+4. Prefer safe and popular routes.
+5. Mention approximate daily expenses for each day.
+6. Do NOT book anything — only planning.
+7. Match destinations to the trip style: "${input.tripStyle}".
+
+Output Format (strictly follow this JSON structure):
+
+{
+  "bestDestinations": [
+    { "name": "Place Name", "reason": "Why this place suits the user" }
+  ],
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Catchy day title",
+      "morning": "Detailed morning plan with specific places",
+      "afternoon": "Afternoon activities with food/cafe recommendations",
+      "evening": "Evening relaxation, market, sunset spot",
+      "dailyExpense": "₹X,XXX - ₹X,XXX per person"
+    }
+  ],
+  "transportAdvice": ["Tip 1", "Tip 2", "Tip 3"],
+  "budgetBreakdown": {
+    "transport": "₹X,XXX",
+    "accommodation": "₹X,XXX",
+    "food": "₹X,XXX",
+    "activities": "₹X,XXX",
+    "misc": "₹X,XXX",
+    "total": "₹XX,XXX"
+  },
+  "localTips": ["Tip about weather", "Clothing advice", "Common mistake to avoid"],
+  "bookingCTA": "Contact Destiny Tour Travel to book this exact trip!",
+  "recommendedVehicle": "Best vehicle type"
+}
+
+IMPORTANT INSTRUCTIONS:
+- Write in simple, friendly, human language — like a local friend giving advice.
+- Use real names of places, cafes, dishes, temples from the knowledge base.
+- Morning/Afternoon/Evening should each be 2-3 sentences with SPECIFIC details.
+- Budget breakdown should be realistic and add up close to the user's total budget.
+- Give at least 5 local tips covering weather, clothes, food safety, and common tourist mistakes.
+- Transport advice should include route suggestions from ${input.origin}, road conditions, and vehicle tips.
+`;
 
       const { output } = await ai.generate({
         prompt,
@@ -67,80 +91,64 @@ export const createItineraryFlow = ai.defineFlow(
       return output;
 
     } catch (error) {
-      console.error("Itinerary Gen Error:", error);
-      console.error("Itinerary Gen Error:", error);
+      console.error("Leo AI Generation Error:", error);
+      console.log("⚠️ USING FALLBACK LOGIC - AI GENERATION FAILED");
 
-      console.error("Itinerary Gen Error:", error);
-      console.log("⚠️ USING SMART FALLBACK LOGIC - AI GENERATION FAILED");
-
-      // SMART FALLBACK v3: Multi-Destination, No-Repetition & Deep Details
-      const totalDays = input.days;
-      const userDests = input.destinations;
-
-      // 1. Identify relevant districts for the chosen destinations
-      let relevantDistricts = userDests.map(ud =>
-        HIMACHAL_KNOWLEDGE.districts.find(d =>
-          d.keywords.some(k => k.toLowerCase() === ud.toLowerCase()) ||
-          d.name.toLowerCase().includes(ud.toLowerCase())
-        ) || HIMACHAL_KNOWLEDGE.districts[0]
-      );
-
-      // Remove duplicates if multiple destinations map to same district (e.g. Manali & Solang -> Kullu)
-      relevantDistricts = [...new Set(relevantDistricts)];
+      // FALLBACK: Generate a basic but structured response
+      const districts = HIMACHAL_KNOWLEDGE.districts;
+      const tripDests = districts.slice(0, Math.min(2, districts.length));
 
       const fallbackItinerary = [];
-      const usedPlaces = new Set(); // Track to prevent repetition
-
-      // 2. Distribute days across districts
-      for (let i = 0; i < totalDays; i++) {
-        // Rotate through districts: Day 1 -> Dist A, Day 2 -> Dist B, Day 3 -> Dist A...
-        const district = relevantDistricts[i % relevantDistricts.length];
-
-        // Pick a unique popular place
-        let place = district.popular_places.find(p => !usedPlaces.has(p));
-        if (!place) {
-          place = district.popular_places[Math.floor(Math.random() * district.popular_places.length)];
-        }
-        usedPlaces.add(place);
-
-        // Pick unique attributes
-        const activity = district.activities[i % district.activities.length];
+      for (let i = 0; i < input.days; i++) {
+        const district = tripDests[i % tripDests.length];
+        const place = district.popular_places[i % district.popular_places.length];
         const food = district.food[i % district.food.length];
+        const activity = district.activities[i % district.activities.length];
         const culture = district.culture[i % district.culture.length];
-        const dayNum = i + 1;
-
-        let title = "";
-        let desc = "";
-
-        if (dayNum === 1) {
-          title = `Arrival in ${district.name} & Relax`;
-          desc = `Morning: Arrive and check into your hotel (${district.hotels.mid_range}). \nAfternoon: Visit ${place} for a peaceful start. \nEvening: Stroll around the local market. \nFood to Try: ${food}.`;
-        } else if (dayNum === totalDays) {
-          title = `Departure & Souvenirs`;
-          desc = `Morning: One last view of the mountains from ${place}. \nAfternoon: Buy local handicrafts and ${culture} souvenirs. \nJourney back home with memories.`;
-        } else {
-          title = `Exploring ${place} & Culture`;
-          desc = `Morning: Visit the sacred ${culture}. \nAfternoon: Adventure time! Go for ${activity}. \nEvening: Sunset views at ${place}. \nDinner Recommendation: Try authentic ${food} at a local cafe.`;
-        }
 
         fallbackItinerary.push({
-          day: dayNum,
-          title: title,
-          description: desc,
-          travelTime: dayNum === 1 || dayNum === totalDays ? "Traveling" : "Local Sightseeing"
+          day: i + 1,
+          title: i === 0 ? `Arrival in ${district.name}` : i === input.days - 1 ? `Departure Day` : `Exploring ${place}`,
+          morning: i === 0
+            ? `Arrive in ${district.name} from ${input.origin}. Check into your hotel (${district.hotels.mid_range}).`
+            : `Start your morning with a visit to ${place}. Enjoy the fresh mountain air and scenic views.`,
+          afternoon: `Grab lunch and try ${food} at a local restaurant. Then head out for ${activity}.`,
+          evening: i === input.days - 1
+            ? `Pack up souvenirs and start your journey back to ${input.origin}. Safe travels!`
+            : `Visit ${culture} in the evening. Stroll through the local market and enjoy street food.`,
+          dailyExpense: `₹${Math.round(input.budget / input.days / input.people).toLocaleString()} approx per person`,
         });
       }
 
+      const perPersonBudget = input.budget / input.people;
       return {
-        estimatedCost: (input.budget || 25000),
-        recommendedVehicle: input.vehiclePreference || "SUV",
-        bookingCTA: "This is a curated plan based on top local spots. Contact us to book!",
+        bestDestinations: tripDests.map(d => ({
+          name: d.name,
+          reason: `Popular for ${d.activities.slice(0, 2).join(' and ')} with beautiful scenery.`,
+        })),
         itinerary: fallbackItinerary,
-        foodRecommendations: ["Siddu", "Dham", "Trout Fish", "Thukpa", "Momos"],
-        accommodation: ["Homestays", "Boutique Hotels", "Riverside Camps"],
-        thingsToAvoid: ["Driving at night", "Littering in mountains", "Overexertion on Day 1"],
-        adventures: ["Paragliding", "River Rafting", "Trekking"],
-        temples: ["Hadimba Temple", "Jakhu Temple", "Baijnath Temple"]
+        transportAdvice: [
+          `From ${input.origin}, take a Volvo bus or drive via NH to ${tripDests[0].name}.`,
+          `Roads can be narrow in hills — drive carefully and avoid night driving.`,
+          `Keep extra fuel/snacks as remote areas may not have shops.`,
+        ],
+        budgetBreakdown: {
+          transport: `₹${Math.round(perPersonBudget * 0.30).toLocaleString()}`,
+          accommodation: `₹${Math.round(perPersonBudget * 0.30).toLocaleString()}`,
+          food: `₹${Math.round(perPersonBudget * 0.20).toLocaleString()}`,
+          activities: `₹${Math.round(perPersonBudget * 0.10).toLocaleString()}`,
+          misc: `₹${Math.round(perPersonBudget * 0.10).toLocaleString()}`,
+          total: `₹${perPersonBudget.toLocaleString()} per person`,
+        },
+        localTips: [
+          "Carry warm clothes even in summer — nights are cold in the hills.",
+          "Keep cash handy, ATMs are scarce in remote areas like Spiti.",
+          "Don't litter — Himachal has strict eco-tourism rules.",
+          "Book accommodation in advance during peak season (May-June, Dec).",
+          "Stay hydrated and avoid overexertion on Day 1 to prevent altitude sickness.",
+        ],
+        bookingCTA: "Contact Destiny Tour Travel to book this trip at the best price!",
+        recommendedVehicle: input.vehiclePreference === "Any" ? "SUV" : input.vehiclePreference,
       };
     }
   }

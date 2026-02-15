@@ -5,12 +5,10 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import FloatingButtons from '@/components/layout/FloatingButtons';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { siteConfig } from '@/lib/config';
 import { cn } from '@/lib/utils';
 import { ColorSplash } from '@/components/ui/color-splash';
-import ChatWidget from '@/components/ai/ChatWidget';
 import { ThemeProvider } from "@/components/theme-provider"
 
 
@@ -39,7 +37,7 @@ import ErrorBoundary from '@/components/error-boundary';
  * Wraps the entire application with:
  * - Font configurations (PT Sans, Playfair Display)
  * - Global providers (Firebase, ErrorBoundary)
- * - Global UI components (Header, Footer, Toaster, ChatWidget)
+ * - Global UI components (Header, Footer, Toaster)
  */
 export default function RootLayout({
   children,
@@ -69,8 +67,6 @@ export default function RootLayout({
               <Header />
               <main>{children}</main>
               <Footer />
-              <FloatingButtons />
-              <ChatWidget />
               <Toaster />
             </FirebaseClientProvider>
           </ThemeProvider>
