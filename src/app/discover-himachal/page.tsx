@@ -7,6 +7,15 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, MapPin, Sparkles, Utensils, Mountain, Quote, CloudSun, Languages, Wheat } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import { Clock, Info, Calendar } from 'lucide-react';
 
 const facts = [
     {
@@ -36,37 +45,55 @@ const temples = [
         name: "Hadimba Devi Temple",
         location: "Manali",
         description: "An ancient cave temple dedicated to Hidimbi Devi, built in 1553 with a unique pagoda-style roof.",
-        image: "https://www.tourmyholiday.com/pdf/1696233741hidimba-devi-temple1.png"
+        image: "https://www.tourmyholiday.com/pdf/1696233741hidimba-devi-temple1.png",
+        bestTime: "March to June",
+        entryFee: "Free",
+        timings: "8:00 AM - 6:00 PM"
     },
     {
         name: "Jakhu Temple",
         location: "Shimla",
         description: "Dedicated to Lord Hanuman, this temple sits on the highest peak of Shimla and features a giant 108-foot statue.",
-        image: "https://i0.wp.com/himtimes.com/wp-content/uploads/2023/01/Jakhu-temple-Unique-history-first-choice-tourists-2.jpg?resize=696%2C434&ssl=1"
+        image: "https://i0.wp.com/himtimes.com/wp-content/uploads/2023/01/Jakhu-temple-Unique-history-first-choice-tourists-2.jpg?resize=696%2C434&ssl=1",
+        bestTime: "Throughout the year",
+        entryFee: "Free",
+        timings: "5:00 AM - 9:00 PM"
     },
     {
         name: "Baijnath Temple",
         location: "Kangra",
         description: "A 13th-century Shiva temple known for its exquisite Nagara style architecture and peaceful aura.",
-        image: "https://akm-img-a-in.tosshub.com/sites/indiacontent/0/images/product/public/03042019/00/01/55/42/90/29/29/91/1554290292991/659-a-view-of-the-ancient-shiva-temple-in-image-88005500_20190403_020.jpg"
+        image: "https://akm-img-a-in.tosshub.com/sites/indiacontent/0/images/product/public/03042019/00/01/55/42/90/29/29/91/1554290292991/659-a-view-of-the-ancient-shiva-temple-in-image-88005500_20190403_020.jpg",
+        bestTime: "September to June",
+        entryFee: "Free",
+        timings: "6:00 AM - 8:00 PM"
     },
     {
         name: "Masroor Rock Cut Temple",
         location: "Kangra",
         description: "Known as the Himalayan Pyramid, a complex of monolith rock-cut temples dating back to the 8th century.",
-        image: "https://himalayasdigital.com/wp-content/uploads/2024/06/Masroor-Rock-Cut-Temple-Kangra.jpg"
+        image: "https://himalayasdigital.com/wp-content/uploads/2024/06/Masroor-Rock-Cut-Temple-Kangra.jpg",
+        bestTime: "October to March",
+        entryFee: "INR 25 (Indians), INR 300 (Foreigners)",
+        timings: "9:00 AM - 5:00 PM"
     },
     {
         name: "Jwala Ji Temple",
         location: "Kangra",
         description: "A unique temple with no idol, where eternal flames (Jyotis) have been burning naturally for centuries.",
-        image: "https://jawalaji.in/wp-content/uploads/2015/09/jwaladevi-Jwala-ji-slide7.jpg"
+        image: "https://jawalaji.in/wp-content/uploads/2015/09/jwaladevi-Jwala-ji-slide7.jpg",
+        bestTime: "Anytime",
+        entryFee: "Free",
+        timings: "5:00 AM - 10:00 PM"
     },
     {
         name: "Chamunda Devi",
         location: "Dharamshala",
         description: "A powerful shrine dedicated to Goddess Chamunda, situated on the banks of the Baner River with Dhauladhar views.",
-        image: "https://www.himalayanadrenaline.com/wp-content/uploads/2024/07/Chamunda-Devi-Temple.webp"
+        image: "https://www.himalayanadrenaline.com/wp-content/uploads/2024/07/Chamunda-Devi-Temple.webp",
+        bestTime: "April to October",
+        entryFee: "Free",
+        timings: "6:00 AM - 8:00 PM"
     }
 ];
 
@@ -313,9 +340,61 @@ export default function DiscoverHimachal() {
                                 <div className="p-6 flex-1 flex flex-col">
                                     <h3 className="text-2xl font-bold mb-3 font-headline group-hover:text-primary transition-colors">{temple.name}</h3>
                                     <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">{temple.description}</p>
-                                    <Button variant="ghost" className="w-full justify-between hover:bg-primary/5 hover:text-primary group/btn">
-                                        View Details <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                                    </Button>
+
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <Button variant="ghost" className="w-full justify-between hover:bg-primary/5 hover:text-primary group/btn">
+                                                View Details <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                            </Button>
+                                        </DialogTrigger>
+                                        <DialogContent className="sm:max-w-[425px] md:max-w-2xl overflow-hidden p-0 rounded-3xl">
+                                            <div className="relative h-64 w-full">
+                                                <Image
+                                                    src={temple.image}
+                                                    alt={temple.name}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                                                <div className="absolute bottom-6 left-6 text-white">
+                                                    <DialogTitle className="text-3xl font-bold font-headline mb-2 text-white">{temple.name}</DialogTitle>
+                                                    <div className="flex items-center gap-2 text-sm font-medium uppercase tracking-wider bg-white/20 backdrop-blur-md px-3 py-1 rounded-full w-fit">
+                                                        <MapPin className="h-4 w-4" /> {temple.location}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="p-6 md:p-8 space-y-6">
+                                                <DialogDescription className="text-base text-foreground/80 leading-relaxed">
+                                                    {temple.description}
+                                                </DialogDescription>
+
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-border">
+                                                    <div className="space-y-2">
+                                                        <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wide">
+                                                            <Clock className="h-4 w-4" /> Timings
+                                                        </div>
+                                                        <p className="text-sm font-medium">{temple.timings}</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wide">
+                                                            <Calendar className="h-4 w-4" /> Best Time
+                                                        </div>
+                                                        <p className="text-sm font-medium">{temple.bestTime}</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wide">
+                                                            <Info className="h-4 w-4" /> Entry Fee
+                                                        </div>
+                                                        <p className="text-sm font-medium">{temple.entryFee}</p>
+                                                    </div>
+                                                </div>
+
+                                                <Button className="w-full rounded-xl h-12 text-lg font-bold" asChild>
+                                                    <Link href="/contact">Book a Trip Here</Link>
+                                                </Button>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
                                 </div>
                             </motion.div>
                         ))}
