@@ -171,7 +171,7 @@ export default memo(function ItineraryForm() {
       await downloadItineraryPdf(itinerary);
       toast({ title: "Success", description: "PDF downloaded successfully!" });
     } catch (e) {
-      toast({ variant: "destructive", title: "Error", description: "Failed to download PDF. Make sure the Java backend is running on port 8080." });
+      toast({ variant: "destructive", title: "Error", description: "Failed to generate PDF. Please try again." });
     }
   };
 
