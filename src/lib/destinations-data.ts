@@ -4,10 +4,10 @@ import { PlaceHolderImagesMap } from './placeholder-images';
 export const initialDestinations = [
   {
     name: 'Dharamshala',
-    description: 'Home to the Dalai Lama, Dharamshala is a vibrant town known for its Tibetan culture, monasteries, and stunning views of the Dhauladhar range. A perfect blend of spirituality and natural beauty.',
+    description: 'Nestled in the Kangra Valley against the Dhauladhar mountains, Dharamshala is the winter capital of Himachal Pradesh. It is divided into Lower Dharamshala (commercial center) and Upper Dharamshala (McLeod Ganj), the abode of the Dalai Lama. It offers a unique blend of Tibetan culture, British colonial history, and spiritual serenity.',
     imageUrl: PlaceHolderImagesMap.get('dest-dharamshala')?.imageUrl,
     category: 'Spiritual & Cultural',
-    bestTimeToVisit: 'March to June, September to November',
+    bestTimeToVisit: 'March to June (Pleasant Summer), September to November (Clear Views)',
     attractions: ['McLeod Ganj', 'Namgyal Monastery', 'Bhagsu Nag Temple', 'Dal Lake'],
     coordinates: { lat: 32.2190, lng: 76.3234 }
   },
@@ -22,10 +22,10 @@ export const initialDestinations = [
   },
   {
     name: 'Shimla',
-    description: 'The former summer capital of British India, Shimla is a charming hill station with colonial architecture, a bustling mall road, and panoramic views. Its pleasant weather and accessibility make it a year-round destination.',
+    description: 'The "Queen of Hills" and former summer capital of British India, Shimla sits atop seven majestic hills. Famous for its neo-Gothic colonial architecture, the pedestrian-only Mall Road, and the UNESCO heritage Kalka-Shimla Toy Train. It remains a bustling hub of history, culture, and romance.',
     imageUrl: PlaceHolderImagesMap.get('dest-shimla')?.imageUrl,
     category: 'Hill Station & Heritage',
-    bestTimeToVisit: 'March to June, October to February (for snow)',
+    bestTimeToVisit: 'March to June (Pleasant Summer), November to February (Winter/Snow)',
     attractions: ['The Ridge', 'Mall Road', 'Jakhoo Temple', 'Kufri'],
     coordinates: { lat: 31.1048, lng: 77.1734 }
   },
@@ -40,10 +40,10 @@ export const initialDestinations = [
   },
   {
     name: 'Kangra',
-    description: 'A vast and beautiful valley, Kangra is dotted with tea gardens, ancient forts, and temples. It provides a more serene and offbeat experience compared to other bustling tourist spots.',
+    description: 'One of the oldest inhabited places in India, Kangra is a land of ancient spirituality and valor. Dominated by the majestic Kangra Fort and the sacred Masroor Rock Cut Temple, it is also known for its lush tea gardens and the artistic legacy of Kangra miniature paintings.',
     imageUrl: PlaceHolderImagesMap.get('dest-kangra')?.imageUrl,
     category: 'Nature & Heritage',
-    bestTimeToVisit: 'September to June',
+    bestTimeToVisit: 'September to November (Autumn), February to April (Spring)',
     attractions: ['Kangra Fort', 'Masroor Rock Cut Temple', 'Palampur Tea Gardens'],
     coordinates: { lat: 32.0998, lng: 76.2691 }
   },
