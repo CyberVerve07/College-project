@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Map, List } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { WeatherWidget } from '@/components/ui/WeatherWidget';
 
 const TripMap = dynamic(() => import('@/components/ui/TripMap'), {
   ssr: false,
@@ -241,6 +242,10 @@ export default function DestinationsPage() {
                           <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 line-clamp-3">
                             {dest.description}
                           </p>
+
+                          {dest.coordinates && (
+                            <WeatherWidget lat={dest.coordinates.lat} lng={dest.coordinates.lng} />
+                          )}
 
                           <div className="space-y-4 text-sm text-foreground/80 mb-6 flex-grow">
                             <div className="flex items-center gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
