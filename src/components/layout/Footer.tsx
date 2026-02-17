@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-secondary">Navigate</h3>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Navigate</h3>
           <ul className="space-y-4">
             {[
               { id: 'home', label: 'Home' },
@@ -54,7 +54,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-secondary">Our Fleet</h3>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Our Fleet</h3>
           <ul className="space-y-4">
             {[
               { name: 'Innova Crysta', type: 'Premium SUV' },

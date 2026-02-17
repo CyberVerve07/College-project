@@ -75,6 +75,10 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground bg-mesh selection:bg-secondary/30 selection:text-secondary-foreground;
     background-attachment: fixed;
@@ -192,4 +196,123 @@
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Ripple Effect */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* Breathing Animation */
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* Shimmer Effect for Loading */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Fade in Stagger */
+.stagger-fade-in>* {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.stagger-fade-in>*:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stagger-fade-in>*:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stagger-fade-in>*:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stagger-fade-in>*:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.stagger-fade-in>*:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.stagger-fade-in>*:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
