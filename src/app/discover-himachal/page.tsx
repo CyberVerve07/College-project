@@ -136,18 +136,12 @@ const cultureInsights = [
         color: "bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
     },
     {
-        category: "Weather",
-        title: "Diverse Climate",
-        icon: <CloudSun className="h-4 w-4 text-cyan-500" />,
-        content: "Varies from hot and sub-humid tropical in southern tracts to cold, alpine, and glacial in northern and eastern mountain ranges.",
+        category: "Art & Crafts",
+        title: "Pahari Paintings",
+        icon: <Camera className="h-4 w-4 text-cyan-500" />,
+        content: "Famous for Kangra and Basholi styles of miniature paintings, intricate wood carvings, and beautiful Himachali shawls.",
         color: "bg-cyan-100 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300"
     }
-];
-
-const seasons = [
-    { name: "Summer", months: "Apr - Jun", temp: "5°C to 24°C", desc: "Pleasant weather, perfect for sightseeing and trekking." },
-    { name: "Monsoon", months: "Jul - Sep", temp: "15°C to 25°C", desc: "Lush greenery, but risk of landslides. Great for nature lovers." },
-    { name: "Winter", months: "Nov - Mar", temp: "-5°C to 10°C", desc: "Snowfall in many areas. Ideal for skiing and snow activities." }
 ];
 
 const regions = [
@@ -320,14 +314,19 @@ export default function DiscoverHimachal() {
                     >
                         The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-primary">Himachal</span>
                     </motion.h1>
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed"
+                        className="text-white/90 max-w-4xl mx-auto leading-relaxed space-y-4"
                     >
-                        Beyond the snow-capped peaks lies a land of ancient gods, vibrant culture, and flavors that warm the heart.
-                    </motion.p>
+                        <p className="text-lg md:text-xl font-medium drop-shadow-lg">
+                            Nestled in the western Himalayas, Himachal Pradesh is a majestic realm where ancient history, vibrant culture, and breathtaking natural beauty converge. Officially formed in 1971, this state's history dates back to the Indus Valley Civilization, later flourishing under the Maurya and Gupta empires, and serving as the summer capital of British India.
+                        </p>
+                        <p className="hidden md:block text-base md:text-lg text-white/80 drop-shadow-md">
+                            Known as "Dev Bhoomi" (Land of Gods), the state is steeped in mythology, echoing through thousands of ancient temples and monasteries perched on precarious cliffs. The unique fusion of Hindu and Tibetan cultures gives rise to colorful festivals like Kullu Dussehra and Losar. Beyond its spiritual heart, Himachal offers exquisite Pahari miniature paintings, the world's highest post office in Spiti, and renowned tea gardens in Kangra. It is a land that invites you not just to travel, but to immerse yourself in its timeless traditions.
+                        </p>
+                    </motion.div>
                 </div>
             </section>
 
@@ -401,29 +400,6 @@ export default function DiscoverHimachal() {
                         ))}
                     </div>
 
-                    {/* Weather Widget Style */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        className="bg-slate-900 text-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl overflow-hidden relative"
-                    >
-                        <div className="absolute top-0 right-0 p-12 opacity-10">
-                            <CloudSun className="w-64 h-64" />
-                        </div>
-                        <div className="relative z-10">
-                            <h3 className="text-3xl font-bold mb-8">Seasonal Breakdown</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {seasons.map((season, idx) => (
-                                    <div key={idx} className="space-y-2 border-l-2 border-white/20 pl-6">
-                                        <h4 className="text-xl font-bold text-primary-foreground">{season.name}</h4>
-                                        <span className="text-sm font-mono text-white/60 block">{season.months}</span>
-                                        <div className="text-2xl font-bold">{season.temp}</div>
-                                        <p className="text-sm text-white/80">{season.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
                 </div>
             </section>
 
