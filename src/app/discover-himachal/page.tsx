@@ -251,10 +251,10 @@ export default function DiscoverHimachal() {
                     className="absolute inset-0 z-0"
                 >
                     <Image
-                        src="https://www.japjitravel.com/blog/wp-content/uploads/2015/07/Khajjair.jpg"
-                        alt="Himalayan Peaks"
+                        src="https://images.unsplash.com/photo-1549479367-17edb2be486f?q=80&w=2670&auto=format&fit=crop"
+                        alt="Himalayan Mountains"
                         fill
-                        className="object-cover brightness-50"
+                        className="object-cover"
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background" />
@@ -296,35 +296,42 @@ export default function DiscoverHimachal() {
                     </div>
                 </motion.div>
 
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6">
+                <div className="relative z-10 w-full h-full flex flex-col justify-center items-center px-4 max-w-5xl mx-auto pt-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
+                        className="mb-8"
                     >
-                        <span className="inline-block py-1 px-3 rounded-full bg-primary/20 border border-primary/50 text-white backdrop-blur-md text-sm font-medium tracking-wider mb-4">
-                            DISCOVER THE UNSEEN
+                        <span className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-black/30 border border-white/10 text-white backdrop-blur-xl text-xs sm:text-sm font-semibold tracking-[0.2em] shadow-2xl">
+                            <Sparkles className="w-4 h-4 text-cyan-400" /> DISCOVER THE UNSEEN
                         </span>
                     </motion.div>
+
                     <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-5xl md:text-7xl font-black text-white tracking-tighter drop-shadow-2xl font-headline"
+                        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+                        className="text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter drop-shadow-2xl font-headline text-center mb-8 leading-[1.1]"
                     >
-                        The Soul of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-primary">Himachal</span>
+                        The Soul of <br className="md:hidden" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-cyan-100 filter drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                            Himachal
+                        </span>
                     </motion.h1>
+
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6 }}
-                        className="text-white/90 max-w-4xl mx-auto leading-relaxed space-y-4"
+                        className="text-white/90 max-w-3xl mx-auto text-center space-y-6"
                     >
-                        <p className="text-lg md:text-xl font-medium drop-shadow-lg">
-                            Nestled in the western Himalayas, Himachal Pradesh is a majestic realm where ancient history, vibrant culture, and breathtaking natural beauty converge. Officially formed in 1971, this state's history dates back to the Indus Valley Civilization, later flourishing under the Maurya and Gupta empires, and serving as the summer capital of British India.
+                        <p className="text-lg md:text-2xl font-light drop-shadow-lg leading-relaxed tracking-wide font-serif">
+                            Nestled in the western Himalayas, Himachal Pradesh is a majestic realm where ancient history, vibrant culture, and breathtaking natural beauty converge.
                         </p>
-                        <p className="hidden md:block text-base md:text-lg text-white/80 drop-shadow-md">
-                            Known as "Dev Bhoomi" (Land of Gods), the state is steeped in mythology, echoing through thousands of ancient temples and monasteries perched on precarious cliffs. The unique fusion of Hindu and Tibetan cultures gives rise to colorful festivals like Kullu Dussehra and Losar. Beyond its spiritual heart, Himachal offers exquisite Pahari miniature paintings, the world's highest post office in Spiti, and renowned tea gardens in Kangra. It is a land that invites you not just to travel, but to immerse yourself in its timeless traditions.
+                        <hr className="w-24 border-white/20 mx-auto my-8" />
+                        <p className="hidden md:block text-base items-center md:text-lg text-white/70 drop-shadow-md font-light leading-loose tracking-wide max-w-2xl mx-auto">
+                            Known as "Dev Bhoomi" (Land of Gods), the state is steeped in mythology, echoing through thousands of ancient temples and monasteries perched on precarious cliffs. The unique fusion of Hindu and Tibetan cultures gives rise to colorful festivals, exquisite Pahari miniature paintings, and a legacy that invites you to immerse yourself in its timeless traditions.
                         </p>
                     </motion.div>
                 </div>
