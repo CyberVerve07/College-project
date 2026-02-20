@@ -221,19 +221,19 @@ const festivals = [
         name: "Kullu Dussehra",
         time: "October",
         desc: "A grand deeply religious week-long festival attracting thousands of deities from nearby villages.",
-        image: "https://www.tourmyindia.com/states/himachal/image/kullu-dussehra.jpg"
+        image: "https://tse3.mm.bing.net/th/id/OIP.R__wY-umzSvpSqb-3WqiWQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
     },
     {
         name: "Minjar Fair",
         time: "July / August",
         desc: "Celebrated in Chamba to offer thanks to deities for the good yield of maize crops.",
-        image: "https://himalayasdigital.com/wp-content/uploads/2024/07/Minjar-Mela-Chamba-1024x683.jpg"
+        image: "https://www.tourmyindia.com/socialimg/minjar-mela-himachal.jpg"
     },
     {
         name: "Losar Festival",
         time: "February / March",
         desc: "The Tibetan New Year, celebrated with great enthusiasm and vibrant mask dances in Lahaul, Spiti, and Kinnaur.",
-        image: "https://static.india.com/wp-content/uploads/2021/02/Losar.jpg"
+        image: "https://tse4.mm.bing.net/th/id/OIP.1uygjzH_G1JsO-j_cUzchQHaE8?w=768&h=512&rs=1&pid=ImgDetMain&o=7&rm=3"
     }
 ];
 
