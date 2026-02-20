@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, MapPin, Sparkles, Utensils, Mountain, Quote, CloudSun, Languages, Wheat } from 'lucide-react';
+import { ArrowRight, MapPin, Sparkles, Utensils, Mountain, Quote, CloudSun, Languages, Wheat, Tent, Wind, Waves, Compass, Camera, Map as MapIcon, PartyPopper } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import {
     Dialog,
@@ -150,6 +150,93 @@ const seasons = [
     { name: "Winter", months: "Nov - Mar", temp: "-5°C to 10°C", desc: "Snowfall in many areas. Ideal for skiing and snow activities." }
 ];
 
+const regions = [
+    {
+        name: "Kullu & Manali",
+        title: "Valley of Gods",
+        desc: "Famous for its lush green mountains, apple orchards, and the vibrant Beas river.",
+        image: "https://www.tourmyholiday.com/pdf/1696233741hidimba-devi-temple1.png",
+        highlights: ["Rohtang Pass", "Solang Valley", "Hadimba Temple"]
+    },
+    {
+        name: "Kangra Valley",
+        title: "Seat of Heritage",
+        desc: "Known for ancient temples, sprawling tea gardens, and the majestic Dhauladhar ranges.",
+        image: "https://himalayasdigital.com/wp-content/uploads/2024/06/Masroor-Rock-Cut-Temple-Kangra.jpg",
+        highlights: ["Dharamshala", "McLeod Ganj", "Kangra Fort"]
+    },
+    {
+        name: "Spiti Valley",
+        title: "The Middle Land",
+        desc: "A cold desert mountain valley located high in the Himalayas, known for its surreal landscapes.",
+        image: "https://www.holidify.com/images/bgImages/SPITI.jpg",
+        highlights: ["Key Monastery", "Chandratal Lake", "Kaza"]
+    },
+    {
+        name: "Kinnaur",
+        title: "Land of Fairytales",
+        desc: "Renowned for its delicious apples, gorgeous terrain, and thrilling, dangerous roads.",
+        image: "https://www.trawell.in/admin/images/upload/93442431Kalpa_Main.jpg",
+        highlights: ["Kalpa", "Sangla Valley", "Chitkul"]
+    }
+];
+
+const adventures = [
+    {
+        title: "Trekking",
+        location: "Across Himachal",
+        desc: "From moderate trails in Triund to challenging passes like Pin Parvati.",
+        icon: <Mountain className="w-8 h-8" />,
+        color: "bg-emerald-500/10 text-emerald-500",
+        hoverBorder: "hover:border-emerald-500/50"
+    },
+    {
+        title: "Paragliding",
+        location: "Bir Billing",
+        desc: "Soar high in the second highest paragliding site in the world.",
+        icon: <Wind className="w-8 h-8" />,
+        color: "bg-cyan-500/10 text-cyan-500",
+        hoverBorder: "hover:border-cyan-500/50"
+    },
+    {
+        title: "River Rafting",
+        location: "Kullu",
+        desc: "Battle the rapids of the mighty Beas, Sutlej, and Ravi rivers.",
+        icon: <Waves className="w-8 h-8" />,
+        color: "bg-blue-500/10 text-blue-500",
+        hoverBorder: "hover:border-blue-500/50"
+    },
+    {
+        title: "Camping",
+        location: "Spiti & Lahaul",
+        desc: "Sleep under a blanket of stars in the pristine Himalayan valleys.",
+        icon: <Tent className="w-8 h-8" />,
+        color: "bg-orange-500/10 text-orange-500",
+        hoverBorder: "hover:border-orange-500/50"
+    }
+];
+
+const festivals = [
+    {
+        name: "Kullu Dussehra",
+        time: "October",
+        desc: "A grand deeply religious week-long festival attracting thousands of deities from nearby villages.",
+        image: "https://www.tourmyindia.com/states/himachal/image/kullu-dussehra.jpg"
+    },
+    {
+        name: "Minjar Fair",
+        time: "July / August",
+        desc: "Celebrated in Chamba to offer thanks to deities for the good yield of maize crops.",
+        image: "https://himalayasdigital.com/wp-content/uploads/2024/07/Minjar-Mela-Chamba-1024x683.jpg"
+    },
+    {
+        name: "Losar Festival",
+        time: "February / March",
+        desc: "The Tibetan New Year, celebrated with great enthusiasm and vibrant mask dances in Lahaul, Spiti, and Kinnaur.",
+        image: "https://static.india.com/wp-content/uploads/2021/02/Losar.jpg"
+    }
+];
+
 export default function DiscoverHimachal() {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -177,6 +264,42 @@ export default function DiscoverHimachal() {
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background" />
+
+                    {/* Floating Hero Elements */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                        <motion.div
+                            animate={{ y: [0, -30, 0], opacity: [0.2, 0.5, 0.2] }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute top-[20%] left-[15%]"
+                        >
+                            <CloudSun className="w-32 h-32 text-white/30 blur-[2px]" />
+                        </motion.div>
+                        <motion.div
+                            animate={{ y: [0, 40, 0], opacity: [0.1, 0.4, 0.1] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                            className="absolute top-[30%] right-[20%]"
+                        >
+                            <Mountain className="w-40 h-40 text-white/20 blur-[1px]" />
+                        </motion.div>
+                        <motion.div
+                            animate={{ y: [0, -20, 0], x: [0, 20, 0], opacity: [0.3, 0.6, 0.3] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                            className="absolute bottom-[30%] left-[25%] bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 shadow-xl"
+                        >
+                            <div className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
+                                <MapPin className="w-4 h-4 text-primary" /> Spiti Valley
+                            </div>
+                        </motion.div>
+                        <motion.div
+                            animate={{ y: [0, 20, 0], x: [0, -20, 0], opacity: [0.2, 0.5, 0.2] }}
+                            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                            className="absolute top-[40%] right-[10%] bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 shadow-xl"
+                        >
+                            <div className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
+                                <Sparkles className="w-4 h-4 text-cyan-400" /> Dev Bhoomi
+                            </div>
+                        </motion.div>
+                    </div>
                 </motion.div>
 
                 <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6">
@@ -301,6 +424,92 @@ export default function DiscoverHimachal() {
                             </div>
                         </div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* --- REGIONS OF HIMACHAL --- */}
+            <section className="py-24 bg-primary/5 relative overflow-hidden">
+                <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16">
+                        <span className="text-primary font-bold tracking-widest uppercase text-sm">Explore Landscapes</span>
+                        <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Majestic Regions</h2>
+                        <div className="w-24 h-1 bg-primary/50 mx-auto mt-6 rounded-full" />
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {regions.map((region, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group relative bg-background rounded-[2rem] overflow-hidden border border-border/50 flex flex-col sm:flex-row hover:shadow-2xl transition-all duration-300"
+                            >
+                                <div className="relative h-64 sm:h-auto sm:w-2/5 overflow-hidden">
+                                    <Image
+                                        src={region.image}
+                                        alt={region.name}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                                </div>
+                                <div className="p-8 sm:w-3/5 flex flex-col justify-center">
+                                    <div className="text-primary font-bold uppercase tracking-widest text-xs mb-2">
+                                        {region.title}
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-4 font-headline group-hover:text-primary transition-colors">{region.name}</h3>
+                                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                                        {region.desc}
+                                    </p>
+                                    <div className="flex flex-wrap gap-2">
+                                        {region.highlights.map((highlight, idx) => (
+                                            <span key={idx} className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                                                {highlight}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- ADVENTURE & THRILLS --- */}
+            <section className="py-24 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                        <div>
+                            <span className="text-primary font-bold tracking-widest uppercase text-sm">Adrenaline Rush</span>
+                            <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Adventure & Thrills</h2>
+                        </div>
+                        <Compass className="h-12 w-12 text-muted-foreground/20 hidden md:block" />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {adventures.map((adv, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4, delay: index * 0.1 }}
+                                className={`bg-background border border-border/50 p-8 rounded-[2rem] hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group cursor-pointer ${adv.hoverBorder}`}
+                            >
+                                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform ${adv.color}`}>
+                                    {adv.icon}
+                                </div>
+                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{adv.title}</h3>
+                                <div className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+                                    <MapPin className="w-3 h-3" /> {adv.location}
+                                </div>
+                                <p className="text-muted-foreground text-sm leading-relaxed">
+                                    {adv.desc}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -433,6 +642,53 @@ export default function DiscoverHimachal() {
                                     <h3 className="text-3xl font-bold mb-2">{food.name}</h3>
                                     <p className="text-white/80 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                         {food.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* --- VIBRANT FESTIVALS --- */}
+            <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
+
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                        <div>
+                            <span className="text-cyan-400 font-bold tracking-widest uppercase text-sm">Living Traditions</span>
+                            <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Vibrant Festivals</h2>
+                        </div>
+                        <PartyPopper className="h-12 w-12 text-white/10 hidden md:block" />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {festivals.map((fest, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: index * 0.2 }}
+                                className="group relative rounded-[2rem] overflow-hidden bg-slate-800/50 border border-white/10"
+                            >
+                                <div className="relative h-64 w-full">
+                                    <Image
+                                        src={fest.image}
+                                        alt={fest.name}
+                                        fill
+                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+
+                                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider text-white border border-white/20">
+                                        {fest.time}
+                                    </div>
+                                </div>
+                                <div className="p-8">
+                                    <h3 className="text-2xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">{fest.name}</h3>
+                                    <p className="text-white/70 text-sm leading-relaxed">
+                                        {fest.desc}
                                     </p>
                                 </div>
                             </motion.div>
