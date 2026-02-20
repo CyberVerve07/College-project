@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'image3.mouthshut.com',
+        hostname: '**.mouthshut.com',
       },
       {
         protocol: 'https',
@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.india.com',
+        hostname: '**.india.com',
       },
       {
         protocol: 'https',
@@ -141,13 +141,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'commons.wikimedia.org',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'upload.wikimedia.org',
+        hostname: '**.wikimedia.org',
         port: '',
         pathname: '/**',
       },
@@ -189,13 +183,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'imgd.aeplcdn.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'imgd-ct.aeplcdn.com',
+        hostname: '**.aeplcdn.com',
         port: '',
         pathname: '/**',
       },
@@ -301,12 +289,7 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'static.india.com',
-        port: '',
-        pathname: '/**',
-      },
+
     ],
   },
 };
