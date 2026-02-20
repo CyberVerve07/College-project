@@ -258,42 +258,6 @@ export default function DiscoverHimachal() {
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-background" />
-
-                    {/* Floating Hero Elements */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                        <motion.div
-                            animate={{ y: [0, -30, 0], opacity: [0.2, 0.5, 0.2] }}
-                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-[20%] left-[15%]"
-                        >
-                            <CloudSun className="w-32 h-32 text-white/30 blur-[2px]" />
-                        </motion.div>
-                        <motion.div
-                            animate={{ y: [0, 40, 0], opacity: [0.1, 0.4, 0.1] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute top-[30%] right-[20%]"
-                        >
-                            <Mountain className="w-40 h-40 text-white/20 blur-[1px]" />
-                        </motion.div>
-                        <motion.div
-                            animate={{ y: [0, -20, 0], x: [0, 20, 0], opacity: [0.3, 0.6, 0.3] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                            className="absolute bottom-[30%] left-[25%] bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 shadow-xl"
-                        >
-                            <div className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
-                                <MapPin className="w-4 h-4 text-primary" /> Spiti Valley
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            animate={{ y: [0, 20, 0], x: [0, -20, 0], opacity: [0.2, 0.5, 0.2] }}
-                            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                            className="absolute top-[40%] right-[10%] bg-white/10 backdrop-blur-md rounded-full px-6 py-2 border border-white/20 shadow-xl"
-                        >
-                            <div className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
-                                <Sparkles className="w-4 h-4 text-cyan-400" /> Dev Bhoomi
-                            </div>
-                        </motion.div>
-                    </div>
                 </motion.div>
 
                 <div className="relative z-10 w-full h-full flex flex-col justify-center items-center px-4 max-w-5xl mx-auto pt-20">
