@@ -251,7 +251,7 @@ export default function DiscoverHimachal() {
                     className="absolute inset-0 z-0"
                 >
                     <Image
-                        src="https://images.unsplash.com/photo-1549479367-17edb2be486f?q=80&w=2670&auto=format&fit=crop"
+                        src="https://www.maharanacab.com/wp-content/uploads/2021/09/Himachal-Pradesh.jpg"
                         alt="Himalayan Mountains"
                         fill
                         className="object-cover"

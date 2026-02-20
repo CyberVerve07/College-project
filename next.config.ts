@@ -267,6 +267,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'www.maharanacab.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'st2.depositphotos.com',
         port: '',
         pathname: '/**',
