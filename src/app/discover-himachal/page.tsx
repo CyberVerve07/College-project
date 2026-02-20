@@ -490,9 +490,9 @@ export default function DiscoverHimachal() {
             </section>
 
             {/* --- DIVINE DESTINATIONS (TEMPLES) --- */}
-            <section className="py-24">
+            <section className="py-12">
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex justify-between items-end mb-12">
+                    <div className="flex justify-between items-end mb-8">
                         <div>
                             <span className="text-primary font-bold tracking-widest uppercase text-sm">Spiritual Journey</span>
                             <h2 className="text-4xl md:text-6xl font-bold mt-2 font-headline">Divine Destinations</h2>
