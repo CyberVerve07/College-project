@@ -176,7 +176,7 @@ const regions = [
         name: "Kinnaur",
         title: "Land of Fairytales",
         desc: "Renowned for its delicious apples, gorgeous terrain, and thrilling, dangerous roads.",
-        image: "https://www.trawell.in/admin/images/upload/93442431Kalpa_Main.jpg",
+        image: "https://tse4.mm.bing.net/th/id/OIP.Tl2Hz_QleoEqK4VQHEx2GAHaE6?rs=1&pid=ImgDetMain&o=7&rm=3",
         highlights: ["Kalpa", "Sangla Valley", "Chitkul"]
     }
 ];
