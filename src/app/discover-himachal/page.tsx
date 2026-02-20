@@ -427,7 +427,7 @@ export default function DiscoverHimachal() {
                                         src={region.image}
                                         alt={region.name}
                                         fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                                 </div>
@@ -513,7 +513,7 @@ export default function DiscoverHimachal() {
                                         src={temple.image}
                                         alt={temple.name}
                                         fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                                     <div className="absolute bottom-4 left-4 text-white">
@@ -612,7 +612,7 @@ export default function DiscoverHimachal() {
                                     src={food.image}
                                     alt={food.name}
                                     fill
-                                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                    className="object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-8 flex flex-col justify-end text-white">
                                     <h3 className="text-3xl font-bold mb-2">{food.name}</h3>
@@ -653,7 +653,7 @@ export default function DiscoverHimachal() {
                                         src={fest.image}
                                         alt={fest.name}
                                         fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="object-cover"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
 
