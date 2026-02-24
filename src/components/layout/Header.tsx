@@ -33,7 +33,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/90 backdrop-blur-xl transition-all duration-300 shadow-xl">
       <div className="container flex h-20 items-center justify-between px-6 md:px-10">
         <Link href="/" className="flex items-center space-x-3 group">
-          <span className="font-extrabold text-3xl tracking-tight text-white drop-shadow-lg">
+          <span className="font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight text-white drop-shadow-lg">
             Destiny <span className="text-primary italic font-black">Tour</span> & Travels
           </span>
         </Link>

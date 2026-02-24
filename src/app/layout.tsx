@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { PT_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
@@ -15,6 +15,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 export const metadata: Metadata = {
   title: `${siteConfig.name} - Your Gateway to Himachal`,
   description: siteConfig.description,
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 const ptSans = PT_Sans({

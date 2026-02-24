@@ -79,10 +79,10 @@ export default function HeroSection() {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="font-headline text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-8"
+                        className="font-headline text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] leading-[1.1] sm:leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6 sm:mb-8"
                     >
                         Don&apos;t Just Visit, <br />
-                        <span className="text-white font-black underline decoration-primary/60 decoration-4 underline-offset-8">
+                        <span className="text-white font-black underline decoration-primary/60 decoration-4 underline-offset-4 sm:underline-offset-8">
                             Live Himachal
                         </span>
                     </motion.h1>

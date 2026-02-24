@@ -57,7 +57,7 @@ export default function Home() {
       <AnimatedSection animation="slide-up" delay={0.2}>
         <section id="destinations" className="py-8 md:py-16 relative">
           <div className="container px-6 md:px-8 text-center mb-6 md:mb-10">
-            <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tight mb-3 md:mb-5 text-white" style={{ textShadow: '0 0 60px hsla(200, 85%, 35%, 0.6), 0 4px 20px rgba(0,0,0,0.8)' }}>Legendary Destinations</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black font-headline tracking-tight mb-3 md:mb-5 text-white" style={{ textShadow: '0 0 60px hsla(200, 85%, 35%, 0.6), 0 4px 20px rgba(0,0,0,0.8)' }}>Legendary Destinations</h2>
             <p className="text-base md:text-lg text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
           </div>
 
@@ -111,7 +111,7 @@ export default function Home() {
       <AnimatedSection animation="fade" delay={0.1}>
         <section id="services-overview" className="bg-muted py-16 md:py-32 text-foreground rounded-[2.5rem] md:rounded-[4rem] mx-4 md:mx-8">
           <div className="container px-4 md:px-6 text-center mb-12 md:mb-24">
-            <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 md:mb-6">Our Premium Fleet</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 md:mb-6">Our Premium Fleet</h2>
             <p className="text-base md:text-lg opacity-60 max-w-2xl mx-auto">Reliable, well-maintained vehicles for a safe and comfortable journey.</p>
           </div>
 
@@ -153,7 +153,7 @@ export default function Home() {
       <AnimatedSection animation="slide-up" delay={0.15}>
         <section id="gallery" className="py-16 md:py-32">
           <div className="container px-4 md:px-6 text-center mb-10 md:mb-20">
-            <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 text-primary" style={{ textShadow: '0 0 50px hsla(200, 85%, 35%, 0.5)' }}>Visual Overdose</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black font-headline tracking-tighter mb-4 text-primary" style={{ textShadow: '0 0 50px hsla(200, 85%, 35%, 0.5)' }}>Visual Overdose</h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
           </div>
           <div className="container px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
@@ -182,7 +182,7 @@ export default function Home() {
         <section className="py-20 md:py-40 bg-mesh text-white text-center rounded-t-[2.5rem] md:rounded-t-[5rem] mx-4 md:mx-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-primary/20 backdrop-blur-3xl" />
           <div className="container px-4 md:px-6 relative z-10">
-            <h2 className="text-4xl md:text-6xl lg:text-9xl font-black font-headline mb-6 md:mb-10 tracking-tighter animate-pulse">DON'T SETTLE</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-9xl font-black font-headline mb-6 md:mb-10 tracking-tighter animate-pulse">DON'T SETTLE</h2>
             <p className="text-lg md:text-2xl mb-10 md:mb-16 opacity-80 max-w-3xl mx-auto font-bold uppercase tracking-widest leading-relaxed">
               While others take you to destinations, we take you to experiences. Book the ride of your life.
             </p>
