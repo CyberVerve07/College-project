@@ -10,7 +10,7 @@ The Destiny Tour & Travels project is designed to facilitate seamless travel boo
 - **State Management**: Redux
 - **Routing**: React Router
 - 
-- **UI Framework**: Material-UI
+- **UI Framework**: Material-Ui
 
 ### Directory Structure
 ```
