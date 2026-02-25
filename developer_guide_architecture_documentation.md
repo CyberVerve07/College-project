@@ -1,5 +1,4 @@
 # Developer Guide
-
 ## Overview
 The Destiny Tour & Travels project is designed to facilitate seamless travel booking and management. It incorporates various components, including a frontend interface, backend services, AI for recommendations, and a robust database structure.
 
