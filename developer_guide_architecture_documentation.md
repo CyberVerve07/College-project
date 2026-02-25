@@ -19,7 +19,6 @@ The Destiny Tour & Travels project is designed to facilitate seamless travel boo
   ├── services          # API calls
   └── utils             # Utility functions
 ```
-
 ## Backend Components
 - **Framework**: Node.js with Express
 - **Authentication**: JSON Web Tokens (JWT)
