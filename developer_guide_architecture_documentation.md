@@ -1,5 +1,4 @@
 # Developer Guide
-
 ## Overview
 The Destiny Tour & Travels project is designed to facilitate seamless travel booking and management. It incorporates various components, including a frontend interface, backend services, AI for recommendations, and a robust database structure.
 
@@ -9,7 +8,7 @@ The Destiny Tour & Travels project is designed to facilitate seamless travel boo
 - **Framework**: React.js
 - **State Management**: Redux
 - **Routing**: React Router
-- **UI Framework**: Material-UI
+- **UI Framework**: Material-Ui
 
 ### Directory Structure
 ```
@@ -20,7 +19,6 @@ The Destiny Tour & Travels project is designed to facilitate seamless travel boo
   ├── services          # API calls
   └── utils             # Utility functions
 ```
-
 ## Backend Components
 - **Framework**: Node.js with Express
 - **Authentication**: JSON Web Tokens (JWT)
