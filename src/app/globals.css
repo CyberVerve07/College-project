@@ -77,11 +77,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground bg-mesh selection:bg-secondary/30 selection:text-secondary-foreground;
     background-attachment: fixed;
+    overflow-x: hidden;
   }
 
   h1 {
@@ -145,28 +147,29 @@
     box-shadow: 0 0 10px theme('colors.primary.DEFAULT');
   }
 
-  /* Custom Scrollbar Styles */
-  .custom-scrollbar {
+  /* Global Scrollbar Styles */
+  * {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--primary) / 0.3) transparent;
   }
 
-  .custom-scrollbar::-webkit-scrollbar {
+  *::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
+  *::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 10px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
+  *::-webkit-scrollbar-thumb {
     background: hsl(var(--primary) / 0.3);
     border-radius: 10px;
     transition: background 0.2s ease;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  *::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary) / 0.5);
   }
 
