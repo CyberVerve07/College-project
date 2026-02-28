@@ -34,7 +34,7 @@ export default function HeroSection() {
     return (
         <section
             ref={ref}
-            className="relative w-full h-auto py-24 md:py-32 flex items-center overflow-hidden"
+            className="relative w-full h-[100dvh] flex items-center overflow-hidden"
         >
             {/* Background with Parallax */}
             {heroImage && (
