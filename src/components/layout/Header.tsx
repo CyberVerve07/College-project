@@ -55,7 +55,7 @@ export default function Header() {
             </Link>
           ))}
           <div className="flex gap-4">
-            <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-purple-600 to-pink-600 shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
+            <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-cyan-600 to-teal-500 shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
               <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Book Cab</a>
             </Button>
           </div>

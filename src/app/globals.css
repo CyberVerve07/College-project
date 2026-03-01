@@ -37,7 +37,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 200 85% 35%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   .dark {
@@ -102,9 +102,11 @@
     @apply text-base md:text-lg leading-relaxed;
   }
 
-  /* Custom Icon Style */
+  /* Custom Icon Style — override Lucide defaults */
   .lucide {
-    stroke-width: 1.5px;
+    stroke-width: 1.8px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 }
 
@@ -129,12 +131,12 @@
   }
 
   .neon-border {
-    @apply border-primary/50;
-    box-shadow: 0 0 15px hsla(200, 85%, 35%, 0.3);
+    @apply border-secondary/40;
+    box-shadow: 0 0 18px hsla(180, 70%, 50%, 0.25), 0 0 4px hsla(200, 85%, 35%, 0.15);
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-cyan-400 to-secondary font-extrabold;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-teal-400 to-accent font-extrabold;
   }
 
   .glow-on-hover:hover {
