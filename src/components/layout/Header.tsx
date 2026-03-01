@@ -55,9 +55,6 @@ export default function Header() {
             </Link>
           ))}
           <div className="flex gap-4">
-            <Button asChild variant="outline" className="rounded-xl px-6 h-10 border-white/20 bg-white/5 hover:bg-white/10 text-white transition-all font-bold text-sm">
-              <Link href="/login">Login</Link>
-            </Button>
             <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-purple-600 to-pink-600 shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
               <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Book Cab</a>
             </Button>
@@ -102,16 +99,6 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
-
-                <Link
-                  href="/login"
-                  className={cn(
-                    'text-xl font-bold uppercase tracking-[0.2em] transition-all hover:pl-6 hover:text-primary mt-4',
-                    pathname === '/login' ? 'text-primary' : 'text-foreground/60'
-                  )}
-                >
-                  Login / Sign Up
-                </Link>
 
                 <div className="mt-8 flex justify-center">
                   <ModeToggle />
