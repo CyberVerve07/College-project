@@ -70,9 +70,10 @@ export default function HeroSection() {
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="flex items-center gap-3 text-white/80 tracking-[0.2em] uppercase text-sm mb-8 font-light border-l-2 border-primary pl-4"
+                        className="inline-flex items-center gap-2 text-white/90 tracking-widest uppercase text-xs mb-6 font-medium bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 w-fit"
                     >
-                        <span>Ready for the mountains?</span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>Trusted since 2018</span>
                     </motion.div>
 
                     <motion.h1
@@ -110,6 +111,27 @@ export default function HeroSection() {
                         <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg font-bold text-white hover:bg-white/10 hover:text-white rounded-lg border-white/30 backdrop-blur-sm transition-all bg-transparent">
                             <Link href="#destinations">See the Magic</Link>
                         </Button>
+                    </motion.div>
+
+                    {/* Stats strip — breaks generic hero pattern */}
+                    <motion.div
+                        className="flex flex-wrap gap-6 md:gap-10 mt-10 border-t border-white/10 pt-6"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.9, duration: 0.8 }}
+                    >
+                        <div className="flex flex-col">
+                            <span className="text-2xl md:text-3xl font-black text-white">7+</span>
+                            <span className="text-xs text-white/50 uppercase tracking-wider">Years</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-2xl md:text-3xl font-black text-white">5k+</span>
+                            <span className="text-xs text-white/50 uppercase tracking-wider">Happy Riders</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-2xl md:text-3xl font-black text-white">4.9★</span>
+                            <span className="text-xs text-white/50 uppercase tracking-wider">Rated</span>
+                        </div>
                     </motion.div>
                 </div>
             </motion.div>
