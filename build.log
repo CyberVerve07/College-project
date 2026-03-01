@@ -1,0 +1,4 @@
+
+> nextn@0.1.0 build
+> NODE_ENV=production next build
+
