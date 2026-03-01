@@ -9,29 +9,32 @@ import { motion } from "framer-motion";
 
 export default function LoginPage() {
     const [loading, setLoading] = useState<string | null>(null);
+    const [authError, setAuthError] = useState<string | null>(null);
     const router = useRouter();
 
     const handleGoogleSignIn = async () => {
         try {
+            setAuthError(null);
             setLoading("google");
             await signInWithGoogle();
             router.push("/");
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-        } finally {
-            setLoading("google"); // keep loading on success to prevent flashes before redirect
+            setAuthError(error?.message || "An unexpected error occurred during Google sign in.");
+            setLoading(null);
         }
     };
 
     const handleTwitterSignIn = async () => {
         try {
+            setAuthError(null);
             setLoading("twitter");
             await signInWithTwitter();
             router.push("/");
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-        } finally {
-            setLoading("twitter");
+            setAuthError(error?.message || "An unexpected error occurred during Twitter sign in.");
+            setLoading(null);
         }
     };
 
@@ -90,6 +93,12 @@ export default function LoginPage() {
                             Sign in to your account or create a new one to continue
                         </p>
                     </div>
+
+                    {authError && (
+                        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+                            {authError}
+                        </div>
+                    )}
 
                     <div className="space-y-4">
                         <Button
