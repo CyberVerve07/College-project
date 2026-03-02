@@ -43,8 +43,8 @@ export default function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium uppercase tracking-wide transition-all hover:text-primary relative py-2 group",
-                pathname === link.href ? "text-primary" : "text-white/85"
+                "text-sm font-medium uppercase tracking-wide transition-all hover:text-white relative py-2 group",
+                pathname === link.href ? "text-white drop-shadow-md font-semibold" : "text-white/80"
               )}
             >
               {link.label}
@@ -63,11 +63,12 @@ export default function Header() {
         </nav>
 
         {/* Mobile Nav */}
-        <div className="lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
+          <ModeToggle />
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-                <Menu className="h-8 w-8 text-primary" strokeWidth={1.5} />
+              <Button variant="ghost" size="icon" className="hover:bg-white/10">
+                <Menu className="h-8 w-8 text-white" strokeWidth={1.5} />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -100,9 +101,6 @@ export default function Header() {
                   </Link>
                 ))}
 
-                <div className="mt-8 flex justify-center">
-                  <ModeToggle />
-                </div>
               </nav>
             </SheetContent>
           </Sheet>
