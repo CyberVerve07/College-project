@@ -34,7 +34,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Navigate</h3>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-6 md:mb-8 text-primary">Navigate</h3>
           <ul className="space-y-4">
             {[
               { id: 'home', label: 'Home' },
@@ -54,8 +54,8 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Our Fleet</h3>
-          <ul className="space-y-4">
+          <h3 className="font-black text-xl uppercase tracking-widest mb-6 md:mb-8 text-primary">Our Fleet</h3>
+          <div className="grid grid-cols-2 md:grid-cols-1 gap-4 space-y-0 md:space-y-4">
             {[
               { name: 'Innova Crysta', type: 'Premium SUV' },
               { name: 'Force Traveller', type: 'Group Travel' },
@@ -73,11 +73,11 @@ export default function Footer() {
                 </div>
               </li>
             ))}
-          </ul>
+          </div>
         </div>
 
         <div>
-          <h3 className="font-black text-xl uppercase tracking-widest mb-8 text-primary">Base Camp</h3>
+          <h3 className="font-black text-xl uppercase tracking-widest mb-6 md:mb-8 text-primary">Base Camp</h3>
           <address className="not-italic space-y-6">
             <p className="text-lg opacity-60">Dharamshala, <br />Himachal Pradesh, India</p>
             <div className="flex flex-col gap-4">
@@ -101,8 +101,8 @@ export default function Footer() {
           </address>
         </div>
       </div>
-      <div className="bg-black/20 py-8 border-t border-white/5">
-        <div className="container text-center text-sm font-bold opacity-40 uppercase tracking-[0.3em]">
+      <div className="bg-black/20 py-6 md:py-8 border-t border-white/5">
+        <div className="container text-center text-[10px] sm:text-sm font-bold opacity-40 uppercase tracking-[0.2em] md:tracking-[0.3em] px-4">
           <p>&copy; {year} {siteConfig.name} &bull; Built for the Mountains</p>
         </div>
       </div>
