@@ -66,23 +66,25 @@ export default function HeroSection() {
             >
                 {/* Left Content (Text) - Col Span 8 for MORE asymmetry */}
                 <div className="lg:col-span-8 flex flex-col justify-center pt-20 lg:pt-0">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="inline-flex items-center gap-2 text-white/90 tracking-widest uppercase text-xs mb-6 font-medium bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 w-fit"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>Trusted since 2018</span>
-                    </motion.div>
+                    <div className="flex items-center gap-2 mb-6 sm:mb-8">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="inline-flex items-center gap-2 text-white/90 tracking-widest uppercase text-xs font-medium bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 w-fit"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Trusted since 2018</span>
+                        </motion.div>
+                    </div>
 
                     <motion.h1
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="font-headline text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] leading-[1.1] sm:leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6 sm:mb-8"
+                        className="font-headline text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] leading-[1.1] sm:leading-[0.9] text-white tracking-tighter drop-shadow-2xl mb-6 sm:mb-8"
                     >
-                        Don&apos;t Just Visit, <br />
+                        Don&apos;t Just Visit, <br className="hidden sm:block" />
                         <span className="text-white font-black underline decoration-primary/60 decoration-4 underline-offset-4 sm:underline-offset-8">
                             Live Himachal
                         </span>
