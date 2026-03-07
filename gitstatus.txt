@@ -1,2 +1,0 @@
-?? gitlog.txt
-?? gitstatus.txt
