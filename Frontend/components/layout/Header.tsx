@@ -12,6 +12,7 @@ const mainNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/discover-himachal', label: 'Discover' },
   { href: '/destinations', label: 'Destinations' },
+  { href: '/journeys', label: 'Journeys' },
   { href: '/planner', label: 'AI Planner' },
   { href: '/services', label: 'Services' },
   { href: '/about', label: 'About' },
