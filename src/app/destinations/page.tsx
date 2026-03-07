@@ -83,31 +83,35 @@ export default function DestinationsPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary" style={{ textShadow: '0 0 40px hsla(200, 85%, 35%, 0.4)' }}>
-            Explore Our Destinations
-          </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            From serene valleys to adventurous peaks, discover the best of Himachal Pradesh with us.
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-left max-w-2xl">
+              <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary" style={{ textShadow: '0 0 40px hsla(200, 85%, 35%, 0.4)' }}>
+                Explore Our Destinations
+              </h1>
+              <p className="mt-4 text-lg text-muted-foreground">
+                From serene valleys to adventurous peaks, discover the best of Himachal Pradesh with us.
+              </p>
+            </div>
 
-          <div className="flex justify-center mt-8 gap-4">
-            <div className="bg-muted/50 p-1 rounded-xl flex items-center">
-              <Button
-                variant={viewMode === 'list' ? 'secondary' : 'ghost'}
-                className={`rounded-lg gap-2 ${viewMode === 'list' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
-                onClick={() => setViewMode('list')}
-              >
-                <List className="w-4 h-4" /> List View
-              </Button>
-              <Button
-                variant={viewMode === 'map' ? 'secondary' : 'ghost'}
-                className={`rounded-lg gap-2 ${viewMode === 'map' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
-                onClick={() => setViewMode('map')}
-              >
-                <Map className="w-4 h-4" /> Map View
-              </Button>
+            <div className="flex shrink-0">
+              <div className="bg-muted/50 p-1 rounded-xl flex items-center">
+                <Button
+                  variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+                  className={`rounded-lg gap-2 ${viewMode === 'list' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
+                  onClick={() => setViewMode('list')}
+                >
+                  <List className="w-4 h-4" /> List View
+                </Button>
+                <Button
+                  variant={viewMode === 'map' ? 'secondary' : 'ghost'}
+                  className={`rounded-lg gap-2 ${viewMode === 'map' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
+                  onClick={() => setViewMode('map')}
+                >
+                  <Map className="w-4 h-4" /> Map View
+                </Button>
+              </div>
             </div>
           </div>
         </motion.div>

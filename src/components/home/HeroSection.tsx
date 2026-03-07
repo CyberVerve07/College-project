@@ -74,7 +74,7 @@ export default function HeroSection() {
                             className="inline-flex items-center gap-2 text-white/90 tracking-widest uppercase text-xs font-medium bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 w-fit"
                         >
                             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>Trusted since 2018</span>
+                            <span>Trusted Since 2018</span>
                         </motion.div>
                     </div>
 
@@ -96,7 +96,7 @@ export default function HeroSection() {
                         transition={{ duration: 1, delay: 0.4 }}
                         className="text-lg sm:text-xl text-gray-200 max-w-xl font-medium leading-relaxed mb-12"
                     >
-                        Tired of the city noise? Pack your bags and let us drive you to paradise. From Manali&apos;s peaks to Dharamshala&apos;s peace – we&apos;ve got the ride sorted.
+                        From Manali&apos;s peaks to Dharamshala&apos;s peace — we&apos;ve got the ride sorted.
                     </motion.p>
 
                     <motion.div
@@ -128,7 +128,7 @@ export default function HeroSection() {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-2xl md:text-3xl font-black text-white">5k+</span>
-                            <span className="text-xs text-white/50 uppercase tracking-wider">Happy Riders</span>
+                            <span className="text-xs text-white/50 uppercase tracking-wider">Happy Travelers</span>
                         </div>
                         <div className="flex flex-col">
                             <span className="text-2xl md:text-3xl font-black text-white">4.9★</span>

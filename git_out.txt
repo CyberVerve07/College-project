@@ -1,0 +1,8 @@
+﻿ M git_status.txt
+ M src/app/destinations/page.tsx
+ M src/app/page.tsx
+ M src/components/home/HeroSection.tsx
+ M src/components/layout/Footer.tsx
+ M src/components/layout/Header.tsx
+ M src/lib/placeholder-images.json
+?? git_out.txt

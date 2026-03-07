@@ -8,12 +8,12 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { siteConfig } from '@/lib/config';
 import { ModeToggle } from '@/components/ui/mode-toggle';
-const navLinks = [
+const mainNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/discover-himachal', label: 'Discover' },
   { href: '/destinations', label: 'Destinations' },
-  { href: '/services', label: 'Services' },
   { href: '/planner', label: 'AI Planner' },
+  { href: '/services', label: 'Services' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -37,8 +37,8 @@ export default function Header() {
             Destiny <span className="text-primary italic font-black">Tour</span> & Travels
           </span>
         </Link>
-        <nav className="hidden lg:flex gap-8 items-center">
-          {navLinks.map((link) => (
+        <nav className="hidden lg:flex gap-6 xl:gap-8 items-center">
+          {mainNavLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -54,6 +54,8 @@ export default function Header() {
               )} />
             </Link>
           ))}
+
+
           <div className="flex gap-4">
             <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-cyan-600 to-teal-500 shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
               <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Book Cab</a>
@@ -88,7 +90,7 @@ export default function Header() {
                   <span>{siteConfig.name}</span>
                 </Link>
                 <div className="h-px bg-primary/20 w-full my-4" />
-                {navLinks.map((link) => (
+                {mainNavLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}

@@ -39,6 +39,7 @@ export default function Footer() {
             {[
               { id: 'home', label: 'Home' },
               { id: 'destinations', label: 'Destinations' },
+
               { id: 'services', label: 'Services (24x7)' },
               { id: 'about', label: 'About Us' },
               { id: 'contact', label: 'Contact' }

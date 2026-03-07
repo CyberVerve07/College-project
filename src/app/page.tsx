@@ -43,6 +43,8 @@ const services = [
  * - Featured destinations grid
  * - Services overview
  * - Image gallery
+ * - About section
+ * - Contact section
  * - Booking call-to-action
  */
 export default function Home() {
@@ -107,50 +109,6 @@ export default function Home() {
         </section>
       </AnimatedSection>
 
-      {/* Services Section */}
-      <AnimatedSection animation="fade" delay={0.1}>
-        <section id="services-overview" className="bg-muted py-14 md:py-24 text-foreground rounded-[2rem] md:rounded-[4rem] mx-4 md:mx-8">
-          <div className="container px-4 md:px-6 text-center mb-8 md:mb-24">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-headline tracking-tighter mb-4 md:mb-6">Our Premium Fleet</h2>
-            <p className="text-base md:text-lg opacity-60 max-w-2xl mx-auto">Reliable, well-maintained vehicles for a safe and comfortable journey.</p>
-          </div>
-
-          <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
-              {services.map((service) => {
-                const serviceImage = PlaceHolderImagesMap.get(service.imageId);
-                return (
-                  <div key={service.name} className={cn(
-                    "bg-background/5 border border-white/10 p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] flex flex-col items-center text-center group hover:bg-white/10 transition-all hover:scale-105",
-                    services.indexOf(service) === 0 && "lg:col-span-2 border-secondary/30"
-                  )}>
-                    <div className="relative w-32 h-32 md:w-48 md:h-48 mb-6 md:mb-8">
-                      {serviceImage ? (
-                        <Image
-                          src={serviceImage.imageUrl}
-                          alt={service.name}
-                          fill
-                          sizes="192px"
-                          className="object-contain drop-shadow-[0_10px_30px_rgba(255,255,255,0.15)]"
-                        />
-                      ) : (
-                        <div className="bg-primary/20 w-full h-full flex items-center justify-center rounded-full">
-                          <service.icon className="w-16 h-16 md:w-20 md:h-20 text-primary" strokeWidth={2} />
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-4">{service.name}</h3>
-                    <p className="opacity-50 text-sm md:text-base mb-6 md:mb-8 italic">Rugged. Sanitized. Ready.</p>
-                    <Button asChild variant="secondary" className="mt-auto w-full h-12 md:h-14 rounded-xl md:rounded-2xl text-base md:text-lg font-bold bg-white text-black hover:bg-secondary hover:text-white transition-all">
-                      <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Get Quote</a>
-                    </Button>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      </AnimatedSection>
 
       {/* Gallery Section */}
       <AnimatedSection animation="slide-up" delay={0.15}>
@@ -181,11 +139,13 @@ export default function Home() {
         </section>
       </AnimatedSection>
 
+
+
       <AnimatedSection animation="scale" delay={0.2}>
         <section className="py-16 md:py-32 bg-mesh text-white text-center rounded-t-[2rem] md:rounded-t-[5rem] mx-4 md:mx-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-primary/20 backdrop-blur-3xl" />
           <div className="container px-4 md:px-6 relative z-10 flex flex-col items-center">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-9xl font-black font-headline mb-4 md:mb-10 tracking-tighter animate-pulse">DON'T SETTLE</h2>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-9xl font-black font-headline mb-4 md:mb-10 tracking-tighter animate-pulse">DON&apos;T SETTLE</h2>
             <p className="text-sm md:text-2xl mb-8 md:mb-16 opacity-80 max-w-3xl mx-auto font-bold uppercase tracking-widest leading-relaxed">
               While others take you to destinations, we take you to experiences. Book the ride of your life.
             </p>

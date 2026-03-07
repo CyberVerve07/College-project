@@ -269,6 +269,48 @@
       "description": "A group of happy travellers posing in the mountains.",
       "imageUrl": "https://images.unsplash.com/photo-1664312572933-0563f14484a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMHRyYXZlbGxlcnN8ZW58MHx8fHwxNzY4ODAzNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "happy travellers"
+    },
+    {
+      "id": "story-1",
+      "title": "Family Trip to Manali",
+      "description": "A happy family standing in the snow at Rohtang Pass.",
+      "imageUrl": "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=800&q=80",
+      "imageHint": "family playing in snow"
+    },
+    {
+      "id": "story-2",
+      "title": "Solo Adventure in Spiti",
+      "description": "A solo traveler on a motorcycle looking at the mountains.",
+      "imageUrl": "https://images.unsplash.com/photo-1518599904199-0ca897819ddb?w=800&q=80",
+      "imageHint": "biker in himalayas"
+    },
+    {
+      "id": "story-3",
+      "title": "Honeymoon in Dalhousie",
+      "description": "A couple enjoying the view of Khajjiar.",
+      "imageUrl": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+      "imageHint": "couple in mountains"
+    },
+    {
+      "id": "story-4",
+      "title": "Friends Trip to Kasol",
+      "description": "A group of friends laughing by the river in Parvati Valley.",
+      "imageUrl": "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=800&q=80",
+      "imageHint": "friends camping"
+    },
+    {
+      "id": "story-5",
+      "title": "Trekking in Triund",
+      "description": "Trekkers resting with mountains in the background.",
+      "imageUrl": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+      "imageHint": "trekking himalayas"
+    },
+    {
+      "id": "story-6",
+      "title": "Snow day in Kufri",
+      "description": "People enjoying snow sports.",
+      "imageUrl": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?w=800&q=80",
+      "imageHint": "snow sports"
     }
   ]
 }
