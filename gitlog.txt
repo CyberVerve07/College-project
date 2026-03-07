@@ -1,3 +1,0 @@
-0eead6e feat: restore AI Planner navigation link in header
-8ede9dd git init
-c262ce8 feat: Implement OpenStreetMap integration on the contact page, featuring a dynamically loaded map with a Kangra, HP marker.
