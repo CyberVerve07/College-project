@@ -102,11 +102,59 @@
     @apply text-base md:text-lg leading-relaxed;
   }
 
-  /* Custom Icon Style — override Lucide defaults */
-  .lucide {
-    stroke-width: 1.8px;
+  /* Custom Icon Styling — override library defaults */
+  svg[class*="lucide"] {
+    stroke-width: var(--icon-stroke, 1.75px);
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  /* Strip default icon library class fingerprint */
+  svg[class*="lucide"]::before {
+    content: none;
+  }
+
+  /* Contextual icon weights */
+  .icon-thin {
+    --icon-stroke: 1.25px;
+  }
+
+  .icon-regular {
+    --icon-stroke: 1.75px;
+  }
+
+  .icon-bold {
+    --icon-stroke: 2.25px;
+  }
+
+  .icon-heavy {
+    --icon-stroke: 2.75px;
+  }
+
+  /* Size variants for icons */
+  .icon-xs {
+    width: 14px;
+    height: 14px;
+  }
+
+  .icon-sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  .icon-md {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-xl {
+    width: 32px;
+    height: 32px;
   }
 }
 
