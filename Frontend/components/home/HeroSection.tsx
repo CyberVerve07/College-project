@@ -1,9 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { Button } from '@/frontend/components/ui/button';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
 import Image from 'next/image';
 import { PlaceHolderImagesMap } from '@/images/placeholder-images';
 import { SnowParticles } from '@/animation/snow-particles';
@@ -66,17 +64,7 @@ export default function HeroSection() {
             >
                 {/* Left Content (Text) - Col Span 8 for MORE asymmetry */}
                 <div className="lg:col-span-8 flex flex-col justify-center pt-20 lg:pt-0">
-                    <div className="flex items-center gap-2 mb-6 sm:mb-8">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="inline-flex items-center gap-2 text-white/90 tracking-widest uppercase text-xs font-medium bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 w-fit"
-                        >
-                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>Trusted Since 2018</span>
-                        </motion.div>
-                    </div>
+
 
                     <motion.h1
                         initial={{ opacity: 0, x: -50 }}
@@ -99,42 +87,7 @@ export default function HeroSection() {
                         From Manali&apos;s peaks to Dharamshala&apos;s peace — we&apos;ve got the ride sorted.
                     </motion.p>
 
-                    <motion.div
-                        className="flex flex-wrap gap-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.8 }}
-                    >
-                        <Button asChild size="lg" className="h-14 px-8 text-lg font-bold rounded-lg bg-white text-black hover:bg-gray-200 transition-all shadow-xl">
-                            <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                                Let&apos;s Go! <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
-                            </a>
-                        </Button>
-                        <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg font-bold text-white hover:bg-white/10 hover:text-white rounded-lg border-white/30 backdrop-blur-sm transition-all bg-transparent">
-                            <Link href="#destinations">See the Magic</Link>
-                        </Button>
-                    </motion.div>
 
-                    {/* Stats strip — breaks generic hero pattern */}
-                    <motion.div
-                        className="flex flex-wrap gap-6 md:gap-10 mt-10 border-t border-white/10 pt-6"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.9, duration: 0.8 }}
-                    >
-                        <div className="flex flex-col">
-                            <span className="text-2xl md:text-3xl font-black text-white">7+</span>
-                            <span className="text-xs text-white/50 uppercase tracking-wider">Years</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl md:text-3xl font-black text-white">5k+</span>
-                            <span className="text-xs text-white/50 uppercase tracking-wider">Happy Travelers</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl md:text-3xl font-black text-white">4.9★</span>
-                            <span className="text-xs text-white/50 uppercase tracking-wider">Rated</span>
-                        </div>
-                    </motion.div>
                 </div>
             </motion.div>
         </section>
