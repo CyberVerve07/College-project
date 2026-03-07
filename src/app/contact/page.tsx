@@ -4,6 +4,7 @@ import ContactForm from './ContactForm';
 import { siteConfig } from '@/lib/config';
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import FloatingButtons from '@/components/layout/FloatingButtons';
+import MapWrapper from '@/components/maps/MapWrapper';
 
 export default function ContactPage() {
   return (
@@ -103,6 +104,12 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Map Section */}
+        <div className="mt-16 md:mt-24 max-w-7xl mx-auto animate-fade-in-up delay-500 relative group z-10 w-full">
+          <div className="absolute -inset-1 bg-gradient-to-t from-primary/50 via-teal-400/20 to-secondary/50 rounded-[3rem] blur opacity-25 group-hover:opacity-100 transition duration-1000" />
+          <MapWrapper />
         </div>
       </div>
 
