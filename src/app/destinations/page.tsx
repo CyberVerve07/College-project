@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Map, List } from 'lucide-react';
+import MapWrapper from '@/components/maps/MapWrapper';
 
 interface Destination {
   id: string;
@@ -31,6 +32,7 @@ interface Destination {
 export default function DestinationsPage() {
   const firestore = useFirestore();
   const [isSeeding, setIsSeeding] = useState(true);
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
   const destinationsCollection = useMemoFirebase(() => {
     if (!firestore) return null;
@@ -93,10 +95,18 @@ export default function DestinationsPage() {
           <div className="flex justify-center mt-8 gap-4">
             <div className="bg-muted/50 p-1 rounded-xl flex items-center">
               <Button
-                variant="secondary"
-                className="rounded-lg gap-2 bg-primary text-white shadow-md text-foreground"
+                variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+                className={`rounded-lg gap-2 ${viewMode === 'list' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
+                onClick={() => setViewMode('list')}
               >
                 <List className="w-4 h-4" /> List View
+              </Button>
+              <Button
+                variant={viewMode === 'map' ? 'secondary' : 'ghost'}
+                className={`rounded-lg gap-2 ${viewMode === 'map' ? 'bg-primary text-white shadow-md' : 'text-muted-foreground hover:text-foreground'}`}
+                onClick={() => setViewMode('map')}
+              >
+                <Map className="w-4 h-4" /> Map View
               </Button>
             </div>
           </div>
@@ -149,105 +159,119 @@ export default function DestinationsPage() {
 
         {!showLoading && !error && (
           <AnimatePresence mode="wait">
-            <motion.div
-              key="list-view"
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
-              exit={{ opacity: 0, y: 20 }}
-              className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
-            >
-              {(() => {
-                // Combine DB data with local data just like before
-                const dbDestinations = destinations || [];
-                const mergedList: Destination[] = [...dbDestinations];
+            {viewMode === 'list' ? (
+              <motion.div
+                key="list-view"
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                exit={{ opacity: 0, y: 20 }}
+                className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
+              >
+                {(() => {
+                  // Combine DB data with local data just like before
+                  const dbDestinations = destinations || [];
+                  const mergedList: Destination[] = [...dbDestinations];
 
-                initialDestinations.forEach(local => {
-                  const existingIndex = mergedList.findIndex(d => d.name === local.name);
+                  initialDestinations.forEach(local => {
+                    const existingIndex = mergedList.findIndex(d => d.name === local.name);
 
-                  if (existingIndex !== -1) {
-                    mergedList[existingIndex] = {
-                      ...mergedList[existingIndex],
-                      ...local,
-                      imageUrl: local.imageUrl || mergedList[existingIndex].imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80',
-                      id: mergedList[existingIndex].id
-                    };
-                  } else {
-                    mergedList.push({
-                      ...local,
-                      imageUrl: local.imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80',
-                      id: `local-${local.name.toLowerCase().replace(/\s+/g, '-')}`
-                    } as Destination);
-                  }
-                });
+                    if (existingIndex !== -1) {
+                      mergedList[existingIndex] = {
+                        ...mergedList[existingIndex],
+                        ...local,
+                        imageUrl: local.imageUrl || mergedList[existingIndex].imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80',
+                        id: mergedList[existingIndex].id
+                      };
+                    } else {
+                      mergedList.push({
+                        ...local,
+                        imageUrl: local.imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80',
+                        id: `local-${local.name.toLowerCase().replace(/\s+/g, '-')}`
+                      } as Destination);
+                    }
+                  });
 
-                if (mergedList.length === 0) {
-                  return (
-                    <div className="col-span-full text-center text-muted-foreground">
-                      <p>No destinations found.</p>
-                    </div>
-                  );
-                }
-
-                return mergedList.map((dest) => (
-                  <motion.div key={dest.id} variants={itemVariants} className="h-full">
-                    <Card className="group relative flex flex-col h-full overflow-hidden border-0 bg-card/90 dark:bg-card/40 dark:border dark:border-white/10 shadow-lg transition-all duration-300 hover:shadow-2xl dark:shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:-translate-y-2 rounded-xl">
-
-                      {/* Image Container */}
-                      <div className="relative h-72 overflow-hidden">
-                        <Image
-                          src={dest.imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80'}
-                          alt={dest.name}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
-
-                        <div className="absolute top-4 right-4">
-                          <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20">
-                            {dest.category}
-                          </span>
-                        </div>
-
-                        <div className="absolute bottom-4 left-4 z-10 w-full pr-4">
-                          <h2 className="text-3xl font-bold text-white font-headline drop-shadow-lg tracking-wide group-hover:text-primary-foreground transition-colors">
-                            {dest.name}
-                          </h2>
-                        </div>
+                  if (mergedList.length === 0) {
+                    return (
+                      <div className="col-span-full text-center text-muted-foreground">
+                        <p>No destinations found.</p>
                       </div>
+                    );
+                  }
 
-                      <CardContent className="p-6 flex flex-col flex-grow relative">
-                        {/* Top Border Gradient */}
-                        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  return mergedList.map((dest) => (
+                    <motion.div key={dest.id} variants={itemVariants} className="h-full">
+                      <Card className="group relative flex flex-col h-full overflow-hidden border-0 bg-card/90 dark:bg-card/40 dark:border dark:border-white/10 shadow-lg transition-all duration-300 hover:shadow-2xl dark:shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] hover:-translate-y-2 rounded-xl">
 
-                        <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 line-clamp-3">
-                          {dest.description}
-                        </p>
+                        {/* Image Container */}
+                        <div className="relative h-72 overflow-hidden">
+                          <Image
+                            src={dest.imageUrl || 'https://images.unsplash.com/photo-1601895912784-8774950a9089?w=1080&q=80'}
+                            alt={dest.name}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90 group-hover:opacity-75 transition-opacity" />
 
-                        <div className="space-y-4 text-sm text-foreground/80 mb-6 flex-grow">
-                          <div className="flex items-center gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
-                            <Calendar className="w-5 h-5 text-secondary shrink-0" strokeWidth={2.5} />
-                            <span className="font-medium">{dest.bestTimeToVisit}</span>
+                          <div className="absolute top-4 right-4">
+                            <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-xs font-medium rounded-full border border-white/20">
+                              {dest.category}
+                            </span>
                           </div>
-                          <div className="flex items-start gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
-                            <Star className="w-5 h-5 text-secondary mt-0.5 shrink-0" strokeWidth={2.5} />
-                            <span className="line-clamp-2">{dest.attractions.join(', ')}</span>
+
+                          <div className="absolute bottom-4 left-4 z-10 w-full pr-4">
+                            <h2 className="text-3xl font-bold text-white font-headline drop-shadow-lg tracking-wide group-hover:text-primary-foreground transition-colors">
+                              {dest.name}
+                            </h2>
                           </div>
                         </div>
 
-                        <Button asChild className="w-full mt-auto bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
-                          <Link href="/contact" className="flex items-center justify-center gap-2">
-                            <span>Plan Your Trip</span>
-                            <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
-                          </Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                ));
-              })()}
-            </motion.div>
+                        <CardContent className="p-6 flex flex-col flex-grow relative">
+                          {/* Top Border Gradient */}
+                          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                          <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 line-clamp-3">
+                            {dest.description}
+                          </p>
+
+                          <div className="space-y-4 text-sm text-foreground/80 mb-6 flex-grow">
+                            <div className="flex items-center gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
+                              <Calendar className="w-5 h-5 text-secondary shrink-0" strokeWidth={2.5} />
+                              <span className="font-medium">{dest.bestTimeToVisit}</span>
+                            </div>
+                            <div className="flex items-start gap-3 p-2 rounded-lg bg-muted/50 dark:bg-white/5 hover:bg-muted dark:hover:bg-white/10 transition-colors">
+                              <Star className="w-5 h-5 text-secondary mt-0.5 shrink-0" strokeWidth={2.5} />
+                              <span className="line-clamp-2">{dest.attractions.join(', ')}</span>
+                            </div>
+                          </div>
+
+                          <Button asChild className="w-full mt-auto bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
+                            <Link href="/contact" className="flex items-center justify-center gap-2">
+                              <span>Plan Your Trip</span>
+                              <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
+                            </Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ));
+                })()}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="map-view"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
+                className="max-w-6xl mx-auto w-full relative group"
+              >
+                <div className="absolute -inset-1 bg-gradient-to-t from-primary/30 via-teal-400/20 to-secondary/30 rounded-[3rem] blur opacity-40 group-hover:opacity-70 transition duration-1000" />
+                <MapWrapper />
+              </motion.div>
+            )}
           </AnimatePresence>
         )}
       </div>
