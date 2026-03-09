@@ -194,6 +194,62 @@
       "imageHint": "chail cricket ground"
     },
     {
+      "id": "dest-prasharlake",
+      "title": "Prashar Lake",
+      "description": "Pristine high-altitude lake with a floating island and an ancient pagoda temple.",
+      "imageUrl": "https://images.unsplash.com/photo-1626621331169-5f34be280ed9?w=800&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1626621331169-5f34be280ed9?w=1200&q=80",
+      "imageHint": "prashar lake temple"
+    },
+    {
+      "id": "dest-sanglavalley",
+      "title": "Sangla Valley",
+      "description": "Lush orchards and towering peaks near the Indo-Tibetan border.",
+      "imageUrl": "https://tse3.mm.bing.net/th/id/OIP.NCdX0SB_xxx7_2BpzCa4IwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://tse3.mm.bing.net/th/id/OIP.NCdX0SB_xxx7_2BpzCa4IwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "sangla valley kinnaur"
+    },
+    {
+      "id": "dest-jibhi",
+      "title": "Jibhi",
+      "description": "An offbeat village paradise with wooden cottages and hidden waterfalls.",
+      "imageUrl": "https://vl-prod-static.b-cdn.net/system/images/000/479/896/2647a60cbb2eb3db9827e84d24a5724f/original/himalayan-ecotourism-tirthan-valley-07.jpg?1611263504",
+      "homeImageUrl": "https://vl-prod-static.b-cdn.net/system/images/000/479/896/2647a60cbb2eb3db9827e84d24a5724f/original/himalayan-ecotourism-tirthan-valley-07.jpg?1611263504",
+      "imageHint": "jibhi village cottages"
+    },
+    {
+      "id": "dest-tirthanvalley",
+      "title": "Tirthan Valley",
+      "description": "Gateway to Great Himalayan National Park, famous for trout fishing and nature treks.",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.O45mRN4wgfJQzXK0N05h3AHaD6?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "homeImageUrl": "https://tse2.mm.bing.net/th/id/OIP.O45mRN4wgfJQzXK0N05h3AHaD6?rs=1&pid=ImgDetMain&o=7&rm=3",
+      "imageHint": "tirthan valley river"
+    },
+    {
+      "id": "dest-barotvalley",
+      "title": "Barot Valley",
+      "description": "Tranquil retreat with river camping and ancient hydroelectric projects.",
+      "imageUrl": "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80",
+      "homeImageUrl": "https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=1200&q=80",
+      "imageHint": "barot valley camping"
+    },
+    {
+      "id": "dest-sissu",
+      "title": "Sissu",
+      "description": "Magical Lahaul village with Sissu Lake and waterfall, near Atal Tunnel.",
+      "imageUrl": "https://preview.redd.it/sissu-himachal-pradesh-v0-yl7fb3483p9c1.jpg?width=4080&format=pjpg&auto=webp&s=7e0afb195f2f893c27e3d321a6c9268886fec782",
+      "homeImageUrl": "https://preview.redd.it/sissu-himachal-pradesh-v0-yl7fb3483p9c1.jpg?width=4080&format=pjpg&auto=webp&s=7e0afb195f2f893c27e3d321a6c9268886fec782",
+      "imageHint": "sissu lake lahaul"
+    },
+    {
+      "id": "dest-shoja",
+      "title": "Shoja",
+      "description": "A picturesque hamlet near Jalori Pass, offering raw Himalayan beauty.",
+      "imageUrl": "https://nomadsofindia.com/wp-content/uploads/2023/07/Beautiful-Sunset-in-Tirthan-Valley-1024x576.jpg",
+      "homeImageUrl": "https://nomadsofindia.com/wp-content/uploads/2023/07/Beautiful-Sunset-in-Tirthan-Valley-1024x576.jpg",
+      "imageHint": "shoja tirthan sunset"
+    },
+    {
       "id": "service-alto",
       "title": "Maruti Alto",
       "description": "Budget-friendly hatchback perfect for couples and navigating narrow mountain roads.",

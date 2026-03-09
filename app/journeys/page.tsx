@@ -36,7 +36,7 @@ const sampleJourneys: JourneyData[] = [
         location: 'Spiti Valley',
         date: 'Jan 2026',
         rating: 4,
-        imageUrl: 'https://images.unsplash.com/photo-1585516482738-4e865e4c67e0?w=600&h=400&fit=crop',
+        imageUrl: 'https://www.onacheaptrip.com/wp-content/uploads/Curvy-roads-Spiti-valley-route.jpg',
         author: 'Vikram Singh',
     },
     {
@@ -76,7 +76,7 @@ const sampleJourneys: JourneyData[] = [
         location: 'Manali',
         date: 'Jul 2025',
         rating: 4,
-        imageUrl: 'https://images.unsplash.com/photo-1432405972618-c6b0cfba0673?w=600&h=400&fit=crop',
+        imageUrl: 'https://tse4.mm.bing.net/th/id/OIP.hXqANwGv6mA3Z6j7j358GwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3',
         author: 'Karan Thakur',
     },
     {

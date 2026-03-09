@@ -20,12 +20,12 @@ import { AnimatedCounter } from '@/animation/animated-counter';
 
 const featuredDestinations = [
   { id: 'dest-dharamshala', title: 'Dharamshala' },
-  { id: 'dest-kangra', title: 'Kangra' },
-  { id: 'dest-birbilling', title: 'Bir Billing' },
+  { id: 'dest-sissu', title: 'Sissu' },
+  { id: 'dest-shoja', title: 'Shoja' },
+  { id: 'dest-sanglavalley', title: 'Sangla Valley' },
   { id: 'dest-manali', title: 'Manali' },
   { id: 'dest-shimla', title: 'Shimla' },
   { id: 'dest-spiti', title: 'Spiti Valley' },
-  { id: 'dest-dalhousie', title: 'Dalhousie' },
   { id: 'dest-kasol', title: 'Kasol' },
 ];
 

@@ -227,4 +227,67 @@ export const initialDestinations = [
     attractions: ['Chail Cricket Ground', 'Chail Palace', 'Chail Wildlife Sanctuary', 'Kali Ka Tibba'],
     coordinates: { lat: 30.9678, lng: 77.1891 }
   },
+  {
+    name: 'Prashar Lake',
+    description: 'A pristine high-altitude lake at 2,730m surrounded by snow-capped peaks and dense forests. Famous for its floating island and the ancient three-storied pagoda-style temple dedicated to sage Prashar. A hidden gem for trekkers and nature lovers.',
+    imageUrl: 'https://images.unsplash.com/photo-1626621331169-5f34be280ed9?w=800&q=80',
+    category: 'Trekking & Lake',
+    bestTimeToVisit: 'March to June, September to November',
+    attractions: ['Prashar Lake', 'Prashar Rishi Temple', 'Floating Island', 'Trek from Baggi Village'],
+    coordinates: { lat: 31.7580, lng: 77.1020 }
+  },
+  {
+    name: 'Sangla Valley',
+    description: 'One of the most beautiful valleys in India, Sangla (Baspa Valley) in Kinnaur district is surrounded by towering peaks, lush orchards, and the sparkling Baspa River. The ancient Kamru Fort and Chitkul, the last inhabited village near the Indo-Tibetan border, are major highlights.',
+    imageUrl: 'https://tse3.mm.bing.net/th/id/OIP.NCdX0SB_xxx7_2BpzCa4IwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
+    category: 'Scenic & Cultural',
+    bestTimeToVisit: 'April to June, September to October',
+    attractions: ['Chitkul Village', 'Kamru Fort', 'Baspa River', 'Bering Nag Temple'],
+    coordinates: { lat: 31.4239, lng: 78.2628 }
+  },
+  {
+    name: 'Jibhi',
+    description: 'A quaint hidden village in the Banjar Valley of Kullu, Jibhi is an offbeat paradise with wooden cottages, waterfalls, dense forests, and the serene Jibhi waterfall. Perfect for travelers seeking a peaceful escape from the usual tourist circuit.',
+    imageUrl: 'https://vl-prod-static.b-cdn.net/system/images/000/479/896/2647a60cbb2eb3db9827e84d24a5724f/original/himalayan-ecotourism-tirthan-valley-07.jpg?1611263504',
+    category: 'Offbeat & Nature',
+    bestTimeToVisit: 'March to June, September to December',
+    attractions: ['Jibhi Waterfall', 'Serolsar Lake', 'Jalori Pass', 'Great Himalayan National Park (Nearby)'],
+    coordinates: { lat: 31.6109, lng: 77.3425 }
+  },
+  {
+    name: 'Tirthan Valley',
+    description: 'A serene valley named after the Tirthan River, located on the edge of the Great Himalayan National Park (UNESCO World Heritage Site). Known for its crystal-clear trout streams, untouched forests, and eco-friendly homestays. A paradise for fishing and birdwatching enthusiasts.',
+    imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.O45mRN4wgfJQzXK0N05h3AHaD6?rs=1&pid=ImgDetMain&o=7&rm=3',
+    category: 'Eco-Tourism & Wildlife',
+    bestTimeToVisit: 'March to June, September to November',
+    attractions: ['Great Himalayan National Park', 'Trout Fishing', 'Chhoie Waterfall', 'Serloskar Lake Trek'],
+    coordinates: { lat: 31.6380, lng: 77.3505 }
+  },
+  {
+    name: 'Barot Valley',
+    description: 'A hidden gem in the Mandi district, Barot Valley offers a tranquil retreat with the Uhl River, trout fishing, dense forests, and the historic Shanan Hydroelectric Project. Perfect for camping and connecting with raw nature away from tourist crowds.',
+    imageUrl: 'https://images.unsplash.com/photo-1585409677983-0f6c41ca9c3b?w=800&q=80',
+    category: 'Offbeat & Camping',
+    bestTimeToVisit: 'March to June, September to November',
+    attractions: ['Barot River', 'Nargu Wildlife Sanctuary', 'Shanan Power House', 'Camping by Uhl River'],
+    coordinates: { lat: 31.8475, lng: 76.8458 }
+  },
+  {
+    name: 'Sissu',
+    description: 'A breathtaking village in the Lahaul Valley, made easily accessible by the Atal Tunnel. Famous for the stunning Sissu Lake, its massive waterfall, and the surrounding snow-capped peaks of the Pir Panjal range. It serves as a beautiful gateway to the rugged landscapes of Lahaul and Spiti.',
+    imageUrl: 'https://preview.redd.it/sissu-himachal-pradesh-v0-yl7fb3483p9c1.jpg?width=4080&format=pjpg&auto=webp&s=7e0afb195f2f893c27e3d321a6c9268886fec782',
+    category: 'Nature & Adventure',
+    bestTimeToVisit: 'May to October (for greenery), November to April (for snow)',
+    attractions: ['Sissu Lake', 'Sissu Waterfall', 'Atal Tunnel', 'Gyephang Peak Views'],
+    coordinates: { lat: 32.4833, lng: 77.1233 }
+  },
+  {
+    name: 'Shoja',
+    description: 'A serene and picturesque hamlet in the Seraj Valley of Kullu district. Known for its lush green meadows, dense forests of oak and pine, and its proximity to the magnificent Jalori Pass and Serolsar Lake. It offers a tranquil escape for those looking to experience the raw beauty of the Himalayas.',
+    imageUrl: 'https://nomadsofindia.com/wp-content/uploads/2023/07/Beautiful-Sunset-in-Tirthan-Valley-1024x576.jpg',
+    category: 'Offbeat & Nature',
+    bestTimeToVisit: 'April to June, September to November',
+    attractions: ['Jalori Pass', 'Serolsar Lake', 'Waterfall Point', 'Tirthan Valley (Nearby)'],
+    coordinates: { lat: 31.6256, lng: 77.4089 }
+  },
 ].filter(dest => dest.imageUrl);
