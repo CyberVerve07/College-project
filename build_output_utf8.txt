@@ -1,0 +1,74 @@
+﻿
+> nextn@0.1.0 build
+> next build
+
+   Γû▓ Next.js 15.5.9
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 4.6s
+   Linting and checking validity of types ...
+node.exe : Failed to 
+compile.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Failed to com   
+ pile.:String) [],     
+RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+
+./Frontend/components/u
+i/calendar.tsx:57:9
+Type error: Object 
+literal may only 
+specify known 
+properties, and 
+'IconLeft' does not 
+exist in type 'Partial<
+CustomComponents>'.
+
+[0m [90m 55 |[39m   
+    }}
+ [90m 56 |[39m       
+components[33m=[39m{{
+[31m[1m>[22m[39m[9
+0m 57 |[39m         [
+33mIconLeft[39m[33m:
+[39m ({ 
+className[33m,[39m 
+[33m...[39mprops }) 
+[33m=>[39m (
+ [90m    |[39m       
+  [31m[1m^[22m[39m
+ [90m 58 |[39m       
+    [33m<[39m[33mChe
+vronLeft[39m className
+[33m=[39m{cn([32m"h-
+4 w-4"[39m[33m,[39m 
+className)} 
+{[33m...[39mprops} 
+[33m/[39m[33m>[39m
+ [90m 59 |[39m       
+  )[33m,[39m
+ [90m 60 |[39m       
+  [33mIconRight[39m[
+33m:[39m ({ 
+className[33m,[39m 
+[33m...[39mprops }) 
+[33m=>[39m ([0m
+Next.js build worker 
+exited with code: 1 
+and signal: null
