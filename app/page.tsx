@@ -63,48 +63,36 @@ export default function Home() {
             <p className="text-base md:text-lg text-slate-300 font-medium max-w-3xl mx-auto">Discover the most breathtaking destinations in Himachal Pradesh</p>
           </div>
 
-          <div className="container px-4 md:px-6">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-4 md:-ml-6 py-6">
-                {featuredDestinations.map((dest) => {
-                  const imageData = PlaceHolderImagesMap.get(dest.id);
-                  if (!imageData) return null;
+          <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 max-w-[1600px] mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+              {featuredDestinations.map((dest) => {
+                const imageData = PlaceHolderImagesMap.get(dest.id);
+                if (!imageData) return null;
 
-                  return (
-                    <CarouselItem key={dest.id} className="pl-4 md:pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                      <div className="group relative h-[400px] md:h-[500px] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-3 cursor-pointer neon-border bg-card">
-                        <Image
-                          src={imageData.homeImageUrl || imageData.imageUrl}
-                          alt={imageData.description}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          className="object-cover transition-all duration-300 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                        <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full transform transition-all duration-500">
-                          <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3 group-hover:text-secondary-foreground transition-colors">{dest.title}</h3>
-                          <p className="text-white/60 text-sm md:text-base line-clamp-2 mb-4 md:mb-6 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                            {imageData.description}
-                          </p>
-                          <div className="h-1 w-0 group-hover:w-full bg-secondary transition-all duration-500 rounded-full" />
-                        </div>
+                return (
+                  <Link href={`/destinations`} key={dest.id} className="group">
+                    <div className="relative aspect-[3/4] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-700 hover:-translate-y-3 cursor-pointer neon-border bg-card">
+                      <Image
+                        src={imageData.homeImageUrl || imageData.imageUrl}
+                        alt={imageData.description}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                        className="object-cover transition-all duration-500 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+                      <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full transform transition-all duration-500">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3 group-hover:text-secondary-foreground transition-colors">{dest.title}</h3>
+                        <p className="text-white/60 text-sm md:text-base line-clamp-2 mb-4 md:mb-6 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                          {imageData.description}
+                        </p>
+                        <div className="h-1 w-0 group-hover:w-full bg-secondary transition-all duration-500 rounded-full" />
                       </div>
-                    </CarouselItem>
-                  );
-                })}
-              </CarouselContent>
-              <div className="hidden md:block">
-                <CarouselPrevious className="left-[-2rem] bg-white/10 hover:bg-white/20 border-white/20 text-white" />
-                <CarouselNext className="right-[-2rem] bg-white/10 hover:bg-white/20 border-white/20 text-white" />
-              </div>
-            </Carousel>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
       </AnimatedSection>
@@ -117,9 +105,9 @@ export default function Home() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-headline tracking-tighter mb-4 text-primary" style={{ textShadow: '0 0 50px hsla(200, 85%, 35%, 0.5)' }}>Visual Overdose</h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">No filters needed. Pure Himachal magic.</p>
           </div>
-          <div className="container px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+          <div className="w-full px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {PlaceHolderImages.filter(img => img.id.startsWith('dest-')).map((img: ImagePlaceholder) => (
-              <div key={img.id} className="relative h-[350px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all group neon-border">
+              <div key={img.id} className="relative aspect-[4/3] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl transition-all group neon-border">
                 <Image
                   src={img.imageUrl}
                   alt={img.title}
