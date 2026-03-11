@@ -68,7 +68,7 @@ service cloud.firestore {
      */
     match /services/{serviceId} {
       allow read: if true;
-      allow write: if true; // Temporarily allowed for seeding
+      allow write: if isAdmin();
     }
 
     /**
@@ -77,7 +77,7 @@ service cloud.firestore {
      */
     match /routes/{routeId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
 
     /**
@@ -95,9 +95,19 @@ service cloud.firestore {
      * Write-only for public, Read for admin.
      */
     match /contact_form_submissions/{submissionId} {
-      allow create: if request.resource.data.name is string &&
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'subject', 'message', 'submissionDate']) &&
+                       request.resource.data.name is string &&
+                       request.resource.data.name.size() >= 2 &&
+                       request.resource.data.name.size() <= 100 &&
                        request.resource.data.email is string &&
-                       request.resource.data.message is string;
+                       request.resource.data.email.size() <= 254 &&
+                       request.resource.data.subject is string &&
+                       request.resource.data.subject.size() >= 5 &&
+                       request.resource.data.subject.size() <= 150 &&
+                       request.resource.data.message is string &&
+                       request.resource.data.message.size() >= 10 &&
+                       request.resource.data.message.size() <= 5000 &&
+                       request.resource.data.submissionDate is string;
       allow read, delete: if isAdmin();
     }
   }
