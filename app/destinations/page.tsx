@@ -4,8 +4,7 @@ import Image from 'next/image';
 import { useCollection, useFirestore, useMemoFirebase } from '@/backend/firebase';
 import { collection } from 'firebase/firestore';
 import { Skeleton } from '@/frontend/components/ui/skeleton';
-import { useEffect, useState } from 'react';
-import { seedDestinations, seedRoutes } from '@/backend/firebase/seed';
+import { useState } from 'react';
 import { initialDestinations } from '@/images/destinations-data';
 import { Card, CardContent } from '@/frontend/components/ui/card';
 import { Calendar, Star, ArrowRight } from 'lucide-react';
@@ -31,7 +30,6 @@ interface Destination {
 
 export default function DestinationsPage() {
   const firestore = useFirestore();
-  const [isSeeding, setIsSeeding] = useState(true);
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
   const destinationsCollection = useMemoFirebase(() => {
@@ -40,26 +38,7 @@ export default function DestinationsPage() {
   }, [firestore]);
 
   const { data: destinations, isLoading, error } = useCollection<Destination>(destinationsCollection);
-
-  useEffect(() => {
-    // We need to wait for firestore to be available.
-    if (firestore && !isLoading) {
-      if (destinations?.length === 0) {
-        Promise.all([
-          seedDestinations(firestore),
-          seedRoutes(firestore)
-        ]).finally(() => setIsSeeding(false));
-      } else {
-        // Data exists, no need to seed.
-        setIsSeeding(false);
-      }
-    } else if (!isLoading) {
-      // If data loading is done, stop seeding indicator.
-      setIsSeeding(false);
-    }
-  }, [firestore, destinations, isLoading]);
-
-  const showLoading = isLoading || isSeeding;
+  const showLoading = isLoading;
 
   const containerVariants = {
     hidden: { opacity: 0 },

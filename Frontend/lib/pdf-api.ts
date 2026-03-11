@@ -16,8 +16,8 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         }
     };
 
-    // ── Header ──
-    doc.setFillColor(15, 118, 110); // teal-700
+    // Header
+    doc.setFillColor(15, 118, 110);
     doc.rect(0, 0, pageWidth, 45, 'F');
 
     doc.setTextColor(255, 255, 255);
@@ -27,11 +27,11 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
 
     doc.setFontSize(11);
     doc.setFont('helvetica', 'normal');
-    doc.text('Crafted by Leo AI • Destiny Tour Travel', margin, 34);
+    doc.text('Crafted by Leo AI | Destiny Tour Travel', margin, 34);
 
     y = 60;
 
-    // ── Quick Stats ──
+    // Quick Stats
     doc.setTextColor(50, 50, 50);
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
@@ -62,7 +62,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
 
     y += 35;
 
-    // ── Best Destinations ──
+    // Best Destinations
     checkPageBreak(30);
     doc.setTextColor(30, 30, 30);
     doc.setFontSize(16);
@@ -75,7 +75,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         doc.setTextColor(15, 118, 110);
         doc.setFontSize(11);
         doc.setFont('helvetica', 'bold');
-        doc.text(`• ${dest.name}`, margin + 5, y);
+        doc.text(`- ${dest.name}`, margin + 5, y);
         y += 5;
 
         doc.setTextColor(80, 80, 80);
@@ -92,13 +92,13 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
 
     y += 5;
 
-    // ── Separator ──
+    // Separator
     doc.setDrawColor(200, 200, 200);
     doc.setLineWidth(0.3);
     doc.line(margin, y, pageWidth - margin, y);
     y += 10;
 
-    // ── Day-by-Day Itinerary ──
+    // Day-by-Day Itinerary
     doc.setTextColor(30, 30, 30);
     doc.setFontSize(16);
     doc.setFont('helvetica', 'bold');
@@ -108,7 +108,6 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
     itinerary.itinerary.forEach((day) => {
         checkPageBreak(60);
 
-        // Day number badge
         doc.setFillColor(15, 118, 110);
         doc.circle(margin + 6, y + 3, 6, 'F');
         doc.setTextColor(255, 255, 255);
@@ -116,14 +115,12 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         doc.setFont('helvetica', 'bold');
         doc.text(`${day.day}`, margin + 6, y + 5, { align: 'center' });
 
-        // Day title
         doc.setTextColor(30, 30, 30);
         doc.setFontSize(13);
         doc.setFont('helvetica', 'bold');
         doc.text(day.title, margin + 16, y + 5);
         y += 12;
 
-        // Morning
         doc.setTextColor(180, 130, 0);
         doc.setFontSize(8);
         doc.setFont('helvetica', 'bold');
@@ -140,7 +137,6 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         });
         y += 3;
 
-        // Afternoon
         doc.setTextColor(200, 100, 0);
         doc.setFontSize(8);
         doc.setFont('helvetica', 'bold');
@@ -157,7 +153,6 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         });
         y += 3;
 
-        // Evening
         doc.setTextColor(80, 80, 160);
         doc.setFontSize(8);
         doc.setFont('helvetica', 'bold');
@@ -173,7 +168,6 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
             y += 5;
         });
 
-        // Daily expense
         y += 3;
         doc.setTextColor(120, 120, 120);
         doc.setFontSize(8);
@@ -182,7 +176,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         y += 10;
     });
 
-    // ── Budget Breakdown ──
+    // Budget Breakdown
     checkPageBreak(40);
     doc.setDrawColor(200, 200, 200);
     doc.line(margin, y, pageWidth - margin, y);
@@ -207,7 +201,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         });
     }
 
-    // ── Local Tips ──
+    // Local Tips
     checkPageBreak(30);
     y += 5;
     doc.setTextColor(30, 30, 30);
@@ -221,7 +215,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         doc.setTextColor(70, 70, 70);
         doc.setFontSize(9);
         doc.setFont('helvetica', 'normal');
-        const tipLines = doc.splitTextToSize(`• ${tip}`, contentWidth - 5);
+        const tipLines = doc.splitTextToSize(`- ${tip}`, contentWidth - 5);
         tipLines.forEach((line: string) => {
             checkPageBreak(5);
             doc.text(line, margin + 5, y);
@@ -230,7 +224,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
         y += 3;
     });
 
-    // ── Footer CTA ──
+    // Footer CTA
     checkPageBreak(30);
     doc.setDrawColor(200, 200, 200);
     doc.line(margin, y, pageWidth - margin, y);
@@ -243,7 +237,7 @@ export async function downloadItineraryPdf(itinerary: ItineraryResponse) {
     doc.setFont('helvetica', 'bold');
     doc.text(itinerary.bookingCTA || 'Contact Destiny Tour Travel to book!', pageWidth / 2, y + 13, { align: 'center' });
 
-    // ── Save ──
+    // Save
     const firstName = itinerary.bestDestinations?.[0]?.name || 'Himachal';
     doc.save(`LeoAI_TripTo_${firstName}.pdf`);
 }

@@ -22,7 +22,7 @@ const sampleJourneys: JourneyData[] = [
     {
         id: '2',
         title: 'Paragliding Over Bir Billing',
-        story: 'The moment my feet left the ground I knew this was going to be the best day of my trip. Soaring over the lush green valley with snow-capped peaks in the background — pure adrenaline and zen at the same time.',
+        story: 'The moment my feet left the ground I knew this was going to be the best day of my trip. Soaring over the lush green valley with snow-capped peaks in the background was pure adrenaline and zen at the same time.',
         location: 'Bir Billing',
         date: 'Nov 2025',
         rating: 5,
@@ -52,7 +52,7 @@ const sampleJourneys: JourneyData[] = [
     {
         id: '5',
         title: 'Old Town Walk in Shimla',
-        story: 'Walking through the colonial architecture of Shimla\'s Mall Road during the evening was magical. The church, the old bookshops, and warm momos from a roadside stall — Shimla has a charm that never fades.',
+        story: 'Walking through the colonial architecture of Shimla\'s Mall Road during the evening was magical. The church, the old bookshops, and warm momos from a roadside stall made the town feel timeless.',
         location: 'Shimla',
         date: 'Sep 2025',
         rating: 4,
@@ -72,7 +72,7 @@ const sampleJourneys: JourneyData[] = [
     {
         id: '7',
         title: 'Chasing Waterfalls in Manali',
-        story: 'Discovered a hidden waterfall off the beaten path near Old Manali. The trek through dense forests, crossing wooden bridges, and finally standing before the cascading water — nature at its raw best!',
+        story: 'Discovered a hidden waterfall off the beaten path near Old Manali. The trek through dense forests, crossing wooden bridges, and finally standing before the cascading water was nature at its raw best.',
         location: 'Manali',
         date: 'Jul 2025',
         rating: 4,
@@ -113,7 +113,6 @@ export default function JourneysPage() {
         <div className="min-h-[100dvh]">
             <JourneyHero onShareClick={() => setIsModalOpen(true)} />
 
-            {/* Stats Bar */}
             <div className="container px-6 md:px-8 -mt-6 relative z-20 max-w-3xl mx-auto">
                 <div className="flex justify-center gap-8 md:gap-16 py-5 px-6 rounded-xl bg-card/80 backdrop-blur-sm border border-white/10 shadow-lg">
                     <div className="text-center">
@@ -133,7 +132,6 @@ export default function JourneysPage() {
                 </div>
             </div>
 
-            {/* Journeys Grid */}
             <AnimatedSection animation="fade" delay={0.1}>
                 <section className="pt-14 pb-16 md:pt-20 md:pb-24">
                     <div className="container px-6 md:px-8">
@@ -156,7 +154,6 @@ export default function JourneysPage() {
                 </section>
             </AnimatedSection>
 
-            {/* CTA Section */}
             <AnimatedSection animation="fade" delay={0.1}>
                 <section className="py-14 md:py-24 bg-mesh text-white text-center rounded-t-[2rem] md:rounded-t-[4rem] mx-4 md:mx-8 relative overflow-hidden">
                     <div className="absolute inset-0 bg-primary/20" />
@@ -171,7 +168,7 @@ export default function JourneysPage() {
                             onClick={() => setIsModalOpen(true)}
                             className="h-12 md:h-16 px-8 md:px-12 !text-base md:!text-xl font-black rounded-xl md:rounded-2xl bg-white text-primary hover:bg-black hover:text-white transition-all duration-200 shadow-xl hover:scale-105 active:scale-95"
                         >
-                            WRITE YOUR STORY ✍️
+                            WRITE YOUR STORY
                         </button>
                     </div>
                 </section>

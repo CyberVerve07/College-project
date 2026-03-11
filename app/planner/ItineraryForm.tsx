@@ -23,14 +23,12 @@ import {
   SelectValue,
 } from '@/frontend/components/ui/select';
 import { toast } from '@/frontend/hooks/use-toast';
-import { Bot, Calendar, Clock, IndianRupee, Users, Car, Sparkles, FileText, MapPin, Compass, Wallet, Lightbulb, Navigation } from 'lucide-react';
+import { Bot, Calendar, IndianRupee, Sparkles, FileText, MapPin, Compass, Wallet, Lightbulb, Navigation } from 'lucide-react';
 import { createItinerary } from '@/ai/ai/flows/create-itinerary-flow';
 import { Separator } from '@/frontend/components/ui/separator';
 import type { ItineraryResponse } from '@/ai/ai/flows/itinerary-types';
 import { downloadItineraryPdf } from '@/frontend/lib/pdf-api';
 import { useRouter } from 'next/navigation';
-
-
 
 const tripStyles = ['Adventure', 'Nature', 'Peace', 'Spiritual'];
 
@@ -85,11 +83,11 @@ export default memo(function ItineraryForm() {
   const handleDownloadPdf = async () => {
     if (!itinerary) return;
     try {
-      toast({ title: "Generating PDF...", description: "Please wait while Leo AI prepares your itinerary." });
+      toast({ title: 'Generating PDF...', description: 'Please wait while Leo AI prepares your itinerary.' });
       await downloadItineraryPdf(itinerary);
-      toast({ title: "Success", description: "PDF downloaded successfully!" });
+      toast({ title: 'Success', description: 'PDF downloaded successfully!' });
     } catch (e) {
-      toast({ variant: "destructive", title: "Error", description: "Failed to generate PDF. Please try again." });
+      toast({ variant: 'destructive', title: 'Error', description: 'Failed to generate PDF. Please try again.' });
     }
   };
 
@@ -101,7 +99,6 @@ export default memo(function ItineraryForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {/* Origin */}
           <FormField
             control={form.control}
             name="origin"
@@ -116,7 +113,6 @@ export default memo(function ItineraryForm() {
             )}
           />
 
-          {/* Budget, Days, People */}
           <div className="grid md:grid-cols-3 gap-6">
             <FormField
               control={form.control}
@@ -159,7 +155,6 @@ export default memo(function ItineraryForm() {
             />
           </div>
 
-          {/* Destination & Trip Style */}
           <div className="grid md:grid-cols-2 gap-6">
             <FormField
               control={form.control}
@@ -243,9 +238,6 @@ export default memo(function ItineraryForm() {
             <p className="text-muted-foreground mt-2">Here is your personalized Himachal trip crafted by Leo AI.</p>
           </div>
 
-
-
-          {/* ===== SECTION 1: Best Destinations ===== */}
           <div className="bg-muted/50 rounded-xl p-6">
             <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-primary">
               <MapPin className="w-6 h-6" /> Best Destinations for You
@@ -260,7 +252,6 @@ export default memo(function ItineraryForm() {
             </div>
           </div>
 
-          {/* ===== SECTION 2: Day-wise Itinerary ===== */}
           <div className="bg-muted/50 rounded-xl p-6">
             <h3 className="flex items-center gap-2 font-bold text-xl mb-6 text-secondary">
               <Calendar className="w-6 h-6" /> Day-wise Itinerary
@@ -276,15 +267,15 @@ export default memo(function ItineraryForm() {
                     <h4 className="font-headline text-2xl font-black mb-3 text-foreground/90">{day.title}</h4>
                     <div className="space-y-3">
                       <div className="bg-background/40 p-3 rounded-xl border border-white/5">
-                        <span className="text-xs font-bold uppercase tracking-widest text-amber-400">☀️ Morning</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-amber-400">Morning</span>
                         <p className="text-sm text-muted-foreground mt-1">{day.morning}</p>
                       </div>
                       <div className="bg-background/40 p-3 rounded-xl border border-white/5">
-                        <span className="text-xs font-bold uppercase tracking-widest text-orange-400">🌤️ Afternoon</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-orange-400">Afternoon</span>
                         <p className="text-sm text-muted-foreground mt-1">{day.afternoon}</p>
                       </div>
                       <div className="bg-background/40 p-3 rounded-xl border border-white/5">
-                        <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">🌙 Evening</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">Evening</span>
                         <p className="text-sm text-muted-foreground mt-1">{day.evening}</p>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground/60 mt-2">
@@ -297,7 +288,6 @@ export default memo(function ItineraryForm() {
             </div>
           </div>
 
-          {/* ===== SECTION 3: Travel & Transport ===== */}
           <div className="bg-muted/50 rounded-xl p-6">
             <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-teal-400">
               <Navigation className="w-6 h-6" /> Travel & Transport Advice
@@ -312,7 +302,6 @@ export default memo(function ItineraryForm() {
             </ul>
           </div>
 
-          {/* ===== SECTION 4: Budget Breakdown ===== */}
           <div className="bg-muted/50 rounded-xl p-6">
             <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-amber-400">
               <IndianRupee className="w-6 h-6" /> Budget Breakdown
@@ -327,7 +316,6 @@ export default memo(function ItineraryForm() {
             </div>
           </div>
 
-          {/* ===== SECTION 5: Local Tips ===== */}
           <div className="bg-muted/50 rounded-xl p-6">
             <h3 className="flex items-center gap-2 font-bold text-xl mb-4 text-green-400">
               <Lightbulb className="w-6 h-6" /> Local Tips & Advice
@@ -335,13 +323,12 @@ export default memo(function ItineraryForm() {
             <ul className="space-y-3">
               {itinerary.localTips?.map((tip, i) => (
                 <li key={i} className="flex gap-3 text-muted-foreground text-sm items-start bg-background/40 p-3 rounded-xl border border-white/5">
-                  <span className="text-green-400 font-bold shrink-0">💡</span> {tip}
+                  <span className="text-green-400 font-bold shrink-0">Tip</span> {tip}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* ===== CTA ===== */}
           <Separator />
           <div className="text-center pt-4">
             <p className="text-lg font-semibold mb-4">{itinerary.bookingCTA}</p>

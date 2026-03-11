@@ -123,7 +123,7 @@ export default function ServicesPage() {
                   {/* Action Button */}
                   <div className="mt-auto">
                     <Button asChild className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all group-hover:scale-[1.02]" size="lg">
-                      <Link href="/contact?service=${service.id}" className="flex items-center justify-center gap-2">
+                      <Link href={`/contact?service=${service.id}`} className="flex items-center justify-center gap-2">
                         <Phone className="w-4 h-4" strokeWidth={2.5} />
                         <span>Book This Vehicle</span>
                       </Link>
