@@ -1,6 +1,13 @@
 import { firebaseConfig } from '@/backend/firebase/config';
 import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+/**
+ * Initializes Firebase app and returns the core SDKs.
+ * Handles singleton pattern - only initializes once even if called multiple times.
+ * 
+ * @returns Object containing firebaseApp and firestore instances
+ * @throws Error if Firebase initialization fails and fallback also fails
+ */
 export function initializeFirebase() {
   if (!getApps().length) {
     // Initialize with the generated config.
@@ -9,7 +16,10 @@ export function initializeFirebase() {
     try {
       firebaseApp = initializeApp(firebaseConfig);
     } catch (e) {
-      console.warn('Firebase initialization failed.', e);
+      // Log warning but don't expose sensitive error details
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('[initializeFirebase] Firebase initialization with config failed, attempting fallback:', e);
+      }
       // Fallback if there's any App Hosting or environment defaults
       firebaseApp = initializeApp();
     }
@@ -21,6 +31,12 @@ export function initializeFirebase() {
   return getSdks(getApp());
 }
 
+/**
+ * Extracts and returns the core Firebase SDKs from a FirebaseApp instance.
+ * 
+ * @param firebaseApp - The initialized Firebase app instance
+ * @returns Object containing firebaseApp and firestore instances
+ */
 export function getSdks(firebaseApp: FirebaseApp) {
   return {
     firebaseApp,

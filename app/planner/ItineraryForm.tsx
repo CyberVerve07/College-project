@@ -68,7 +68,10 @@ export default memo(function ItineraryForm() {
       const result = await createItinerary(values);
       setItinerary(result);
     } catch (e) {
-      console.error(e);
+      // Log error for debugging - in production, use a proper error tracking service
+      if (process.env.NODE_ENV === 'development') {
+        console.error('[ItineraryForm] Failed to generate itinerary:', e);
+      }
       setError('Leo AI could not generate the itinerary. Please try again in a moment.');
       toast({
         variant: 'destructive',

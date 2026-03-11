@@ -23,7 +23,7 @@ function getDb() {
     return getFirestore(app);
 }
 
-export async function saveBooking(bookingData: any) {
+export async function saveBooking(bookingData: unknown) {
     try {
         const parsedBooking = bookingSchema.parse(bookingData);
         const db = getDb();
@@ -36,7 +36,12 @@ export async function saveBooking(bookingData: any) {
         });
         return { success: true, id: docRef.id };
     } catch (error) {
-        console.error('Error saving booking:', error);
+        // Log error details for debugging without exposing sensitive info to client
+        if (error instanceof z.ZodError) {
+            console.warn('[saveBooking] Validation failed:', error.flatten());
+        } else {
+            console.error('[saveBooking] Database error:', error instanceof Error ? error.message : 'Unknown error');
+        }
         return { success: false, error: 'Failed to save booking' };
     }
 }
