@@ -1,0 +1,40 @@
+5718804 chore: cleanup git_status.txt
+75cba94 chore: cleanup git_log_final.txt
+e1e73d3 chore: cleanup git_log.txt
+885f84a chore: cleanup build_output_utf8.txt
+c54c194 chore: cleanup build_output.txt
+0e68cde chore: cleanup build_log.txt
+b4d17f0 chore: cleanup build_error_utf8.txt
+505d9c3 chore: cleanup build_error.txt
+614016a chore(maven): update PdfService.class
+b89cf35 chore(maven): update PdfController.class
+b9487ed chore(maven): update PdfApplication.class
+b203b52 chore(maven): update ItineraryRequest.class
+5a2d68b chore(maven): update ItineraryDay.class
+7408640 chore(maven): update WeatherService.class
+e827209 chore(maven): update WeatherResponse.class
+3f593af chore(maven): update WeatherController.class
+c4be51a chore(maven): update application.properties
+b24beac chore(maven): update application.properties
+387806b feat(backend): update PdfService.java
+99428a1 feat(backend): update PdfController.java
+2e66a4f feat(backend): update PdfApplication.java
+6576c72 feat(backend): update ItineraryRequest.java
+3a2aebe feat(backend): update ItineraryDay.java
+6299d41 feat(backend): update WeatherService.java
+f9e7355 feat(backend): update WeatherResponse.java
+bdf93f4 feat(backend): update WeatherController.java
+4dcbcc7 chore(maven): update run_backend.ps1
+dbe2f45 chore(maven): update pom.xml
+613c84a chore(maven): update mvnw.cmd
+293edaf chore(maven): update maven-wrapper.properties
+394faaf feat(api): update route.ts
+6bd0016 refactor: sync changes for settings.json
+3203c17 atomic test commit
+ab54f8c test empty commit
+8c65d46 init
+3b7686c git fix size
+d6913e1 refactor: remove file.
+4d39d35 git init
+36c124a git update
+cd2ee7e fix: harden firestore access rules

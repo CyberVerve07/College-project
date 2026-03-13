@@ -1,0 +1,35 @@
+8c65d46 init
+3b7686c git fix size
+d6913e1 refactor: remove file.
+4d39d35 git init
+36c124a git update
+cd2ee7e fix: harden firestore access rules
+ddc5dd4 chore: disable debug ai route
+a5bf8df chore: disable public env debug page
+4d31db2 git update
+cd2cd9e chore: Create build output and error log files.
+570ff31 git init
+5f917b0 feat: Add Axios dependency and create initial destination data file.
+9f0264d feat: implement root layout for Next.js application with global providers, fonts, and UI components.
+7f9cd2b git init
+151aa51 feat: introduce user journey sharing and display features with form, modal, and dedicated components.
+69820a2 chore: remove final_commit_out.txt
+269d334 chore: final synchronization of root package structure
+af3cf29 style: reorganized final_commit_out.txt
+e2ceff1 refactor: relocated e -i HEAD~30
+18f0e2d refactor: reorganized debug-images.mjs
+60961d0 chore: updated commits_out.txt
+8cfd0b3 chore: final synchronization of root package structure
+2ea31fa style: setup tsc_stdout.txt
+894f381 refactor: migrated status_out.txt
+3617854 chore: updated test-openrouter.mjs
+851713e refactor: adjusted test-groq-simple.mjs
+e9be461 fix: reorganized test-gemini.mjs
+d84a192 build: reorganized test-ai.ts
+04186b4 fix: relocated master-move.js
+e0ad556 fix: adjusted fix-imports.js
+08659df fix: adjusted fix-imports-2.js
+2afa116 refactor: migrated download_images.ps1
+bb1b2e1 chore: setup boost-commits.js
+12c07c8 chore: reorganized out.txt
+c92eefc fix: reorganized move_out.txt
