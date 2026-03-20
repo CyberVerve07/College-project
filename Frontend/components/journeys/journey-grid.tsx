@@ -8,11 +8,9 @@ interface JourneyGridProps {
 
 export function JourneyGrid({ journeys }: JourneyGridProps) {
     return (
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
             {journeys.map((journey, index) => (
-                <div key={journey.id} className="break-inside-avoid">
-                    <JourneyCard journey={journey} index={index} />
-                </div>
+                <JourneyCard key={journey.id} journey={journey} index={index} />
             ))}
         </div>
     );

@@ -23,14 +23,14 @@ export const viewport: Viewport = {
 };
 
 const ptSans = PT_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '700'],
   variable: '--font-pt-sans',
   display: 'swap',
 });
 
 const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-playfair-display',
   display: 'swap',
 });
