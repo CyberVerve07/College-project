@@ -7,7 +7,7 @@
 4. [Running the Application](#running-the-application)
 
 ## Prerequisites
-Before you begin, ensure you have met the following requirements:
+Before you begin, ensure you have met the following requirements
 - Node.js (version 14 or higher)
 - npm (Node Package Manager)
 - MongoDB (if using MongoDB for the backend)
