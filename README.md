@@ -1,4 +1,4 @@
-# Destiny Tour & Travels 🏔️
+# Destiny Tour & Travels 
 
 > **"Don't Just Visit, Live Himachal."**
 
