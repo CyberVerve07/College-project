@@ -10,12 +10,30 @@ Built with love, code, and a passion for the mountains.
 
 ## 🌟 Features
 
+-   **User Authentication & Profiles:** Google Sign-in and Email/Password authentication powered by Firebase Auth. Includes user profile creation, roles management, and a custom user dashboard.
+-   **Live Route Cost Calculator:** Dynamic distance and fare estimation using mathematical Haversine formula mapping and winding mountain path adjustments, plotted with a Leaflet route polyline.
+-   **Popular Tour Packages:** Curated pre-made Himachal tour packages detailing Day-by-Day itineraries, inclusions, exclusions, and quick booking triggers.
+-   **Travel Blog & Journal:** SEO-friendly, styled travel blog with categories, read times, author profiles, and detail page layouts.
+-   **Real-time Weather Widget:** Regional simulated/live weather widgets tailored for Himachal towns to provide smart clothing and activity recommendations.
+-   **Star Ratings & Reviews:** Real-time feedback submission linked with Firestore database, calculated average scores, and review feeds.
+-   **Admin Control Panel:** Secured interface for managing active bookings (Confirm/Complete/Cancel) and dismissing contact inquiries.
 -   **AI Trip Planner:** Intelligent itinerary generation using Genkit (Google GenAI & Groq).
 -   **Interactive Maps:** Real-time distance and route calculation.
 -   **Premium Fleet:** Showcase of available vehicles with booking integration.
 -   **Dynamic Pricing:** Automated fare estimation based on distance and vehicle type.
 -   **Responsive Design:** A "Visual Overdose" experience on any device, powered by Tailwind and Framer Motion.
 -   **Direct Connection:** One-click WhatsApp booking and inquiry system.
+
+### 📸 Screenshots
+
+| Feature | Screenshot | Description |
+|---|---|---|
+| **Landing Page** | `![Homepage](/public/screenshots/homepage.png)` | Epic landing page with parallax and mountain mesh |
+| **Trip Cost Calculator** | `![Cost Estimator](/public/screenshots/calculator.png)` | Route mapping & pricing breakdown |
+| **User Dashboard** | `![Dashboard](/public/screenshots/dashboard.png)` | Secure user profile and booking history |
+| **Travel Blog** | `![Blog](/public/screenshots/blog.png)` | SEO-friendly articles about Himachal valleys |
+| **Tour Packages** | `![Packages](/public/screenshots/packages.png)` | Interactive modal itineraries |
+| **Admin Control Center** | `![Admin Panel](/public/screenshots/admin.png)` | Dashboard to review orders and messages |
 
 ---
 
