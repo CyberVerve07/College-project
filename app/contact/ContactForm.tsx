@@ -1,11 +1,10 @@
 'use client';
 
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/frontend/components/ui/button';
-import { Sparkles, Send } from 'lucide-react';
+import { Sparkles, Send, Loader2 } from 'lucide-react';
 import {
   Form,
   FormControl,
@@ -17,9 +16,10 @@ import {
 import { Input } from '@/frontend/components/ui/input';
 import { Textarea } from '@/frontend/components/ui/textarea';
 import { useToast } from '@/frontend/hooks/use-toast';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useFirestore } from '@/backend/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,10 +36,11 @@ const formSchema = z.object({
   }),
 });
 
-export default function ContactForm() {
+function ContactFormContent() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const firestore = useFirestore();
+  const searchParams = useSearchParams();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,6 +51,31 @@ export default function ContactForm() {
       message: '',
     },
   });
+
+  useEffect(() => {
+    if (!searchParams) return;
+    const pickup = searchParams.get('pickup');
+    const drop = searchParams.get('drop');
+    const vehicle = searchParams.get('vehicle');
+    const fare = searchParams.get('fare');
+    const pkg = searchParams.get('package');
+    const service = searchParams.get('service');
+    const hotel = searchParams.get('hotel');
+
+    if (pickup && drop && vehicle && fare) {
+      form.setValue('subject', `Cab Booking: ${vehicle}`);
+      form.setValue('message', `Hello, I want to book a taxi ride from ${pickup} to ${drop} with the ${vehicle}. The estimated fare is ₹${fare}. Please confirm the booking.`);
+    } else if (pkg) {
+      form.setValue('subject', `Tour Inquiry: ${pkg}`);
+      form.setValue('message', `Hello, I want to book the tour package: ${pkg}. Please let me know the availability and next steps.`);
+    } else if (service) {
+      form.setValue('subject', `Fleet Booking: ${service}`);
+      form.setValue('message', `Hello, I want to book the cab service for: ${service}. Please contact me.`);
+    } else if (hotel) {
+      form.setValue('subject', `Hotel Booking Inquiry: ${hotel}`);
+      form.setValue('message', `Hello, I want to book a stay at: ${hotel}. Please share options and pricing.`);
+    }
+  }, [searchParams, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!firestore) {
@@ -103,7 +129,7 @@ export default function ContactForm() {
                 <Input
                   placeholder="John Doe"
                   {...field}
-                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg text-foreground dark:text-white"
                 />
               </FormControl>
               <FormMessage className="pl-1" />
@@ -120,7 +146,7 @@ export default function ContactForm() {
                 <Input
                   placeholder="you@example.com"
                   {...field}
-                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg text-foreground dark:text-white"
                 />
               </FormControl>
               <FormMessage className="pl-1" />
@@ -137,7 +163,7 @@ export default function ContactForm() {
                 <Input
                   placeholder="Booking Inquiry"
                   {...field}
-                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg"
+                  className="h-14 px-6 rounded-2xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg text-foreground dark:text-white"
                 />
               </FormControl>
               <FormMessage className="pl-1" />
@@ -153,7 +179,7 @@ export default function ContactForm() {
               <FormControl>
                 <Textarea
                   placeholder="Tell us how we can help you..."
-                  className="min-h-[160px] p-6 rounded-3xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg resize-none"
+                  className="min-h-[160px] p-6 rounded-3xl bg-muted/30 border-muted-foreground/20 focus:border-primary/50 focus:bg-background focus:ring-4 focus:ring-primary/10 transition-all duration-300 text-lg resize-none text-foreground dark:text-white"
                   {...field}
                 />
               </FormControl>
@@ -168,7 +194,7 @@ export default function ContactForm() {
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 animate-spin" /> Sending...
+              <Loader2 className="w-5 h-5 animate-spin" /> Sending...
             </span>
           ) : (
             <span className="flex items-center gap-2">
@@ -178,5 +204,17 @@ export default function ContactForm() {
         </Button>
       </form>
     </Form>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={
+      <div className="h-60 flex items-center justify-center">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+      </div>
+    }>
+      <ContactFormContent />
+    </Suspense>
   );
 }
