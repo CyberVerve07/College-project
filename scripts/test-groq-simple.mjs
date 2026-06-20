@@ -1,5 +1,11 @@
 // Simple test to verify Groq API key works
-const API_KEY = "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";
+// Usage: GROQ_API_KEY=your_key node scripts/test-groq-simple.mjs
+const API_KEY = process.env.GROQ_API_KEY;
+
+if (!API_KEY) {
+    console.error("❌ No GROQ_API_KEY found. Set it via: GROQ_API_KEY=your_key node scripts/test-groq-simple.mjs");
+    process.exit(1);
+}
 
 async function testGroq() {
     console.log("🧪 Testing Groq API Key...\n");
