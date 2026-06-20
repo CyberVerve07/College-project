@@ -110,5 +110,15 @@ service cloud.firestore {
                        request.resource.data.submissionDate is string;
       allow read, delete: if isAdmin();
     }
+
+    /**
+     * @path /reviews/{reviewId}
+     * Public read, authenticated user write.
+     */
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+    }
   }
 }
