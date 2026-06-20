@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'IndianRupee';
+  src: local('Segoe UI'), local('Arial'), local('sans-serif');
+  unicode-range: U+20B9;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
