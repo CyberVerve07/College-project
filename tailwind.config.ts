@@ -12,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['var(--font-pt-sans)', 'sans-serif'],
-        headline: ['var(--font-playfair-display)', 'serif'],
+        body: ['IndianRupee', 'var(--font-pt-sans)', 'sans-serif'],
+        headline: ['IndianRupee', 'var(--font-playfair-display)', 'serif'],
         code: ['monospace'],
       },
       colors: {
