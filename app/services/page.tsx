@@ -11,6 +11,15 @@ import { Badge } from '@/frontend/components/ui/badge';
 import { Star, MapPin, Coffee, ShieldCheck, Clock, HeartHandshake, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/frontend/components/ui/dialog';
+import ReviewSection from '@/frontend/components/reviews/ReviewSection';
 
 /**
  * Services Page component.
@@ -147,12 +156,30 @@ export default function ServicesPage() {
                         </div>
                       </div>
 
-                      <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between gap-4">
-                        <div>
-                          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-0.5">Starting at</p>
-                          <p className="text-xl font-bold text-foreground">{service.pricing}</p>
+                      <div className="mt-auto pt-4 border-t border-border/50 flex flex-col gap-3">
+                        <div className="flex items-center justify-between gap-4">
+                          <div>
+                            <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-0.5">Starting at</p>
+                            <p className="text-xl font-bold text-foreground">{service.pricing}</p>
+                          </div>
+                          
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="border-white/10 text-xs font-bold rounded-xl h-8 px-4 text-white">
+                                Reviews
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-slate-900 border-white/10 text-white rounded-3xl p-6 max-h-[80vh] overflow-y-auto max-w-lg">
+                              <DialogHeader>
+                                <DialogTitle className="text-xl font-bold font-headline">Reviews for {service.name}</DialogTitle>
+                                <DialogDescription className="text-slate-400 text-xs">Real customer experiences and ratings.</DialogDescription>
+                              </DialogHeader>
+                              <ReviewSection targetId={service.id} />
+                            </DialogContent>
+                          </Dialog>
                         </div>
-                        <Button asChild className="flex-grow bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all" size="sm">
+
+                        <Button asChild className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white shadow-md hover:shadow-lg transition-all h-10 rounded-xl" size="sm">
                           <Link href={`/contact?service=${service.id}`} className="flex items-center justify-center gap-2">
                             <Phone className="w-3.5 h-3.5" strokeWidth={2.5} />
                             <span>Book Now</span>
@@ -225,12 +252,30 @@ export default function ServicesPage() {
                         ))}
                       </div>
 
-                      <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between">
-                        <div>
-                          <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-1">Starting from</p>
-                          <p className="text-2xl font-black text-foreground">{hotel.priceRange.split('-')[0].trim()}</p>
+                      <div className="mt-auto pt-4 border-t border-border/50 flex flex-col gap-3">
+                        <div className="flex items-center justify-between gap-4">
+                          <div>
+                            <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mb-1">Starting from</p>
+                            <p className="text-2xl font-black text-white">{hotel.priceRange.split('-')[0].trim()}</p>
+                          </div>
+                          
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button variant="outline" size="sm" className="border-white/10 text-xs font-bold rounded-xl h-8 px-4 text-white">
+                                Reviews
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="bg-slate-900 border-white/10 text-white rounded-3xl p-6 max-h-[80vh] overflow-y-auto max-w-lg">
+                              <DialogHeader>
+                                <DialogTitle className="text-xl font-bold font-headline">Reviews for {hotel.name}</DialogTitle>
+                                <DialogDescription className="text-slate-400 text-xs">Real customer experiences and ratings.</DialogDescription>
+                              </DialogHeader>
+                              <ReviewSection targetId={hotel.id} />
+                            </DialogContent>
+                          </Dialog>
                         </div>
-                        <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 shadow-md hover:shadow-blue-500/50 transition-all">
+
+                        <Button asChild size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl h-10 shadow-md hover:shadow-blue-500/50 transition-all font-bold">
                           <Link href={`/contact?hotel=${hotel.id}`}>
                             Enquire Now
                           </Link>
