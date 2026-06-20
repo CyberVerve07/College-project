@@ -8,14 +8,16 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/frontend/lib/utils';
 import { siteConfig } from '@/frontend/lib/config';
 import { ModeToggle } from '@/frontend/components/ui/mode-toggle';
+import { useFirebase } from '@/backend/firebase/provider';
+
 const mainNavLinks = [
   { href: '/', label: 'Home' },
   { href: '/discover-himachal', label: 'Discover' },
   { href: '/destinations', label: 'Destinations' },
-  { href: '/journeys', label: 'Journeys' },
+  { href: '/packages', label: 'Packages' },
+  { href: '/blog', label: 'Blog' },
   { href: '/planner', label: 'AI Planner' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Fleet' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -29,6 +31,8 @@ const mainNavLinks = [
  */
 export default function Header() {
   const pathname = usePathname();
+  const firebase = useFirebase();
+  const user = firebase?.user;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/90 backdrop-blur-xl transition-all duration-300 shadow-xl">
@@ -58,9 +62,15 @@ export default function Header() {
 
 
           <div className="flex gap-4">
-            <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-cyan-600 to-teal-500 shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
-              <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer">Book Cab</a>
-            </Button>
+            {user ? (
+              <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-cyan-600 to-teal-500 shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            ) : (
+              <Button asChild className="rounded-xl px-6 h-10 bg-gradient-to-r from-primary via-cyan-600 to-teal-500 shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 active:scale-95 font-bold text-sm glow-on-hover">
+                <Link href="/login">Login</Link>
+              </Button>
+            )}
           </div>
           <ModeToggle />
         </nav>
