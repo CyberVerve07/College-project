@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Map, List } from 'lucide-react';
 import MapWrapper from '@/frontend/components/maps/MapWrapper';
+import WeatherWidget from '@/frontend/components/ui/WeatherWidget';
 
 interface Destination {
   id: string;
@@ -94,6 +95,19 @@ export default function DestinationsPage() {
             </div>
           </div>
         </motion.div>
+
+        {/* Live Weather Widget Overview */}
+        <div className="mb-12 space-y-4">
+          <h2 className="text-xl font-bold font-headline text-slate-200 uppercase tracking-widest flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" /> Live Himachal Weather
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <WeatherWidget destination="Dharamshala" />
+            <WeatherWidget destination="Manali" />
+            <WeatherWidget destination="Shimla" />
+            <WeatherWidget destination="Sissu" />
+          </div>
+        </div>
 
         {showLoading && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
